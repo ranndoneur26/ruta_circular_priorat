@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travessa del Priorat · Gran travesía circular a pie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+  :root{
+    --llicorella: #1a1715;
+    --llicorella-2: #241f1c;
+    --pergami: #ede6d6;
+    --pergami-dim: #cfc6b2;
+    --samfaina: #c69214;
+    --vinya: #7a1f2b;
+    --herba: #6e7858;
+    --line: rgba(237,230,214,0.14);
+    --radius: 2px;
+    --maxw: 1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--llicorella);
+    color:var(--pergami);
+    font-family:'Public Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  ::selection{background:var(--samfaina); color:var(--llicorella);}
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--samfaina);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--samfaina); display:inline-block; }
+
+  /* ---------- top bar ---------- */
+  header.top{
+    position:sticky; top:0; z-index:30;
+    background:rgba(26,23,21,0.9);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  header.top .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
+  .brand{ font-family:'Fraunces', serif; font-size:18px; font-weight:600; white-space:nowrap; flex-shrink:0; }
+  .brand span{ color:var(--samfaina); }
+  nav.top-nav{ display:flex; gap:18px; font-size:12.5px; align-items:center; flex-wrap:nowrap; }
+  nav.top-nav a{ text-decoration:none; color:var(--pergami-dim); letter-spacing:0.02em; white-space:nowrap; }
+  nav.top-nav a:hover{ color:var(--pergami); }
+  nav.top-nav a:focus-visible, a:focus-visible, button:focus-visible{
+    outline:2px solid var(--samfaina); outline-offset:3px;
+  }
+  .nav-cta{
+    border:1px solid var(--samfaina); color:var(--samfaina) !important;
+    padding:5px 12px; font-family:'JetBrains Mono', monospace; font-size:11px !important;
+    letter-spacing:0.04em; white-space:nowrap;
+  }
+  .nav-cta:hover{ background:var(--samfaina); color:var(--llicorella) !important; }
+
+  /* ---------- mobile nav (hamburger + in-flow dropdown, never covers content) ---------- */
+  .nav-toggle{
+    display:none; flex-direction:column; justify-content:center; align-items:center; gap:5px;
+    background:transparent; border:1px solid var(--line); width:40px; height:36px;
+    padding:0; cursor:pointer; flex-shrink:0;
+  }
+  .nav-toggle .bar{
+    display:block; width:18px; height:1.5px; background:var(--pergami);
+    transition:transform .25s ease, opacity .2s ease;
+  }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(2){ opacity:0; }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+  #mobile-nav{
+    display:none; flex-direction:column;
+    max-height:0; overflow:hidden; transition:max-height .35s ease;
+    background:var(--llicorella-2); border-bottom:1px solid var(--line);
+  }
+  /* Suficiente para 8 enlaces incluso si alguno hace wrap a 2 líneas en pantallas muy
+     estrechas; overflow-y:auto actúa de red de seguridad si aun así no cupiera. */
+  #mobile-nav.open{ max-height:min(70vh, 620px); overflow-y:auto; }
+  #mobile-nav a, #mobile-nav .mnav-cta{
+    display:block; padding:14px 24px; text-decoration:none; color:var(--pergami-dim);
+    border-top:1px solid var(--line); font-size:14px;
+  }
+  #mobile-nav a:first-child{ border-top:none; }
+  #mobile-nav .mnav-cta{ color:var(--samfaina); font-weight:600; }
+
+  /* Punto de corte subido: con 7 enlaces + botón, el nav de escritorio necesita más
+     ancho para no apretarse. Por debajo de 1100px se usa directamente el menú móvil. */
+  @media (max-width:1100px){
+    nav.top-nav{ display:none; }
+    .nav-toggle{ display:flex; order:3; }
+    #mobile-nav{ display:flex; }
+  }
+
+  .lang-switch{
+    display:flex;
+    border:1px solid var(--line);
+    flex-shrink:0;
+  }
+  .lang-switch button{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    letter-spacing:0.05em;
+    background:transparent;
+    color:var(--pergami-dim);
+    border:none;
+    padding:5px 9px;
+    cursor:pointer;
+  }
+  .lang-switch button + button{ border-left:1px solid var(--line); }
+  .lang-switch button[aria-pressed="true"]{ background:var(--samfaina); color:var(--llicorella); font-weight:600; }
+  .lang-switch button:hover:not([aria-pressed="true"]){ color:var(--pergami); }
+
+  /* ---------- photo reel ---------- */
+  .photo-reel{
+    position:relative; width:100%; height:52vh; min-height:320px; max-height:620px;
+    overflow:hidden; background:var(--llicorella-2);
+  }
+  .photo-reel img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    opacity:0; transition:opacity 1.4s ease;
+  }
+  .photo-reel img.active{ opacity:1; }
+  .photo-reel::after{
+    content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(180deg, rgba(26,23,21,0.10) 0%, rgba(26,23,21,0.15) 55%, rgba(26,23,21,0.65) 100%);
+  }
+  .photo-reel .credit{
+    position:absolute; right:16px; bottom:12px; z-index:2;
+    font-family:'JetBrains Mono', monospace; font-size:10px; color:rgba(237,230,214,0.55);
+  }
+  @media (max-width:640px){ .photo-reel{ height:38vh; min-height:220px; } }
+
+  /* ---------- hero ---------- */
+  .hero{ padding:96px 0 70px; position:relative; overflow:hidden; }
+  .hero .wrap{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:56px; align-items:center; }
+  @media (max-width:900px){ .hero .wrap{grid-template-columns:1fr;} .hero{padding:64px 0 48px;} }
+  .hero h1{ font-size:clamp(38px, 5.4vw, 64px); line-height:1.02; margin-top:18px; }
+  .hero h1 em{ font-style:italic; color:var(--samfaina); }
+  .hero p.lead{ margin-top:22px; max-width:52ch; color:var(--pergami); font-size:17px; }
+  .hero p.lead .accent{ color:var(--samfaina); }
+  .hero-sub{
+    margin-top:16px; max-width:52ch; font-family:'JetBrains Mono', monospace;
+    font-size:12.5px; line-height:1.6; letter-spacing:0.01em; color:var(--pergami-dim);
+  }
+  .hero-quick{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+  .stat-row{ display:flex; gap:0; margin-top:36px; border-top:1px solid var(--line); }
+  .stat{ flex:1; padding:16px 18px 0 0; border-right:1px solid var(--line); }
+  .stat:last-child{ border-right:none; }
+  .stat .n{ font-family:'JetBrains Mono', monospace; font-size:26px; color:var(--samfaina); display:block; }
+  .stat .l{ font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--pergami-dim); }
+
+  /* ---------- hero CTAs ---------- */
+  .hero-cta{ display:flex; gap:14px; margin-top:28px; flex-wrap:wrap; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:12px 22px;
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; letter-spacing:0.03em;
+    text-decoration:none; cursor:pointer; border:1px solid var(--samfaina);
+  }
+  .btn-primary{ background:var(--samfaina); color:var(--llicorella); font-weight:600; }
+  .btn-primary:hover{ opacity:0.88; }
+  .btn-secondary{ background:transparent; color:var(--samfaina); }
+  .btn-secondary:hover{ background:rgba(198,146,20,0.08); }
+
+  /* ---------- terrain warning ---------- */
+  .terrain-warn{ padding:36px 0; border-bottom:1px solid var(--line); background:var(--llicorella-2); }
+  .tw-box{ display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:flex-start; }
+  .tw-box svg{ flex-shrink:0; margin-top:2px; }
+  .tw-box h3{ font-size:17px; margin-bottom:10px; }
+  .tw-list{ display:flex; flex-wrap:wrap; gap:10px 28px; list-style:none; margin:0; padding:0; }
+  .tw-list li{ font-size:13.5px; color:var(--pergami-dim); padding-left:15px; position:relative; }
+  .tw-list li::before{ content:"·"; position:absolute; left:0; color:var(--vinya); font-weight:700; }
+  .tw-list a{ color:var(--samfaina); text-decoration:none; border-bottom:1px dotted var(--samfaina); }
+
+  /* ---------- falset callout ---------- */
+  .falset-callout{ padding:44px 0; border-bottom:1px solid var(--line); }
+  .fc-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:36px; align-items:center; }
+  @media (max-width:800px){ .fc-grid{ grid-template-columns:1fr; } }
+  .fc-grid h3{ font-size:22px; margin:8px 0 12px; }
+  .fc-grid p{ font-size:14.5px; color:var(--pergami-dim); max-width:56ch; margin:0 0 16px; }
+  .fc-mini{ border:1px solid var(--line); background:var(--llicorella-2); padding:20px 22px; }
+  .fc-mini .flabel{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.05em; text-transform:uppercase; color:var(--samfaina); margin-bottom:8px; display:block; }
+  .fc-mini ul{ margin:0; padding-left:0; list-style:none; }
+  .fc-mini li{ font-size:13px; color:var(--pergami-dim); padding:6px 0; border-top:1px solid var(--line); }
+  .fc-mini li:first-child{ border-top:none; }
+
+  /* ---------- closing / soon ---------- */
+  .closing{ padding:70px 0; text-align:center; border-bottom:1px solid var(--line); }
+  .closing p{ font-family:'Fraunces', serif; font-style:italic; font-size:20px; line-height:1.6; color:var(--pergami); max-width:56ch; margin:0 auto 28px; }
+  .closing .accent{ color:var(--samfaina); }
+  .soon-box{ padding:40px 0; }
+  .soon-box .inner{ border:1px solid var(--line); padding:30px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
+  .soon-box h4{ font-size:16px; margin-bottom:6px; }
+  .soon-box p{ font-size:13.5px; color:var(--pergami-dim); margin:0; max-width:52ch; }
+  .soon-box a.btn{ flex-shrink:0; }
+
+  .loop-wrap{ display:flex; justify-content:center; }
+  .node-label{ font-family:'JetBrains Mono', monospace; font-size:10px; fill:var(--pergami-dim); }
+
+  .ridge{ display:block; width:100%; height:46px; opacity:0.55; }
+
+  section{ padding:64px 0; }
+  section.dark-alt{ background:var(--llicorella-2); }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:34px; flex-wrap:wrap; }
+  .section-head h2{ font-size:clamp(26px,3.2vw,36px); margin-top:10px; }
+  .section-head p{ max-width:38ch; color:var(--pergami-dim); font-size:14.5px; margin:0; }
+
+  /* ---------- trail legend ---------- */
+  .legend{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  @media (max-width:760px){ .legend{grid-template-columns:1fr;} }
+  .legend-item{ background:var(--llicorella); padding:26px 24px; }
+  section.dark-alt .legend-item{ background:var(--llicorella-2); }
+  .waymark{ width:34px; height:34px; border:2px solid var(--pergami); display:flex; margin-bottom:16px; }
+  .waymark span{ flex:1; }
+  .wm-gr span:first-child{background:var(--vinya);}
+  .wm-gr span:last-child{background:var(--pergami);}
+  .wm-pr span:first-child{background:var(--samfaina);}
+  .wm-pr span:last-child{background:var(--pergami);}
+  .wm-local span:first-child{background:var(--herba);}
+  .wm-local span:last-child{background:var(--pergami);}
+  .legend-item h3{ font-size:17px; margin-bottom:8px; }
+  .legend-item p{ font-size:14px; color:var(--pergami-dim); margin:0; }
+
+  /* ---------- villages directory ---------- */
+  .village-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:0; border-top:1px solid var(--line); }
+  @media (max-width:700px){ .village-grid{grid-template-columns:1fr;} }
+  .village-row{ display:flex; justify-content:space-between; align-items:center; gap:14px; padding:15px 4px; border-bottom:1px solid var(--line); }
+  .village-grid .village-row:nth-child(odd){ padding-right:24px; border-right:1px solid var(--line); }
+  @media (max-width:700px){ .village-grid .village-row:nth-child(odd){ border-right:none; padding-right:4px; } }
+  .village-name{ font-size:15.5px; }
+  .village-name .idx{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--pergami-dim); margin-right:10px; }
+  .tag{ font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.03em; padding:4px 8px; border:1px solid var(--line); color:var(--pergami-dim); white-space:nowrap; }
+  .tag.gr{ border-color:var(--vinya); color:var(--vinya); background:rgba(122,31,43,0.12); }
+  .tag.pr{ border-color:var(--samfaina); color:var(--samfaina); background:rgba(198,146,20,0.1); }
+  .tag.verified{ border-color:var(--herba); color:var(--herba); background:rgba(110,120,88,0.12); }
+  .tag.pending{ border-color:var(--vinya); color:var(--vinya); background:rgba(122,31,43,0.1); }
+  .map-status{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 22px; }
+
+  /* ---------- map ---------- */
+  #map{
+    width:100%; height:520px;
+    border:1px solid var(--line);
+    background:var(--llicorella-2);
+  }
+  /* Aclara un 30% las teselas del mapa (CARTO Dark Matter es casi negro por defecto)
+     para que las líneas topográficas se distingan mejor al ampliar. Solo afecta al
+     pane de teselas, no a marcadores, líneas de etapa ni popups. */
+  #map .leaflet-tile-pane{ filter:brightness(1.3); }
+  .map-caption{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
+    margin-top:14px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--pergami-dim);
+  }
+  .map-caption .dot{ display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:middle; }
+  .leaflet-popup-content-wrapper{
+    background:var(--llicorella-2);
+    color:var(--pergami);
+    border:1px solid var(--samfaina);
+    border-radius:0;
+    box-shadow:none;
+  }
+  .leaflet-popup-tip{ background:var(--llicorella-2); border:1px solid var(--samfaina); }
+  .leaflet-popup-content{ font-family:'Public Sans', sans-serif; font-size:13px; margin:10px 12px; }
+  .leaflet-popup-content b{ font-family:'Fraunces', serif; font-size:15px; display:block; margin-bottom:3px; }
+  .leaflet-popup-content .pc-tag{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--samfaina); }
+  .leaflet-container a.leaflet-popup-close-button{ color:var(--pergami-dim); }
+  .leaflet-control-zoom a{ background:var(--llicorella-2) !important; color:var(--pergami) !important; border-color:var(--line) !important; }
+  .leaflet-control-attribution{ background:rgba(26,23,21,0.75) !important; color:var(--pergami-dim) !important; }
+  .leaflet-control-attribution a{ color:var(--pergami-dim) !important; }
+
+  /* ---------- stages ---------- */
+  .loop-summary{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+    padding:14px 20px; margin-bottom:28px;
+    border:1px solid var(--line);
+    font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--pergami-dim);
+  }
+  .loop-summary strong{ color:var(--samfaina); font-weight:600; }
+  .stage-list{ display:flex; flex-direction:column; }
+  .stage{ display:grid; grid-template-columns:110px 1fr; gap:24px; padding:26px 0; border-bottom:1px solid var(--line); }
+  .stage:first-child{ border-top:1px solid var(--line); }
+  @media (max-width:640px){ .stage{grid-template-columns:60px 1fr;} }
+  .stage .day{ font-family:'JetBrains Mono', monospace; color:var(--samfaina); }
+  .stage .day .num{ font-size:34px; display:block; line-height:1; }
+  .stage .day .lbl{ font-size:10px; letter-spacing:0.1em; color:var(--pergami-dim); text-transform:uppercase; }
+  .stage .route{ font-size:17px; }
+  .stage .route .arrow{ color:var(--pergami-dim); margin:0 6px; }
+  .stage-facts{
+    display:flex; flex-wrap:wrap; gap:10px 22px;
+    margin-top:14px; padding-top:14px; border-top:1px solid var(--line);
+  }
+  .stage-fact{ font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--pergami-dim); }
+  .stage-fact b{ color:var(--pergami); font-weight:600; }
+  .diff-badge{
+    display:inline-block; padding:2px 8px; font-size:10px; letter-spacing:0.04em;
+    border:1px solid var(--line);
+  }
+  .diff-badge.facil{ border-color:var(--herba); color:var(--herba); }
+  .diff-badge.moderada{ border-color:var(--samfaina); color:var(--samfaina); }
+  .diff-badge.exigente{ border-color:var(--vinya); color:var(--vinya); }
+  .stage .highlight{ margin-top:10px; font-size:13.5px; color:var(--pergami-dim); font-style:italic; }
+  .stage-extra{
+    margin-top:16px; padding-top:16px; border-top:1px solid var(--line);
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
+  }
+  @media (max-width:640px){ .stage-extra{ grid-template-columns:1fr; } }
+  .stage-extra h5{
+    margin:0 0 6px; font-family:'JetBrains Mono', monospace; font-size:10px;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--samfaina);
+  }
+  .stage-extra ul{ margin:0; padding:0; list-style:none; }
+  .stage-extra li{ font-size:12.5px; color:var(--pergami-dim); line-height:1.5; padding-left:11px; position:relative; }
+  .stage-extra li::before{ content:"·"; position:absolute; left:0; color:var(--samfaina); }
+  .stage-extra .empty{ font-style:italic; opacity:0.7; }
+  .stage-extra a{ color:var(--samfaina); text-decoration:none; border-bottom:1px dotted var(--samfaina); }
+  .stage-extra .verified{ color:var(--herba); font-size:11px; }
+  .elev-block{ margin-top:16px; padding-top:16px; border-top:1px solid var(--line); }
+  .elev-block h5{
+    margin:0 0 8px; font-family:'JetBrains Mono', monospace; font-size:10px;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--samfaina);
+  }
+  .elev-svg{ width:100%; height:64px; display:block; }
+  .elev-caption{ margin-top:4px; font-size:11px; color:var(--pergami-dim); font-style:italic; opacity:0.8; }
+  .gpx-facts{ margin-top:12px; align-items:center; }
+  .gpx-badge{
+    font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.03em;
+    color:var(--herba); border:1px solid var(--herba); padding:2px 8px; background:rgba(110,120,88,0.12);
+  }
+  .gpx-download{
+    font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.03em;
+    color:var(--llicorella); background:var(--samfaina); padding:4px 10px;
+    text-decoration:none; margin-left:auto;
+  }
+  .gpx-download:hover{ opacity:0.85; }
+  .stage-source{
+    margin-top:22px; font-family:'JetBrains Mono', monospace; font-size:11px;
+    color:var(--pergami-dim); opacity:0.75;
+  }
+  .stage-source a{ color:var(--samfaina); text-decoration:none; border-bottom:1px dotted var(--samfaina); }
+  .stage .meta{ margin-top:10px; font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--pergami-dim); opacity:0.75; }
+
+  footer{ padding:40px 0 60px; border-top:1px solid var(--line); font-size:12.5px; color:var(--pergami-dim); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+
+  /* ---------- guía práctica ---------- */
+  .guide-subnav{
+    display:flex; flex-wrap:wrap; gap:2px;
+    margin-bottom:40px; border:1px solid var(--line);
+    position:sticky; top:65px; z-index:20; background:rgba(26,23,21,0.95); backdrop-filter:blur(6px);
+  }
+  .guide-subnav a{
+    flex:1 1 auto; text-align:center; white-space:nowrap;
+    padding:12px 14px; font-family:'JetBrains Mono', monospace; font-size:11px;
+    letter-spacing:0.03em; text-decoration:none; color:var(--pergami-dim);
+    border-right:1px solid var(--line);
+  }
+  .guide-subnav a:last-child{ border-right:none; }
+  .guide-subnav a:hover{ color:var(--samfaina); background:rgba(198,146,20,0.06); }
+  @media (max-width:760px){ .guide-subnav{ position:static; } .guide-subnav a{ flex:1 1 45%; } }
+
+  .guide-block{ margin-bottom:56px; scroll-margin-top:80px; }
+  .guide-block h3{
+    font-size:22px; margin-bottom:4px; display:flex; align-items:center; gap:12px;
+  }
+  .guide-block h3 .gnum{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--samfaina); }
+  .guide-block .gsub{ font-size:13.5px; color:var(--pergami-dim); margin:0 0 20px; max-width:60ch; }
+  .guide-block p{ font-size:14.5px; line-height:1.7; color:var(--pergami-dim); margin:0 0 14px; max-width:72ch; }
+  .guide-block strong{ color:var(--pergami); font-weight:600; }
+  .guide-block ul{ margin:0 0 14px; padding-left:0; list-style:none; max-width:72ch; }
+  .guide-block ul li{ font-size:14px; color:var(--pergami-dim); line-height:1.6; padding-left:16px; position:relative; margin-bottom:6px; }
+  .guide-block ul li::before{ content:"·"; position:absolute; left:0; color:var(--samfaina); font-weight:700; }
+  .guide-block .g-warn{ border-left:2px solid var(--vinya); padding:4px 0 4px 16px; margin:16px 0; }
+  .guide-block .g-warn p{ margin:0; color:var(--pergami); font-size:14px; }
+  .transport-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:18px; }
+  @media (max-width:700px){ .transport-grid{ grid-template-columns:1fr; } }
+  .transport-item{ background:var(--llicorella-2); padding:20px 22px; }
+  .transport-item h4{ margin:0 0 6px; font-size:14.5px; font-family:'Public Sans'; font-weight:600; }
+  .transport-item .tsub{ font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--samfaina); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px; display:block; }
+  .transport-item p{ font-size:13px; margin:0 0 4px; color:var(--pergami-dim); }
+  .transport-item a{ color:var(--samfaina); text-decoration:none; border-bottom:1px dotted var(--samfaina); }
+  .kit-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px 40px; margin-top:8px; }
+  @media (max-width:700px){ .kit-grid{ grid-template-columns:1fr; } }
+  .kit-cat h4{ font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--samfaina); margin:0 0 10px; }
+
+  .reveal{ opacity:1; transform:none; }
+  .reveal.pending{ opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal.pending.in{ opacity:1; transform:none; }
+  @media (prefers-reduced-motion: reduce){
+    .reveal.pending{ opacity:1; transform:none; transition:none; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="brand">Travessa del <span>Priorat</span></div>
+    <nav class="top-nav">
+      <a href="#red" data-i18n="nav.red">La red</a>
+      <a href="#pueblos" data-i18n="nav.pueblos">19 pueblos</a>
+      <a href="#mapa" data-i18n="nav.mapa">Mapa</a>
+      <a href="#etapas" data-i18n="nav.etapas">Etapas</a>
+      <a href="#guia" data-i18n="nav.guia">Guía</a>
+      <a href="inscripcion.html" data-i18n="nav.inscripcion">Inscribirme</a>
+      <a href="finalizados.html" data-i18n="nav.finalizados">Caminantes</a>
+      <a href="info-practica.html" class="nav-cta" data-i18n="nav.info">Info práctica</a>
+    </nav>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+    <div class="lang-switch" role="group" aria-label="Idioma / Llengua / Language">
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      <button type="button" data-lang="ca" aria-pressed="true">CA</button>
+      <button type="button" data-lang="en" aria-pressed="false">ENG</button>
+    </div>
+  </div>
+  <div id="mobile-nav">
+    <a href="#red" data-i18n="nav.red">La red</a>
+    <a href="#pueblos" data-i18n="nav.pueblos">19 pueblos</a>
+    <a href="#mapa" data-i18n="nav.mapa">Mapa</a>
+    <a href="#etapas" data-i18n="nav.etapas">Etapas</a>
+    <a href="#guia" data-i18n="nav.guia">Guía</a>
+    <a href="inscripcion.html" data-i18n="nav.inscripcion">Inscribirme</a>
+    <a href="finalizados.html" data-i18n="nav.finalizados">Caminantes</a>
+    <a href="info-practica.html" class="mnav-cta" data-i18n="nav.info">Info práctica</a>
+  </div>
+</header>
+
+<div class="photo-reel" id="photo-reel" aria-hidden="true"></div>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow" data-i18n="hero.eyebrow">Gran travesía circular · 100% senderista</div>
+      <h1 data-i18n-html="hero.h1">Los 19 pueblos del Priorat, <em>unidos a pie</em>.</h1>
+      <p class="lead" data-i18n-html="hero.lead">El Priorat es una tierra dura y solitaria, de laderas imposibles y suelos de llicorella donde la vida siempre ha sido una batalla cuerpo a cuerpo con la roca. <span class="accent">Seguir la ruta de sus 19 pueblos es una experiencia épica</span>: un viaje interior entre viñas de viticultura heroica, ermitas y barrancos silenciosos, donde cada curva del camino te invita a sentir más intensamente el paisaje y a descubrir una espiritualidad hecha de esfuerzo, contemplación y belleza extrema.</p>
+      <p class="hero-sub" data-i18n="hero.sub">Una travesía circular de 8 etapas que conecta los 19 pueblos del Priorat por senderos ya homologados, con Falset como puerta de entrada y salida.</p>
+      <div class="hero-quick" aria-label="Resumen rápido">
+        <span class="tag" data-i18n="hero.quick1">19 pueblos</span>
+        <span class="tag" data-i18n="hero.quick2">Eje GR‑174</span>
+        <span class="tag pr" data-i18n="hero.quick3">Inicio recomendado: Falset</span>
+        <span class="tag" data-i18n="hero.quick4">Recorrido verificado con GPX real</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="n">19</span><span class="l" data-i18n="hero.stat1">Municipios</span></div>
+        <div class="stat"><span class="n">8</span><span class="l" data-i18n="hero.stat2">Etapas</span></div>
+        <div class="stat"><span class="n">GR·PR</span><span class="l" data-i18n="hero.stat3">Red homologada</span></div>
+        <div class="stat"><span class="n">○</span><span class="l" data-i18n="hero.stat4">Circuito cerrado</span></div>
+      </div>
+      <div class="hero-cta">
+        <a href="#etapas" class="btn btn-primary" data-i18n="hero.cta1">Explorar las etapas</a>
+        <a href="#mapa" class="btn btn-secondary" data-i18n="hero.cta2">Ver mapa interactivo</a>
+      </div>
+    </div>
+    <div class="loop-wrap">
+      <svg width="380" height="380" viewBox="0 0 380 380" role="img" aria-label="Esquema circular de las 8 etapas de la travesía">
+        <circle cx="190" cy="190" r="128" fill="none" stroke="var(--line)" stroke-width="1"/>
+        <circle cx="190" cy="190" r="128" fill="none" stroke="var(--samfaina)" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round"/>
+        <g id="nodes"></g>
+        <text x="190" y="182" text-anchor="middle" font-family="Fraunces, serif" font-size="15" fill="var(--pergami)">Falset</text>
+        <text x="190" y="200" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--pergami-dim)" data-i18n="hero.hub">nudo central</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<svg class="ridge" viewBox="0 0 1200 60" preserveAspectRatio="none">
+  <polyline points="0,50 60,30 130,45 210,15 300,42 380,20 460,48 560,10 660,40 760,25 860,46 960,18 1060,44 1150,28 1200,40" fill="none" stroke="var(--samfaina)" stroke-width="1.5"/>
+</svg>
+
+<section id="red" class="reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="red.eyebrow">Cómo se aprovecha lo existente</div>
+        <h2 data-i18n="red.h2">Una red, no un trazado nuevo</h2>
+      </div>
+      <p data-i18n="red.p">El GR‑174 hace de columna vertebral; el PR‑C y los senderos del Montsant cierran los enlaces que faltan.</p>
+    </div>
+    <div class="legend">
+      <div class="legend-item">
+        <div class="waymark wm-gr"><span></span><span></span></div>
+        <h3 data-i18n="red.gr.h">GR‑174</h3>
+        <p data-i18n="red.gr.p">Eje principal en Falset, Gratallops, Poboleda, Escaladei y Cornudella. La columna vertebral del circuito.</p>
+      </div>
+      <div class="legend-item">
+        <div class="waymark wm-pr"><span></span><span></span></div>
+        <h3 data-i18n="red.pr.h">PR‑C y senderos locales</h3>
+        <p data-i18n="red.pr.p">Enlazan los municipios que no quedan directamente sobre el GR‑174, sin recurrir al asfalto.</p>
+      </div>
+      <div class="legend-item">
+        <div class="waymark wm-local"><span></span><span></span></div>
+        <h3 data-i18n="red.local.h">Caminos y pistas forestales</h3>
+        <p data-i18n="red.local.p">Caminos históricos, mineros y agrícolas para las conexiones rurales que aún no tienen sendero homologado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="falset-callout">
+  <div class="wrap fc-grid">
+    <div>
+      <div class="eyebrow" data-i18n="falset.eyebrow">Punto de entrada y salida</div>
+      <h3 data-i18n="falset.h">Falset: el nudo del circuito</h3>
+      <p data-i18n="falset.p">Falset es la capital del Priorat y el mejor punto para empezar y cerrar la travessa: aquí convergen las conexiones hacia el resto de municipios, y es donde hay más servicios (tren, autobuses, coche, alojamiento).</p>
+      <a href="info-practica.html#servicios" class="btn btn-secondary" data-i18n="falset.cta">Cómo llegar a Falset →</a>
+    </div>
+    <div class="fc-mini">
+      <span class="flabel" data-i18n="falset.miniLabel">Acceso rápido</span>
+      <ul>
+        <li data-i18n="falset.tren">Tren: RENFE Rodalies R15, estación Marçà-Falset (2 km)</li>
+        <li data-i18n="falset.bus">Autobús: líneas comarcales Domènech, HIFE, Igualadina</li>
+        <li data-i18n="falset.coche">Coche: C-242 (Reus–Falset–Móra d'Ebre)</li>
+        <li data-i18n="falset.avion">Avión: aeropuerto de Reus, a 35 km</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section id="mapa" class="reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="mapa.eyebrow">Primera fase interactiva</div>
+        <h2 data-i18n="mapa.h2">El mapa</h2>
+      </div>
+      <p data-i18n="mapa.p">Ubicación real de los 19 municipios y trazado real de las 8 etapas, verificado con GPX.</p>
+    </div>
+    <div class="map-status">
+      <span class="tag verified" data-i18n="mapa.statusVerified">Las 8 etapas verificadas con GPX real</span>
+    </div>
+    <div id="map"></div>
+    <div class="map-caption">
+      <span><span class="dot" style="background:var(--vinya)"></span><span data-i18n="mapa.legendGr">Nudo GR-174</span> &nbsp; <span class="dot" style="background:var(--samfaina)"></span><span data-i18n="mapa.legendPr">Municipio</span></span>
+      <span data-i18n="mapa.note">Líneas de etapa esquemáticas, pendientes de verificación</span>
+    </div>
+  </div>
+</section>
+
+<div class="terrain-warn">
+  <div class="wrap">
+    <div class="tw-box">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <path d="M13 2 L24 22 L2 22 Z" stroke="var(--vinya)" stroke-width="2" stroke-linejoin="round"/>
+        <line x1="13" y1="10" x2="13" y2="16" stroke="var(--vinya)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="13" cy="19" r="1.2" fill="var(--vinya)"/>
+      </svg>
+      <div>
+        <h3 data-i18n="terrain.h">Condiciones del terreno</h3>
+        <ul class="tw-list">
+          <li data-i18n="terrain.i1">Terreno agreste, llicorella y desniveles fuertes: ruta exigente</li>
+          <li data-i18n="terrain.i2">Poca sombra, calor intenso en época estival</li>
+          <li data-i18n="terrain.i3">Muy poca infraestructura turística fuera de fin de semana</li>
+          <li><a href="#guia" data-i18n="terrain.link">Ver la guía práctica completa →</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="pueblos" class="dark-alt reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="pueblos.eyebrow">Directorio</div>
+        <h2 data-i18n="pueblos.h2">Los 19 municipios</h2>
+      </div>
+      <p data-i18n="pueblos.p">Cada pueblo, con el tipo de conexión senderista recomendada para llegar a él.</p>
+    </div>
+    <div class="village-grid" id="village-grid"></div>
+  </div>
+</section>
+
+<section id="etapas" class="dark-alt reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="etapas.eyebrow">Trazado propuesto</div>
+        <h2 data-i18n="etapas.h2">Ocho etapas, un círculo</h2>
+      </div>
+      <p data-i18n="etapas.p">Distancia, desnivel y tiempo reales de las 8 etapas, verificados con GPX.</p>
+    </div>
+    <div class="loop-summary" id="loop-summary"></div>
+    <div class="stage-list" id="stage-list"></div>
+    <div class="stage-source" id="stage-source"></div>
+  </div>
+</section>
+
+<section id="guia" class="reveal">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="guia.eyebrow">Preparación</div>
+        <h2 data-i18n="guia.h2">Guía práctica del peregrino</h2>
+      </div>
+      <p data-i18n="guia.p">Terreno agreste, poca sombra, calor fuerte y muy poca infraestructura turística fuera de fin de semana. Prepárate en consecuencia.</p>
+    </div>
+
+    <nav class="guide-subnav">
+      <a href="#guia-cuando" data-i18n="guia.nav1">Cuándo ir</a>
+      <a href="#guia-llegar" data-i18n="guia.nav2">Cómo llegar</a>
+      <a href="#guia-agua" data-i18n="guia.nav3">Agua</a>
+      <a href="#guia-comida" data-i18n="guia.nav4">Comida</a>
+      <a href="#guia-calor" data-i18n="guia.nav5">Calor</a>
+      <a href="#guia-terreno" data-i18n="guia.nav6">Terreno y calzado</a>
+      <a href="#guia-equipo" data-i18n="guia.nav7">Equipo</a>
+    </nav>
+
+    <div class="guide-block" id="guia-cuando">
+      <h3><span class="gnum">01</span> <span data-i18n="guia.cuando.h">Cuándo ir</span></h3>
+      <div data-i18n-html="guia.cuando.body"></div>
+    </div>
+
+    <div class="guide-block" id="guia-llegar">
+      <h3><span class="gnum">02</span> <span data-i18n="guia.llegar.h">Cómo llegar</span></h3>
+      <p data-i18n="guia.llegar.intro">Falset es el nudo del circuito y el mejor punto de entrada y salida. Así se llega:</p>
+      <div class="transport-grid" id="transport-grid"></div>
+    </div>
+
+    <div class="guide-block" id="guia-agua">
+      <h3><span class="gnum">03</span> <span data-i18n="guia.agua.h">Agua: la prioridad número uno</span></h3>
+      <div data-i18n-html="guia.agua.body"></div>
+    </div>
+
+    <div class="guide-block" id="guia-comida">
+      <h3><span class="gnum">04</span> <span data-i18n="guia.comida.h">Comida y restauración</span></h3>
+      <div data-i18n-html="guia.comida.body"></div>
+    </div>
+
+    <div class="guide-block" id="guia-calor">
+      <h3><span class="gnum">05</span> <span data-i18n="guia.calor.h">Gestión del calor</span></h3>
+      <div data-i18n-html="guia.calor.body"></div>
+    </div>
+
+    <div class="guide-block" id="guia-terreno">
+      <h3><span class="gnum">06</span> <span data-i18n="guia.terreno.h">Terreno y calzado</span></h3>
+      <div data-i18n-html="guia.terreno.body"></div>
+    </div>
+
+    <div class="guide-block" id="guia-equipo">
+      <h3><span class="gnum">07</span> <span data-i18n="guia.equipo.h">Lista de equipo para 8 días</span></h3>
+      <div class="kit-grid" id="kit-grid"></div>
+    </div>
+
+  </div>
+</section>
+
+<div class="closing">
+  <div class="wrap">
+    <p data-i18n-html="closing.text"></p>
+    <a href="#etapas" class="btn btn-primary" data-i18n="closing.cta">Preparar mi travessa</a>
+  </div>
+</div>
+
+<div class="soon-box">
+  <div class="wrap">
+    <div class="inner">
+      <div>
+        <h4 data-i18n="soon.h">¿Ya te animas?</h4>
+        <p data-i18n="soon.p">Apúntate con tu alias y la fecha en la que empiezas: verás tu nombre en la lista de caminantes junto a los demás.</p>
+      </div>
+      <a href="inscripcion.html" class="btn btn-secondary" data-i18n="soon.cta">Inscribirme →</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; width:100%;">
+    <span data-i18n="footer.left">Travessa del Priorat — maqueta de estructura, sin verificar sobre el terreno.</span>
+    <span class="mono" data-i18n="footer.right">v0.2 · mapa interactivo (esquemático)</span>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  // ---------------- data ----------------
+  // [name, lat, lon, tag, connES, connCA]
+  // Altitudes reales de cada núcleo (Idescat, Consell Regulador DOQ Priorat, enciclopedia.cat).
+  // Sirven para el perfil de elevación simplificado de cada etapa: unen los núcleos en línea
+  // recta y NO seguien el perfil real del sendero, que sigue pendiente de trazado GPX.
+  // Tracks GPX verificados (subidos y procesados a partir del .gpx real).
+  // coords: polilínea simplificada para el mapa. profile: perfil de elevación
+  // remuestreado cada ~240 m sobre la distancia real del track. Las demás etapas
+  // siguen siendo esquemáticas hasta que se suba su GPX correspondiente.
+  const GPX_TRACKS = {
+    0: {
+      file: "etapa-1-falset-marca-capcanes-guiamets.gpx",
+      distKm: 14.6, gainM: 354, lossM: 492, minEle: 169, maxEle: 367,
+      coords: [[41.14249,0.81742],[41.14201,0.81804],[41.14131,0.81734],[41.14125,0.81693],[41.14155,0.81612],[41.14145,0.81586],[41.14061,0.81554],[41.1397,0.81526],[41.13901,0.81475],[41.13882,0.81477],[41.13872,0.81507],[41.13853,0.81535],[41.13834,0.81578],[41.13788,0.81618],[41.13749,0.81642],[41.13727,0.81643],[41.13701,0.81591],[41.13665,0.81573],[41.13613,0.81587],[41.13578,0.81623],[41.13547,0.81653],[41.13469,0.81676],[41.13439,0.81695],[41.13399,0.81702],[41.13335,0.81688],[41.13306,0.817],[41.13277,0.81747],[41.13277,0.81763],[41.13235,0.81851],[41.13224,0.81892],[41.13192,0.81908],[41.13153,0.81939],[41.13126,0.8196],[41.13101,0.81972],[41.13068,0.81989],[41.13001,0.81983],[41.12871,0.82004],[41.12845,0.82034],[41.12817,0.82027],[41.12788,0.82061],[41.12745,0.82057],[41.12702,0.82024],[41.12663,0.81969],[41.12628,0.81946],[41.12626,0.81943],[41.12611,0.8189],[41.12586,0.81896],[41.12611,0.81639],[41.12628,0.81527],[41.12634,0.81392],[41.12645,0.81353],[41.12702,0.81271],[41.12671,0.81157],[41.1265,0.81054],[41.12659,0.81011],[41.12685,0.8097],[41.12685,0.80875],[41.12722,0.8082],[41.12714,0.80781],[41.12714,0.80736],[41.12745,0.80688],[41.12744,0.80615],[41.12717,0.8051],[41.12694,0.80403],[41.12667,0.80186],[41.12657,0.8014],[41.12616,0.80135],[41.12606,0.80104],[41.12609,0.80027],[41.12581,0.80022],[41.12524,0.80016],[41.12481,0.79958],[41.12463,0.79924],[41.1244,0.79914],[41.12364,0.79782],[41.12308,0.79719],[41.12239,0.79658],[41.12143,0.7957],[41.12087,0.79546],[41.12008,0.79518],[41.11977,0.7949],[41.11914,0.79481],[41.11905,0.79475],[41.11885,0.7948],[41.11873,0.7945],[41.11874,0.79372],[41.11875,0.79356],[41.11863,0.79341],[41.11853,0.79335],[41.1181,0.79386],[41.11744,0.79388],[41.11694,0.79411],[41.1163,0.7941],[41.11582,0.79422],[41.11475,0.79378],[41.11461,0.7939],[41.11446,0.79404],[41.11448,0.79453],[41.114,0.79439],[41.1137,0.79441],[41.11364,0.79434],[41.11337,0.79368],[41.11335,0.79302],[41.11356,0.79205],[41.11348,0.79193],[41.11285,0.79149],[41.11213,0.79105],[41.11158,0.791],[41.111,0.79106],[41.10975,0.7918],[41.10942,0.79212],[41.10877,0.79231],[41.10885,0.79204],[41.10902,0.79159],[41.10918,0.79113],[41.10909,0.79076],[41.10878,0.79024],[41.10842,0.78987],[41.10799,0.7896],[41.1075,0.78943],[41.10673,0.78934],[41.10545,0.78889],[41.10489,0.7885],[41.10469,0.78857],[41.10449,0.78874],[41.10323,0.78828],[41.10151,0.78749],[41.10135,0.78712],[41.10095,0.78495],[41.10056,0.78454],[41.10024,0.78346],[41.0995,0.7825],[41.09937,0.78216],[41.09936,0.78189],[41.09983,0.78135],[41.09955,0.77961],[41.0988,0.77872],[41.09868,0.77842],[41.09903,0.77791],[41.09912,0.7778],[41.09874,0.77791],[41.09863,0.77787],[41.09831,0.77698],[41.09802,0.77687],[41.09782,0.77668],[41.09808,0.77631],[41.09911,0.77578],[41.09979,0.77569],[41.09979,0.77547],[41.09911,0.77423],[41.09871,0.77296],[41.09859,0.77273],[41.09846,0.77278],[41.09844,0.77338],[41.09821,0.77287],[41.09782,0.77221],[41.09724,0.77159],[41.09687,0.77113],[41.09662,0.77118],[41.09649,0.77168],[41.09647,0.77256],[41.09638,0.77323],[41.09599,0.77382],[41.0957,0.77423],[41.09543,0.77423],[41.09519,0.7736],[41.09483,0.77304],[41.09426,0.77247],[41.09361,0.77311],[41.09334,0.77328],[41.09299,0.77289],[41.093,0.7726],[41.09357,0.77193],[41.09367,0.77144],[41.09358,0.77095],[41.09311,0.77068],[41.09234,0.77025],[41.09195,0.77038],[41.0916,0.7708],[41.09086,0.77132],[41.09029,0.77133],[41.08981,0.77103],[41.09005,0.77067],[41.09053,0.77014],[41.09075,0.76917],[41.0908,0.76887],[41.09078,0.76836],[41.09127,0.76755],[41.0912,0.7674],[41.09041,0.76753],[41.09016,0.76735],[41.09008,0.76686],[41.09027,0.76655],[41.09054,0.7662],[41.09088,0.76651],[41.09047,0.76559],[41.09048,0.76412],[41.09067,0.76304],[41.09079,0.76175],[41.09147,0.76073],[41.09228,0.75993],[41.09311,0.75869],[41.09414,0.75786],[41.09506,0.75711],[41.09546,0.75632],[41.09594,0.7554],[41.0965,0.75336],[41.09695,0.75214],[41.09743,0.75121],[41.09745,0.75074],[41.09768,0.75025],[41.09786,0.75097],[41.09837,0.75134],[41.09934,0.75201],[41.0993,0.75232],[41.0994,0.75259],[41.09969,0.7529],[41.09995,0.75294],[41.10045,0.75294],[41.10102,0.75292],[41.10122,0.75284],[41.10135,0.7528],[41.10164,0.75196],[41.10181,0.75095],[41.10184,0.75112]],
+      profile: [{d:0.0,e:356.9},{d:0.243,e:364.0},{d:0.487,e:361.6},{d:0.73,e:353.8},{d:0.973,e:353.7},{d:1.217,e:331.7},{d:1.46,e:312.5},{d:1.704,e:319.8},{d:1.947,e:322.8},{d:2.19,e:314.3},{d:2.434,e:309.0},{d:2.677,e:300.5},{d:2.92,e:288.5},{d:3.164,e:278.6},{d:3.407,e:287.8},{d:3.65,e:296.6},{d:3.894,e:302.5},{d:4.137,e:312.3},{d:4.38,e:333.4},{d:4.624,e:341.2},{d:4.867,e:317.0},{d:5.111,e:265.5},{d:5.354,e:234.9},{d:5.597,e:250.0},{d:5.841,e:264.4},{d:6.084,e:261.9},{d:6.327,e:242.7},{d:6.571,e:215.3},{d:6.814,e:208.5},{d:7.057,e:221.8},{d:7.301,e:200.9},{d:7.544,e:194.6},{d:7.787,e:193.3},{d:8.031,e:193.6},{d:8.274,e:195.6},{d:8.518,e:217.7},{d:8.761,e:201.5},{d:9.004,e:188.3},{d:9.248,e:176.8},{d:9.491,e:196.4},{d:9.734,e:213.9},{d:9.978,e:229.0},{d:10.221,e:236.9},{d:10.464,e:237.6},{d:10.708,e:223.4},{d:10.951,e:222.4},{d:11.194,e:218.5},{d:11.438,e:205.6},{d:11.681,e:229.5},{d:11.925,e:229.0},{d:12.168,e:228.9},{d:12.411,e:243.7},{d:12.655,e:249.7},{d:12.898,e:240.3},{d:13.141,e:226.1},{d:13.385,e:215.2},{d:13.628,e:201.4},{d:13.871,e:180.9},{d:14.115,e:177.6},{d:14.358,e:214.4},{d:14.602,e:218.9}]
+    },
+    1: {
+      file: "etapa-2-guiamets-masroig-molar-bellmunt.gpx",
+      distKm: 24.71, gainM: 591, lossM: 552, minEle: 65, maxEle: 265,
+      coords: [[41.10225,0.75247],[41.10232,0.75226],[41.10243,0.75191],[41.10211,0.75152],[41.10291,0.75078],[41.10327,0.75104],[41.10315,0.75007],[41.10406,0.75159],[41.10466,0.74977],[41.10559,0.74875],[41.10624,0.74762],[41.10696,0.74885],[41.10883,0.75041],[41.11023,0.74977],[41.11078,0.74835],[41.1108,0.7466],[41.11234,0.74474],[41.11294,0.73937],[41.11286,0.73591],[41.11142,0.73392],[41.11257,0.73277],[41.11229,0.73081],[41.11266,0.73023],[41.11262,0.72911],[41.11162,0.72754],[41.11104,0.72655],[41.11146,0.72606],[41.11257,0.72558],[41.11272,0.72418],[41.11364,0.72068],[41.11423,0.71931],[41.115,0.71998],[41.11534,0.7214],[41.11565,0.7217],[41.1162,0.72076],[41.11641,0.71971],[41.11662,0.71892],[41.11732,0.71866],[41.11806,0.71718],[41.11894,0.71752],[41.11886,0.71858],[41.11884,0.71975],[41.11947,0.71933],[41.11979,0.72025],[41.1193,0.72154],[41.11916,0.72231],[41.12011,0.72281],[41.11978,0.72335],[41.11928,0.72384],[41.11984,0.72441],[41.11964,0.72519],[41.11894,0.72541],[41.11951,0.72608],[41.1194,0.72732],[41.11944,0.72844],[41.12008,0.72747],[41.12054,0.72779],[41.12051,0.72884],[41.12005,0.73073],[41.11993,0.73228],[41.11972,0.73304],[41.12026,0.73296],[41.12132,0.73436],[41.12188,0.73378],[41.12153,0.73218],[41.12162,0.73141],[41.12269,0.73225],[41.12416,0.73264],[41.12507,0.73278],[41.12555,0.73275],[41.12603,0.73234],[41.12645,0.73154],[41.1265,0.73143],[41.12681,0.73161],[41.12705,0.73132],[41.1275,0.7295],[41.12857,0.72847],[41.12981,0.72713],[41.13066,0.72669],[41.13218,0.72574],[41.13352,0.72555],[41.13552,0.72521],[41.13712,0.72523],[41.13802,0.72317],[41.1396,0.72153],[41.14066,0.72106],[41.14192,0.721],[41.1429,0.72185],[41.14427,0.72201],[41.1454,0.72136],[41.14574,0.71962],[41.14556,0.71812],[41.14604,0.71587],[41.1475,0.71509],[41.14821,0.71427],[41.14908,0.71393],[41.15049,0.71199],[41.15163,0.70981],[41.15191,0.70856],[41.15318,0.70652],[41.15382,0.70594],[41.15526,0.7057],[41.15729,0.70525],[41.15867,0.70499],[41.15988,0.70424],[41.16007,0.70548],[41.16017,0.70593],[41.16143,0.70583],[41.16238,0.70578],[41.16344,0.70529],[41.1634,0.70601],[41.16342,0.70632],[41.16388,0.70693],[41.16397,0.70755],[41.16354,0.70747],[41.16262,0.70756],[41.16095,0.70768],[41.16025,0.70629],[41.15946,0.70665],[41.15936,0.70807],[41.15919,0.70866],[41.15891,0.70972],[41.1588,0.71083],[41.15898,0.71208],[41.15853,0.71362],[41.1581,0.7148],[41.15758,0.71663],[41.15684,0.71844],[41.15622,0.71909],[41.15549,0.72105],[41.15558,0.72211],[41.15579,0.72347],[41.15537,0.72398],[41.15393,0.72506],[41.15359,0.72645],[41.15305,0.72736],[41.15298,0.7284],[41.15367,0.72927],[41.1549,0.72969],[41.15656,0.73028],[41.15622,0.73169],[41.1561,0.73305],[41.1539,0.73259],[41.15208,0.73151],[41.15007,0.72993],[41.14948,0.73079],[41.15046,0.73207],[41.15124,0.73264],[41.15237,0.73287],[41.15331,0.73338],[41.1549,0.73459],[41.15472,0.7357],[41.15405,0.73669],[41.15362,0.73947],[41.15346,0.7401],[41.15338,0.74114],[41.1533,0.74141],[41.15345,0.74152],[41.15395,0.7421],[41.15473,0.74239],[41.15535,0.74265],[41.15643,0.74374],[41.15694,0.74376],[41.157,0.74398],[41.1577,0.74379],[41.15814,0.74512],[41.15818,0.74668],[41.15815,0.74775],[41.15852,0.74972],[41.15851,0.75081],[41.15903,0.75212],[41.15899,0.75378],[41.15908,0.7555],[41.15891,0.75707],[41.15867,0.75783],[41.15877,0.75867],[41.158,0.75944],[41.15787,0.76018],[41.15883,0.76084],[41.15986,0.76057],[41.15989,0.76209],[41.16085,0.76239],[41.16162,0.76177],[41.16179,0.7622],[41.1622,0.76285],[41.16322,0.76417],[41.16332,0.76502],[41.16343,0.76565],[41.16351,0.76583]],
+      profile: [{d:0.0,e:224.7},{d:0.412,e:207.5},{d:0.824,e:180.4},{d:1.235,e:154.0},{d:1.647,e:172.2},{d:2.059,e:195.1},{d:2.471,e:214.0},{d:2.882,e:205.0},{d:3.294,e:183.6},{d:3.706,e:153.3},{d:4.118,e:143.0},{d:4.529,e:145.0},{d:4.941,e:144.0},{d:5.353,e:143.6},{d:5.765,e:143.5},{d:6.176,e:143.1},{d:6.588,e:141.9},{d:7.0,e:139.7},{d:7.412,e:142.1},{d:7.823,e:138.5},{d:8.235,e:139.9},{d:8.647,e:159.9},{d:9.059,e:184.2},{d:9.47,e:183.5},{d:9.882,e:183.8},{d:10.294,e:187.0},{d:10.706,e:186.7},{d:11.117,e:147.4},{d:11.529,e:112.2},{d:11.941,e:83.3},{d:12.353,e:144.9},{d:12.764,e:162.5},{d:13.176,e:165.9},{d:13.588,e:171.6},{d:14.0,e:176.2},{d:14.411,e:184.1},{d:14.823,e:201.6},{d:15.235,e:220.0},{d:15.647,e:187.3},{d:16.059,e:178.4},{d:16.47,e:198.3},{d:16.882,e:200.5},{d:17.294,e:195.7},{d:17.706,e:182.7},{d:18.117,e:144.6},{d:18.529,e:105.7},{d:18.941,e:103.0},{d:19.353,e:83.6},{d:19.764,e:76.6},{d:20.176,e:88.1},{d:20.588,e:83.6},{d:21.0,e:151.5},{d:21.411,e:153.1},{d:21.823,e:149.8},{d:22.235,e:192.4},{d:22.647,e:219.3},{d:23.058,e:211.4},{d:23.47,e:217.1},{d:23.882,e:222.7},{d:24.294,e:229.8},{d:24.705,e:264.1}]
+    },
+    2: {
+      file: "etapa-3-bellmunt-la-figuera-cabaces.gpx",
+      distKm: 22.92, gainM: 792, lossM: 713, minEle: 84, maxEle: 603,
+      coords: [[41.16381,0.76569],[41.16349,0.76615],[41.16343,0.76565],[41.16313,0.76517],[41.16344,0.76482],[41.16322,0.76417],[41.16225,0.76314],[41.16214,0.76232],[41.16162,0.76201],[41.16171,0.76143],[41.16202,0.76099],[41.16229,0.75955],[41.16221,0.75868],[41.16166,0.75688],[41.16169,0.75585],[41.16139,0.7555],[41.16114,0.75467],[41.16123,0.75447],[41.16159,0.7545],[41.16179,0.75413],[41.16216,0.75394],[41.1626,0.75319],[41.16247,0.75257],[41.16312,0.75294],[41.16325,0.75263],[41.16286,0.75174],[41.16295,0.75023],[41.16266,0.74932],[41.16246,0.74726],[41.16209,0.74536],[41.16248,0.74443],[41.1624,0.74387],[41.16262,0.74301],[41.16262,0.74194],[41.16275,0.74177],[41.16314,0.74178],[41.16246,0.74103],[41.16169,0.73864],[41.16128,0.73811],[41.16125,0.73779],[41.16143,0.73725],[41.16222,0.73658],[41.16231,0.73665],[41.15941,0.73403],[41.15827,0.73218],[41.15794,0.72952],[41.15755,0.72888],[41.15778,0.72839],[41.15778,0.72791],[41.15739,0.72727],[41.15736,0.72635],[41.15782,0.72534],[41.15766,0.72413],[41.15843,0.72348],[41.15963,0.7199],[41.16026,0.71894],[41.16076,0.71884],[41.16179,0.71792],[41.16201,0.71756],[41.16253,0.71781],[41.16294,0.71707],[41.16313,0.7171],[41.16342,0.71766],[41.16377,0.71747],[41.16442,0.71664],[41.16474,0.71706],[41.16499,0.71702],[41.16506,0.71516],[41.16573,0.71363],[41.16547,0.71304],[41.16491,0.71254],[41.16534,0.71071],[41.16507,0.70869],[41.16552,0.70806],[41.16562,0.70764],[41.16621,0.70705],[41.16639,0.7063],[41.16573,0.70608],[41.1663,0.70509],[41.16729,0.70525],[41.16741,0.70562],[41.16729,0.70636],[41.16783,0.707],[41.1686,0.70725],[41.16918,0.70881],[41.16943,0.70885],[41.17,0.70852],[41.17093,0.70849],[41.17133,0.70878],[41.17092,0.7133],[41.1712,0.71371],[41.17241,0.71401],[41.1729,0.71436],[41.17351,0.71401],[41.17372,0.7141],[41.17423,0.71483],[41.17484,0.71619],[41.17491,0.71701],[41.17555,0.71787],[41.1759,0.71801],[41.17573,0.7188],[41.17618,0.71996],[41.17658,0.72031],[41.1773,0.72224],[41.17814,0.72235],[41.17922,0.72205],[41.17963,0.72174],[41.17988,0.72176],[41.18061,0.72259],[41.18142,0.7232],[41.18157,0.72364],[41.18173,0.72371],[41.18217,0.7233],[41.1825,0.72362],[41.1829,0.72374],[41.18287,0.72388],[41.18233,0.72395],[41.18229,0.72469],[41.18276,0.7262],[41.1831,0.72679],[41.18368,0.72657],[41.18307,0.72673],[41.18376,0.72616],[41.1854,0.72729],[41.18697,0.72723],[41.18788,0.72778],[41.1885,0.72782],[41.18876,0.72866],[41.18904,0.72878],[41.18899,0.72904],[41.18954,0.72934],[41.18909,0.72981],[41.19042,0.73025],[41.19101,0.73076],[41.19173,0.73065],[41.19212,0.73099],[41.19242,0.73076],[41.19318,0.73074],[41.19389,0.73099],[41.19527,0.73202],[41.19541,0.73256],[41.19567,0.73278],[41.19626,0.73236],[41.19783,0.73339],[41.19811,0.73339],[41.19865,0.73308],[41.20214,0.73667],[41.20346,0.73767],[41.20595,0.74081],[41.20615,0.74079],[41.20649,0.74005],[41.20687,0.73983],[41.2073,0.7393],[41.20852,0.73903],[41.21041,0.74012],[41.21148,0.7401],[41.21256,0.73878],[41.21267,0.73845],[41.21348,0.73813],[41.21249,0.73639],[41.2122,0.73469],[41.21276,0.73428],[41.21349,0.73479],[41.21386,0.73535],[41.21414,0.73542],[41.21435,0.73485],[41.21499,0.73416],[41.21495,0.73401],[41.2154,0.73397],[41.21539,0.73332],[41.21567,0.73324],[41.21652,0.73238],[41.21607,0.73192],[41.21587,0.73128],[41.21597,0.73085],[41.21629,0.72988],[41.21686,0.72908],[41.21724,0.72783],[41.21775,0.7271],[41.21806,0.72551],[41.21863,0.72454],[41.21895,0.72352],[41.21986,0.72226],[41.22009,0.7212],[41.22067,0.72049],[41.22179,0.72137],[41.22175,0.72098],[41.22227,0.71972],[41.22246,0.71941],[41.22265,0.71957],[41.22282,0.71941],[41.22261,0.71815],[41.22269,0.71794],[41.22274,0.71823],[41.22285,0.71745],[41.22304,0.71733],[41.22336,0.71774],[41.22338,0.7175],[41.22355,0.71763],[41.22356,0.71743],[41.22375,0.71785],[41.22374,0.7162],[41.22413,0.71548],[41.22421,0.71578],[41.22433,0.71534],[41.22498,0.71484],[41.22517,0.71481],[41.22503,0.71523],[41.22487,0.71534],[41.22531,0.71467],[41.22555,0.71478],[41.22535,0.71593],[41.2256,0.71623],[41.22642,0.71646],[41.22674,0.71615],[41.22729,0.71606],[41.22728,0.71572],[41.22771,0.71549],[41.22786,0.71551],[41.2283,0.71647],[41.2288,0.71612],[41.22997,0.71583],[41.23022,0.71625],[41.23068,0.7163],[41.23052,0.71674],[41.23103,0.71701],[41.23254,0.71613],[41.23282,0.71552],[41.23312,0.71346],[41.23317,0.71386],[41.2336,0.71423],[41.23371,0.71471],[41.23397,0.71499],[41.23407,0.71618],[41.23432,0.71659],[41.23434,0.71718],[41.23478,0.7183],[41.2357,0.71888],[41.23587,0.71922],[41.23637,0.71925],[41.23656,0.71959],[41.23651,0.71996],[41.23687,0.72091],[41.23668,0.72122],[41.23689,0.72248],[41.23742,0.72263],[41.23812,0.72343],[41.23883,0.72389],[41.23883,0.72508],[41.23907,0.72608],[41.24018,0.72676],[41.24124,0.7282],[41.24134,0.72868],[41.24106,0.72858],[41.24099,0.72876],[41.2412,0.72942],[41.24143,0.72964],[41.2418,0.72961],[41.24224,0.72994],[41.24362,0.73015],[41.24444,0.73093],[41.24482,0.7317],[41.245,0.73157],[41.24481,0.73135],[41.2446,0.73045],[41.24481,0.73135],[41.245,0.73157],[41.24551,0.73119],[41.2463,0.7311],[41.2463,0.7314],[41.24595,0.73143],[41.24616,0.73147],[41.24609,0.73227],[41.24691,0.7331]],
+      profile: [{d:0.0,e:269.4},{d:0.382,e:239.0},{d:0.764,e:214.1},{d:1.146,e:198.2},{d:1.528,e:166.3},{d:1.91,e:156.2},{d:2.292,e:136.9},{d:2.674,e:104.1},{d:3.056,e:90.4},{d:3.439,e:87.0},{d:3.821,e:102.3},{d:4.203,e:130.8},{d:4.585,e:140.4},{d:4.967,e:155.1},{d:5.349,e:174.3},{d:5.731,e:187.4},{d:6.113,e:205.2},{d:6.495,e:206.1},{d:6.877,e:211.8},{d:7.259,e:228.6},{d:7.641,e:225.5},{d:8.023,e:232.5},{d:8.405,e:237.7},{d:8.787,e:254.4},{d:9.169,e:278.1},{d:9.551,e:301.3},{d:9.933,e:319.5},{d:10.316,e:360.3},{d:10.698,e:376.4},{d:11.08,e:389.9},{d:11.462,e:417.0},{d:11.844,e:448.7},{d:12.226,e:453.6},{d:12.608,e:475.7},{d:12.99,e:501.3},{d:13.372,e:519.5},{d:13.754,e:547.6},{d:14.136,e:558.8},{d:14.518,e:591.4},{d:14.9,e:595.2},{d:15.282,e:580.9},{d:15.664,e:561.1},{d:16.046,e:557.3},{d:16.428,e:536.9},{d:16.811,e:533.3},{d:17.193,e:523.4},{d:17.575,e:461.6},{d:17.957,e:386.2},{d:18.339,e:323.4},{d:18.721,e:292.2},{d:19.103,e:252.3},{d:19.485,e:263.9},{d:19.867,e:303.5},{d:20.249,e:302.5},{d:20.631,e:303.7},{d:21.013,e:309.9},{d:21.395,e:295.5},{d:21.777,e:303.2},{d:22.159,e:325.4},{d:22.541,e:323.3},{d:22.923,e:349.1}]
+    },
+    3: {
+      file: "etapa-4-cabaces-la-bisbal-margalef.gpx",
+      distKm: 12.29, gainM: 472, lossM: 438, minEle: 330, maxEle: 547,
+      coords: [[41.24779,0.73394],[41.24861,0.73536],[41.24855,0.7352],[41.24917,0.73541],[41.24965,0.73489],[41.24983,0.73432],[41.25074,0.73418],[41.25127,0.73376],[41.25148,0.73379],[41.25179,0.73296],[41.25192,0.73294],[41.25168,0.73262],[41.2517,0.73239],[41.25234,0.7324],[41.25294,0.73291],[41.25327,0.73289],[41.25321,0.73207],[41.25295,0.7316],[41.25315,0.73141],[41.2535,0.73154],[41.25342,0.73133],[41.25284,0.73072],[41.25249,0.72974],[41.25189,0.7293],[41.25164,0.72888],[41.25129,0.7288],[41.2511,0.72833],[41.25118,0.72722],[41.25144,0.72719],[41.25186,0.72756],[41.25202,0.72814],[41.25365,0.72939],[41.25582,0.73284],[41.25698,0.73345],[41.25734,0.73398],[41.25743,0.7346],[41.25784,0.73497],[41.25879,0.73534],[41.25889,0.73588],[41.25847,0.73626],[41.25835,0.73663],[41.25929,0.73867],[41.25968,0.73869],[41.26055,0.73796],[41.26133,0.73938],[41.26225,0.74047],[41.26285,0.74085],[41.26304,0.7412],[41.26319,0.74275],[41.26351,0.74325],[41.26396,0.74327],[41.26461,0.74262],[41.26475,0.74154],[41.2649,0.74149],[41.26583,0.74241],[41.26579,0.74311],[41.26636,0.74343],[41.26664,0.74412],[41.26722,0.74421],[41.26735,0.74446],[41.26725,0.74466],[41.26755,0.74505],[41.26804,0.74465],[41.26817,0.74411],[41.26779,0.74278],[41.26791,0.74183],[41.26815,0.74117],[41.26922,0.73994],[41.26917,0.7397],[41.26904,0.73972],[41.26931,0.73928],[41.26964,0.73903],[41.27029,0.73803],[41.27034,0.73717],[41.27092,0.73642],[41.271,0.7346],[41.272,0.7333],[41.27241,0.73338],[41.27264,0.73327],[41.27359,0.73044],[41.27426,0.72979],[41.27452,0.72976],[41.27466,0.72995],[41.27527,0.72906],[41.27566,0.72906],[41.27602,0.72823],[41.27599,0.72858],[41.27631,0.72753],[41.27679,0.72735],[41.27721,0.72697],[41.27781,0.72683],[41.27833,0.72627],[41.27864,0.72519],[41.27904,0.72507],[41.27909,0.72481],[41.28024,0.72462],[41.28038,0.72514],[41.28043,0.72481],[41.28012,0.72365],[41.27969,0.72315],[41.28016,0.72346],[41.2803,0.72312],[41.28026,0.72335],[41.28075,0.72364],[41.28108,0.72524],[41.28098,0.72645],[41.28121,0.72827],[41.2808,0.72902],[41.28084,0.73014],[41.28005,0.73079],[41.27933,0.73209],[41.27872,0.73234],[41.27849,0.73267],[41.27813,0.73271],[41.278,0.73288],[41.27807,0.73355],[41.27804,0.73314],[41.2784,0.73388],[41.2793,0.73425],[41.28011,0.73425],[41.28012,0.73487],[41.28069,0.73487],[41.28144,0.73552],[41.2818,0.73666],[41.28133,0.73862],[41.28155,0.73938],[41.28135,0.73959],[41.28153,0.73967],[41.28183,0.74061],[41.28159,0.74157],[41.28188,0.74279],[41.28329,0.74287],[41.28441,0.74266],[41.2851,0.74236],[41.28569,0.74235],[41.28607,0.74246],[41.28653,0.74325],[41.28683,0.74337],[41.28686,0.74412],[41.28645,0.74538],[41.28647,0.74559],[41.2867,0.74572],[41.28664,0.74614],[41.28604,0.74616],[41.28508,0.74705],[41.28408,0.74734],[41.28392,0.74751],[41.28402,0.74787],[41.2843,0.74799],[41.28406,0.74756],[41.2843,0.74799],[41.28519,0.74866],[41.28566,0.75004],[41.28558,0.7514],[41.28393,0.75392],[41.28405,0.75449],[41.28429,0.7545],[41.28457,0.75375],[41.28507,0.75338],[41.28502,0.75355]],
+      profile: [{d:0.0,e:356.5},{d:0.205,e:365.8},{d:0.41,e:356.1},{d:0.614,e:341.7},{d:0.819,e:375.0},{d:1.024,e:407.3},{d:1.229,e:443.1},{d:1.434,e:469.2},{d:1.638,e:505.5},{d:1.843,e:526.7},{d:2.048,e:532.4},{d:2.253,e:520.6},{d:2.457,e:520.3},{d:2.662,e:522.4},{d:2.867,e:520.5},{d:3.072,e:523.1},{d:3.277,e:516.8},{d:3.481,e:514.4},{d:3.686,e:514.6},{d:3.891,e:526.2},{d:4.096,e:510.3},{d:4.301,e:490.1},{d:4.505,e:505.4},{d:4.71,e:529.5},{d:4.915,e:542.2},{d:5.12,e:545.9},{d:5.324,e:516.9},{d:5.529,e:483.9},{d:5.734,e:458.0},{d:5.939,e:444.5},{d:6.144,e:430.7},{d:6.348,e:414.2},{d:6.553,e:384.0},{d:6.758,e:384.0},{d:6.963,e:356.2},{d:7.168,e:335.2},{d:7.372,e:340.9},{d:7.577,e:357.8},{d:7.782,e:378.5},{d:7.987,e:387.0},{d:8.191,e:376.7},{d:8.396,e:366.8},{d:8.601,e:365.7},{d:8.806,e:354.4},{d:9.011,e:346.6},{d:9.215,e:339.5},{d:9.42,e:352.6},{d:9.625,e:363.5},{d:9.83,e:375.3},{d:10.035,e:381.3},{d:10.239,e:368.3},{d:10.444,e:355.4},{d:10.649,e:349.9},{d:10.854,e:359.3},{d:11.058,e:369.0},{d:11.263,e:376.5},{d:11.468,e:376.0},{d:11.673,e:369.5},{d:11.878,e:364.0},{d:12.082,e:370.5},{d:12.287,e:390.7}]
+    },
+    4: {
+      file: "etapa-5-margalef-ulldemolins-cornudella.gpx",
+      distKm: 32.84, gainM: 1600, lossM: 1468, minEle: 371, maxEle: 1150,
+      coords: [[41.28539,0.75391],[41.28748,0.75413],[41.28819,0.75487],[41.28961,0.75869],[41.28877,0.76114],[41.29019,0.76231],[41.29162,0.76514],[41.29224,0.76536],[41.29276,0.76607],[41.29535,0.76789],[41.29598,0.76856],[41.29585,0.76871],[41.29734,0.76955],[41.29785,0.77063],[41.29787,0.77221],[41.29669,0.77285],[41.29613,0.77353],[41.2963,0.77466],[41.29718,0.77516],[41.29746,0.77579],[41.29765,0.77714],[41.29743,0.77913],[41.29698,0.77922],[41.29634,0.78045],[41.2956,0.78099],[41.29495,0.7826],[41.29499,0.78317],[41.2957,0.78332],[41.29584,0.78388],[41.29652,0.78396],[41.29688,0.78437],[41.29692,0.78584],[41.29563,0.7893],[41.29595,0.78954],[41.29652,0.78922],[41.29713,0.78977],[41.29757,0.78954],[41.2976,0.78994],[41.29817,0.79024],[41.29931,0.79168],[41.29989,0.79187],[41.30033,0.7933],[41.30059,0.79198],[41.30161,0.79229],[41.30234,0.79156],[41.30365,0.78819],[41.30405,0.78817],[41.30481,0.78875],[41.30488,0.79009],[41.3042,0.79244],[41.30449,0.79375],[41.30536,0.79426],[41.30488,0.79528],[41.30491,0.79595],[41.30701,0.7947],[41.30819,0.79492],[41.31042,0.79673],[41.31182,0.79859],[41.31129,0.7998],[41.30843,0.80185],[41.30845,0.80233],[41.30795,0.80281],[41.30722,0.80478],[41.30503,0.80537],[41.30434,0.80518],[41.30387,0.80556],[41.30327,0.80843],[41.30351,0.80903],[41.30338,0.81073],[41.30253,0.81254],[41.30244,0.8134],[41.3032,0.81603],[41.30376,0.81687],[41.30373,0.81772],[41.30406,0.81801],[41.3047,0.81807],[41.30506,0.81757],[41.30546,0.81514],[41.30625,0.81454],[41.30707,0.8147],[41.30887,0.81999],[41.30861,0.82093],[41.30722,0.82145],[41.30672,0.82201],[41.3067,0.82322],[41.30741,0.82441],[41.30867,0.8255],[41.30903,0.82648],[41.31014,0.82749],[41.31163,0.82706],[41.31257,0.82767],[41.31301,0.82953],[41.31236,0.83291],[41.31323,0.83325],[41.31478,0.83197],[41.31562,0.8321],[41.3157,0.83472],[41.3166,0.83619],[41.31402,0.8392],[41.31399,0.8417],[41.31519,0.84325],[41.31747,0.84438],[41.31856,0.84555],[41.31959,0.84861],[41.31923,0.85071],[41.32057,0.85221],[41.32114,0.85243],[41.32166,0.8537],[41.32147,0.85465],[41.32103,0.85465],[41.32079,0.85511],[41.32071,0.85652],[41.32145,0.85686],[41.32051,0.85684],[41.32008,0.85756],[41.31924,0.86173],[41.31934,0.86334],[41.31811,0.8643],[41.31777,0.86492],[41.31819,0.86677],[41.31816,0.86827],[41.3177,0.86837],[41.31774,0.86932],[41.31785,0.86977],[41.31894,0.87015],[41.31978,0.87172],[41.32098,0.87254],[41.32127,0.87363],[41.32205,0.87286],[41.32214,0.87611],[41.32126,0.87661],[41.31893,0.87435],[41.31774,0.87378],[41.31753,0.87118],[41.31702,0.87158],[41.31571,0.87145],[41.31533,0.87113],[41.31548,0.87037],[41.31395,0.86958],[41.31404,0.86858],[41.31296,0.86865],[41.31305,0.86818],[41.3124,0.86784],[41.31216,0.86693],[41.3118,0.8668],[41.31109,0.86418],[41.30914,0.86394],[41.30864,0.86461],[41.30823,0.86414],[41.30849,0.86353],[41.30773,0.86287],[41.30706,0.86359],[41.30669,0.86298],[41.30649,0.86324],[41.30588,0.86224],[41.30636,0.85968],[41.30578,0.85851],[41.30554,0.8564],[41.30509,0.85689],[41.30537,0.85572],[41.30442,0.85454],[41.30444,0.854],[41.30382,0.85433],[41.30261,0.8528],[41.30225,0.85327],[41.30133,0.8519],[41.30099,0.85092],[41.30136,0.85071],[41.302,0.85104],[41.30192,0.85009],[41.30121,0.84871],[41.30114,0.8474],[41.30038,0.84791],[41.30029,0.84828],[41.29888,0.84774],[41.29843,0.84849],[41.2976,0.8473],[41.29555,0.84756],[41.29498,0.84785],[41.29475,0.84847],[41.2941,0.84779],[41.29438,0.84728],[41.29359,0.84718],[41.29233,0.84844],[41.29333,0.84867],[41.29374,0.84942],[41.29305,0.85079],[41.29279,0.85216],[41.29178,0.85339],[41.29091,0.8536],[41.29037,0.85416],[41.29109,0.85409],[41.29165,0.85442],[41.29086,0.85443],[41.29042,0.85549],[41.29032,0.85628],[41.29092,0.85696],[41.29101,0.85808],[41.28963,0.85939],[41.28971,0.8606],[41.28918,0.86152],[41.28818,0.86196],[41.28773,0.86453],[41.28616,0.86574],[41.28616,0.86672],[41.28436,0.87055],[41.28416,0.87165],[41.28339,0.87266],[41.28314,0.87531],[41.28275,0.87503],[41.28275,0.87612],[41.28252,0.87595],[41.28096,0.87825],[41.28032,0.87831],[41.27961,0.87758],[41.27835,0.87815],[41.27876,0.88011],[41.27945,0.88154],[41.27882,0.88147],[41.27834,0.88075],[41.27823,0.88278],[41.27779,0.88299],[41.27784,0.8826],[41.27739,0.88235],[41.27744,0.88279],[41.27674,0.88335],[41.27687,0.88444],[41.27624,0.88685],[41.27587,0.88693],[41.27582,0.88729],[41.27539,0.88676],[41.27541,0.88814],[41.27315,0.8904],[41.27143,0.89351],[41.27007,0.89808],[41.27047,0.89896],[41.27002,0.90257],[41.26762,0.90341],[41.26671,0.90411],[41.26618,0.905],[41.26545,0.90499],[41.2655,0.90536]],
+      profile: [{d:0.0,e:398.5},{d:0.547,e:373.7},{d:1.095,e:380.7},{d:1.642,e:381.3},{d:2.19,e:384.7},{d:2.737,e:390.8},{d:3.284,e:420.9},{d:3.832,e:403.0},{d:4.379,e:457.6},{d:4.927,e:482.5},{d:5.474,e:447.8},{d:6.022,e:441.8},{d:6.569,e:487.7},{d:7.116,e:447.6},{d:7.664,e:446.1},{d:8.211,e:461.3},{d:8.759,e:449.1},{d:9.306,e:453.7},{d:9.853,e:461.8},{d:10.401,e:464.7},{d:10.948,e:478.7},{d:11.496,e:496.7},{d:12.043,e:499.5},{d:12.591,e:490.3},{d:13.138,e:503.8},{d:13.685,e:532.0},{d:14.233,e:524.6},{d:14.78,e:599.9},{d:15.328,e:629.8},{d:15.875,e:589.9},{d:16.422,e:556.3},{d:16.97,e:566.7},{d:17.517,e:589.9},{d:18.065,e:614.7},{d:18.612,e:653.1},{d:19.16,e:608.7},{d:19.707,e:597.9},{d:20.254,e:658.0},{d:20.802,e:682.2},{d:21.349,e:781.1},{d:21.897,e:894.7},{d:22.444,e:1013.3},{d:22.991,e:989.0},{d:23.539,e:941.5},{d:24.086,e:883.4},{d:24.634,e:855.7},{d:25.181,e:902.7},{d:25.729,e:893.1},{d:26.276,e:956.3},{d:26.823,e:1043.9},{d:27.371,e:1066.7},{d:27.918,e:1143.9},{d:28.466,e:1088.2},{d:29.013,e:1009.1},{d:29.56,e:937.3},{d:30.108,e:844.3},{d:30.655,e:763.8},{d:31.203,e:682.1},{d:31.75,e:641.5},{d:32.298,e:572.4},{d:32.845,e:530.4}]
+    },
+    5: {
+      file: "etapa-6-cornudella-siurana-poboleda.gpx",
+      distKm: 24.56, gainM: 1066, lossM: 1235, minEle: 352, maxEle: 799,
+      coords: [[41.26536,0.90776],[41.26574,0.90957],[41.26514,0.91005],[41.26444,0.9115],[41.26346,0.91229],[41.26267,0.9123],[41.2621,0.91267],[41.26022,0.91483],[41.25967,0.91539],[41.25954,0.91529],[41.25961,0.91573],[41.25867,0.9164],[41.25857,0.91687],[41.25856,0.91643],[41.25828,0.91709],[41.25808,0.91714],[41.25769,0.91676],[41.25745,0.91715],[41.25721,0.91699],[41.25679,0.91723],[41.25638,0.91709],[41.25652,0.91892],[41.25681,0.9196],[41.25643,0.91951],[41.2553,0.91984],[41.25491,0.92022],[41.25411,0.92009],[41.25429,0.92137],[41.25515,0.92277],[41.25416,0.92204],[41.25354,0.92098],[41.25346,0.92034],[41.25289,0.92055],[41.25306,0.92112],[41.25276,0.92169],[41.2534,0.92222],[41.25322,0.92373],[41.25285,0.9241],[41.25278,0.92489],[41.25245,0.92538],[41.25279,0.92619],[41.25242,0.92641],[41.25121,0.92629],[41.25108,0.92645],[41.25115,0.92781],[41.25162,0.92855],[41.25225,0.92874],[41.25256,0.9291],[41.25228,0.9296],[41.25259,0.93028],[41.2526,0.93106],[41.25287,0.9314],[41.25315,0.93107],[41.25326,0.92996],[41.25489,0.92935],[41.25514,0.929],[41.25461,0.92769],[41.25469,0.92729],[41.25515,0.92688],[41.25487,0.92624],[41.25515,0.92688],[41.25622,0.92662],[41.25748,0.92681],[41.25836,0.92811],[41.25885,0.92805],[41.26023,0.9295],[41.26027,0.93034],[41.26013,0.92999],[41.26,0.93039],[41.25989,0.93013],[41.2598,0.93052],[41.25955,0.93067],[41.25943,0.92983],[41.25886,0.92954],[41.25815,0.93042],[41.25826,0.93089],[41.25846,0.93037],[41.25865,0.93059],[41.25844,0.93192],[41.25774,0.932],[41.25865,0.9351],[41.25872,0.93573],[41.2585,0.93635],[41.25927,0.9399],[41.25966,0.94082],[41.26031,0.94154],[41.2606,0.94274],[41.26048,0.9431],[41.26066,0.94344],[41.26049,0.94339],[41.26045,0.94402],[41.26022,0.94419],[41.26039,0.94449],[41.26039,0.94645],[41.26064,0.94675],[41.26074,0.94749],[41.2606,0.94747],[41.26087,0.94792],[41.26073,0.94853],[41.26052,0.94843],[41.26035,0.94865],[41.26073,0.94961],[41.26011,0.94893],[41.25922,0.94838],[41.2587,0.94906],[41.25827,0.94913],[41.25769,0.94966],[41.25751,0.94958],[41.25742,0.94889],[41.25694,0.94922],[41.25655,0.95073],[41.25617,0.95097],[41.25613,0.95068],[41.25561,0.95107],[41.25535,0.95145],[41.2554,0.9519],[41.25469,0.95237],[41.25454,0.95128],[41.25387,0.95064],[41.25347,0.94953],[41.25284,0.95018],[41.25273,0.9492],[41.25143,0.94726],[41.25014,0.94678],[41.24984,0.94635],[41.24928,0.94671],[41.24871,0.94646],[41.24837,0.94601],[41.24835,0.94513],[41.24766,0.94383],[41.24631,0.94292],[41.24609,0.94182],[41.24522,0.93998],[41.24536,0.94016],[41.24569,0.94006],[41.24569,0.93949],[41.24594,0.93958],[41.24625,0.93897],[41.24759,0.93758],[41.24782,0.93776],[41.2477,0.93719],[41.24845,0.93661],[41.24946,0.9336],[41.24935,0.93301],[41.24913,0.93302],[41.24949,0.93181],[41.24922,0.92992],[41.24874,0.92999],[41.24907,0.92914],[41.24812,0.9279],[41.24748,0.92801],[41.24764,0.92598],[41.24737,0.92568],[41.24763,0.92521],[41.24741,0.92348],[41.24782,0.92333],[41.24881,0.92156],[41.24837,0.92076],[41.2484,0.91984],[41.24882,0.91873],[41.24944,0.91798],[41.24943,0.91729],[41.24931,0.91702],[41.24872,0.91695],[41.24735,0.91732],[41.24863,0.91514],[41.24809,0.91443],[41.24751,0.91408],[41.24745,0.91179],[41.24714,0.91141],[41.24652,0.91117],[41.24686,0.90988],[41.24667,0.90821],[41.24635,0.90776],[41.24585,0.90796],[41.24464,0.90575],[41.24405,0.90411],[41.24314,0.9026],[41.24188,0.89921],[41.24122,0.89872],[41.23892,0.89969],[41.23856,0.89958],[41.23814,0.89916],[41.23828,0.89799],[41.23647,0.89648],[41.23536,0.89472],[41.23673,0.8918],[41.23665,0.89196],[41.23775,0.89226],[41.23898,0.89203],[41.24012,0.89239],[41.24212,0.8922],[41.24286,0.89021],[41.24301,0.89063],[41.24418,0.89061],[41.2456,0.88871],[41.24593,0.88874],[41.24607,0.88853],[41.24598,0.88571],[41.24492,0.88483],[41.24461,0.88411],[41.24437,0.88418],[41.24392,0.88388],[41.24367,0.88301],[41.24387,0.88157],[41.24264,0.87976],[41.24222,0.87862],[41.24231,0.87718],[41.24167,0.87584],[41.24202,0.8754],[41.24301,0.87555],[41.24602,0.87279],[41.24648,0.87165],[41.24795,0.87024],[41.24811,0.86881],[41.24785,0.86833],[41.24719,0.86789],[41.24653,0.86813],[41.2463,0.86847],[41.24574,0.86682],[41.24582,0.8659],[41.24601,0.86557],[41.24659,0.8653],[41.24673,0.86488],[41.24641,0.86398],[41.24549,0.86323],[41.2452,0.86182],[41.245,0.8622],[41.24513,0.86323],[41.24495,0.86371],[41.24533,0.86449],[41.24467,0.86426],[41.24416,0.86434],[41.2434,0.86309],[41.243,0.86342],[41.24317,0.86177],[41.24247,0.86083],[41.24209,0.85863],[41.24167,0.85806],[41.24171,0.85758],[41.24122,0.8566],[41.24123,0.85578],[41.24094,0.85493],[41.24059,0.85449],[41.2393,0.85389],[41.2389,0.85337],[41.23903,0.85267],[41.23829,0.85184],[41.2387,0.85084],[41.23837,0.84955],[41.23732,0.84827],[41.23712,0.84725],[41.23686,0.84708],[41.23599,0.84723],[41.23475,0.84529]],
+      profile: [{d:0.0,e:526.8},{d:0.409,e:523.4},{d:0.819,e:498.2},{d:1.228,e:474.0},{d:1.638,e:479.8},{d:2.047,e:486.8},{d:2.456,e:491.4},{d:2.866,e:524.1},{d:3.275,e:532.8},{d:3.684,e:506.1},{d:4.094,e:501.3},{d:4.503,e:562.9},{d:4.913,e:564.1},{d:5.322,e:568.6},{d:5.731,e:597.4},{d:6.141,e:689.9},{d:6.55,e:735.7},{d:6.959,e:748.4},{d:7.369,e:732.6},{d:7.778,e:658.4},{d:8.188,e:551.5},{d:8.597,e:518.3},{d:9.006,e:611.1},{d:9.416,e:720.3},{d:9.825,e:778.8},{d:10.234,e:794.8},{d:10.644,e:798.1},{d:11.053,e:779.7},{d:11.463,e:685.0},{d:11.872,e:618.9},{d:12.281,e:507.0},{d:12.691,e:478.1},{d:13.1,e:472.7},{d:13.509,e:482.5},{d:13.919,e:475.6},{d:14.328,e:488.3},{d:14.738,e:459.8},{d:15.147,e:433.4},{d:15.556,e:417.4},{d:15.966,e:412.6},{d:16.375,e:401.0},{d:16.784,e:405.9},{d:17.194,e:400.8},{d:17.603,e:419.5},{d:18.013,e:454.4},{d:18.422,e:490.2},{d:18.831,e:475.9},{d:19.241,e:440.7},{d:19.65,e:417.4},{d:20.059,e:402.8},{d:20.469,e:439.8},{d:20.878,e:475.7},{d:21.288,e:483.0},{d:21.697,e:466.1},{d:22.106,e:442.0},{d:22.516,e:415.1},{d:22.925,e:377.4},{d:23.334,e:361.3},{d:23.744,e:363.4},{d:24.153,e:362.0},{d:24.563,e:358.3}]
+    },
+    6: {
+      file: "etapa-7-poboleda-escaladei-vilella-alta-torroja.gpx",
+      distKm: 14.89, gainM: 534, lossM: 558, minEle: 249, maxEle: 523,
+      coords: [[41.23468,0.8448],[41.23486,0.84419],[41.23523,0.84381],[41.23526,0.84262],[41.23486,0.84113],[41.23506,0.84097],[41.23597,0.84101],[41.2358,0.84007],[41.23547,0.83964],[41.23566,0.83969],[41.23562,0.83903],[41.23605,0.83775],[41.23623,0.83756],[41.23618,0.8372],[41.23656,0.83699],[41.23663,0.83673],[41.23644,0.83635],[41.23684,0.83548],[41.23689,0.83498],[41.23735,0.83436],[41.23731,0.83332],[41.23778,0.83246],[41.23774,0.83189],[41.23794,0.83122],[41.23774,0.82986],[41.23859,0.82834],[41.23885,0.82819],[41.24013,0.8284],[41.24104,0.82879],[41.24018,0.82842],[41.24088,0.82838],[41.24063,0.82747],[41.24105,0.82693],[41.24124,0.82581],[41.24241,0.82478],[41.24198,0.82537],[41.24284,0.82401],[41.24283,0.82234],[41.24222,0.82184],[41.2421,0.82157],[41.24228,0.82133],[41.24238,0.82053],[41.2428,0.81978],[41.24327,0.8197],[41.24324,0.81916],[41.2443,0.81814],[41.24496,0.81817],[41.24555,0.81843],[41.24574,0.81809],[41.24603,0.81795],[41.24596,0.81717],[41.24538,0.81632],[41.24678,0.81521],[41.24672,0.81455],[41.24686,0.81409],[41.2464,0.81258],[41.24557,0.81123],[41.24485,0.81064],[41.24487,0.81026],[41.24529,0.81035],[41.24584,0.81082],[41.24639,0.81101],[41.24676,0.81157],[41.24727,0.81195],[41.24762,0.81132],[41.24742,0.81153],[41.24561,0.80965],[41.24749,0.81156],[41.24727,0.81195],[41.24676,0.81157],[41.24639,0.81101],[41.24468,0.81015],[41.24456,0.80934],[41.24428,0.8089],[41.24445,0.80783],[41.24334,0.80435],[41.24271,0.80392],[41.24234,0.80395],[41.24174,0.80353],[41.24148,0.80307],[41.24112,0.80292],[41.24086,0.8029],[41.24035,0.80333],[41.23953,0.8031],[41.23916,0.8029],[41.23883,0.80153],[41.23838,0.80174],[41.238,0.80169],[41.23798,0.80069],[41.23834,0.7996],[41.23794,0.79805],[41.23797,0.7973],[41.23817,0.7968],[41.23792,0.79612],[41.23746,0.79602],[41.23713,0.79505],[41.23675,0.79491],[41.23605,0.79387],[41.23513,0.79338],[41.23469,0.79268],[41.23419,0.79226],[41.23355,0.79233],[41.23305,0.79195],[41.23242,0.79176],[41.23198,0.79188],[41.23154,0.7914],[41.23103,0.79165],[41.23078,0.79148],[41.23069,0.7908],[41.22988,0.79064],[41.22962,0.79026],[41.2291,0.79017],[41.22915,0.78939],[41.2287,0.78877],[41.22811,0.78854],[41.22752,0.78718],[41.22703,0.78668],[41.22751,0.78553],[41.2274,0.78511],[41.22717,0.78503],[41.22667,0.78519],[41.2261,0.78497],[41.22594,0.78359],[41.2252,0.78202],[41.22557,0.78148],[41.2258,0.78064],[41.22556,0.78053],[41.22536,0.78063],[41.22532,0.78128],[41.22481,0.78158],[41.22476,0.78122],[41.22512,0.78088],[41.22508,0.78076],[41.22512,0.78088],[41.22476,0.78122],[41.22463,0.78216],[41.22486,0.78294],[41.22471,0.78357],[41.2242,0.78353],[41.22382,0.78389],[41.22339,0.784],[41.22322,0.78445],[41.22335,0.78484],[41.22324,0.7854],[41.22144,0.78651],[41.22117,0.78737],[41.22145,0.7875],[41.22193,0.7872],[41.22199,0.78786],[41.22228,0.78823],[41.2219,0.78822],[41.22171,0.78791],[41.22126,0.7888],[41.22099,0.78856],[41.22055,0.78892],[41.22072,0.78927],[41.22045,0.7893],[41.22072,0.78927],[41.22075,0.78952],[41.22054,0.79048],[41.22082,0.79068],[41.22154,0.7907],[41.22126,0.79102],[41.22148,0.7921],[41.2212,0.79258],[41.22098,0.79521],[41.22067,0.79534],[41.22033,0.79576],[41.22093,0.797],[41.22009,0.79837],[41.2197,0.80011],[41.21843,0.80202],[41.21812,0.80295],[41.21822,0.80299],[41.21821,0.80366],[41.21742,0.8049],[41.21755,0.80559],[41.21726,0.8067],[41.21666,0.80701],[41.21644,0.8069],[41.21683,0.80726],[41.21633,0.80807],[41.21714,0.80838],[41.21737,0.8087],[41.21707,0.80977],[41.21708,0.80961],[41.21694,0.80962],[41.21679,0.80998],[41.21652,0.81014],[41.21635,0.81002],[41.21636,0.81021],[41.21583,0.811],[41.21502,0.81111],[41.21503,0.81161],[41.21405,0.812],[41.21398,0.81192],[41.21426,0.81156],[41.21391,0.81202],[41.21361,0.81207],[41.21344,0.81082],[41.21341,0.81071],[41.21328,0.81082]],
+      profile: [{d:0.0,e:357.6},{d:0.248,e:343.6},{d:0.496,e:334.2},{d:0.744,e:355.5},{d:0.992,e:390.7},{d:1.241,e:394.2},{d:1.489,e:402.1},{d:1.737,e:406.7},{d:1.985,e:413.6},{d:2.233,e:410.2},{d:2.481,e:417.4},{d:2.729,e:431.5},{d:2.977,e:445.3},{d:3.226,e:471.7},{d:3.474,e:485.9},{d:3.722,e:515.7},{d:3.97,e:500.5},{d:4.218,e:472.8},{d:4.466,e:449.5},{d:4.714,e:425.1},{d:4.962,e:412.3},{d:5.211,e:404.8},{d:5.459,e:406.6},{d:5.707,e:418.0},{d:5.955,e:429.7},{d:6.203,e:455.4},{d:6.451,e:484.0},{d:6.699,e:503.3},{d:6.947,e:519.3},{d:7.196,e:508.5},{d:7.444,e:492.8},{d:7.692,e:500.2},{d:7.94,e:499.4},{d:8.188,e:478.7},{d:8.436,e:476.0},{d:8.684,e:463.3},{d:8.932,e:449.8},{d:9.181,e:432.3},{d:9.429,e:420.9},{d:9.677,e:414.9},{d:9.925,e:367.5},{d:10.173,e:329.3},{d:10.421,e:321.7},{d:10.669,e:345.5},{d:10.917,e:383.6},{d:11.166,e:379.0},{d:11.414,e:364.7},{d:11.662,e:351.2},{d:11.91,e:326.8},{d:12.158,e:322.7},{d:12.406,e:317.3},{d:12.654,e:324.0},{d:12.902,e:318.6},{d:13.151,e:297.5},{d:13.399,e:275.9},{d:13.647,e:261.9},{d:13.895,e:249.1},{d:14.143,e:263.5},{d:14.391,e:282.7},{d:14.639,e:306.1},{d:14.887,e:334.4}]
+    },
+    7: {
+      file: "etapa-8-torroja-porrera-falset.gpx",
+      distKm: 19.55, gainM: 816, lossM: 797, minEle: 293, maxEle: 611,
+      coords: [[41.21287,0.80988],[41.21318,0.81005],[41.21288,0.81098],[41.21227,0.81052],[41.21207,0.8108],[41.21152,0.81081],[41.21207,0.8108],[41.21227,0.81052],[41.2128,0.81102],[41.21273,0.81139],[41.21239,0.81133],[41.21238,0.81159],[41.21201,0.81164],[41.21191,0.81244],[41.21207,0.8128],[41.2119,0.81289],[41.21191,0.81365],[41.2115,0.81395],[41.21104,0.8138],[41.2106,0.81393],[41.21076,0.81482],[41.20988,0.81534],[41.20927,0.81619],[41.20941,0.81637],[41.21002,0.81655],[41.21029,0.81719],[41.20992,0.81745],[41.20914,0.81876],[41.20907,0.81967],[41.2095,0.81988],[41.20965,0.8208],[41.20929,0.82237],[41.20841,0.82372],[41.20843,0.82396],[41.20888,0.82388],[41.20838,0.82396],[41.20779,0.82486],[41.20752,0.82563],[41.20765,0.82626],[41.20749,0.82636],[41.20768,0.82624],[41.20804,0.82681],[41.2083,0.82782],[41.20911,0.82925],[41.20836,0.82879],[41.20801,0.82905],[41.20752,0.8289],[41.20732,0.82921],[41.20669,0.82901],[41.20574,0.83041],[41.20576,0.83093],[41.2062,0.83215],[41.20622,0.83255],[41.20598,0.83317],[41.20612,0.83336],[41.2062,0.83305],[41.20633,0.83338],[41.20619,0.83428],[41.20635,0.83503],[41.20609,0.83592],[41.20651,0.83652],[41.20592,0.83631],[41.20566,0.83641],[41.20534,0.83741],[41.20549,0.83768],[41.20602,0.83752],[41.20657,0.83809],[41.20724,0.83813],[41.20739,0.83837],[41.20698,0.83949],[41.20668,0.83986],[41.20664,0.84028],[41.20627,0.84058],[41.20584,0.84129],[41.20584,0.84202],[41.20726,0.84243],[41.208,0.84316],[41.20787,0.84327],[41.20726,0.84313],[41.20682,0.84328],[41.20609,0.84411],[41.20605,0.84478],[41.2065,0.84514],[41.2068,0.84567],[41.20638,0.84603],[41.20583,0.84621],[41.20597,0.84702],[41.20575,0.84749],[41.20517,0.84808],[41.20563,0.84876],[41.20552,0.84915],[41.20579,0.84968],[41.20491,0.84995],[41.20473,0.85029],[41.204,0.8507],[41.20374,0.85104],[41.20322,0.85038],[41.20295,0.85041],[41.20282,0.85069],[41.20276,0.85226],[41.20229,0.85231],[41.20197,0.85195],[41.20169,0.85219],[41.20065,0.85242],[41.20042,0.8521],[41.20013,0.85199],[41.19933,0.85369],[41.19846,0.85468],[41.19809,0.85542],[41.19764,0.85579],[41.19753,0.85504],[41.19767,0.85445],[41.19691,0.85367],[41.19711,0.85236],[41.19678,0.85234],[41.19642,0.8526],[41.19531,0.85241],[41.1947,0.85282],[41.19443,0.85355],[41.19413,0.85287],[41.19339,0.85325],[41.193,0.85311],[41.1929,0.85461],[41.19331,0.85384],[41.19365,0.85383],[41.19377,0.85473],[41.19366,0.85554],[41.19346,0.85494],[41.19292,0.85577],[41.19261,0.85579],[41.19205,0.85631],[41.19189,0.85655],[41.1921,0.85665],[41.19149,0.85697],[41.19102,0.85681],[41.19084,0.85655],[41.18985,0.85621],[41.18888,0.85613],[41.18866,0.85625],[41.18853,0.85601],[41.18848,0.85622],[41.18827,0.8557],[41.18788,0.85605],[41.18736,0.85511],[41.18631,0.85417],[41.18581,0.85332],[41.18535,0.85341],[41.18494,0.85316],[41.18387,0.85338],[41.18204,0.85266],[41.1796,0.85236],[41.17962,0.85265],[41.17854,0.85335],[41.17827,0.85369],[41.17765,0.85595],[41.1774,0.85814],[41.17713,0.8584],[41.17643,0.85821],[41.17553,0.85835],[41.17535,0.85869],[41.17393,0.86003],[41.17397,0.86117],[41.17383,0.86147],[41.17317,0.86165],[41.17258,0.86146],[41.1723,0.86168],[41.1719,0.86166],[41.17144,0.86329],[41.17125,0.86344],[41.17052,0.86282],[41.17025,0.86209],[41.16942,0.86179],[41.16883,0.86175],[41.16879,0.86237],[41.16827,0.86303],[41.16826,0.86368],[41.168,0.86382],[41.16784,0.86426],[41.16757,0.8645],[41.16662,0.86471],[41.16602,0.86414],[41.16569,0.86408],[41.16526,0.86459],[41.16447,0.86507],[41.1637,0.86438],[41.1632,0.86598],[41.16236,0.86731],[41.16177,0.86642],[41.16159,0.86588],[41.16179,0.86573],[41.16087,0.86361],[41.16009,0.86327],[41.15964,0.86255],[41.15842,0.86237],[41.1579,0.86207],[41.15597,0.86049],[41.15441,0.85738],[41.15462,0.85642],[41.15487,0.8563],[41.15492,0.85556],[41.15622,0.85459],[41.15664,0.85386],[41.15748,0.85335],[41.15785,0.85237],[41.15799,0.85142],[41.15722,0.84859],[41.15731,0.84806],[41.15712,0.8476],[41.15726,0.84713],[41.1566,0.84625],[41.15698,0.84618],[41.15723,0.84639],[41.1573,0.8463],[41.15751,0.84546],[41.15736,0.8452],[41.15727,0.84426],[41.15697,0.84351],[41.15616,0.84237],[41.15563,0.84062],[41.15532,0.8403],[41.15531,0.83974],[41.155,0.83883],[41.15494,0.83748],[41.15471,0.83727],[41.15504,0.83717],[41.15521,0.83679],[41.15481,0.83627],[41.15458,0.83563],[41.1549,0.83311],[41.15489,0.83267],[41.15473,0.83271],[41.15492,0.83258],[41.15473,0.83138],[41.15254,0.82766],[41.15231,0.82589],[41.15156,0.82379],[41.15076,0.82323],[41.14985,0.82214],[41.14923,0.82178],[41.14813,0.82158],[41.14692,0.82083],[41.14656,0.82033],[41.14507,0.82015],[41.14485,0.82073],[41.14509,0.82082],[41.14485,0.82073],[41.14523,0.81979],[41.14485,0.8195]],
+      profile: [{d:0.0,e:333.5},{d:0.326,e:370.1},{d:0.652,e:337.4},{d:0.978,e:374.4},{d:1.304,e:398.4},{d:1.63,e:428.4},{d:1.955,e:459.5},{d:2.281,e:453.8},{d:2.607,e:433.3},{d:2.933,e:464.1},{d:3.259,e:495.4},{d:3.585,e:512.6},{d:3.911,e:525.7},{d:4.237,e:521.5},{d:4.563,e:482.4},{d:4.889,e:472.6},{d:5.215,e:473.3},{d:5.54,e:483.3},{d:5.866,e:457.0},{d:6.192,e:436.4},{d:6.518,e:452.8},{d:6.844,e:467.1},{d:7.17,e:446.1},{d:7.496,e:437.7},{d:7.822,e:444.8},{d:8.148,e:407.2},{d:8.474,e:377.0},{d:8.8,e:339.0},{d:9.125,e:335.8},{d:9.451,e:301.7},{d:9.777,e:294.8},{d:10.103,e:326.6},{d:10.429,e:363.2},{d:10.755,e:421.2},{d:11.081,e:483.7},{d:11.407,e:519.2},{d:11.733,e:541.0},{d:12.059,e:558.5},{d:12.385,e:558.4},{d:12.71,e:583.6},{d:13.036,e:599.1},{d:13.362,e:606.0},{d:13.688,e:610.8},{d:14.014,e:584.3},{d:14.34,e:590.9},{d:14.666,e:575.1},{d:14.992,e:548.9},{d:15.318,e:540.6},{d:15.644,e:572.8},{d:15.97,e:561.1},{d:16.295,e:520.7},{d:16.621,e:491.1},{d:16.947,e:464.5},{d:17.273,e:415.1},{d:17.599,e:395.1},{d:17.925,e:377.5},{d:18.251,e:364.3},{d:18.577,e:349.6},{d:18.903,e:354.9},{d:19.229,e:359.8},{d:19.555,e:352.6}]
+    }
+  };
+
+  const ELEV = {
+    "Falset":364, "Marçà":315, "Capçanes":238, "Els Guiamets":220, "El Masroig":192,
+    "El Molar":228, "Bellmunt del Priorat":261, "La Figuera":575, "Cabacés":357,
+    "La Bisbal de Falset":372, "Margalef":379, "Ulldemolins":481,
+    "Cornudella de Montsant":533, "Siurana":737, "Escaladei":400,
+    "Poboleda":343, "Torroja del Priorat":332, "La Vilella Alta":327, "Porrera":316
+  };
+
+  const villages = [
+    ["Falset",41.150,0.817,"gr","GR-174 / PR-C","GR-174 / PR-C","GR-174 / PR-C"],
+    ["Marçà",41.129,0.804,"pr","PR-C / caminos rurales","PR-C / camins rurals","PR-C / rural paths"],
+    ["Capçanes",41.102,0.782,"pr","PR-C / senderos locales","PR-C / senders locals","PR-C / local trails"],
+    ["Els Guiamets",41.104,0.754,"pr","PR-C / caminos agrícolas","PR-C / camins agrícoles","PR-C / farm tracks"],
+    ["El Masroig",41.128,0.734,"pr","PR-C / caminos rurales","PR-C / camins rurals","PR-C / rural paths"],
+    ["El Molar",41.166,0.707,"pr","PR-C / senderos locales","PR-C / senders locals","PR-C / local trails"],
+    ["Bellmunt del Priorat",41.163,0.766,"pr","PR-C / caminos mineros","PR-C / camins miners","PR-C / mining tracks"],
+    ["La Bisbal de Falset",41.282,0.724,"pr","PR-C / senderos rurales","PR-C / senders rurals","PR-C / rural trails"],
+    ["Cabacés",41.247,0.733,"pr","PR-C / caminos forestales","PR-C / camins forestals","PR-C / forest tracks"],
+    ["Margalef",41.285,0.754,"pr","PR-C / senderos de Montsant","PR-C / senders del Montsant","PR-C / Montsant trails"],
+    ["Ulldemolins",41.324,0.878,"gr","GR / senderos de Montsant","GR / senders del Montsant","GR / Montsant trails"],
+    ["Cornudella de Montsant",41.267,0.906,"gr","GR-174 / senderos locales","GR-174 / senders locals","GR-174 / local trails"],
+    ["Siurana",41.258,0.925,"pr","PR-C / senderos de escalada","PR-C / senders d'escalada","PR-C / climbing trails"],
+    ["Escaladei",41.248,0.811,"gr","GR-174 / caminos históricos","GR-174 / camins històrics","GR-174 / historic paths"],
+    ["Poboleda",41.233,0.850,"gr","GR-174 / senderos locales","GR-174 / senders locals","GR-174 / local trails"],
+    ["Torroja del Priorat",41.215,0.813,"gr","GR-174 / caminos rurales","GR-174 / camins rurals","GR-174 / rural paths"],
+    ["La Vilella Alta",41.227,0.781,"pr","PR-C / caminos tradicionales","PR-C / camins tradicionals","PR-C / traditional paths"],
+    ["Porrera",41.183,0.850,"gr","GR-174 / senderos locales","GR-174 / senders locals","GR-174 / local trails"],
+    ["La Figuera",41.218,0.732,"pr","PR-C / senderos rurales","PR-C / senders rurals","PR-C / rural trails"],
+  ];
+
+  // Circuito cerrado real: los 19 municipios/núcleos de la ruta, cada uno una sola vez.
+  // Falset abre la etapa 1 y cierra la etapa 8 (mismo punto = origen/final del círculo).
+  const stages = [
+    ["Falset","Marçà","Capçanes","Els Guiamets"],
+    ["Els Guiamets","El Masroig","El Molar","Bellmunt del Priorat"],
+    ["Bellmunt del Priorat","La Figuera","Cabacés"],
+    ["Cabacés","La Bisbal de Falset","Margalef"],
+    ["Margalef","Ulldemolins","Cornudella de Montsant"],
+    ["Cornudella de Montsant","Siurana","Poboleda"],
+    ["Poboleda","Escaladei","La Vilella Alta","Torroja del Priorat"],
+    ["Torroja del Priorat","Porrera","Falset"],
+  ];
+
+  // eat/sleep: nombre (población) — teléfono real cuando el directorio oficial de Turisme
+  // Priorat o el propio negocio lo publica; "tel. no publicado" cuando no lo encontramos,
+  // en vez de inventar un número. Las notas ★ son de una comprobación puntual en Google/
+  // Tripadvisor/Booking, no de los 40 negocios listados — ver la nota de fuente al pie.
+  const stageInfo = [
+    { distKm:14.6, diff:"moderada", time:"4,5–5,5 h", gainM:354, lossM:492, gpx:true, hEs:"Bodegas cooperativas y el pantà dels Guiamets.", hCa:"Cellers cooperatius i el pantà dels Guiamets.",
+      hEn:"Cooperative wineries and the Guiamets reservoir.",
+      poiEs:["Celler Cooperatiu de Falset-Marçà (modernista, Cèsar Martinell)","Pantà dels Guiamets"],
+      poiCa:["Celler Cooperatiu de Falset-Marçà (modernista, Cèsar Martinell)","Pantà dels Guiamets"],
+      poiEn:["Falset-Marçà Cooperative Winery (Modernist, Cèsar Martinell)","Guiamets reservoir"],
+      eat:['Bar el Casal (Capçanes) — <a href="tel:+34637337005">637 337 005</a>',
+           'Restaurant Mestral (Els Guiamets) — <a href="tel:+34977413073">977 413 073</a> <span class="verified">★4.4 Google, 258 reseñas</span>'],
+      sleep:['Hotel Rural Cal Torner (Els Guiamets) — tel. no publicado, ver Turisme Priorat',
+             'Ca la Tieta Quima (Els Guiamets) — tel. no publicado, ver Turisme Priorat'] },
+    { distKm:24.71, diff:"exigente", time:"7,5–9 h", gainM:591, lossM:552, gpx:true, hEs:"Antiguas minas de Bellmunt y los caminos de les Barraques del Camí Ral.", hCa:"Antigues mines de Bellmunt i els camins de les Barraques del Camí Ral.",
+      hEn:"Bellmunt's old mines and the Barraques del Camí Ral tracks.",
+      poiEs:["Museu de les Mines de Bellmunt (mina Eugènia, plomo y plata)","Barraques del Camí Ral (El Masroig)"],
+      poiCa:["Museu de les Mines de Bellmunt (mina Eugènia, plom i plata)","Barraques del Camí Ral (el Masroig)"],
+      poiEn:["Bellmunt Mines Museum (Eugènia mine, lead and silver)","Barraques del Camí Ral (El Masroig)"],
+      eat:['Nou 21 (El Masroig) — <a href="tel:+34977825501">977 825 501</a>',
+           'Forn Bocinets (El Masroig, panadería) — <a href="tel:+34609541921">609 541 921</a>'],
+      sleep:['La Colònia Bellmunt (Bellmunt del Priorat) — <a href="tel:+34977178481">977 178 481</a>',
+             'Riu Montsant (Bellmunt del Priorat) — <a href="tel:+34608422013">608 422 013</a>'] },
+    { distKm:22.92, diff:"exigente", time:"7,5–9 h", gainM:792, lossM:713, gpx:true, hEs:"Mirador de La Figuera (575 m) y el núcleo antiguo de Cabacés. El trazado real dobla la distancia prevista: sube y baja varias veces entre las tres poblaciones.", hCa:"Mirador de la Figuera (575 m) i el nucli antic de Cabacés. El traçat real duplica la distància prevista: puja i baixa diverses vegades entre les tres poblacions.",
+      hEn:"La Figuera viewpoint (575 m) and Cabacés' old quarter. The real track roughly doubles the earlier straight-line estimate, climbing and descending repeatedly between the three villages.",
+      poiEs:["Mirador de La Figuera (575 m)","Ermita de la Foia, Cabacés"],
+      poiCa:["Mirador de la Figuera (575 m)","Ermita de la Foia, Cabacés"],
+      poiEn:["La Figuera viewpoint (575 m)","Ermita de la Foia, Cabacés"],
+      eat:['Forn de Pa El Mulo (Cabacés, panadería) — <a href="tel:+34696854390">696 854 390</a>'],
+      sleep:['Les Fonts (Cabacés) — <a href="https://www.google.com/maps/search/?api=1&query=Les+Fonts+Cabac%C3%A9s+Priorat" target="_blank" rel="noopener">ver en Google Maps</a>',
+             'Casa la Canal (Cabacés) — <a href="tel:+34659321718">659 321 718</a>'] },
+    { distKm:12.29,  diff:"moderada",    time:"4–5 h", gainM:472, lossM:438, gpx:true, hEs:"Cuevas de La Bisbal y las paredes de escalada de Margalef.", hCa:"Coves de la Bisbal i les parets d'escalada de Margalef.",
+      hEn:"La Bisbal's caves and Margalef's climbing walls.",
+      poiEs:["Cuevas y abrigos de La Bisbal de Falset","Paredes de escalada de Margalef"],
+      poiCa:["Coves i abrics de la Bisbal de Falset","Parets d'escalada de Margalef"],
+      poiEn:["Caves and rock shelters of La Bisbal de Falset","Margalef climbing walls"],
+      eat:['La Fonda Margalef (Margalef) — <a href="tel:+34977054922">977 054 922</a>',
+           'El Tros de Llúpol (Margalef) — carnes a la brasa',
+           'Cafè Vernet (Margalef) — desayunos y bar'],
+      sleep:['La Fonda Margalef (Margalef) — <a href="tel:+34977054922">977 054 922</a> · hostal con restaurante',
+             'Cal Roig (Margalef) — <a href="https://calroigmargalef.com" target="_blank" rel="noopener">calroigmargalef.com</a>'] },
+    { distKm:32.84, diff:"exigente", time:"12–14,5 h", gainM:1600, lossM:1468, gpx:true, hEs:"La etapa reina del circuito: sube al filo del Montsant. El trazado real casi duplica la distancia y el desnivel previstos — valora partirla en dos días, pernoctando en Ulldemolins.", hCa:"L'etapa reina del circuit: puja a la carena del Montsant. El traçat real gairebé duplica la distància i el desnivell previstos — valora partir-la en dos dies, pernoctant a Ulldemolins.",
+      hEn:"The circuit's queen stage: climbs to the Montsant ridge. The real track is nearly double the distance and elevation gain first estimated — consider splitting it over two days, sleeping in Ulldemolins.",
+      poiEs:["Ermita de Sant Antoni (Ulldemolins)","Carena del Montsant"],
+      poiCa:["Ermita de Sant Antoni (Ulldemolins)","Carena del Montsant"],
+      poiEn:["Ermita de Sant Antoni (Ulldemolins)","Montsant ridge"],
+      eat:['Fonda Toldrà (Ulldemolins) — <a href="tel:+34977561537">977 561 537</a> <span class="verified">★4.5 Google, 674 reseñas</span>',
+           'Forn Eduard (Cornudella de Montsant, panadería) — <a href="tel:+34977821068">977 821 068</a>'],
+      sleep:['Fonda Toldrà (Ulldemolins) — <a href="tel:+34977561537">977 561 537</a> · hotel rural, punto útil para partir la etapa en dos',
+             'Can Molone (Cornudella de Montsant) — <a href="https://www.google.com/maps/search/?api=1&query=Can+Molone+Carrer+Major+11+Cornudella+de+Montsant" target="_blank" rel="noopener">ver en Google Maps</a>',
+             'El Palauet del Priorat (Cornudella de Montsant) — <a href="https://www.google.com/maps/search/?api=1&query=El+Palauet+del+Priorat+Cornudella+de+Montsant" target="_blank" rel="noopener">ver en Google Maps</a>'] },
+    { distKm:24.56, diff:"exigente", time:"8,5–10 h", gainM:1066, lossM:1235, gpx:true, hEs:"Siurana, la última fortaleza musulmana de Catalunya, en lo alto de un acantilado. El trazado real triplica la distancia recta prevista, con fuerte desnivel acumulado.", hCa:"Siurana, l'última fortalesa musulmana de Catalunya, dalt d'un penya-segat. El traçat real triplica la distància recta prevista, amb fort desnivell acumulat.",
+      hEn:"Siurana, Catalonia's last Muslim stronghold, atop a cliff. The real track roughly triples the earlier straight-line estimate, with substantial accumulated elevation change.",
+      poiEs:["Restos del castillo de Siurana (s. XII)","Paredes de escalada de fama internacional"],
+      poiCa:["Restes del castell de Siurana (s. XII)","Parets d'escalada de fama internacional"],
+      poiEn:["Remains of Siurana castle (12th c.)","Internationally famous climbing walls"],
+      eat:['Restaurant Siurana (Siurana) — <a href="tel:+34977821027">977 821 027</a>',
+           'Els Tallers (Siurana) — <a href="tel:+34977821144">977 821 144</a>'],
+      sleep:['Hotel Siuranella (Siurana) — <a href="tel:+34630871462">630 871 462</a>',
+             'Refugi de Siurana – Ciríac Bonet (Siurana) — <a href="tel:+34977821382">977 821 382</a> · reabierto con nueva gestión (CEC); bar-restaurante y reactivando pernoctaciones'] },
+    { distKm:14.89, diff:"moderada", time:"5–6 h", gainM:534, lossM:558, gpx:true, hEs:"La Cartoixa d'Escaladei, cuna del nombre «Priorat», de camino a Torroja.", hCa:"La Cartoixa d'Escaladei, bressol del nom «Priorat», de camí a Torroja.",
+      hEn:"The Escaladei Charterhouse, birthplace of the name «Priorat», on the way to Torroja.",
+      poiEs:["Cartoixa d'Escaladei (monasterio, s. XII)","Torre Roja i seu del Consell Regulador DOQ, Torroja"],
+      poiCa:["Cartoixa d'Escaladei (monestir, s. XII)","Torre Roja i seu del Consell Regulador DOQ, Torroja"],
+      poiEn:["Escaladei Charterhouse (monastery, 12th c.)","Torre Roja and DOQ Regulatory Board headquarters, Torroja"],
+      eat:['Vinum (Torroja del Priorat, Gran Hotel Mas d\'en Bruno) — cocina de autor, chef Josep Queralt',
+           'Tarraco (Torroja del Priorat, Gran Hotel Mas d\'en Bruno) — junto a la piscina'],
+      sleep:['Gran Hotel Mas d\'en Bruno (Torroja del Priorat) — <a href="https://www.google.com/maps/search/?api=1&query=Gran+Hotel+Mas+d%27en+Bruno+Torroja+del+Priorat" target="_blank" rel="noopener">ver en Google Maps</a>',
+             'Ora Hotel Priorat (Torroja del Priorat) — <a href="tel:+34977099488">977 099 488</a>'] },
+    { distKm:19.55, diff:"exigente", time:"7–8,5 h", gainM:816, lossM:797, gpx:true, hEs:"Cierre del círculo: los relojes de sol de Porrera y la vuelta a Falset.", hCa:"Tancament del cercle: els rellotges de sol de Porrera i la tornada a Falset.",
+      hEn:"Closing the loop: Porrera's sundials and the return to Falset.",
+      poiEs:["Ruta dels Rellotges de Sol (Porrera)","Cierre del círculo en Falset, capital del Priorat"],
+      poiCa:["Ruta dels Rellotges de Sol (Porrera)","Tancament del cercle a Falset, capital del Priorat"],
+      poiEn:["Sundial Route (Porrera)","Closing the loop in Falset, capital of Priorat"],
+      eat:['La Cooperativa (Porrera) — <a href="tel:+34977828378">977 828 378</a> <span class="verified">★4.7/5 Google, 577 reseñas</span> · <a href="https://www.restaurantlacooperativa.com" target="_blank" rel="noopener">web</a>',
+           'Forn de Pa Ferran i Roser (Porrera, panadería) — <a href="tel:+34977828059">977 828 059</a>',
+           'Forn Pedret (Falset, panadería) — <a href="tel:+34977830111">977 830 111</a>'],
+      sleep:['Hotel-Hostal Sport (Falset) — <a href="tel:+34977830078">977 830 078</a> · <a href="https://www.hotelpriorat-hostalsport.com" target="_blank" rel="noopener">web</a>',
+             'Apartaments Falset (Falset) — <a href="https://www.google.com/maps/search/?api=1&query=Apartaments+Falset+Priorat" target="_blank" rel="noopener">ver en Google Maps</a>',
+             'El Racó de la Vero (Falset) — <a href="https://www.google.com/maps/search/?api=1&query=El+Rac%C3%B3+de+la+Vero+Falset" target="_blank" rel="noopener">ver en Google Maps</a>'] },
+  ];
+  const TOTAL_KM = stageInfo.reduce((a,s)=>a+s.distKm,0);
+
+  const nameToLatLng = {};
+  villages.forEach(v => { nameToLatLng[v[0]] = [v[1], v[2]]; });
+
+  // ---------------- i18n ----------------
+  const T = {
+    es: {
+      nav: { red:"La red", pueblos:"19 pueblos", mapa:"Mapa", etapas:"Etapas", guia:"Guía", info:"Info práctica", inscripcion:"Inscribirme", finalizados:"Caminantes" },
+      hero: {
+        eyebrow:"Gran travesía circular · 100% senderista",
+        h1:'Los 19 pueblos del Priorat, <em>unidos a pie</em>.',
+        lead:'El Priorat es una tierra dura y solitaria, de laderas imposibles y suelos de llicorella donde la vida siempre ha sido una batalla cuerpo a cuerpo con la roca. <span class="accent">Seguir la ruta de sus 19 pueblos es una experiencia épica</span>: un viaje interior entre viñas de viticultura heroica, ermitas y barrancos silenciosos, donde cada curva del camino te invita a sentir más intensamente el paisaje y a descubrir una espiritualidad hecha de esfuerzo, contemplación y belleza extrema.',
+        sub:"Una travesía circular de 8 etapas que conecta los 19 pueblos del Priorat por senderos ya homologados, con Falset como puerta de entrada y salida.",
+        quick1:"19 pueblos", quick2:"Eje GR‑174", quick3:"Inicio recomendado: Falset", quick4:"Recorrido verificado con GPX real",
+        stat1:"Municipios", stat2:"Etapas", stat3:"Red homologada", stat4:"Circuito cerrado",
+        hub:"nudo central", cta1:"Explorar las etapas", cta2:"Ver mapa interactivo"
+      },
+      red: {
+        eyebrow:"Cómo se aprovecha lo existente", h2:"Una red, no un trazado nuevo",
+        p:"El GR‑174 hace de columna vertebral; el PR‑C y los senderos del Montsant cierran los enlaces que faltan.",
+        gr:{h:"GR‑174", p:"Eje principal en Falset, Gratallops, Poboleda, Escaladei y Cornudella. La columna vertebral del circuito."},
+        pr:{h:"PR‑C y senderos locales", p:"Enlazan los municipios que no quedan directamente sobre el GR‑174, sin recurrir al asfalto."},
+        local:{h:"Caminos y pistas forestales", p:"Caminos históricos, mineros y agrícolas para las conexiones rurales que aún no tienen sendero homologado."}
+      },
+      pueblos: { eyebrow:"Directorio", h2:"Los 19 municipios", p:"Cada pueblo, con el tipo de conexión senderista recomendada para llegar a él." },
+      mapa: {
+        eyebrow:"Primera fase interactiva", h2:"El mapa",
+        p:"Ubicación real de los 19 municipios y trazado real de las 8 etapas, verificado con GPX.",
+        legendGr:"Nudo GR-174", legendPr:"Municipio", note:"Las 8 etapas verificadas con GPX real (línea sólida).",
+        popupConn:"Conexión",
+        statusVerified:"Las 8 etapas verificadas con GPX real"
+      },
+      etapas: { eyebrow:"Trazado propuesto", h2:"Ocho etapas, un círculo cerrado", p:"Cada uno de los 19 municipios se visita una sola vez. Falset abre y cierra el circuito.",
+        etapaLabel:"Etapa", dist:"Distancia (línea recta)", diff:"Dificultad", time:"Tiempo estimado",
+        diffFacil:"Fácil", diffModerada:"Moderada", diffExigente:"Exigente",
+        summary:"Circuito cerrado · 19 municipios, cada uno una vez · <strong>{km} km</strong> reales, verificados con GPX en las 8 etapas",
+        meta:"desnivel y distancia real del sendero — pendientes de trazado GPX verificado",
+        poi:"Qué visitar", eat:"Dónde comer", sleep:"Dónde dormir", noOffer:"Sin oferta registrada — lleva provisiones",
+        distReal:"Distancia (GPX real)", gain:"Desnivel positivo", loss:"Desnivel negativo",
+        gpxVerified:"Track GPX verificado", gpxDownload:"Descargar .gpx",
+        elev:"Perfil de elevación (núcleos)", elevNote:"Altitud real de cada núcleo, unida en línea recta — no sigue el perfil real del sendero, pendiente de trazado GPX.",
+        elevNoteReal:"Perfil real extraído del track GPX verificado, punto a punto sobre el sendero.",
+        source:"Comer y dormir: directorio oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, contrastado puntualmente con reseñas de Google/Tripadvisor/Booking en los establecimientos marcados con ★ (no en los 40 negocios listados). Altitudes: Idescat y Consell Regulador DOQ Priorat. Verifica horarios, disponibilidad y teléfonos antes de salir. Datos de restauración y alojamiento de las etapas 3–8 revisados y actualizados en julio de 2026." },
+      guia: {
+        eyebrow:"Preparación", h2:"Guía práctica del peregrino",
+        p:"Terreno agreste, poca sombra, calor fuerte y muy poca infraestructura turística fuera de fin de semana. Prepárate en consecuencia.",
+        nav1:"Cuándo ir", nav2:"Cómo llegar", nav3:"Agua", nav4:"Comida", nav5:"Calor", nav6:"Terreno y calzado", nav7:"Equipo",
+        cuando: { h:"Cuándo ir", body:
+          `<p><strong>Evita julio y agosto.</strong> El Priorat es una de las comarcas más calurosas del interior de Catalunya; en verano se superan fácilmente los 35–38&nbsp;°C, sin apenas sombra en los tramos entre viñedos y en la sierra del Montsant.</p>
+           <p><strong>Mejor época: abril–junio y septiembre–noviembre.</strong> Temperaturas moderadas, mejor luz y los pueblos suelen tener algo más de vida.</p>
+           <p>Si caminas en verano por fuerza mayor, empieza antes de las 7:00 y para entre las 13:00 y las 17:00. Las etapas 2 y 5 (las más largas y expuestas) son las más peligrosas con calor fuerte.</p>
+           <div class="g-warn"><p>En invierno, Siurana (737&nbsp;m, el punto más alto del recorrido) y la carena del Montsant pueden tener heladas o nieve puntual: riesgo de suelo resbaladizo más que térmico.</p></div>` },
+        llegar: { h:"Cómo llegar", intro:"Falset es el nudo del circuito y el mejor punto de entrada y salida. Así se llega:" },
+        agua: { h:"Agua: la prioridad número uno", body:
+          `<p>Esta es la carencia real más seria del circuito: muchos tramos no tienen ninguna fuente fiable ni ningún pueblo con servicio abierto, y el terreno es seco casi todo el año.</p>
+           <p><strong>Regla general:</strong> mínimo 2,5–3 litros por persona y etapa en temporada media; 4–5 litros en las etapas largas (5 y 9) o con calor fuerte. Sal siempre con el depósito lleno — no cuentes con reponer por el camino salvo que lo hayas confirmado tú mismo ese mismo día.</p>
+           <p>Lleva electrolitos, no solo agua: con esfuerzo sostenido varios días y calor, la pérdida de sodio pesa tanto como la de agua.</p>
+           <p><strong>Fuentes de referencia</strong> (sin garantía de potabilidad — lleva pastillas potabilizadoras o filtro): Font del Mingot (Poboleda), Font de les Amades (cerca de Falset).</p>` },
+        comida: { h:"Comida y restauración", body:
+          `<p>Lleva siempre comida de reserva para un día entero, aunque la ficha de la etapa marque un sitio para comer: en pueblos de 100–300 habitantes, un solo restaurante puede estar cerrado por descanso semanal o fuera de temporada.</p>
+           <p>Las <strong>etapas 3 y 4</strong> (Bellmunt→Cabacés y Cabacés→La Bisbal→Margalef) son las más críticas: apenas hay oferta registrada — revisa el detalle exacto en la ficha de cada etapa, más abajo en esta misma página.</p>
+           <p>Los hornos de pan (forns) abren temprano, antes que cualquier restaurante — son tu mejor opción para desayunar fuerte. El Priorat apenas tiene supermercados fuera de Falset y Cornudella: compra víveres para varios días cuando pases por uno de los dos.</p>` },
+        calor: { h:"Gestión del calor", body:
+          `<p>Con etapas de hasta 18&nbsp;km y poca sombra, el golpe de calor es un riesgo más real en esta ruta que perderse.</p>
+           <p><strong>Agotamiento por calor</strong> (frecuente, se resuelve parando): sudoración excesiva, debilidad, mareo, piel pálida y húmeda. Para, busca sombra, bebe agua con sales, descansa al menos 30 minutos.</p>
+           <div class="g-warn"><p><strong>Golpe de calor</strong> (urgencia médica): piel caliente y seca, confusión, temperatura corporal muy alta. Llama al <strong>112</strong>, enfría a la persona con lo que tengas mientras llega ayuda.</p></div>
+           <p>Señal de alarma temprana: si dejas de sudar con calor fuerte y sigues caminando, es momento de parar, no de continuar.</p>` },
+        terreno: { h:"Terreno y calzado", body:
+          `<p>El suelo dominante es <strong>llicorella</strong> (pizarra negra), muy resbaladiza suelta o mojada. Bota de montaña con buena suela de agarre, no zapatilla lisa de trail — hay piedra suelta en la subida a Montsant y en los caminos mineros de Bellmunt.</p>
+           <p>Bastones de trekking muy recomendables en las etapas 2 y 5 (más desnivel acumulado). Polainas ligeras si caminas con vegetación baja y matorral cerrado.</p>` },
+        equipo: { h:"Lista de equipo para 8 días" },
+      },
+      terrain: {
+        h:"Condiciones del terreno",
+        i1:"Terreno agreste, llicorella y desniveles fuertes: ruta exigente",
+        i2:"Poca sombra, calor intenso en época estival",
+        i3:"Muy poca infraestructura turística fuera de fin de semana",
+        link:"Ver la guía práctica completa →"
+      },
+      falset: {
+        eyebrow:"Punto de entrada y salida", h:"Falset: el nudo del circuito",
+        p:"Falset es la capital del Priorat y el mejor punto para empezar y cerrar la travessa: aquí convergen las conexiones hacia el resto de municipios, y es donde hay más servicios (tren, autobuses, coche, alojamiento).",
+        cta:"Cómo llegar a Falset →", miniLabel:"Acceso rápido",
+        tren:"Tren: RENFE Rodalies R15, estación Marçà-Falset (2 km)",
+        bus:"Autobús: líneas comarcales Domènech, HIFE, Igualadina",
+        coche:"Coche: C-242 (Reus–Falset–Móra d'Ebre)",
+        avion:"Avión: aeropuerto de Reus, a 35 km"
+      },
+      closing: {
+        text:'«Un viaje interior entre viñas de viticultura heroica, ermitas y barrancos silenciosos, donde <span class="accent">cada curva del camino te invita a sentir más intensamente el paisaje</span>.»',
+        cta:"Preparar mi travessa"
+      },
+      soon: {
+        h:"¿Ya te animas?",
+        p:"Apúntate con tu alias y la fecha en la que empiezas: verás tu nombre en la lista de caminantes junto a los demás.",
+        cta:"Inscribirme →"
+      },
+      footer: { left:"Travessa del Priorat — las 8 etapas verificadas sobre el terreno con GPX real.", right:"v1.0 · circuito cerrado, 19 pueblos, 8/8 etapas verificadas" }
+    },
+    ca: {
+      nav: { red:"La xarxa", pueblos:"19 pobles", mapa:"Mapa", etapas:"Etapes", guia:"Guia", info:"Info pràctica", inscripcion:"Inscriure'm", finalizados:"Caminants" },
+      hero: {
+        eyebrow:"Gran travessa circular · 100% senderista",
+        h1:'Els 19 pobles del Priorat, <em>units a peu</em>.',
+        lead:'El Priorat és una terra dura i solitària, de vessants impossibles i sòls de llicorella on la vida sempre ha estat una batalla cos a cos amb la roca. <span class="accent">Seguir la ruta dels seus 19 pobles és una experiència èpica</span>: un viatge interior entre vinyes de viticultura heroica, ermites i barrancs silenciosos, on cada revolt del camí et convida a sentir més intensament el paisatge i a descobrir una espiritualitat feta d\'esforç, contemplació i bellesa extrema.',
+        sub:"Una travessa circular de 8 etapes que connecta els 19 pobles del Priorat per senders ja homologats, amb Falset com a porta d'entrada i sortida.",
+        quick1:"19 pobles", quick2:"Eix GR‑174", quick3:"Inici recomanat: Falset", quick4:"Recorregut verificat amb GPX real",
+        stat1:"Municipis", stat2:"Etapes", stat3:"Xarxa homologada", stat4:"Circuit tancat",
+        hub:"node central", cta1:"Explorar les etapes", cta2:"Veure mapa interactiu"
+      },
+      red: {
+        eyebrow:"Com s'aprofita el que ja existeix", h2:"Una xarxa, no un traçat nou",
+        p:"El GR‑174 fa de columna vertebral; el PR‑C i els senders del Montsant tanquen els enllaços que falten.",
+        gr:{h:"GR‑174", p:"Eix principal a Falset, Gratallops, Poboleda, Escaladei i Cornudella. La columna vertebral del circuit."},
+        pr:{h:"PR‑C i senders locals", p:"Enllacen els municipis que no queden directament sobre el GR‑174, sense recórrer a l'asfalt."},
+        local:{h:"Camins i pistes forestals", p:"Camins històrics, miners i agrícoles per a les connexions rurals que encara no tenen sender homologat."}
+      },
+      pueblos: { eyebrow:"Directori", h2:"Els 19 municipis", p:"Cada poble, amb el tipus de connexió senderista recomanada per arribar-hi." },
+      mapa: {
+        eyebrow:"Primera fase interactiva", h2:"El mapa",
+        p:"Ubicació real dels 19 municipis i traçat real de les 8 etapes, verificat amb GPX.",
+        legendGr:"Node GR-174", legendPr:"Municipi", note:"Les 8 etapes verificades amb GPX real (línia sòlida).",
+        popupConn:"Connexió",
+        statusVerified:"Les 8 etapes verificades amb GPX real"
+      },
+      etapas: { eyebrow:"Traçat proposat", h2:"Vuit etapes, un cercle tancat", p:"Cada un dels 19 municipis es visita una sola vegada. Falset obre i tanca el circuit.",
+        etapaLabel:"Etapa", dist:"Distància (línia recta)", diff:"Dificultat", time:"Temps estimat",
+        diffFacil:"Fàcil", diffModerada:"Moderada", diffExigente:"Exigent",
+        summary:"Circuit tancat · 19 municipis, cadascun una vegada · <strong>{km} km</strong> reals, verificats amb GPX a les 8 etapes",
+        meta:"desnivell i distància real del sender — pendents de traçat GPX verificat",
+        poi:"Què visitar", eat:"On menjar", sleep:"On dormir", noOffer:"Sense oferta registrada — porta provisions",
+        distReal:"Distància (GPX real)", gain:"Desnivell positiu", loss:"Desnivell negatiu",
+        gpxVerified:"Track GPX verificat", gpxDownload:"Descarregar .gpx",
+        elev:"Perfil d'elevació (nuclis)", elevNote:"Altitud real de cada nucli, unida en línia recta — no segueix el perfil real del sender, pendent de traçat GPX.",
+        elevNoteReal:"Perfil real extret del track GPX verificat, punt a punt sobre el sender.",
+        source:"Menjar i dormir: directori oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, contrastat puntualment amb ressenyes de Google/Tripadvisor/Booking als establiments marcats amb ★ (no als 40 negocis llistats). Altituds: Idescat i Consell Regulador DOQ Priorat. Comprova horaris, disponibilitat i telèfons abans de sortir. Dades de restauració i allotjament de les etapes 3–8 revisades i actualitzades el juliol de 2026." },
+      guia: {
+        eyebrow:"Preparació", h2:"Guia pràctica del pelegrí",
+        p:"Terreny agrest, poca ombra, calor forta i molt poca infraestructura turística fora de cap de setmana. Prepara't en conseqüència.",
+        nav1:"Quan anar-hi", nav2:"Com arribar-hi", nav3:"Aigua", nav4:"Menjar", nav5:"Calor", nav6:"Terreny i calçat", nav7:"Equipament",
+        cuando: { h:"Quan anar-hi", body:
+          `<p><strong>Evita juliol i agost.</strong> El Priorat és una de les comarques més caloroses de l'interior de Catalunya; a l'estiu se superen fàcilment els 35–38&nbsp;°C, sense gaire ombra als trams entre vinyes i a la serra de Montsant.</p>
+           <p><strong>Millor època: abril–juny i setembre–novembre.</strong> Temperatures moderades, millor llum i els pobles solen tenir una mica més de vida.</p>
+           <p>Si camines a l'estiu per força major, comença abans de les 7:00 i para entre les 13:00 i les 17:00. Les etapes 2 i 5 (les més llargues i exposades) són les més perilloses amb calor forta.</p>
+           <div class="g-warn"><p>A l'hivern, Siurana (737&nbsp;m, el punt més alt del recorregut) i la carena del Montsant poden tenir gelades o neu puntual: risc de terra lliscant més que tèrmic.</p></div>` },
+        llegar: { h:"Com arribar-hi", intro:"Falset és el node del circuit i el millor punt d'entrada i sortida. Així s'hi arriba:" },
+        agua: { h:"Aigua: la prioritat número u", body:
+          `<p>Aquesta és la mancança real més seriosa del circuit: molts trams no tenen cap font fiable ni cap poble amb servei obert, i el terreny és sec gairebé tot l'any.</p>
+           <p><strong>Regla general:</strong> mínim 2,5–3 litres per persona i etapa en temporada mitjana; 4–5 litres a les etapes llargues (5 i 9) o amb calor forta. Surt sempre amb el dipòsit ple — no comptis reposar pel camí llevat que ho hagis confirmat tu mateix el mateix dia.</p>
+           <p>Porta electròlits, no només aigua: amb esforç sostingut diversos dies i calor, la pèrdua de sodi pesa tant com la d'aigua.</p>
+           <p><strong>Fonts de referència</strong> (sense garantia de potabilitat — porta pastilles potabilitzadores o filtre): Font del Mingot (Poboleda), Font de les Amades (a prop de Falset).</p>` },
+        comida: { h:"Menjar i restauració", body:
+          `<p>Porta sempre menjar de reserva per a un dia sencer, encara que la fitxa de l'etapa marqui un lloc per menjar: en pobles de 100–300 habitants, un sol restaurant pot estar tancat per descans setmanal o fora de temporada.</p>
+           <p>Les <strong>etapes 3 i 4</strong> (Bellmunt→Cabacés i Cabacés→la Bisbal→Margalef) són les més crítiques: gairebé no hi ha oferta registrada — revisa el detall exacte a la fitxa de cada etapa, més avall en aquesta mateixa pàgina.</p>
+           <p>Els forns de pa obren d'hora, abans que qualsevol restaurant — són la teva millor opció per esmorzar fort. El Priorat gairebé no té supermercats fora de Falset i Cornudella: compra provisions per a diversos dies quan hi passis.</p>` },
+        calor: { h:"Gestió de la calor", body:
+          `<p>Amb etapes de fins a 18&nbsp;km i poca ombra, el cop de calor és un risc més real en aquesta ruta que perdre's.</p>
+           <p><strong>Esgotament per calor</strong> (freqüent, es resol parant): suor excessiva, feblesa, marejos, pell pàl·lida i humida. Para, busca ombra, beu aigua amb sals, descansa almenys 30 minuts.</p>
+           <div class="g-warn"><p><strong>Cop de calor</strong> (urgència mèdica): pell calenta i seca, confusió, temperatura corporal molt alta. Truca al <strong>112</strong>, refreda la persona amb el que tinguis mentre arriba ajuda.</p></div>
+           <p>Senyal d'alarma primerenca: si deixes de suar amb calor forta i continues caminant, és moment de parar, no de continuar.</p>` },
+        terreno: { h:"Terreny i calçat", body:
+          `<p>El sòl dominant és <strong>llicorella</strong> (pissarra negra), molt lliscant solta o mullada. Bota de muntanya amb bona sola d'agafament, no sabatilla llisa de trail — hi ha pedra solta a la pujada al Montsant i als camins miners de Bellmunt.</p>
+           <p>Bastons de trekking molt recomanables a les etapes 2 i 5 (més desnivell acumulat). Polaines lleugeres si camines amb vegetació baixa i matoll tancat.</p>` },
+        equipo: { h:"Llista d'equipament per a 8 dies" },
+      },
+      terrain: {
+        h:"Condicions del terreny",
+        i1:"Terreny agrest, llicorella i desnivells forts: ruta exigent",
+        i2:"Poca ombra, calor intensa en època estival",
+        i3:"Molt poca infraestructura turística fora de cap de setmana",
+        link:"Veure la guia pràctica completa →"
+      },
+      falset: {
+        eyebrow:"Punt d'entrada i sortida", h:"Falset: el node del circuit",
+        p:"Falset és la capital del Priorat i el millor punt per començar i tancar la travessa: aquí convergeixen les connexions cap a la resta de municipis, i és on hi ha més serveis (tren, autobusos, cotxe, allotjament).",
+        cta:"Com arribar a Falset →", miniLabel:"Accés ràpid",
+        tren:"Tren: RENFE Rodalies R15, estació Marçà-Falset (2 km)",
+        bus:"Autobús: línies comarcals Domènech, HIFE, Igualadina",
+        coche:"Cotxe: C-242 (Reus–Falset–Móra d'Ebre)",
+        avion:"Avió: aeroport de Reus, a 35 km"
+      },
+      closing: {
+        text:'«Un viatge interior entre vinyes de viticultura heroica, ermites i barrancs silenciosos, on <span class="accent">cada revolt del camí et convida a sentir més intensament el paisatge</span>.»',
+        cta:"Preparar la meva travessa"
+      },
+      soon: {
+        h:"Ja t'animes?",
+        p:"Inscriu-te amb el teu àlies i la data en què comences: veuràs el teu nom a la llista de caminants junt amb els altres.",
+        cta:"Inscriure'm →"
+      },
+      footer: { left:"Travessa del Priorat — les 8 etapes verificades sobre el terreny amb GPX real.", right:"v1.0 · circuit tancat, 19 pobles, 8/8 etapes verificades" }
+    },
+    en: {
+      nav: { red:"The network", pueblos:"19 villages", mapa:"Map", etapas:"Stages", guia:"Guide", info:"Practical info", inscripcion:"Sign up", finalizados:"Walkers" },
+      hero: {
+        eyebrow:"Great circular crossing · 100% on foot",
+        h1:'The 19 villages of Priorat, <em>joined on foot</em>.',
+        lead:'Priorat is a harsh, solitary land, of impossible slopes and llicorella soils where life has always been a hand-to-hand battle with rock. <span class="accent">Walking the route of its 19 villages is an epic experience</span>: an inner journey among vineyards of heroic viticulture, hermitages and silent ravines, where every bend in the path invites you to feel the landscape more intensely and to discover a spirituality made of effort, contemplation and extreme beauty.',
+        sub:"A circular, 8-stage crossing linking Priorat's 19 villages along already-approved trails, with Falset as the entry and exit point.",
+        quick1:"19 villages", quick2:"GR‑174 axis", quick3:"Recommended start: Falset", quick4:"Route verified with real GPX",
+        stat1:"Municipalities", stat2:"Stages", stat3:"Approved network", stat4:"Closed loop",
+        hub:"central hub", cta1:"Explore the stages", cta2:"View interactive map"
+      },
+      red: {
+        eyebrow:"Making the most of what exists", h2:"A network, not a new trail",
+        p:"The GR‑174 forms the backbone; the PR‑C and the Montsant trails close the missing links.",
+        gr:{h:"GR‑174", p:"Main axis through Falset, Gratallops, Poboleda, Escaladei and Cornudella. The backbone of the circuit."},
+        pr:{h:"PR‑C and local trails", p:"Link the municipalities that don't sit directly on the GR‑174, without resorting to asphalt."},
+        local:{h:"Tracks and forest roads", p:"Historic, mining and farm tracks for the rural connections that still lack an approved trail."}
+      },
+      pueblos: { eyebrow:"Directory", h2:"The 19 municipalities", p:"Each village, with the recommended type of trail connection to reach it." },
+      mapa: {
+        eyebrow:"First interactive phase", h2:"The map",
+        p:"Real location of the 19 municipalities and real track of all 8 stages, verified with GPX.",
+        legendGr:"GR-174 node", legendPr:"Municipality", note:"All 8 stages verified with a real GPX track (solid line).",
+        popupConn:"Connection",
+        statusVerified:"All 8 stages verified with real GPX"
+      },
+      etapas: { eyebrow:"Proposed route", h2:"Eight stages, one closed loop", p:"Each of the 19 municipalities is visited exactly once. Falset opens and closes the circuit.",
+        etapaLabel:"Stage", dist:"Distance (straight line)", diff:"Difficulty", time:"Estimated time",
+        diffFacil:"Easy", diffModerada:"Moderate", diffExigente:"Demanding",
+        summary:"Closed loop · 19 municipalities, each visited once · <strong>{km} km</strong> real, verified with GPX across all 8 stages",
+        meta:"real elevation gain and trail distance — pending verified GPX track",
+        poi:"What to see", eat:"Where to eat", sleep:"Where to sleep", noOffer:"No listed option — bring provisions",
+        distReal:"Distance (real GPX)", gain:"Elevation gain", loss:"Elevation loss",
+        gpxVerified:"Verified GPX track", gpxDownload:"Download .gpx",
+        elev:"Elevation profile (villages)", elevNote:"Real altitude of each village, joined in a straight line — does not follow the trail's real profile, pending GPX track.",
+        elevNoteReal:"Real profile extracted from the verified GPX track, point by point along the trail.",
+        source:"Eating and sleeping: official directory of <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, spot-checked against Google/Tripadvisor/Booking reviews for the venues marked with ★ (not all 40 businesses listed). Altitudes: Idescat and the DOQ Priorat Regulatory Board. Check opening hours, availability and phone numbers before setting out. Dining and lodging data for stages 3–8 reviewed and updated in July 2026." },
+      guia: {
+        eyebrow:"Preparation", h2:"Practical guide for the pilgrim",
+        p:"Rugged terrain, little shade, strong heat and very little tourist infrastructure outside weekends. Prepare accordingly.",
+        nav1:"When to go", nav2:"How to get there", nav3:"Water", nav4:"Food", nav5:"Heat", nav6:"Terrain and footwear", nav7:"Gear",
+        cuando: { h:"When to go", body:
+          `<p><strong>Avoid July and August.</strong> Priorat is one of the hottest inland counties in Catalonia; in summer temperatures easily exceed 35–38&nbsp;°C, with barely any shade on the stretches between vineyards and on the Montsant range.</p>
+           <p><strong>Best season: April–June and September–November.</strong> Moderate temperatures, better light, and the villages tend to have a bit more life.</p>
+           <p>If you must walk in summer, start before 7:00 and stop between 13:00 and 17:00. Stages 5 and 9 (the longest and most exposed) are the most dangerous in strong heat.</p>
+           <div class="g-warn"><p>In winter, Siurana (737&nbsp;m, the highest point on the route) and the Montsant ridge can have frost or occasional snow: more a risk of slippery ground than of cold.</p></div>` },
+        llegar: { h:"How to get there", intro:"Falset is the hub of the circuit and the best entry and exit point. Here's how to reach it:" },
+        agua: { h:"Water: priority number one", body:
+          `<p>This is the most serious real shortfall of the circuit: many stretches have no reliable fountain and no village with an open service, and the terrain is dry almost all year round.</p>
+           <p><strong>General rule:</strong> at least 2.5–3 litres per person per stage in mid-season; 4–5 litres on the long stages (5 and 9) or in strong heat. Always set out with a full reservoir — don't count on refilling along the way unless you've confirmed it yourself that same day.</p>
+           <p>Carry electrolytes, not just water: with sustained effort over several days and heat, sodium loss matters as much as water loss.</p>
+           <p><strong>Reference fountains</strong> (no guarantee of potability — carry purification tablets or a filter): Font del Mingot (Poboleda), Font de les Amades (near Falset).</p>` },
+        comida: { h:"Food and dining", body:
+          `<p>Always carry backup food for a full day, even if the stage card marks a place to eat: in villages of 100–300 people, the one restaurant can be closed for its weekly rest day or out of season.</p>
+           <p><strong>Stages 3 and 4</strong> (Bellmunt→Cabacés and Cabacés→La Bisbal→Margalef) are the most critical: there's barely any registered option — check the exact detail on each stage card further down this same page.</p>
+           <p>Bakeries (forns) open early, before any restaurant — they're your best bet for a hearty breakfast. Priorat has almost no supermarkets outside Falset and Cornudella: stock up for several days when you pass through one of the two.</p>` },
+        calor: { h:"Managing the heat", body:
+          `<p>With stages of up to 18&nbsp;km and little shade, heatstroke is a more real risk on this route than getting lost.</p>
+           <p><strong>Heat exhaustion</strong> (common, resolved by stopping): excessive sweating, weakness, dizziness, pale and clammy skin. Stop, find shade, drink water with salts, rest at least 30 minutes.</p>
+           <div class="g-warn"><p><strong>Heatstroke</strong> (medical emergency): hot, dry skin, confusion, very high body temperature. Call <strong>112</strong>, cool the person with whatever you have while help arrives.</p></div>
+           <p>Early warning sign: if you stop sweating in strong heat and keep walking, it's time to stop, not to continue.</p>` },
+        terreno: { h:"Terrain and footwear", body:
+          `<p>The dominant ground is <strong>llicorella</strong> (black slate), very slippery when loose or wet. Wear hiking boots with a good grip sole, not smooth trail shoes — there's loose stone on the climb to Montsant and on Bellmunt's old mining tracks.</p>
+           <p>Trekking poles strongly recommended on stages 2 and 5 (more accumulated elevation change). Light gaiters if you walk through low scrub and dense undergrowth.</p>` },
+        equipo: { h:"8-day gear list" },
+      },
+      terrain: {
+        h:"Terrain conditions",
+        i1:"Rugged terrain, llicorella slate and steep gradients: a demanding route",
+        i2:"Little shade, intense heat in summer",
+        i3:"Very little tourist infrastructure outside weekends",
+        link:"See the full practical guide →"
+      },
+      falset: {
+        eyebrow:"Entry and exit point", h:"Falset: the hub of the circuit",
+        p:"Falset is the capital of Priorat and the best point to start and close the crossing: this is where the connections to every other municipality converge, and where you'll find the most services (train, buses, car, lodging).",
+        cta:"How to get to Falset →", miniLabel:"Quick access",
+        tren:"Train: RENFE Rodalies R15, Marçà-Falset station (2 km)",
+        bus:"Bus: Domènech, HIFE and Igualadina regional lines",
+        coche:"Car: C-242 (Reus–Falset–Móra d'Ebre)",
+        avion:"Plane: Reus Airport, 35 km away"
+      },
+      closing: {
+        text:'"An inner journey among vineyards of heroic viticulture, hermitages and silent ravines, where <span class="accent">every bend in the path invites you to feel the landscape more intensely</span>."',
+        cta:"Plan my crossing"
+      },
+      soon: {
+        h:"Ready to join?",
+        p:"Sign up with your alias and the date you're starting: you'll see your name on the list of walkers alongside everyone else.",
+        cta:"Sign me up →"
+      },
+      footer: { left:"Travessa del Priorat — all 8 stages verified on the ground with real GPX.", right:"v1.0 · closed loop, 19 villages, 8/8 stages verified" }
+    }
+  };
+
+  let currentLang = "es";
+  let map, markerLayer, lineLayer;
+
+  function get(obj, path){
+    return path.split(".").reduce((o,k)=> (o && o[k] !== undefined) ? o[k] : null, obj);
+  }
+
+  function applyStaticText(lang){
+    document.documentElement.lang = lang === "ca" ? "ca" : lang === "en" ? "en" : "es";
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const val = get(T[lang], el.getAttribute("data-i18n"));
+      if (val !== null) el.textContent = val;
+    });
+    document.querySelectorAll("[data-i18n-html]").forEach(el=>{
+      const val = get(T[lang], el.getAttribute("data-i18n-html"));
+      if (val !== null) el.innerHTML = val;
+    });
+    document.querySelectorAll(".lang-switch button").forEach(b=>{
+      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false");
+    });
+  }
+
+  function renderVillages(lang){
+    const grid = document.getElementById("village-grid");
+    grid.innerHTML = "";
+    villages.forEach((v, i) => {
+      const conn = lang === "ca" ? v[5] : lang === "en" ? v[6] : v[4];
+      const row = document.createElement("div");
+      row.className = "village-row";
+      row.innerHTML = `
+        <span class="village-name"><span class="idx">${String(i+1).padStart(2,"0")}</span>${v[0]}</span>
+        <span class="tag ${v[3]}">${conn}</span>
+      `;
+      grid.appendChild(row);
+    });
+  }
+
+  // Transporte: datos reales de turismepriorat.org/es/transportes (RENFE R15, autobuses
+  // comarcales Domènech/Plana/HIFE/Igualadina, taxis, aeropuerto de Reus).
+  const TRANSPORT_ITEMS = [
+    { cat:"tren", title:"RENFE Rodalies R15", titleEn:"RENFE Rodalies R15", phone:null, web:"https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R15.pdf", webLabel:"Horarios",
+      noteEs:"Barcelona–Tarragona–Reus–Marçà-Falset–Móra la Nova–Riba-roja. Estación a 2 km de Falset.",
+      noteCa:"Barcelona–Tarragona–Reus–Marçà-Falset–Móra la Nova–Riba-roja. Estació a 2 km de Falset.",
+      noteEn:"Barcelona–Tarragona–Reus–Marçà-Falset–Móra la Nova–Riba-roja. Station 2 km from Falset." },
+    { cat:"tren", title:"Minibús Falset ↔ estación RENFE", titleEn:"Minibus Falset ↔ RENFE station", phone:"977 831 871", web:"http://www.autocarsdomenech.cat", webLabel:"Autocars Domènech",
+      noteEs:"Conecta Falset con la estación de Marçà-Falset (a 2 km del pueblo).",
+      noteCa:"Connecta Falset amb l'estació de Marçà-Falset (a 2 km del poble).",
+      noteEn:"Connects Falset with the Marçà-Falset station (2 km from the village)." },
+    { cat:"bus", title:"HIFE — Barcelona ↔ Alcañiz", titleEn:"HIFE — Barcelona ↔ Alcañiz", phone:"977 440 300", web:"https://www.hife.es", webLabel:"hife.es",
+      noteEs:"Pasa por el Priorat, de lunes a viernes.",
+      noteCa:"Passa pel Priorat, de dilluns a divendres.",
+      noteEn:"Runs through Priorat, Monday to Friday." },
+    { cat:"bus", title:"Hispano Igualadina — Tarragona ↔ Gandesa", titleEn:"Hispano Igualadina — Tarragona ↔ Gandesa", phone:"902 292 900", web:"http://www.igualadina.com", webLabel:"igualadina.com",
+      noteEs:"Parada en Falset, en ruta hacia Gandesa.",
+      noteCa:"Parada a Falset, en ruta cap a Gandesa.",
+      noteEn:"Stops in Falset, on the way to Gandesa." },
+    { cat:"bus", title:"Plana — Reus/Barcelona ↔ Cornudella", titleEn:"Plana — Reus/Barcelona ↔ Cornudella", phone:"977 553 680", web:"http://www.empresaplana.cat", webLabel:"empresaplana.cat",
+      noteEs:"Varias líneas hacia Cornudella de Montsant, Poboleda, La Morera de Montsant y Vilanova de Prades.",
+      noteCa:"Diverses línies cap a Cornudella de Montsant, Poboleda, la Morera de Montsant i Vilanova de Prades.",
+      noteEn:"Several lines to Cornudella de Montsant, Poboleda, La Morera de Montsant and Vilanova de Prades." },
+    { cat:"bus", title:"Transports del Priorat i Domènech (líneas locales)", titleEn:"Transports del Priorat i Domènech (local lines)", phone:"977 831 871", web:"http://www.autocarsdomenech.cat", webLabel:"autocarsdomenech.cat",
+      noteEs:"Conectan Falset con la mayoría de pueblos de la comarca (estén o no en el circuito de 8 etapas): Gratallops–El Lloar–Torroja, Pradell–Porrera, La Figuera–El Molar–El Masroig–Bellmunt, La Bisbal–Margalef–Cabacés–La Vilella Alta–La Vilella Baixa, Ulldemolins–Cornudella–Porrera.",
+      noteCa:"Connecten Falset amb la majoria de pobles de la comarca (siguin o no al circuit de 8 etapes): Gratallops–el Lloar–Torroja, Pradell–Porrera, la Figuera–el Molar–el Masroig–Bellmunt, la Bisbal–Margalef–Cabacés–la Vilella Alta–la Vilella Baixa, Ulldemolins–Cornudella–Porrera.",
+      noteEn:"Connect Falset with most villages in the county (whether or not they're on the 8-stage circuit): Gratallops–El Lloar–Torroja, Pradell–Porrera, La Figuera–El Molar–El Masroig–Bellmunt, La Bisbal–Margalef–Cabacés–La Vilella Alta–La Vilella Baixa, Ulldemolins–Cornudella–Porrera." },
+    { cat:"coche", title:"En coche", titleEn:"By car", phone:null, web:null,
+      noteEs:"C-242 (Reus–Falset–Móra d'Ebre) o T-702/N-420 desde Tarragona. Aparca en Falset: es el inicio y el cierre del circuito.",
+      noteCa:"C-242 (Reus–Falset–Móra d'Ebre) o T-702/N-420 des de Tarragona. Aparca a Falset: és l'inici i el tancament del circuit.",
+      noteEn:"C-242 (Reus–Falset–Móra d'Ebre) or T-702/N-420 from Tarragona. Park in Falset: it's the start and finish of the circuit." },
+    { cat:"avion", title:"Aeropuerto de Reus", titleEn:"Reus Airport", phone:null, web:null,
+      noteEs:"A 35 km de Falset. Ryanair, Jet2, EasyJet, TUI, Vueling (a París) y AirNostrum (a Palma). Cierra en temporada de invierno.",
+      noteCa:"A 35 km de Falset. Ryanair, Jet2, EasyJet, TUI, Vueling (a París) i AirNostrum (a Palma). Tanca a l'hivern.",
+      noteEn:"35 km from Falset. Ryanair, Jet2, EasyJet, TUI, Vueling (to Paris) and AirNostrum (to Palma). Closed in winter season." },
+    { cat:"taxi", title:"Taxis locales", titleEn:"Local taxis", phone:"977 831 871", web:null,
+      noteEs:"Falset (Taxi Priorat 619 022 994, Taxi Domènech 977 831 871), Cornudella de Montsant (Enric Gomis 977 911 329), La Bisbal de Montsant (Josep M. Pardell 977 819 009), Marçà (Taxi Priorat).",
+      noteCa:"Falset (Taxi Priorat 619 022 994, Taxi Domènech 977 831 871), Cornudella de Montsant (Enric Gomis 977 911 329), la Bisbal de Montsant (Josep M. Pardell 977 819 009), Marçà (Taxi Priorat).",
+      noteEn:"Falset (Taxi Priorat 619 022 994, Taxi Domènech 977 831 871), Cornudella de Montsant (Enric Gomis 977 911 329), La Bisbal de Montsant (Josep M. Pardell 977 819 009), Marçà (Taxi Priorat)." },
+  ];
+
+  const KIT_ITEMS = [
+    { catEs:"Mochila y agua", catCa:"Motxilla i aigua", catEn:"Backpack and water",
+      itemsEs:["Mochila de 35–45 L + funda impermeable","Depósito de 2–3 L, capacidad hasta 4–5 L en etapas críticas","Pastillas potabilizadoras o filtro de agua","Sales / electrolitos"],
+      itemsCa:["Motxilla de 35–45 L + funda impermeable","Dipòsit de 2–3 L, capacitat fins a 4–5 L a les etapes crítiques","Pastilles potabilitzadores o filtre d'aigua","Sals / electròlits"],
+      itemsEn:["35–45 L backpack + waterproof cover","2–3 L reservoir, capacity up to 4–5 L on critical stages","Water purification tablets or filter","Electrolyte salts"] },
+    { catEs:"Ropa", catCa:"Roba", catEn:"Clothing",
+      itemsEs:["2–3 camisetas técnicas transpirables (no algodón)","Pantalón ligero de trekking","Cortavientos ligero + chubasquero","Sombrero de ala ancha o gorra con protección de cuello","2–3 pares de calcetines técnicos"],
+      itemsCa:["2–3 samarretes tècniques transpirables (no cotó)","Pantaló lleuger de trekking","Tallavent lleuger + xubasquer","Barret d'ala ampla o gorra amb protecció de coll","2–3 parells de mitjons tècnics"],
+      itemsEn:["2–3 breathable technical t-shirts (no cotton)","Lightweight trekking trousers","Light windbreaker + rain jacket","Wide-brim hat or cap with neck protection","2–3 pairs of technical socks"] },
+    { catEs:"Pies y terreno", catCa:"Peus i terreny", catEn:"Feet and terrain",
+      itemsEs:["Bota de montaña ya rodada, con buena suela de agarre","Sandalias ligeras para el pueblo por la tarde","Bastones de trekking (etapas 2 y 5)"],
+      itemsCa:["Bota de muntanya ja rodada, amb bona sola d'agafament","Sandàlies lleugeres per al poble a la tarda","Bastons de trekking (etapes 2 i 5)"],
+      itemsEn:["Broken-in hiking boots with good grip sole","Light sandals for the village in the evening","Trekking poles (stages 2 and 5)"] },
+    { catEs:"Salud y emergencia", catCa:"Salut i emergència", catEn:"Health and emergency",
+      itemsEs:["Botiquín básico: tiritas, ampollas, antiinflamatorio, suero oral","Crema solar factor 50 + after-sun","Repelente de insectos","Silbato de emergencia"],
+      itemsCa:["Farmaciola bàsica: tiretes, butllofes, antiinflamatori, sèrum oral","Crema solar factor 50 + after-sun","Repel·lent d'insectes","Xiulet d'emergència"],
+      itemsEn:["Basic first-aid kit: plasters, blister care, anti-inflammatory, oral rehydration salts","Factor 50 sunscreen + after-sun","Insect repellent","Emergency whistle"] },
+    { catEs:"Navegación y electrónica", catCa:"Navegació i electrònica", catEn:"Navigation and electronics",
+      itemsEs:["Móvil con track GPX offline + batería externa","Mapa físico de respaldo (IGN o Alpina de la sierra de Montsant)"],
+      itemsCa:["Mòbil amb track GPX offline + bateria externa","Mapa físic de reserva (IGN o Alpina de la serra de Montsant)"],
+      itemsEn:["Phone with offline GPX track + power bank","Backup paper map (IGN or Alpina, Sierra de Montsant)"] },
+    { catEs:"Comida", catCa:"Menjar", catEn:"Food",
+      itemsEs:["Ración de emergencia para 1 día completo (sin tocar salvo necesidad)","Frutos secos, barritas, fruta deshidratada"],
+      itemsCa:["Ració d'emergència per a 1 dia complet (sense tocar llevat de necessitat)","Fruits secs, barretes, fruita deshidratada"],
+      itemsEn:["Emergency ration for a full day (untouched unless needed)","Nuts, energy bars, dried fruit"] },
+  ];
+
+  const TRANSPORT_CAT_LABELS = {
+    es: { tren:"Tren", bus:"Autobús", coche:"Coche", avion:"Avión", taxi:"Taxi" },
+    ca: { tren:"Tren", bus:"Autobús", coche:"Cotxe", avion:"Avió", taxi:"Taxi" },
+    en: { tren:"Train", bus:"Bus", coche:"Car", avion:"Plane", taxi:"Taxi" },
+  };
+
+  function renderTransport(lang){
+    const grid = document.getElementById("transport-grid");
+    if (!grid) return;
+    grid.innerHTML = TRANSPORT_ITEMS.map(it => {
+      const note = lang === "ca" ? it.noteCa : lang === "en" ? it.noteEn : it.noteEs;
+      const title = lang === "en" ? (it.titleEn || it.title) : it.title;
+      const catLabel = (TRANSPORT_CAT_LABELS[lang] || TRANSPORT_CAT_LABELS.es)[it.cat] || it.cat;
+      const phoneHtml = it.phone ? `<p><a href="tel:+34${it.phone.replace(/\s/g,'')}">${it.phone}</a></p>` : "";
+      const webHtml = it.web ? `<p><a href="${it.web}" target="_blank" rel="noopener">${it.webLabel || it.web.replace(/^https?:\/\//,'')}</a></p>` : "";
+      return `<div class="transport-item">
+        <span class="tsub">${catLabel}</span>
+        <h4>${title}</h4>
+        <p>${note}</p>
+        ${phoneHtml}${webHtml}
+      </div>`;
+    }).join("");
+  }
+
+  function renderKit(lang){
+    const grid = document.getElementById("kit-grid");
+    if (!grid) return;
+    grid.innerHTML = KIT_ITEMS.map(k => {
+      const cat = lang === "ca" ? k.catCa : lang === "en" ? k.catEn : k.catEs;
+      const items = lang === "ca" ? k.itemsCa : lang === "en" ? k.itemsEn : k.itemsEs;
+      return `<div class="kit-cat"><h4>${cat}</h4><ul>${items.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+    }).join("");
+  }
+
+  const DIFF_LABEL_KEY = { facil:"diffFacil", moderada:"diffModerada", exigente:"diffExigente" };
+
+  function listOrEmpty(arr, emptyLabel){
+    if (!arr || arr.length === 0) return `<li class="empty">${emptyLabel}</li>`;
+    return arr.map(x => `<li>${x}</li>`).join("");
+  }
+
+  function renderElevationSVG(routeVillages){
+    const w = 600, h = 64, pad = 12;
+    const pts = routeVillages.map(name => ({ name, alt: ELEV[name] }));
+    const alts = pts.map(p => p.alt);
+    const min = Math.min(...alts), max = Math.max(...alts);
+    const range = Math.max(max - min, 30);
+    const stepX = pts.length > 1 ? (w - 2*pad) / (pts.length - 1) : 0;
+    const coords = pts.map((p, i) => ({
+      x: pad + i * stepX,
+      y: h - pad - ((p.alt - min) / range) * (h - 2*pad),
+      alt: p.alt
+    }));
+    const poly = coords.map(c => `${c.x.toFixed(1)},${c.y.toFixed(1)}`).join(" ");
+    const fillPoly = `${pad},${h-pad} ` + poly + ` ${w-pad},${h-pad}`;
+    const dots = coords.map(c => `
+      <circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="2.6" fill="var(--samfaina)"/>
+      <text x="${c.x.toFixed(1)}" y="${(c.y-7).toFixed(1)}" font-size="9" text-anchor="middle" fill="var(--pergami-dim)" font-family="JetBrains Mono, monospace">${c.alt}</text>
+    `).join("");
+    return `<svg class="elev-svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">
+      <polygon points="${fillPoly}" fill="var(--samfaina)" opacity="0.08"/>
+      <polyline points="${poly}" fill="none" stroke="var(--samfaina)" stroke-width="1.6"/>
+      ${dots}
+    </svg>`;
+  }
+
+  function renderElevationSVGFromProfile(profile){
+    const w = 600, h = 64, pad = 12;
+    const eles = profile.map(p => p.e);
+    const min = Math.min(...eles), max = Math.max(...eles);
+    const range = Math.max(max - min, 30);
+    const maxD = profile[profile.length-1].d;
+    const coords = profile.map(p => ({
+      x: pad + (maxD > 0 ? (p.d / maxD) : 0) * (w - 2*pad),
+      y: h - pad - ((p.e - min) / range) * (h - 2*pad)
+    }));
+    const poly = coords.map(c => `${c.x.toFixed(1)},${c.y.toFixed(1)}`).join(" ");
+    const fillPoly = `${pad},${h-pad} ` + poly + ` ${w-pad},${h-pad}`;
+    // etiqueta solo min y max para no saturar (perfil denso, no un punto por pueblo)
+    const minIdx = eles.indexOf(min), maxIdx = eles.indexOf(max);
+    const label = (idx, val) => {
+      const c = coords[idx];
+      return `<circle cx="${c.x.toFixed(1)}" cy="${c.y.toFixed(1)}" r="2.4" fill="var(--samfaina)"/>
+      <text x="${c.x.toFixed(1)}" y="${(c.y-7).toFixed(1)}" font-size="9" text-anchor="middle" fill="var(--pergami-dim)" font-family="JetBrains Mono, monospace">${val}</text>`;
+    };
+    return `<svg class="elev-svg" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">
+      <polygon points="${fillPoly}" fill="var(--samfaina)" opacity="0.08"/>
+      <polyline points="${poly}" fill="none" stroke="var(--samfaina)" stroke-width="1.4"/>
+      ${label(0, Math.round(eles[0]))}
+      ${label(minIdx, Math.round(min))}
+      ${label(maxIdx, Math.round(max))}
+      ${label(eles.length-1, Math.round(eles[eles.length-1]))}
+    </svg>`;
+  }
+
+  function renderStages(lang){
+    const t = T[lang].etapas;
+    const summaryEl = document.getElementById("loop-summary");
+    if (summaryEl){
+      summaryEl.innerHTML = t.summary.replace("{km}", TOTAL_KM.toFixed(1));
+    }
+    const stageList = document.getElementById("stage-list");
+    stageList.innerHTML = "";
+    stages.forEach((s, i) => {
+      const info = stageInfo[i];
+      const gpxData = GPX_TRACKS[i];
+      const highlight = lang === "ca" ? info.hCa : lang === "en" ? info.hEn : info.hEs;
+      const poi = lang === "ca" ? info.poiCa : lang === "en" ? info.poiEn : info.poiEs;
+      const diffLabel = t[DIFF_LABEL_KEY[info.diff]];
+      const row = document.createElement("div");
+      row.className = "stage";
+      const distLabel = info.gpx ? t.distReal : t.dist;
+      const metaOrGain = info.gpx
+        ? `<div class="stage-facts gpx-facts">
+             <span class="stage-fact">${t.gain}: <b>+${info.gainM} m</b></span>
+             <span class="stage-fact">${t.loss}: <b>−${info.lossM} m</b></span>
+             <span class="gpx-badge">✓ ${t.gpxVerified}</span>
+             <a class="gpx-download" href="${gpxData.file}" download>${t.gpxDownload}</a>
+           </div>`
+        : `<div class="meta">${t.meta}</div>`;
+      row.innerHTML = `
+        <div class="day"><span class="num">${String(i+1).padStart(2,"0")}</span><span class="lbl">${t.etapaLabel}</span></div>
+        <div>
+          <div class="route">${s.join(' <span class="arrow">&rarr;</span> ')}</div>
+          <div class="highlight">${highlight}</div>
+          <div class="stage-facts">
+            <span class="stage-fact">${distLabel}: <b>${info.distKm.toFixed(1)} km</b></span>
+            <span class="stage-fact">${t.time}: <b>${info.time}</b></span>
+            <span class="stage-fact">${t.diff}: <span class="diff-badge ${info.diff}">${diffLabel}</span></span>
+          </div>
+          <div class="stage-extra">
+            <div><h5>${t.poi}</h5><ul>${listOrEmpty(poi, "—")}</ul></div>
+            <div><h5>${t.eat}</h5><ul>${listOrEmpty(info.eat, t.noOffer)}</ul></div>
+            <div><h5>${t.sleep}</h5><ul>${listOrEmpty(info.sleep, t.noOffer)}</ul></div>
+          </div>
+          <div class="elev-block">
+            <h5>${t.elev}</h5>
+            ${info.gpx ? renderElevationSVGFromProfile(gpxData.profile) : renderElevationSVG(s)}
+            <div class="elev-caption">${info.gpx ? t.elevNoteReal : t.elevNote}</div>
+          </div>
+          ${metaOrGain}
+        </div>
+      `;
+      stageList.appendChild(row);
+    });
+    const srcEl = document.getElementById("stage-source");
+    if (srcEl) srcEl.innerHTML = t.source;
+  }
+
+  function renderMapPopups(lang){
+    if (!markerLayer) return;
+    markerLayer.eachLayer(m=>{
+      const v = m._villageData;
+      const conn = lang === "ca" ? v[5] : lang === "en" ? v[6] : v[4];
+      m.setPopupContent(`<b>${v[0]}</b><span class="pc-tag">${T[lang].mapa.popupConn}: ${conn}</span>`);
+    });
+  }
+
+  function initMap(){
+    map = L.map('map', { scrollWheelZoom:false, attributionControl:true }).setView([41.21, 0.80], 11);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+      subdomains: 'abcd',
+      maxZoom: 18
+    }).addTo(map);
+
+    lineLayer = L.layerGroup().addTo(map);
+    stages.forEach((s, i)=>{
+      const gpxData = GPX_TRACKS[i];
+      if (gpxData){
+        L.polyline(gpxData.coords, { color:'#c69214', weight:3, opacity:0.9 }).addTo(lineLayer);
+      } else {
+        const pts = s.map(n => nameToLatLng[n]);
+        L.polyline(pts, { color:'#c69214', weight:2, opacity:0.65, dashArray:'2 8' }).addTo(lineLayer);
+      }
+    });
+
+    markerLayer = L.layerGroup().addTo(map);
+    villages.forEach(v=>{
+      const isHub = v[0] === "Falset";
+      const marker = L.circleMarker([v[1], v[2]], {
+        radius: isHub ? 8 : 5.5,
+        color: v[3] === "gr" ? "#7a1f2b" : "#c69214",
+        weight: 1.5,
+        fillColor: v[3] === "gr" ? "#7a1f2b" : "#c69214",
+        fillOpacity: 0.85
+      });
+      marker._villageData = v;
+      marker.bindPopup("");
+      marker.addTo(markerLayer);
+    });
+
+    const bounds = L.latLngBounds(villages.map(v => [v[1], v[2]]));
+    map.fitBounds(bounds, { padding: [30, 30] });
+    renderMapPopups(currentLang);
+  }
+
+  function renderAll(lang){
+    currentLang = lang;
+    applyStaticText(lang);
+    renderVillages(lang);
+    renderStages(lang);
+    renderMapPopups(lang);
+    renderTransport(lang);
+    renderKit(lang);
+    updateReelAlt(lang);
+  }
+
+  document.querySelectorAll(".lang-switch button").forEach(btn=>{
+    btn.addEventListener("click", ()=> renderAll(btn.getAttribute("data-lang")));
+  });
+
+  // mobile nav: in-flow dropdown (never covers content), closes on link tap
+  const navToggle = document.getElementById("nav-toggle");
+  const mobileNav = document.getElementById("mobile-nav");
+  if (navToggle && mobileNav){
+    navToggle.addEventListener("click", () => {
+      const open = mobileNav.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    mobileNav.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  // hero loop nodes (decorative, language-independent numbers)
+  const nodesG = document.getElementById("nodes");
+  const cx = 190, cy = 190, r = 128;
+  for (let i = 0; i < 9; i++){
+    const angle = (i / 9) * Math.PI * 2 - Math.PI/2;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    const c = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    c.setAttribute("cx", x); c.setAttribute("cy", y); c.setAttribute("r", 5);
+    c.setAttribute("fill", i === 0 ? "var(--vinya)" : "var(--samfaina)");
+    nodesG.appendChild(c);
+    const t = document.createElementNS("http://www.w3.org/2000/svg","text");
+    const lx = cx + (r+18) * Math.cos(angle);
+    const ly = cy + (r+18) * Math.sin(angle) + 3;
+    t.setAttribute("x", lx); t.setAttribute("y", ly);
+    t.setAttribute("text-anchor","middle");
+    t.setAttribute("class","node-label");
+    t.textContent = (i+1);
+    nodesG.appendChild(t);
+  }
+
+  // scroll reveal (progressive enhancement only — content is visible by default in CSS,
+  // this only adds a fade-in flourish when JS + IntersectionObserver are actually available)
+  const els = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window){
+    els.forEach(el => el.classList.add("pending"));
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  }
+
+  // Reel de fotos: 2 paisajes del Priorat (estilo) + 2 detalles de senderismo (botas, roca).
+  // Fuente: Unsplash, licencia libre — no requiere atribución, pero se cita igualmente.
+  const REEL_IMAGES = [
+    { url:"https://images.unsplash.com/photo-1753459056340-fc3f8f5107cd?w=1920&h=1080&fit=crop&q=80&auto=format",
+      altEs:"Viñedos en terrazas bajo un cielo azul", altCa:"Vinyes en terrasses sota un cel blau", altEn:"Terraced vineyards under a blue sky", credit:"Andrea Pasquali / Unsplash" },
+    { url:"https://images.unsplash.com/photo-1658248708933-5e7a5d4737da?w=1920&h=1080&fit=crop&q=80&auto=format",
+      altEs:"Pueblo en lo alto de una colina entre viñedos", altCa:"Poble dalt d'un turó entre vinyes", altEn:"Village atop a hill among vineyards", credit:"Skyler Smith / Unsplash" },
+    { url:"https://images.unsplash.com/photo-1733744237781-6eed02c60b8a?w=1920&h=1080&fit=crop&q=80&auto=format",
+      altEs:"Botas de senderismo sobre un sendero rocoso", altCa:"Botes de senderisme sobre un sender rocós", altEn:"Hiking boots on a rocky trail", credit:"Bare Kind / Unsplash" },
+    { url:"https://images.unsplash.com/photo-1655976795374-6b519928f1e1?w=1920&h=1080&fit=crop&q=80&auto=format",
+      altEs:"Detalle de una bota apoyada sobre roca", altCa:"Detall d'una bota recolzada sobre roca", altEn:"Close-up of a boot resting on rock", credit:"Ajeet Panesar / Unsplash" },
+  ];
+
+  function initReel(){
+    const reel = document.getElementById("photo-reel");
+    if (!reel) return;
+    reel.innerHTML = REEL_IMAGES.map((img, i) => {
+      return `<img src="${img.url}" alt="${img.altEs}" loading="${i===0?'eager':'lazy'}" class="${i===0?'active':''}" data-idx="${i}">`;
+    }).join("") + `<div class="credit">Unsplash — ${REEL_IMAGES.map(i=>i.credit.split(" / ")[0]).join(" · ")}</div>`;
+    const imgs = reel.querySelectorAll("img");
+    let idx = 0;
+    setInterval(() => {
+      imgs[idx].classList.remove("active");
+      idx = (idx + 1) % imgs.length;
+      imgs[idx].classList.add("active");
+    }, 4000);
+  }
+
+  function updateReelAlt(lang){
+    const reel = document.getElementById("photo-reel");
+    if (!reel) return;
+    reel.querySelectorAll("img").forEach(img => {
+      const data = REEL_IMAGES[Number(img.getAttribute("data-idx"))];
+      if (data) img.alt = lang === "ca" ? data.altCa : lang === "en" ? data.altEn : data.altEs;
+    });
+  }
+
+  // init
+  initReel();
+  renderAll("ca");
+  try {
+    initMap();
+  } catch (err) {
+    const mapEl = document.getElementById("map");
+    if (mapEl) mapEl.innerHTML = '<div style="padding:20px;font-family:JetBrains Mono, monospace;font-size:12px;color:var(--pergami-dim);">No se pudo cargar el mapa interactivo (sin conexión a la red de mapas). El resto de la página funciona con normalidad.</div>';
+    console.error("Map init failed:", err);
+  }
+</script>
+
+</body>
+</html>
