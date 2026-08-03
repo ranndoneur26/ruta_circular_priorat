@@ -424,6 +424,14 @@
   .guide-block h3 .gnum{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--samfaina); }
   .guide-block .gsub{ font-size:13.5px; color:var(--pergami-dim); margin:0 0 20px; max-width:60ch; }
   .guide-block p{ font-size:14.5px; line-height:1.7; color:var(--pergami-dim); margin:0 0 14px; max-width:72ch; }
+  .gpx-highlight{
+    border:1px solid var(--samfaina); border-left:3px solid var(--samfaina);
+    background:rgba(198,146,20,0.08); padding:18px 22px; margin-top:6px; max-width:72ch;
+  }
+  .gpx-highlight p{ color:var(--samfaina); font-weight:500; margin-bottom:12px; }
+  .gpx-highlight p:last-child{ margin-bottom:0; }
+  .gpx-highlight strong{ color:var(--samfaina); font-weight:700; }
+  .gpx-highlight em{ color:var(--pergami); font-style:italic; }
   .guide-block strong{ color:var(--pergami); font-weight:600; }
   .guide-block ul{ margin:0 0 14px; padding-left:0; list-style:none; max-width:72ch; }
   .guide-block ul li{ font-size:14px; color:var(--pergami-dim); line-height:1.6; padding-left:16px; position:relative; margin-bottom:6px; }
@@ -635,10 +643,11 @@
     </div>
     <div class="map-status">
       <span class="tag verified" data-i18n="mapa.statusVerified">Las 8 etapas verificadas con GPX real</span>
+      <span class="tag pending" data-i18n="mapa.statusShortRoute">Ruta corta (3 días): propuesta, tramo de cierre Bellmunt–Falset pendiente de GPX</span>
     </div>
     <div id="map"></div>
     <div class="map-caption">
-      <span><span class="dot" style="background:var(--vinya)"></span><span data-i18n="mapa.legendGr">Nudo GR-174</span> &nbsp; <span class="dot" style="background:var(--samfaina)"></span><span data-i18n="mapa.legendPr">Municipio</span></span>
+      <span><span class="dot" style="background:var(--vinya)"></span><span data-i18n="mapa.legendGr">Nudo GR-174</span> &nbsp; <span class="dot" style="background:var(--samfaina)"></span><span data-i18n="mapa.legendPr">Municipio</span> &nbsp; <span class="dot" style="background:var(--pergami)"></span><span data-i18n="mapa.legendCorta">Ruta corta (3 días)</span></span>
       <span data-i18n="mapa.note">Líneas de etapa esquemáticas, pendientes de verificación</span>
     </div>
   </div>
@@ -984,7 +993,7 @@
   const T = { es: I18N.dict.es.home, ca: I18N.dict.ca.home, en: I18N.dict.en.home };
 
   let currentLang = I18N.FALLBACK;
-  let map, markerLayer, lineLayer;
+  let map, markerLayer, lineLayer, shortRouteLine;
 
   const get = I18N.get;
 
@@ -1225,6 +1234,7 @@
   }
 
   function renderMapPopups(lang){
+    if (shortRouteLine) shortRouteLine.setTooltipContent(T[lang].mapa.shortRouteLabel);
     if (!markerLayer) return;
     markerLayer.eachLayer(m=>{
       const v = m._villageData;
@@ -1251,6 +1261,11 @@
         L.polyline(pts, { color:'#c69214', weight:2, opacity:0.65, dashArray:'2 8' }).addTo(lineLayer);
       }
     });
+
+    // Ruta corta (3 días): tramo de cierre directo Bellmunt–Falset, propuesta sin verificar con GPX todavía.
+    const shortRoutePts = [nameToLatLng["Bellmunt del Priorat"], nameToLatLng["Falset"]];
+    shortRouteLine = L.polyline(shortRoutePts, { color:'#ede6d6', weight:2.5, opacity:0.8, dashArray:'6 8' }).addTo(lineLayer);
+    shortRouteLine.bindTooltip(T[currentLang].mapa.shortRouteLabel, { sticky:true });
 
     markerLayer = L.layerGroup().addTo(map);
     villages.forEach(v=>{

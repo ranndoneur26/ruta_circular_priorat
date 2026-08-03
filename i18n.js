@@ -66,7 +66,10 @@
         "legendPr": "Municipio",
         "note": "Las 8 etapas verificadas con GPX real (línea sólida).",
         "popupConn": "Conexión",
-        "statusVerified": "Las 8 etapas verificadas con GPX real"
+        "statusVerified": "Las 8 etapas verificadas con GPX real",
+        "statusShortRoute": "Ruta corta (3 días): propuesta, tramo de cierre Bellmunt–Falset pendiente de GPX",
+        "legendCorta": "Ruta corta (3 días)",
+        "shortRouteLabel": "Ruta corta (3 días) — tramo Bellmunt–Falset, propuesta sin verificar con GPX todavía"
       },
       "etapas": {
         "eyebrow": "Trazado propuesto",
@@ -136,7 +139,7 @@
         "nav8": "Usar los tracks GPX",
         "gpx": {
           "h": "Cómo usar los tracks GPX",
-          "body": "<p>Cada ficha de etapa tiene un botón para descargar su track en formato <strong>.gpx</strong>. Un GPX no es un mapa: es solo una lista de coordenadas. Para verlo y seguirlo necesitas una aplicación que lo importe — Google Maps normal no sirve para esto.</p>\n           <p><strong>No hace falta un GPS dedicado.</strong> Cualquier smartphone actual lleva chip GPS de serie, el mismo que usas para la ubicación normal. Un Garmin u otro GPS de montaña es una opción más, no un requisito.</p>\n           <p><strong>Aplicaciones gratuitas que sí leen GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot o Gaia GPS. Todas permiten importar el archivo y seguirlo en directo con tu posición en pantalla.</p>\n           <p><strong>Pasos:</strong> descarga el .gpx de la etapa → ábrelo con la app (opción \"Importar track\" o \"Abrir con\") → antes de salir, descarga también el mapa de esa zona en modo <em>offline</em> desde la propia app.</p>\n           <p>Esto último es imprescindible: como ya se advierte en este mismo circuito, hay tramos largos sin cobertura móvil. Un track offline es la diferencia entre orientarte y no.</p>"
+          "body": "<p>Cada ficha de etapa tiene un botón para descargar su track en formato <strong>.gpx</strong>. Un GPX no es un mapa: es solo una lista de coordenadas. Para verlo y seguirlo necesitas una aplicación que lo importe — Google Maps normal no sirve para esto.</p>\n           <p><strong>No hace falta un GPS dedicado.</strong> Cualquier smartphone actual lleva chip GPS de serie, el mismo que usas para la ubicación normal. Un Garmin u otro GPS de montaña es una opción más, no un requisito.</p>\n           <div class=\"gpx-highlight\">\n             <p><strong>Aplicaciones gratuitas que sí leen GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot o Gaia GPS. Todas permiten importar el archivo y seguirlo en directo con tu posición en pantalla.</p>\n             <p><strong>Pasos:</strong> descarga el .gpx de la etapa → ábrelo con la app (opción \"Importar track\" o \"Abrir con\") → antes de salir, descarga también el mapa de esa zona en modo <em>offline</em> desde la propia app.</p>\n             <p>Esto último es imprescindible: como ya se advierte en este mismo circuito, hay tramos largos sin cobertura móvil. Un track offline es la diferencia entre orientarte y no.</p>\n           </div>"
         }
       },
       "terrain": {
@@ -267,18 +270,13 @@
           "p": "Los 19 municipios, cada uno una vez. La travessa completa tal como está descrita en las 8 fichas de etapa, verificadas con GPX real."
         },
         "v2": {
-          "label": "Fin de semana",
-          "h": "2 días",
-          "body": "<p>Etapas 1 y 2: Falset → Marçà → Capçanes → Els Guiamets → El Masroig → El Molar → Bellmunt del Priorat.</p>\n           <p>Para volver a Falset sin repetir el camino a pie: línea local de Transports del Priorat i Domènech (977 831 871).</p>"
-        },
-        "v3": {
-          "label": "Toma de contacto",
-          "h": "1 día",
-          "body": "<p>Falset → Marçà → Capçanes → Els Guiamets (etapa 1 en solitario). Bodegas cooperativas y el pantà dels Guiamets: la forma más corta de probar el circuito sin comprometerte a más de un día.</p>\n           <p>Dificultad moderada, +354 m / −492 m de desnivel. Para volver a Falset: mismo servicio de Transports del Priorat i Domènech.</p>"
+          "label": "Ruta corta",
+          "h": "3 días",
+          "body": "<p>Etapas 1 y 2: Falset → Marçà → Capçanes → Els Guiamets → El Masroig → El Molar → Bellmunt del Priorat. El tercer día cierra el círculo por un tramo directo Bellmunt–Falset, todavía sin verificar con GPX (lo añadiremos en cuanto lo tengamos).</p>\n     <p>Para volver a Falset sin cerrar a pie: línea local de Transports del Priorat i Domènech (977 831 871).</p>"
         },
         "registro": {
           "h": "Apúntate y certifica tu paso",
-          "body": "<p>Antes de salir, <a href=\"inscripcion.html\">apúntate con tu alias</a>. Cuando termines, <a href=\"certificar.html\">certifica la travessa</a> subiendo 4 fotos en puntos concretos (fin de etapa 2, fin de etapa 5, etapa 7 y el cierre en Falset): alguien las revisa a mano y, si encajan, tu alias queda marcado como verificado en la <a href=\"finalizados.html\">lista pública de caminantes</a>.</p>\n           <p>Esto funciona sin servidor propio: los datos se guardan en el almacenamiento compartido de este artifact de Claude. Si esta web se publica alguna vez fuera de ese entorno, este sistema dejará de compartir datos entre visitantes — haría falta entonces un backend real o un formulario externo tipo Google Forms.</p>"
+          "body": "<p>Antes de salir, <a href=\"inscripcion.html\">apúntate con tu alias</a>. Cuando termines, <a href=\"certificar.html\">certifica la travessa</a> subiendo 4 fotos en puntos concretos (fin de etapa 2, fin de etapa 5, etapa 7 y el cierre en Falset): alguien las revisa a mano y, si encajan, tu alias queda marcado como verificado en la <a href=\"finalizados.html\">lista pública de caminantes</a>.</p>"
         },
         "sello": "Información de esta página contrastada con el directorio oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a> y fuentes patrimoniales citadas (Viquipèdia, enciclopedia.cat, Generalitat de Catalunya). Actualizada por última vez en julio de 2026."
       },
@@ -323,8 +321,7 @@
         "varianteErr": "Elige la variante que vas a hacer.",
         "variantePlaceholder": "Elige una variante…",
         "variante1": "Circuito completo · 8 días · ~166,4 km",
-        "variante2": "Fin de semana · 2 días · etapas 1-2",
-        "variante3": "Toma de contacto · 1 día · etapa 1",
+        "variante2": "Ruta corta · 3 días · Falset–Bellmunt–Falset (~45 km, tramo de cierre pendiente de GPX)",
         "date": "Día de inicio de la ruta",
         "dateErr": "Elige una fecha.",
         "mensaje": "¿Por qué te atreves con el Priorat?",
@@ -426,16 +423,14 @@
         "search": "Buscar por alias u origen…",
         "allVariants": "Todas las variantes",
         "vCompleto": "Circuito completo",
-        "vFinde": "Fin de semana",
-        "vContacto": "Toma de contacto",
         "sortRecent": "Más recientes",
         "sortAlias": "Por alias",
-        "loading": "Cargando caminantes…"
+        "loading": "Cargando caminantes…",
+        "vCorta": "Ruta corta (3 días)"
       },
       "variant": {
         "completo": "Circuito completo",
-        "finde": "Fin de semana",
-        "contacto": "Toma de contacto"
+        "corta": "Ruta corta (3 días)"
       },
       "card": {
         "verified": "✓ Verificado",
@@ -507,8 +502,7 @@
       },
       "variant": {
         "completo": "Circuito completo",
-        "finde": "Fin de semana",
-        "contacto": "Toma de contacto"
+        "corta": "Ruta corta (3 días)"
       }
     }
   },
@@ -571,7 +565,10 @@
         "legendPr": "Municipi",
         "note": "Les 8 etapes verificades amb GPX real (línia sòlida).",
         "popupConn": "Connexió",
-        "statusVerified": "Les 8 etapes verificades amb GPX real"
+        "statusVerified": "Les 8 etapes verificades amb GPX real",
+        "statusShortRoute": "Ruta curta (3 dies): proposta, tram de tancament Bellmunt–Falset pendent de GPX",
+        "legendCorta": "Ruta curta (3 dies)",
+        "shortRouteLabel": "Ruta curta (3 dies) — tram Bellmunt–Falset, proposta sense verificar amb GPX encara"
       },
       "etapas": {
         "eyebrow": "Traçat proposat",
@@ -641,7 +638,7 @@
         "nav8": "Fer servir els tracks GPX",
         "gpx": {
           "h": "Com fer servir els tracks GPX",
-          "body": "<p>Cada fitxa d'etapa té un botó per descarregar el seu track en format <strong>.gpx</strong>. Un GPX no és un mapa: només és una llista de coordenades. Per veure'l i seguir-lo necessites una aplicació que l'importi — el Google Maps normal no serveix per a això.</p>\n           <p><strong>No cal un GPS dedicat.</strong> Qualsevol smartphone actual porta xip GPS de sèrie, el mateix que fas servir per a la ubicació normal. Un Garmin o un altre GPS de muntanya és una opció més, no un requisit.</p>\n           <p><strong>Aplicacions gratuïtes que sí que llegeixen GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot o Gaia GPS. Totes permeten importar l'arxiu i seguir-lo en directe amb la teva posició a la pantalla.</p>\n           <p><strong>Passos:</strong> descarrega el .gpx de l'etapa → obre'l amb l'app (opció \"Importar track\" o \"Obrir amb\") → abans de sortir, descarrega també el mapa d'aquella zona en mode <em>offline</em> des de la mateixa app.</p>\n           <p>Això últim és imprescindible: tal com ja s'avisa en aquest mateix circuit, hi ha trams llargs sense cobertura mòbil. Un track offline és la diferència entre orientar-te i no fer-ho.</p>"
+          "body": "<p>Cada fitxa d'etapa té un botó per descarregar el seu track en format <strong>.gpx</strong>. Un GPX no és un mapa: només és una llista de coordenades. Per veure'l i seguir-lo necessites una aplicació que l'importi — el Google Maps normal no serveix per a això.</p>\n           <p><strong>No cal un GPS dedicat.</strong> Qualsevol smartphone actual porta xip GPS de sèrie, el mateix que fas servir per a la ubicació normal. Un Garmin o un altre GPS de muntanya és una opció més, no un requisit.</p>\n           <div class=\"gpx-highlight\">\n             <p><strong>Aplicacions gratuïtes que sí que llegeixen GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot o Gaia GPS. Totes permeten importar l'arxiu i seguir-lo en directe amb la teva posició a la pantalla.</p>\n             <p><strong>Passos:</strong> descarrega el .gpx de l'etapa → obre'l amb l'app (opció \"Importar track\" o \"Obrir amb\") → abans de sortir, descarrega també el mapa d'aquella zona en mode <em>offline</em> des de la mateixa app.</p>\n             <p>Això últim és imprescindible: tal com ja s'avisa en aquest mateix circuit, hi ha trams llargs sense cobertura mòbil. Un track offline és la diferència entre orientar-te i no fer-ho.</p>\n           </div>"
         }
       },
       "terrain": {
@@ -772,18 +769,13 @@
           "p": "Els 19 municipis, cadascun una vegada. La travessa completa tal com està descrita a les 8 fitxes d'etapa, verificades amb GPX real."
         },
         "v2": {
-          "label": "Cap de setmana",
-          "h": "2 dies",
-          "body": "<p>Etapes 1 i 2: Falset → Marçà → Capçanes → els Guiamets → el Masroig → el Molar → Bellmunt del Priorat.</p>\n           <p>Per tornar a Falset sense repetir el camí a peu: línia local de Transports del Priorat i Domènech (977 831 871).</p>"
-        },
-        "v3": {
-          "label": "Presa de contacte",
-          "h": "1 dia",
-          "body": "<p>Falset → Marçà → Capçanes → els Guiamets (etapa 1 en solitari). Cellers cooperatius i el pantà dels Guiamets: la manera més curta de tastar el circuit sense comprometre't a més d'un dia.</p>\n           <p>Dificultat moderada, +354 m / −492 m de desnivell. Per tornar a Falset: mateix servei de Transports del Priorat i Domènech.</p>"
+          "label": "Ruta curta",
+          "h": "3 dies",
+          "body": "<p>Etapes 1 i 2: Falset → Marçà → Capçanes → els Guiamets → el Masroig → el Molar → Bellmunt del Priorat. El tercer dia tanca el cercle per un tram directe Bellmunt–Falset, encara sense verificar amb GPX (l'afegirem tan bon punt el tinguem).</p>\n     <p>Per tornar a Falset sense tancar-lo a peu: línia local de Transports del Priorat i Domènech (977 831 871).</p>"
         },
         "registro": {
           "h": "Inscriu-te i certifica el teu pas",
-          "body": "<p>Abans de sortir, <a href=\"inscripcion.html\">inscriu-te amb el teu àlies</a>. Quan acabis, <a href=\"certificar.html\">certifica la travessa</a> pujant 4 fotos en punts concrets (final de l'etapa 2, final de l'etapa 5, etapa 7 i el tancament a Falset): algú les revisa a mà i, si encaixen, el teu àlies queda marcat com a verificat a la <a href=\"finalizados.html\">llista pública de caminants</a>.</p>\n           <p>Això funciona sense servidor propi: les dades es guarden a l'emmagatzematge compartit d'aquest artifact de Claude. Si aquesta web es publica mai fora d'aquest entorn, aquest sistema deixarà de compartir dades entre visitants — caldria llavors un backend real o un formulari extern tipus Google Forms.</p>"
+          "body": "<p>Abans de sortir, <a href=\"inscripcion.html\">inscriu-te amb el teu àlies</a>. Quan acabis, <a href=\"certificar.html\">certifica la travessa</a> pujant 4 fotos en punts concrets (final de l'etapa 2, final de l'etapa 5, etapa 7 i el tancament a Falset): algú les revisa a mà i, si encaixen, el teu àlies queda marcat com a verificat a la <a href=\"finalizados.html\">llista pública de caminants</a>.</p>"
         },
         "sello": "Informació d'aquesta pàgina contrastada amb el directori oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a> i fonts patrimonials citades (Viquipèdia, enciclopedia.cat, Generalitat de Catalunya). Actualitzada per última vegada el juliol de 2026."
       },
@@ -828,8 +820,7 @@
         "varianteErr": "Tria la variant que faràs.",
         "variantePlaceholder": "Tria una variant…",
         "variante1": "Circuit complet · 8 dies · ~166,4 km",
-        "variante2": "Cap de setmana · 2 dies · etapes 1-2",
-        "variante3": "Presa de contacte · 1 dia · etapa 1",
+        "variante2": "Ruta curta · 3 dies · Falset–Bellmunt–Falset (~45 km, tram de tancament pendent de GPX)",
         "date": "Dia d'inici de la ruta",
         "dateErr": "Tria una data.",
         "mensaje": "Per què t'atreveixes amb el Priorat?",
@@ -931,16 +922,14 @@
         "search": "Cerca per àlies o origen…",
         "allVariants": "Totes les variants",
         "vCompleto": "Circuit complet",
-        "vFinde": "Cap de setmana",
-        "vContacto": "Presa de contacte",
         "sortRecent": "Més recents",
         "sortAlias": "Per àlies",
-        "loading": "Carregant caminants…"
+        "loading": "Carregant caminants…",
+        "vCorta": "Ruta curta (3 dies)"
       },
       "variant": {
         "completo": "Circuit complet",
-        "finde": "Cap de setmana",
-        "contacto": "Presa de contacte"
+        "corta": "Ruta curta (3 dies)"
       },
       "card": {
         "verified": "✓ Verificat",
@@ -1012,8 +1001,7 @@
       },
       "variant": {
         "completo": "Circuit complet",
-        "finde": "Cap de setmana",
-        "contacto": "Presa de contacte"
+        "corta": "Ruta curta (3 dies)"
       }
     }
   },
@@ -1076,7 +1064,10 @@
         "legendPr": "Municipality",
         "note": "All 8 stages verified with a real GPX track (solid line).",
         "popupConn": "Connection",
-        "statusVerified": "All 8 stages verified with real GPX"
+        "statusVerified": "All 8 stages verified with real GPX",
+        "statusShortRoute": "Short route (3 days): proposal, Bellmunt–Falset closing leg pending GPX",
+        "legendCorta": "Short route (3 days)",
+        "shortRouteLabel": "Short route (3 days) — Bellmunt–Falset stretch, a proposal not yet verified with GPX"
       },
       "etapas": {
         "eyebrow": "Proposed route",
@@ -1146,7 +1137,7 @@
         "nav8": "Using the GPX tracks",
         "gpx": {
           "h": "How to use the GPX tracks",
-          "body": "<p>Each stage card has a button to download its track as a <strong>.gpx</strong> file. A GPX isn't a map — it's just a list of coordinates. To see it and follow it you need an app that can import it; regular Google Maps won't do this.</p>\n           <p><strong>You don't need a dedicated GPS device.</strong> Any current smartphone already has a GPS chip built in, the same one used for regular location services. A Garmin or other hiking GPS is one more option, not a requirement.</p>\n           <p><strong>Free apps that read GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot, or Gaia GPS. All of them let you import the file and follow it live with your position on screen.</p>\n           <p><strong>Steps:</strong> download the stage's .gpx file → open it with the app (\"Import track\" or \"Open with\") → before setting out, also download the map for that area in <em>offline</em> mode from within the app.</p>\n           <p>That last step matters: as this same circuit's guide already warns, there are long stretches with no mobile signal. An offline track is the difference between staying oriented and getting lost.</p>"
+          "body": "<p>Each stage card has a button to download its track as a <strong>.gpx</strong> file. A GPX isn't a map — it's just a list of coordinates. To see it and follow it you need an app that can import it; regular Google Maps won't do this.</p>\n           <p><strong>You don't need a dedicated GPS device.</strong> Any current smartphone already has a GPS chip built in, the same one used for regular location services. A Garmin or other hiking GPS is one more option, not a requirement.</p>\n           <div class=\"gpx-highlight\">\n             <p><strong>Free apps that read GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot, or Gaia GPS. All of them let you import the file and follow it live with your position on screen.</p>\n             <p><strong>Steps:</strong> download the stage's .gpx file → open it with the app (\"Import track\" or \"Open with\") → before setting out, also download the map for that area in <em>offline</em> mode from within the app.</p>\n             <p>That last step matters: as this same circuit's guide already warns, there are long stretches with no mobile signal. An offline track is the difference between staying oriented and getting lost.</p>\n           </div>"
         }
       },
       "terrain": {
@@ -1277,18 +1268,13 @@
           "p": "All 19 municipalities, each visited once. The complete crossing as described in the 8 stage cards, verified with real GPX."
         },
         "v2": {
-          "label": "Weekend",
-          "h": "2 days",
-          "body": "<p>Stages 1 and 2: Falset → Marçà → Capçanes → Els Guiamets → El Masroig → El Molar → Bellmunt del Priorat.</p>\n           <p>To get back to Falset without retracing your steps on foot: local line of Transports del Priorat i Domènech (977 831 871).</p>"
-        },
-        "v3": {
-          "label": "First taste",
-          "h": "1 day",
-          "body": "<p>Falset → Marçà → Capçanes → Els Guiamets (stage 1 on its own). Cooperative wineries and the Guiamets reservoir: the shortest way to sample the circuit without committing to more than a day.</p>\n           <p>Moderate difficulty, +354 m / −492 m elevation. To get back to Falset: same Transports del Priorat i Domènech service.</p>"
+          "label": "Short route",
+          "h": "3 days",
+          "body": "<p>Stages 1 and 2: Falset → Marçà → Capçanes → Els Guiamets → El Masroig → El Molar → Bellmunt del Priorat. The third day closes the loop via a direct Bellmunt–Falset stretch, not yet verified with GPX (we'll add it once we have it).</p>\n     <p>To get back to Falset without closing it on foot: local line of Transports del Priorat i Domènech (977 831 871).</p>"
         },
         "registro": {
           "h": "Sign up and certify your crossing",
-          "body": "<p>Before setting out, <a href=\"inscripcion.html\">sign up with your alias</a>. When you finish, <a href=\"certificar.html\">certify the crossing</a> by uploading 4 photos at specific points (end of stage 2, end of stage 5, stage 7, and the closing point in Falset): someone reviews them by hand and, if they match, your alias gets marked as verified on the <a href=\"finalizados.html\">public list of walkers</a>.</p>\n           <p>This works without a server of its own: the data is stored in this Claude artifact's shared storage. If this site is ever published outside that environment, this system will stop sharing data between visitors — at that point you'd need a real backend or an external form like Google Forms.</p>"
+          "body": "<p>Before setting out, <a href=\"inscripcion.html\">sign up with your alias</a>. When you finish, <a href=\"certificar.html\">certify the crossing</a> by uploading 4 photos at specific points (end of stage 2, end of stage 5, stage 7, and the closing point in Falset): someone reviews them by hand and, if they match, your alias gets marked as verified on the <a href=\"finalizados.html\">public list of walkers</a>.</p>"
         },
         "sello": "Information on this page cross-checked against the official directory of <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a> and cited heritage sources (Viquipèdia, enciclopedia.cat, Generalitat de Catalunya). Last updated July 2026."
       },
@@ -1333,8 +1319,7 @@
         "varianteErr": "Choose the variant you'll do.",
         "variantePlaceholder": "Choose a variant…",
         "variante1": "Full circuit · 8 days · ~166.4 km",
-        "variante2": "Weekend · 2 days · stages 1-2",
-        "variante3": "First taste · 1 day · stage 1",
+        "variante2": "Short route · 3 days · Falset–Bellmunt–Falset (~45 km, closing leg pending GPX)",
         "date": "Route start date",
         "dateErr": "Choose a date.",
         "mensaje": "Why are you daring to do the Priorat?",
@@ -1436,16 +1421,14 @@
         "search": "Search by alias or origin…",
         "allVariants": "All variants",
         "vCompleto": "Full circuit",
-        "vFinde": "Weekend",
-        "vContacto": "First taste",
         "sortRecent": "Most recent",
         "sortAlias": "By alias",
-        "loading": "Loading walkers…"
+        "loading": "Loading walkers…",
+        "vCorta": "Short route (3 days)"
       },
       "variant": {
         "completo": "Full circuit",
-        "finde": "Weekend",
-        "contacto": "First taste"
+        "corta": "Short route (3 days)"
       },
       "card": {
         "verified": "✓ Verified",
@@ -1517,8 +1500,7 @@
       },
       "variant": {
         "completo": "Full circuit",
-        "finde": "Weekend",
-        "contacto": "First taste"
+        "corta": "Short route (3 days)"
       }
     }
   }
