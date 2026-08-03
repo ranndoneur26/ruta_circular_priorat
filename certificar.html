@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a1715">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <title>Certificar la travessa · Travessa del Priorat</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,6 +37,14 @@
   .lang-switch button{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.05em; background:transparent; color:var(--pergami-dim); border:none; padding:5px 9px; cursor:pointer; }
   .lang-switch button + button{ border-left:1px solid var(--line); }
   .lang-switch button[aria-pressed="true"]{ background:var(--samfaina); color:var(--llicorella); font-weight:600; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{ outline:2px solid var(--samfaina); outline-offset:3px; }
+  .skip-link{
+    position:absolute; left:12px; top:-60px; z-index:100;
+    background:var(--samfaina); color:var(--llicorella); font-weight:600;
+    padding:10px 18px; text-decoration:none; font-family:'JetBrains Mono', monospace;
+    font-size:13px; transition:top .2s ease;
+  }
+  .skip-link:focus{ top:12px; }
 
   .phero{ padding:56px 0 32px; border-bottom:1px solid var(--line); }
   .phero h1{ font-size:clamp(28px,4.4vw,42px); line-height:1.08; margin-top:14px; }
@@ -106,11 +118,12 @@
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Saltar al contenido</a>
 <header class="top">
   <div class="wrap">
-    <a href="index.html" class="brand">Travessa del <span>Priorat</span></a>
+    <a href="travessa-priorat.html" class="brand">Travessa del <span>Priorat</span></a>
     <div class="top-links">
-      <a href="index.html" data-i18n="nav.back">← Volver al circuito</a>
+      <a href="travessa-priorat.html" data-i18n="nav.back">← Volver al circuito</a>
       <a href="finalizados.html" data-i18n="nav.list">Ver caminantes</a>
     </div>
     <div class="lang-switch" role="group" aria-label="Idioma / Llengua / Language">
@@ -121,7 +134,7 @@
   </div>
 </header>
 
-<div class="phero">
+<div class="phero" id="main-content">
   <div class="wrap">
     <div class="eyebrow" data-i18n="hero.eyebrow">Última etapa</div>
     <h1 data-i18n="hero.h1">Certifica que la has completado</h1>
@@ -235,112 +248,29 @@
   <div class="wrap" data-i18n="footer.text">Travessa del Priorat — verificación manual, no automática.</div>
 </footer>
 
+<script src="i18n.js"></script>
 <script>
-  const T = {
-    es: {
-      nav: { back:"← Volver al circuito", list:"Ver caminantes" },
-      hero: { eyebrow:"Última etapa", h1:"Certifica que la has completado", p:"Sube 4 fotos tomadas en puntos concretos de la ruta. Solo pueden acceder aquí las personas ya inscritas." },
-      notice: {
-        gate:"Esta página solo es para quien ya se <a href=\"inscripcion.html\" style=\"color:var(--samfaina)\">inscribió</a>. Escribe el alias y el correo exactos que usaste entonces.",
-        upload:"<strong>Importante:</strong> subir las fotos no te marca como verificado al instante. Alguien las revisará a mano para confirmar que corresponden a los 4 puntos pedidos. Puede tardar unos días."
-      },
-      gate: { alias:"Tu alias", email:"Tu correo (el mismo de la inscripción)", submit:"Acceder",
-        err:"No encontramos esa combinación de alias y correo entre las inscripciones. Revisa que los escribiste igual que al inscribirte.",
-        lock:"Demasiados intentos. Espera {s} segundos antes de volver a probar." },
-      welcome: "Hola, {alias} — sube tus 4 fotos cuando quieras.",
-      cp: {
-        label1:"Punto 1 · fin etapa 2", h1:"Bellmunt del Priorat", p1:"Foto en el pueblo o en el Museu de les Mines, con algo que identifique el lugar.",
-        label2:"Punto 2 · fin etapa 5", h2:"Cornudella de Montsant", p2:"Foto en el pueblo, idealmente con la Serra de Montsant al fondo.",
-        label3:"Punto 3 · etapa 7", h3:"Cartoixa d'Escaladei", p3:"Foto en las ruinas del monasterio.",
-        label4:"Punto 4 · cierre del circuito", h4:"Falset", p4:"Foto en el Castell de Falset o en la plaza del pueblo, cerrando el círculo.",
-        dzHl:"Toca para elegir", dzOr:"o arrastra una foto aquí",
-        fileErr:"Ese archivo no parece una imagen válida.",
-        compressing:"comprimiendo…", ready:"lista para enviar", remove:"Quitar",
-        submit:"Enviar fotos", submitting:"Enviando…", missing:"Faltan {n} fotos por subir."
-      },
-      success: { h:"¡Fotos enviadas!", p:"Las revisaremos y, si todo encaja, tu alias aparecerá marcado como verificado en la lista de caminantes. Esto no es automático: alguien las mira a mano." },
-      footer: { text:"Travessa del Priorat — verificación manual, no automática." }
-    },
-    ca: {
-      nav: { back:"← Tornar al circuit", list:"Veure caminants" },
-      hero: { eyebrow:"Última etapa", h1:"Certifica que l'has completat", p:"Puja 4 fotos preses en punts concrets de la ruta. Només hi poden accedir les persones ja inscrites." },
-      notice: {
-        gate:"Aquesta pàgina només és per a qui ja es va <a href=\"inscripcion.html\" style=\"color:var(--samfaina)\">inscriure</a>. Escriu l'àlies i el correu exactes que vas fer servir aleshores.",
-        upload:"<strong>Important:</strong> pujar les fotos no et marca com a verificat a l'instant. Algú les revisarà a mà per confirmar que corresponen als 4 punts demanats. Pot trigar uns dies."
-      },
-      gate: { alias:"El teu àlies", email:"El teu correu (el mateix de la inscripció)", submit:"Accedir",
-        err:"No hem trobat aquesta combinació d'àlies i correu entre les inscripcions. Revisa que els vas escriure igual que en inscriure't.",
-        lock:"Massa intents. Espera {s} segons abans de tornar a provar." },
-      welcome: "Hola, {alias} — puja les teves 4 fotos quan vulguis.",
-      cp: {
-        label1:"Punt 1 · final etapa 2", h1:"Bellmunt del Priorat", p1:"Foto al poble o al Museu de les Mines, amb alguna cosa que identifiqui el lloc.",
-        label2:"Punt 2 · final etapa 5", h2:"Cornudella de Montsant", p2:"Foto al poble, idealment amb la Serra de Montsant al fons.",
-        label3:"Punt 3 · etapa 7", h3:"Cartoixa d'Escaladei", p3:"Foto a les runes del monestir.",
-        label4:"Punt 4 · tancament del circuit", h4:"Falset", p4:"Foto al Castell de Falset o a la plaça del poble, tancant el cercle.",
-        dzHl:"Toca per triar", dzOr:"o arrossega una foto aquí",
-        fileErr:"Aquest arxiu no sembla una imatge vàlida.",
-        compressing:"comprimint…", ready:"llesta per enviar", remove:"Treure",
-        submit:"Enviar fotos", submitting:"Enviant…", missing:"Falten {n} fotos per pujar."
-      },
-      success: { h:"Fotos enviades!", p:"Les revisarem i, si tot encaixa, el teu àlies apareixerà marcat com a verificat a la llista de caminants. Això no és automàtic: algú les mira a mà." },
-      footer: { text:"Travessa del Priorat — verificació manual, no automàtica." }
-    },
-    en: {
-      nav: { back:"← Back to the circuit", list:"See walkers" },
-      hero: { eyebrow:"Final stage", h1:"Certify that you completed it", p:"Upload 4 photos taken at specific points on the route. Only people already signed up can access this page." },
-      notice: {
-        gate:"This page is only for people who already <a href=\"inscripcion.html\" style=\"color:var(--samfaina)\">signed up</a>. Enter the exact alias and email you used then.",
-        upload:"<strong>Important:</strong> uploading photos doesn't mark you as verified instantly. Someone will review them by hand to confirm they match the 4 requested spots. It may take a few days."
-      },
-      gate: { alias:"Your alias", email:"Your email (same as sign-up)", submit:"Access",
-        err:"We couldn't find that alias/email combination among sign-ups. Check you typed them exactly as when you registered.",
-        lock:"Too many attempts. Wait {s} seconds before trying again." },
-      welcome: "Hi, {alias} — upload your 4 photos whenever you're ready.",
-      cp: {
-        label1:"Point 1 · end of stage 2", h1:"Bellmunt del Priorat", p1:"Photo in the village or at the Museu de les Mines, with something that identifies the place.",
-        label2:"Point 2 · end of stage 5", h2:"Cornudella de Montsant", p2:"Photo in the village, ideally with the Serra de Montsant in the background.",
-        label3:"Point 3 · stage 7", h3:"Escaladei Charterhouse", p3:"Photo at the monastery ruins.",
-        label4:"Point 4 · closing the loop", h4:"Falset", p4:"Photo at Falset Castle or the village square, closing the circle.",
-        dzHl:"Tap to choose", dzOr:"or drag a photo here",
-        fileErr:"That file doesn't look like a valid image.",
-        compressing:"compressing…", ready:"ready to send", remove:"Remove",
-        submit:"Send photos", submitting:"Sending…", missing:"{n} photos still missing."
-      },
-      success: { h:"Photos sent!", p:"We'll review them and, if everything checks out, your alias will appear marked as verified on the list of walkers. This isn't automatic: someone looks at them by hand." },
-      footer: { text:"Travessa del Priorat — manual verification, not automatic." }
-    }
-  };
+  const T = { es: I18N.dict.es.certificar, ca: I18N.dict.ca.certificar, en: I18N.dict.en.certificar };
 
-  function get(obj, path){ return path.split(".").reduce((o,k)=> (o && o[k] !== undefined) ? o[k] : null, obj); }
-  let currentLang = "ca";
+  const get = I18N.get;
+  let currentLang = I18N.FALLBACK;
   let matchedWalker = null;
   let matchedKey = null;
 
   function applyStaticText(lang){
     currentLang = lang;
-    document.documentElement.lang = lang === "ca" ? "ca" : lang === "en" ? "en" : "es";
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const val = get(T[lang], el.getAttribute("data-i18n"));
-      if (val !== null) el.textContent = val;
-    });
-    document.querySelectorAll("[data-i18n-html]").forEach(el=>{
-      const val = get(T[lang], el.getAttribute("data-i18n-html"));
-      if (val !== null) el.innerHTML = val;
-    });
-    document.querySelectorAll(".lang-switch button").forEach(b=>{
-      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false");
-    });
+    I18N.applyDom(T, lang);
     if (matchedWalker){
       document.getElementById("welcome-back").textContent = T[lang].welcome.replace("{alias}", matchedWalker.alias);
     }
     updateFileLabels();
   }
   document.querySelectorAll(".lang-switch button").forEach(btn=>{
-    btn.addEventListener("click", ()=> applyStaticText(btn.getAttribute("data-lang")));
+    btn.addEventListener("click", ()=> applyStaticText(I18N.setLanguage(btn.getAttribute("data-lang"))));
   });
 
   // --- Backend real: mismo Google Sheets que inscripcion.html (ver INSTRUCCIONES.md). ---
-  const SHEETS_API_URL = https://script.google.com/macros/s/AKfycbx0rdqZy-iIHXjJNgDRhIQOEUxR6zrSiJBfI2-rwqtLJVk9SO6Ql4shDLMm5l4Qts_06w/exec;
+  const SHEETS_API_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
   const SHEETS_CONFIGURED = /^https:\/\/script\.google(usercontent)?\.com\//.test(SHEETS_API_URL);
 
   async function sheetsList(){
@@ -653,7 +583,7 @@
     btn.innerHTML = '<span class="spinner"></span> ' + T[currentLang].cp.submitting;
   });
 
-  applyStaticText("ca");
+  applyStaticText(I18N.setLanguage(I18N.resolveInitialLanguage()));
 </script>
 </body>
 </html>

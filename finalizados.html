@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a1715">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <title>Caminantes · Travessa del Priorat</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,6 +39,14 @@
   .lang-switch button{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.05em; background:transparent; color:var(--pergami-dim); border:none; padding:5px 9px; cursor:pointer; }
   .lang-switch button + button{ border-left:1px solid var(--line); }
   .lang-switch button[aria-pressed="true"]{ background:var(--samfaina); color:var(--llicorella); font-weight:600; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{ outline:2px solid var(--samfaina); outline-offset:3px; }
+  .skip-link{
+    position:absolute; left:12px; top:-60px; z-index:100;
+    background:var(--samfaina); color:var(--llicorella); font-weight:600;
+    padding:10px 18px; text-decoration:none; font-family:'JetBrains Mono', monospace;
+    font-size:13px; transition:top .2s ease;
+  }
+  .skip-link:focus{ top:12px; }
 
   .phero{ padding:56px 0 30px; border-bottom:1px solid var(--line); position:relative; overflow:hidden; }
   .phero::before{ content:""; position:absolute; top:-40%; right:-10%; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle, rgba(198,146,20,0.10) 0%, transparent 70%); pointer-events:none; }
@@ -84,11 +96,12 @@
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Saltar al contenido</a>
 <header class="top">
   <div class="wrap">
-    <a href="index.html" class="brand">Travessa del <span>Priorat</span></a>
+    <a href="travessa-priorat.html" class="brand">Travessa del <span>Priorat</span></a>
     <div class="top-links">
-      <a href="index.html" data-i18n="nav.back">← Volver al circuito</a>
+      <a href="travessa-priorat.html" data-i18n="nav.back">← Volver al circuito</a>
       <a href="inscripcion.html" class="cta" data-i18n="nav.signup">Inscribirme</a>
     </div>
     <div class="lang-switch" role="group" aria-label="Idioma / Llengua / Language">
@@ -99,7 +112,7 @@
   </div>
 </header>
 
-<div class="phero">
+<div class="phero" id="main-content">
   <div class="wrap">
     <div class="eyebrow" data-i18n="hero.eyebrow">Quién ya se ha atrevido</div>
     <h1 data-i18n="hero.h1">Caminantes de la travessa</h1>
@@ -141,88 +154,26 @@
   <div class="wrap" data-i18n="footer.text">Travessa del Priorat — lista pública informal, sin verificación de identidad. Los correos nunca se muestran.</div>
 </footer>
 
+<script src="i18n.js"></script>
 <script>
-  const T = {
-    es: {
-      nav: { back:"← Volver al circuito", signup:"Inscribirme" },
-      hero: {
-        eyebrow:"Quién ya se ha atrevido", h1:"Caminantes de la travessa",
-        p:"Lista informal, tipo libro de firmas: nadie ha verificado que estos alias hayan completado realmente la ruta. El «Verificado» solo indica que alguien del proyecto ha revisado fotos enviadas por correo."
-      },
-      stats: { total:"Inscritos", verified:"Verificados", completo:"Circuito completo", origenes:"Orígenes distintos" },
-      toolbar: {
-        search:"Buscar por alias u origen…", allVariants:"Todas las variantes",
-        vCompleto:"Circuito completo", vFinde:"Fin de semana", vContacto:"Toma de contacto",
-        sortRecent:"Más recientes", sortAlias:"Por alias", loading:"Cargando caminantes…"
-      },
-      variant: { completo:"Circuito completo", finde:"Fin de semana", contacto:"Toma de contacto" },
-      card: { verified:"✓ Verificado", start:"Inicio" },
-      empty: { h:"Todavía nadie se ha apuntado", p:"Sé la primera persona en dejar su alias escrito en esta lista.", cta:"Inscribirme →" },
-      footer: { text:"Travessa del Priorat — lista pública informal, sin verificación de identidad. Los correos nunca se muestran." }
-    },
-    ca: {
-      nav: { back:"← Tornar al circuit", signup:"Inscriure'm" },
-      hero: {
-        eyebrow:"Qui ja s'hi ha atrevit", h1:"Caminants de la travessa",
-        p:"Llista informal, tipus llibre de signatures: ningú ha verificat que aquests àlies hagin completat realment la ruta. El «Verificat» només indica que algú del projecte ha revisat fotos enviades per correu."
-      },
-      stats: { total:"Inscrits", verified:"Verificats", completo:"Circuit complet", origenes:"Orígens diferents" },
-      toolbar: {
-        search:"Cerca per àlies o origen…", allVariants:"Totes les variants",
-        vCompleto:"Circuit complet", vFinde:"Cap de setmana", vContacto:"Presa de contacte",
-        sortRecent:"Més recents", sortAlias:"Per àlies", loading:"Carregant caminants…"
-      },
-      variant: { completo:"Circuit complet", finde:"Cap de setmana", contacto:"Presa de contacte" },
-      card: { verified:"✓ Verificat", start:"Inici" },
-      empty: { h:"Encara ningú s'ha apuntat", p:"Sigues la primera persona a deixar el teu àlies escrit en aquesta llista.", cta:"Inscriure'm →" },
-      footer: { text:"Travessa del Priorat — llista pública informal, sense verificació d'identitat. Els correus mai es mostren." }
-    },
-    en: {
-      nav: { back:"← Back to the circuit", signup:"Sign up" },
-      hero: {
-        eyebrow:"Who's already dared", h1:"Walkers of the crossing",
-        p:"An informal list, like a guestbook: no one has verified that these aliases actually completed the route. «Verified» only means someone from the project has reviewed photos sent by email."
-      },
-      stats: { total:"Signed up", verified:"Verified", completo:"Full circuit", origenes:"Distinct origins" },
-      toolbar: {
-        search:"Search by alias or origin…", allVariants:"All variants",
-        vCompleto:"Full circuit", vFinde:"Weekend", vContacto:"First taste",
-        sortRecent:"Most recent", sortAlias:"By alias", loading:"Loading walkers…"
-      },
-      variant: { completo:"Full circuit", finde:"Weekend", contacto:"First taste" },
-      card: { verified:"✓ Verified", start:"Start" },
-      empty: { h:"No one has signed up yet", p:"Be the first to leave your alias written on this list.", cta:"Sign up →" },
-      footer: { text:"Travessa del Priorat — informal public list, no identity verification. Emails are never shown." }
-    }
-  };
+  const T = { es: I18N.dict.es.finalizados, ca: I18N.dict.ca.finalizados, en: I18N.dict.en.finalizados };
 
-  let currentLang = "ca";
-  function get(obj, path){ return path.split(".").reduce((o,k)=> (o && o[k] !== undefined) ? o[k] : null, obj); }
+  let currentLang = I18N.FALLBACK;
+  const get = I18N.get;
 
   function applyStaticText(lang){
     currentLang = lang;
-    document.documentElement.lang = lang === "ca" ? "ca" : lang === "en" ? "en" : "es";
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const val = get(T[lang], el.getAttribute("data-i18n"));
-      if (val !== null) el.textContent = val;
-    });
-    document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
-      const val = get(T[lang], el.getAttribute("data-i18n-placeholder"));
-      if (val !== null) el.setAttribute("placeholder", val);
-    });
-    document.querySelectorAll(".lang-switch button").forEach(b=>{
-      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false");
-    });
+    I18N.applyDom(T, lang);
     render();
   }
   document.querySelectorAll(".lang-switch button").forEach(btn=>{
-    btn.addEventListener("click", ()=> applyStaticText(btn.getAttribute("data-lang")));
+    btn.addEventListener("click", ()=> applyStaticText(I18N.setLanguage(btn.getAttribute("data-lang"))));
   });
 
   // --- Load entries: Google Sheets backend (real, cross-device) as primary source,
   // plus shared window.storage and localStorage as fallback for continuity. ---
   const LOCAL_KEY = "travessa_priorat_walkers";
-  const SHEETS_API_URL = https://script.google.com/macros/s/AKfycbx0rdqZy-iIHXjJNgDRhIQOEUxR6zrSiJBfI2-rwqtLJVk9SO6Ql4shDLMm5l4Qts_06w/exec;
+  const SHEETS_API_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
   const SHEETS_CONFIGURED = /^https:\/\/script\.google(usercontent)?\.com\//.test(SHEETS_API_URL);
 
   async function sheetsList(){
@@ -351,7 +302,7 @@
   (async function init(){
     allEntries = await loadEntries();
     document.getElementById("loading").style.display = "none";
-    applyStaticText("ca");
+    applyStaticText(I18N.setLanguage(I18N.resolveInitialLanguage()));
   })();
 </script>
 </body>

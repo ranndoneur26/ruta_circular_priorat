@@ -3,7 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a1715">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <title>Inscripció · Travessa del Priorat</title>
+<meta name="description" id="meta-description" content="Apúntate a la Travessa del Priorat: la Ruta del Priorat a pie, la ruta de los eremitas, la ruta del silencio. 166 km, 8 etapas, 19 pueblos. Deja tu alias escrito junto al de quienes ya se han atrevido.">
+<meta name="keywords" content="inscripción Travessa del Priorat, apuntarse ruta del Priorat, ruta de los eremitas, ruta del silencio, senderismo Priorat inscripción">
+<link rel="canonical" href="PASTE_YOUR_SITE_URL_HERE/inscripcion.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Inscríbete · Travessa del Priorat">
+<meta property="og:description" content="La Ruta del Priorat a pie, la ruta de los eremitas, la ruta del silencio. Apúntate antes de salir.">
+<meta property="og:locale" content="ca_ES">
+<meta property="og:locale:alternate" content="es_ES">
+<meta property="og:locale:alternate" content="en_GB">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -33,6 +46,14 @@
   .lang-switch button{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.05em; background:transparent; color:var(--pergami-dim); border:none; padding:5px 9px; cursor:pointer; }
   .lang-switch button + button{ border-left:1px solid var(--line); }
   .lang-switch button[aria-pressed="true"]{ background:var(--samfaina); color:var(--llicorella); font-weight:600; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{ outline:2px solid var(--samfaina); outline-offset:3px; }
+  .skip-link{
+    position:absolute; left:12px; top:-60px; z-index:100;
+    background:var(--samfaina); color:var(--llicorella); font-weight:600;
+    padding:10px 18px; text-decoration:none; font-family:'JetBrains Mono', monospace;
+    font-size:13px; transition:top .2s ease;
+  }
+  .skip-link:focus{ top:12px; }
 
   .phero{ padding:60px 0 34px; border-bottom:1px solid var(--line); position:relative; overflow:hidden; }
   .phero::before{
@@ -40,6 +61,7 @@
     background:radial-gradient(circle, rgba(198,146,20,0.10) 0%, transparent 70%); pointer-events:none;
   }
   .phero h1{ font-size:clamp(30px,4.8vw,46px); line-height:1.06; margin-top:14px; max-width:16ch; }
+  .phero h2.seo-h2{ font-family:'JetBrains Mono', monospace; font-weight:500; font-size:13px; letter-spacing:0.02em; color:var(--samfaina); margin-top:12px; max-width:48ch; text-transform:none; }
   .phero p{ font-size:16px; color:var(--pergami-dim); margin-top:16px; max-width:56ch; }
   .phero .kicker{ font-family:'Fraunces', serif; font-style:italic; color:var(--pergami); font-size:17px; margin-top:18px; }
   .phero .kicker .accent{ color:var(--samfaina); font-style:normal; font-weight:600; }
@@ -93,11 +115,12 @@
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Saltar al contenido</a>
 <header class="top">
   <div class="wrap">
-    <a href="index.html" class="brand">Travessa del <span>Priorat</span></a>
+    <a href="travessa-priorat.html" class="brand">Travessa del <span>Priorat</span></a>
     <div class="top-links">
-      <a href="index.html" data-i18n="nav.back">← Volver al circuito</a>
+      <a href="travessa-priorat.html" data-i18n="nav.back">← Volver al circuito</a>
       <a href="finalizados.html" data-i18n="nav.list">Ver caminantes</a>
     </div>
     <div class="lang-switch" role="group" aria-label="Idioma / Llengua / Language">
@@ -108,10 +131,11 @@
   </div>
 </header>
 
-<div class="phero">
+<div class="phero" id="main-content">
   <div class="wrap">
     <div class="eyebrow" data-i18n="hero.eyebrow">El primer paso ya es tuyo</div>
     <h1 data-i18n="hero.h1">Deja tu huella en la llicorella</h1>
+    <h2 class="seo-h2" data-i18n="hero.h2">La Ruta del Priorat a pie · la ruta de los eremitas · la ruta del silencio</h2>
     <p data-i18n="hero.p">19 pueblos. 8 etapas. Una tierra que no perdona la improvisación.</p>
     <p class="kicker" data-i18n-html="hero.kicker"></p>
   </div>
@@ -129,18 +153,18 @@
     <div class="form-section-label" data-i18n="section.who">Quién eres</div>
     <div class="field" id="field-alias">
       <label for="alias" data-i18n="form.alias">Alias</label>
-      <input type="text" id="alias" name="alias" maxlength="30" autocomplete="off" placeholder="p. ej. Caminant del Montsant">
+      <input type="text" id="alias" name="alias" maxlength="30" autocomplete="off" data-i18n-placeholder="form.aliasPlaceholder" placeholder="p. ej. Caminante del Montsant">
       <div class="err" data-i18n="form.aliasErr">Escribe un alias (2-30 caracteres).</div>
     </div>
     <div class="field" id="field-email">
       <label for="email" data-i18n="form.email">Correo electrónico</label>
-      <input type="email" id="email" name="email" autocomplete="off" placeholder="tú@ejemplo.com">
+      <input type="email" id="email" name="email" autocomplete="off" data-i18n-placeholder="form.emailPlaceholder" placeholder="tú@ejemplo.com">
       <div class="hint" data-i18n="form.emailHint">No se muestra públicamente, solo tu alias.</div>
       <div class="err" data-i18n="form.emailErr">Escribe un correo válido.</div>
     </div>
     <div class="field" id="field-origen">
       <label for="origen" data-i18n="form.origen">¿De dónde vienes?</label>
-      <input type="text" id="origen" name="origen" maxlength="40" autocomplete="off" placeholder="Ciudad o país">
+      <input type="text" id="origen" name="origen" maxlength="40" autocomplete="off" data-i18n-placeholder="form.origenPlaceholder" placeholder="Ciudad o país">
       <div class="err" data-i18n="form.origenErr">Escribe de dónde vienes.</div>
     </div>
 
@@ -162,7 +186,7 @@
     </div>
     <div class="field" id="field-mensaje">
       <label for="mensaje"><span data-i18n="form.mensaje">¿Por qué te atreves con el Priorat?</span> <span class="optional-tag" data-i18n="form.optional">(opcional)</span></label>
-      <textarea id="mensaje" name="mensaje" maxlength="140" placeholder="Una frase corta — se mostrará junto a tu alias"></textarea>
+      <textarea id="mensaje" name="mensaje" maxlength="140" data-i18n-placeholder="form.mensajePlaceholder" placeholder="Una frase corta — se mostrará junto a tu alias"></textarea>
       <div class="charcount"><span id="mensaje-count">0</span>/140</div>
     </div>
 
@@ -185,116 +209,21 @@
   <div class="wrap" data-i18n="footer.text">Travessa del Priorat — inscripción informal, sin verificación de identidad.</div>
 </footer>
 
+<script src="i18n.js"></script>
 <script>
-  const T = {
-    es: {
-      nav: { back:"← Volver al circuito", list:"Ver caminantes" },
-      hero: {
-        eyebrow:"El primer paso ya es tuyo",
-        h1:"Deja tu huella en la llicorella",
-        p:"19 pueblos. 8 etapas. Una tierra que no perdona la improvisación.",
-        kicker:'Apúntate con tu alias y quedará escrito junto al de quienes también <span class="accent">se han atrevido</span>.'
-      },
-      notice: { text:"Esto es una inscripción informal, tipo libro de firmas: <strong>no hay verificación de identidad ni de que hayas completado realmente la ruta</strong>. Tu correo se guarda solo por si queremos avisarte de novedades — nunca se muestra en la lista pública." },
-      section: { who:"Quién eres", route:"Tu travessa" },
-      form: {
-        alias:"Alias", aliasErr:"Escribe un alias (2-30 caracteres).",
-        email:"Correo electrónico", emailHint:"No se muestra públicamente, solo tu alias.", emailErr:"Escribe un correo válido.",
-        origen:"¿De dónde vienes?", origenErr:"Escribe de dónde vienes.", optional:"(opcional)",
-        variante:"Variante que vas a caminar", varianteErr:"Elige la variante que vas a hacer.",
-        variantePlaceholder:"Elige una variante…",
-        variante1:"Circuito completo · 8 días · ~166,4 km",
-        variante2:"Fin de semana · 2 días · etapas 1-2",
-        variante3:"Toma de contacto · 1 día · etapa 1",
-        date:"Día de inicio de la ruta", dateErr:"Elige una fecha.",
-        mensaje:"¿Por qué te atreves con el Priorat?",
-        consent:"Acepto que mi alias, la variante elegida, mi origen y mi mensaje (si los relleno) se muestren públicamente en la lista de caminantes. Mi correo nunca se muestra.",
-        consentErr:"Marca la casilla para poder inscribirte.",
-        submit:"Inscribirme", submitting:"Guardando…", submitErr:"No hemos podido guardar tu inscripción. Comprueba tu conexión e inténtalo de nuevo."
-      },
-      success: { h:"¡Listo!", p:'Tu alias ya está en la lista. <a href="finalizados.html" style="color:var(--samfaina)">Ver la lista de caminantes →</a><br>Cuando termines la ruta, <a href="certificar.html" style="color:var(--samfaina)">certifícala con 4 fotos →</a>' },
-      footer: { text:"Travessa del Priorat — inscripción informal, sin verificación de identidad." }
-    },
-    ca: {
-      nav: { back:"← Tornar al circuit", list:"Veure caminants" },
-      hero: {
-        eyebrow:"El primer pas ja és teu",
-        h1:"Deixa la teva empremta a la llicorella",
-        p:"19 pobles. 8 etapes. Una terra que no perdona la improvisació.",
-        kicker:'Inscriu-te amb el teu àlies i quedarà escrit junt amb el de qui també <span class="accent">s\'hi ha atrevit</span>.'
-      },
-      notice: { text:"Això és una inscripció informal, tipus llibre de signatures: <strong>no hi ha verificació d'identitat ni que hagis completat realment la ruta</strong>. El teu correu es guarda només per si volem avisar-te de novetats — mai es mostra a la llista pública." },
-      section: { who:"Qui ets", route:"La teva travessa" },
-      form: {
-        alias:"Àlies", aliasErr:"Escriu un àlies (2-30 caràcters).",
-        email:"Correu electrònic", emailHint:"No es mostra públicament, només el teu àlies.", emailErr:"Escriu un correu vàlid.",
-        origen:"D'on véns?", origenErr:"Escriu d'on véns.", optional:"(opcional)",
-        variante:"Variant que caminaràs", varianteErr:"Tria la variant que faràs.",
-        variantePlaceholder:"Tria una variant…",
-        variante1:"Circuit complet · 8 dies · ~166,4 km",
-        variante2:"Cap de setmana · 2 dies · etapes 1-2",
-        variante3:"Presa de contacte · 1 dia · etapa 1",
-        date:"Dia d'inici de la ruta", dateErr:"Tria una data.",
-        mensaje:"Per què t'atreveixes amb el Priorat?",
-        consent:"Accepto que el meu àlies, la variant escollida, el meu origen i el meu missatge (si els emplo) es mostrin públicament a la llista de caminants. El meu correu mai es mostra.",
-        consentErr:"Marca la casella per poder inscriure't.",
-        submit:"Inscriure'm", submitting:"Desant…", submitErr:"No hem pogut desar la teva inscripció. Comprova la connexió i torna-ho a provar."
-      },
-      success: { h:"Fet!", p:'El teu àlies ja és a la llista. <a href="finalizados.html" style="color:var(--samfaina)">Veure la llista de caminants →</a><br>Quan acabis la ruta, <a href="certificar.html" style="color:var(--samfaina)">certifica-la amb 4 fotos →</a>' },
-      footer: { text:"Travessa del Priorat — inscripció informal, sense verificació d'identitat." }
-    },
-    en: {
-      nav: { back:"← Back to the circuit", list:"See walkers" },
-      hero: {
-        eyebrow:"The first step is already yours",
-        h1:"Leave your mark on the llicorella",
-        p:"19 villages. 8 stages. A land that doesn't forgive improvisation.",
-        kicker:'Sign up with your alias and it will stand written alongside everyone else who has also <span class="accent">dared</span>.'
-      },
-      notice: { text:"This is an informal sign-up, like a guestbook: <strong>there's no identity check and no verification that you actually completed the route</strong>. Your email is stored only in case we want to notify you of updates — it's never shown on the public list." },
-      section: { who:"Who you are", route:"Your crossing" },
-      form: {
-        alias:"Alias", aliasErr:"Enter an alias (2-30 characters).",
-        email:"Email", emailHint:"Not shown publicly, only your alias.", emailErr:"Enter a valid email.",
-        origen:"Where are you from?", origenErr:"Enter where you're from.", optional:"(optional)",
-        variante:"Variant you'll be walking", varianteErr:"Choose the variant you'll do.",
-        variantePlaceholder:"Choose a variant…",
-        variante1:"Full circuit · 8 days · ~166.4 km",
-        variante2:"Weekend · 2 days · stages 1-2",
-        variante3:"First taste · 1 day · stage 1",
-        date:"Route start date", dateErr:"Choose a date.",
-        mensaje:"Why are you daring to do the Priorat?",
-        consent:"I agree that my alias, chosen variant, origin and message (if filled in) will be shown publicly on the list of walkers. My email is never shown.",
-        consentErr:"Check the box to sign up.",
-        submit:"Sign me up", submitting:"Saving…", submitErr:"We couldn't save your sign-up. Check your connection and try again."
-      },
-      success: { h:"Done!", p:'Your alias is now on the list. <a href="finalizados.html" style="color:var(--samfaina)">See the list of walkers →</a><br>Once you finish the route, <a href="certificar.html" style="color:var(--samfaina)">certify it with 4 photos →</a>' },
-      footer: { text:"Travessa del Priorat — informal sign-up, no identity verification." }
-    }
-  };
+  const T = { es: I18N.dict.es.inscripcion, ca: I18N.dict.ca.inscripcion, en: I18N.dict.en.inscripcion };
 
-  let currentLang = "ca";
-  function get(obj, path){ return path.split(".").reduce((o,k)=> (o && o[k] !== undefined) ? o[k] : null, obj); }
+  let currentLang = I18N.FALLBACK;
+  const get = I18N.get;
 
   function applyStaticText(lang){
     currentLang = lang;
-    document.documentElement.lang = lang === "ca" ? "ca" : lang === "en" ? "en" : "es";
-    document.querySelectorAll("[data-i18n]").forEach(el=>{
-      const val = get(T[lang], el.getAttribute("data-i18n"));
-      if (val !== null) el.textContent = val;
-    });
-    document.querySelectorAll("[data-i18n-html]").forEach(el=>{
-      const val = get(T[lang], el.getAttribute("data-i18n-html"));
-      if (val !== null) el.innerHTML = val;
-    });
-    document.querySelectorAll(".lang-switch button").forEach(b=>{
-      b.setAttribute("aria-pressed", b.getAttribute("data-lang") === lang ? "true" : "false");
-    });
+    I18N.applyDom(T, lang);
   }
   document.querySelectorAll(".lang-switch button").forEach(btn=>{
-    btn.addEventListener("click", ()=> applyStaticText(btn.getAttribute("data-lang")));
+    btn.addEventListener("click", ()=> applyStaticText(I18N.setLanguage(btn.getAttribute("data-lang"))));
   });
-  applyStaticText("ca");
+  applyStaticText(I18N.setLanguage(I18N.resolveInitialLanguage()));
 
   // char counter for the optional message
   const mensajeEl = document.getElementById("mensaje");
@@ -303,7 +232,7 @@
 
   // --- Backend real: Google Sheets vía Apps Script. Pega aquí la URL que obtienes
   // al desplegar codigo-apps-script.gs como aplicación web (ver INSTRUCCIONES.md). ---
-  const SHEETS_API_URL = https://script.google.com/macros/s/AKfycbx0rdqZy-iIHXjJNgDRhIQOEUxR6zrSiJBfI2-rwqtLJVk9SO6Ql4shDLMm5l4Qts_06w/exec;
+  const SHEETS_API_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
   const SHEETS_CONFIGURED = /^https:\/\/script\.google(usercontent)?\.com\//.test(SHEETS_API_URL);
 
   async function sheetsAdd(entry){
