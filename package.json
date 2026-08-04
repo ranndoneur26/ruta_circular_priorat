@@ -1,0 +1,20 @@
+{
+  "name": "ruta-circular-priorat",
+  "version": "1.0.0",
+  "description": "Travessa del Priorat - Gran travesía circular a pie",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "lint": "echo 'No linter configured yet'"
+  },
+  "keywords": [
+    "priorat",
+    "hiking",
+    "catalunya"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
