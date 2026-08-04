@@ -125,3 +125,28 @@ compte personal de Google (més amb Workspace). Més que suficient per aquest ú
 **Comportament**: un cop enviat, la fila mostra "✓ Notificat" i el botó desapareix,
 per evitar enviar el mateix correu dues vegades per error. Si mai necessites reenviar-lo,
 canvia manualment la cel·la `notified` a `FALSE` al full de càlcul.
+
+## Seguretat de la contrasenya d'administrador (actualitzat)
+
+Abans, la contrasenya vivia escrita dins d'`admin.html` — qualsevol que mirés el
+codi font de la pàgina la podia veure. **Ara ja no hi és.** El login es valida
+al servidor (Apps Script): `admin.html` envia el que teclegis, Apps Script ho
+compara amb `ADMIN_PASSWORD` (que només existeix dins del `.gs`, mai es
+descarrega al navegador), i retorna només un sí/no.
+
+**Contrasenya generada** (canvia-la quan vulguis, és només un valor inicial):
+```
+v3mxFSUZa9EJDnDyCN6X
+```
+
+**Per canviar-la en el futur**: edita `ADMIN_PASSWORD` a `codigo-apps-script.gs`
+i torna a desplegar (Desplegar → Gestiona desplegaments → editar l'existent →
+Nova versió). No cal tocar res a `admin.html`.
+
+## Correu de contacte
+
+`ruta.silenci@gmail.com` ja està configurat com a:
+- Destinatari de les 4 fotos de certificació (`certificar.html`).
+- El compte de Google amb què hauries de crear el full de càlcul i l'Apps
+  Script, perquè els correus de confirmació (`MailApp.sendEmail`) surtin
+  d'aquesta mateixa adreça.

@@ -198,16 +198,29 @@
     btn.addEventListener("click", ()=> applyStaticText(I18N.setLanguage(btn.getAttribute("data-lang"))));
   });
 
-  // Contraseña simple, cámbiala aquí antes de publicar el sitio.
-  // Este mismo valor se usa como token para marcar verificaciones en Google Sheets:
-  // si lo cambias, cámbialo también en ADMIN_TOKEN dentro de codigo-apps-script.gs.
-  const ADMIN_PASS = "priorat2026";
+  // La contraseña real NO está en este archivo: se comprueba en el servidor
+  // (Apps Script). Solo guardamos aquí, en memoria, la que el admin ha tecleado
+  // y ha sido validada, para poder autenticar las siguientes peticiones (verificar/notificar).
+  let adminPass = null;
   const SESSION_KEY = "travessa_admin_session";
   const LOCAL_KEY = "travessa_priorat_walkers";
 
   // --- Backend real: Google Sheets vía Apps Script (ver INSTRUCCIONES.md). ---
   const SHEETS_API_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
   const SHEETS_CONFIGURED = /^https:\/\/script\.google(usercontent)?\.com\//.test(SHEETS_API_URL);
+
+  async function sheetsLogin(password){
+    if (!SHEETS_CONFIGURED) return { ok:false, error:"backend-not-configured" };
+    try {
+      const res = await fetch(SHEETS_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ action:"login", password })
+      });
+      const data = await res.json();
+      return data || { ok:false };
+    } catch(e){ return { ok:false, error:String(e) }; }
+  }
 
   async function sheetsList(){
     if (!SHEETS_CONFIGURED) return [];
@@ -224,7 +237,7 @@
       const res = await fetch(SHEETS_API_URL, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" }, // evita el preflight CORS
-        body: JSON.stringify({ action:"verify", id, verified, token: ADMIN_PASS })
+        body: JSON.stringify({ action:"verify", id, verified, token: adminPass })
       });
       const data = await res.json();
       return !!(data && data.ok);
@@ -237,7 +250,7 @@
       const res = await fetch(SHEETS_API_URL, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ action:"notify", id, token: ADMIN_PASS })
+        body: JSON.stringify({ action:"notify", id, token: adminPass })
       });
       const data = await res.json();
       return data || { ok:false, error:"sin respuesta" };
@@ -246,7 +259,9 @@
 
   function tryRestoreSession(){
     try {
-      if (sessionStorage.getItem(SESSION_KEY) === "1"){
+      const stored = sessionStorage.getItem(SESSION_KEY);
+      if (stored){
+        adminPass = stored;
         document.getElementById("gate").style.display = "none";
         document.getElementById("panel").classList.add("show");
         loadAndRender();
@@ -254,14 +269,28 @@
     } catch(e){}
   }
 
-  document.getElementById("gate-btn").addEventListener("click", () => {
+  document.getElementById("gate-btn").addEventListener("click", async () => {
+    const btn = document.getElementById("gate-btn");
     const val = document.getElementById("passphrase").value;
-    if (val === ADMIN_PASS){
-      try { sessionStorage.setItem(SESSION_KEY, "1"); } catch(e){}
+    if (!SHEETS_CONFIGURED){
+      document.getElementById("gate-err").textContent = T[currentLang].gate.notConfigured;
+      document.getElementById("gate-err").classList.add("show");
+      return;
+    }
+    btn.disabled = true;
+    const originalLabel = btn.textContent;
+    btn.textContent = T[currentLang].gate.checking;
+    const result = await sheetsLogin(val);
+    btn.disabled = false;
+    btn.textContent = originalLabel;
+    if (result.ok){
+      adminPass = val;
+      try { sessionStorage.setItem(SESSION_KEY, val); } catch(e){}
       document.getElementById("gate").style.display = "none";
       document.getElementById("panel").classList.add("show");
       loadAndRender();
     } else {
+      document.getElementById("gate-err").textContent = T[currentLang].gate.err;
       document.getElementById("gate-err").classList.add("show");
     }
   });

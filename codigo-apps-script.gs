@@ -2,7 +2,7 @@
  * Travessa del Priorat — backend con Google Sheets
  * ================================================
  * Pega este código en el editor de Apps Script de tu Google Sheet
- * (Extensiones → Apps Script), sustituye ADMIN_TOKEN si quieres,
+ * (Extensiones → Apps Script), sustituye ADMIN_PASSWORD si quieres,
  * y despliega como aplicación web (ver instrucciones adjuntas).
  *
  * Crea automáticamente una hoja llamada "Inscripcions" con las columnas:
@@ -17,10 +17,11 @@
 
 const SHEET_NAME = "Inscripcions";
 
-// Mismo espíritu que el ADMIN_PASS de admin.html: no es seguridad real,
-// solo evita que cualquiera que encuentre la URL pueda marcar verificaciones.
-// Cámbialo aquí y también en admin.html (variable ADMIN_PASS) para que coincidan.
-const ADMIN_TOKEN = "priorat2026";
+// Contraseña real del panel de administración. Vive SOLO aquí, en el servidor
+// (Apps Script) — nunca se descarga al navegador, así que no puede verse
+// viendo el código fuente de admin.html. Cámbiala cuando quieras: solo hace
+// falta editar esta línea y volver a desplegar (ver INSTRUCCIONES.md).
+const ADMIN_PASSWORD = "v3mxFSUZa9EJDnDyCN6X";
 
 // --- Plantilla del correo de confirmación. {alias} se sustituye automáticamente. ---
 // Cuando tengas el texto definitivo, sustitúyelo aquí (o pídemelo y te lo actualizo).
@@ -72,12 +73,17 @@ function doPost(e) {
   if (body.action === "add") {
     return jsonOut_(addEntry_(body));
   }
+  if (body.action === "login") {
+    // Pequeña pausa para dificultar intentos automatizados de adivinar la contraseña.
+    Utilities.sleep(300);
+    return jsonOut_({ ok: body.password === ADMIN_PASSWORD });
+  }
   if (body.action === "verify") {
-    if (body.token !== ADMIN_TOKEN) return jsonOut_({ error: "unauthorized" });
+    if (body.token !== ADMIN_PASSWORD) return jsonOut_({ error: "unauthorized" });
     return jsonOut_(setVerified_(body.id, !!body.verified));
   }
   if (body.action === "notify") {
-    if (body.token !== ADMIN_TOKEN) return jsonOut_({ error: "unauthorized" });
+    if (body.token !== ADMIN_PASSWORD) return jsonOut_({ error: "unauthorized" });
     return jsonOut_(notifyWalker_(body.id));
   }
   return jsonOut_({ error: "unknown action" });
