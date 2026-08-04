@@ -463,7 +463,9 @@
       "gate": {
         "placeholder": "Contraseña de administración",
         "btn": "Entrar",
-        "err": "Contraseña incorrecta."
+        "err": "Contraseña incorrecta.",
+        "checking": "Comprobando…",
+        "notConfigured": "Configura primero el backend de Google Sheets (ver INSTRUCCIONES.md)."
       },
       "toolbar": {
         "searchPlaceholder": "Buscar por alias o correo…",
@@ -966,7 +968,9 @@
       "gate": {
         "placeholder": "Contrasenya d'administració",
         "btn": "Entrar",
-        "err": "Contrasenya incorrecta."
+        "err": "Contrasenya incorrecta.",
+        "checking": "Comprovant…",
+        "notConfigured": "Configura primer el backend de Google Sheets (vegeu INSTRUCCIONES.md)."
       },
       "toolbar": {
         "searchPlaceholder": "Cerca per àlies o correu…",
@@ -1469,7 +1473,9 @@
       "gate": {
         "placeholder": "Admin password",
         "btn": "Enter",
-        "err": "Wrong password."
+        "err": "Wrong password.",
+        "checking": "Checking…",
+        "notConfigured": "Set up the Google Sheets backend first (see INSTRUCCIONES.md)."
       },
       "toolbar": {
         "searchPlaceholder": "Search by alias or email…",
