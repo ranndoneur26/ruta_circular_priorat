@@ -174,11 +174,12 @@
     position:relative; width:100%; height:52vh; min-height:320px; max-height:620px;
     overflow:hidden; background:var(--llicorella-2);
   }
-  .photo-reel img{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  .photo-reel picture{
+    position:absolute; inset:0; display:block;
     opacity:0; transition:opacity 1.4s ease;
   }
-  .photo-reel img.active{ opacity:1; }
+  .photo-reel picture.active{ opacity:1; }
+  .photo-reel picture img{ width:100%; height:100%; object-fit:cover; display:block; }
   .photo-reel::after{
     content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
     background:linear-gradient(180deg, rgba(26,23,21,0.10) 0%, rgba(26,23,21,0.15) 55%, rgba(26,23,21,0.65) 100%);
@@ -455,7 +456,7 @@
   @media (prefers-reduced-motion: reduce){
     .reveal.pending{ opacity:1; transform:none; transition:none; }
     html{ scroll-behavior:auto; }
-    .photo-reel img{ transition:none; }
+    .photo-reel picture{ transition:none; }
   }
 
   .skip-link{
@@ -1350,43 +1351,77 @@
     els.forEach(el => io.observe(el));
   }
 
-  // Reel de fotos: 2 paisajes del Priorat (estilo) + 2 detalles de senderismo (botas, roca).
-  // Fuente: Unsplash, licencia libre — no requiere atribución, pero se cita igualmente.
+  // Reel de fotos: 10 imágenes reales del Priorat, cada una con versión desktop (1920×728)
+  // y versión mobile (780×728). El <picture> de cada una elige la fuente según el ancho
+  // de pantalla (punto de corte: 780px, el ancho exacto de las imágenes mobile).
   const REEL_IMAGES = [
-    // Para sustituir por tus propias fotos: cambia solo "url" por la ruta a tu .jpg
-    // (p. ej. "fotos/etapa1-vinyes.jpg" si las subes junto a este index.html),
-    // y "credit" por el autor real, o bórralo si son tuyas (ver initReel() más abajo).
-    { url:"https://images.unsplash.com/photo-1753459056340-fc3f8f5107cd?w=1920&h=1080&fit=crop&q=80&auto=format",
-      altEs:"Viñedos en terrazas bajo un cielo azul", altCa:"Vinyes en terrasses sota un cel blau", altEn:"Terraced vineyards under a blue sky", credit:"Andrea Pasquali / Unsplash" },
-    { url:"https://images.unsplash.com/photo-1658248708933-5e7a5d4737da?w=1920&h=1080&fit=crop&q=80&auto=format",
-      altEs:"Pueblo en lo alto de una colina entre viñedos", altCa:"Poble dalt d'un turó entre vinyes", altEn:"Village atop a hill among vineyards", credit:"Skyler Smith / Unsplash" },
-    { url:"https://images.unsplash.com/photo-1733744237781-6eed02c60b8a?w=1920&h=1080&fit=crop&q=80&auto=format",
-      altEs:"Botas de senderismo sobre un sendero rocoso", altCa:"Botes de senderisme sobre un sender rocós", altEn:"Hiking boots on a rocky trail", credit:"Bare Kind / Unsplash" },
-    { url:"https://images.unsplash.com/photo-1655976795374-6b519928f1e1?w=1920&h=1080&fit=crop&q=80&auto=format",
-      altEs:"Detalle de una bota apoyada sobre roca", altCa:"Detall d'una bota recolzada sobre roca", altEn:"Close-up of a boot resting on rock", credit:"Ajeet Panesar / Unsplash" },
+    { url:"cami%20pluja.jpg", mobileUrl:"cami%20pluja_mobile.jpg",
+      altEs:"Camino de tierra mojado por la lluvia entre las viñas del Priorat — cami pluja",
+      altCa:"Camí de terra molla per la pluja entre les vinyes del Priorat — cami pluja",
+      altEn:"Dirt path wet from rain among Priorat's vineyards — cami pluja" },
+    { url:"cami.jpg", mobileUrl:"cami_mobile.jpg",
+      altEs:"Sendero de tierra entre bancales de viñedo del Priorat — cami",
+      altCa:"Camí de terra entre bancals de vinya del Priorat — cami",
+      altEn:"Dirt trail between Priorat's vineyard terraces — cami" },
+    { url:"contemplacio.jpg", mobileUrl:"contemplacio_mobile.jpg",
+      altEs:"Vista abierta y contemplativa del paisaje mineral del Priorat — contemplacio",
+      altCa:"Vista oberta i contemplativa del paisatge mineral del Priorat — contemplacio",
+      altEn:"Open, contemplative view of Priorat's mineral landscape — contemplacio" },
+    { url:"ermita_ulldemolins.jpg", mobileUrl:"ermita_ulldemolins_mobile.jpg",
+      altEs:"Ermita de Sant Antoni, en Ulldemolins — ermita_ulldemolins",
+      altCa:"Ermita de Sant Antoni, a Ulldemolins — ermita_ulldemolins",
+      altEn:"Ermita de Sant Antoni hermitage, in Ulldemolins — ermita_ulldemolins" },
+    { url:"morera%20del%20montsant.jpg", mobileUrl:"morera%20del%20montsant_mobile.jpg",
+      altEs:"Vista del pueblo de La Morera de Montsant — morera del montsant",
+      altCa:"Vista del poble de la Morera de Montsant — morera del montsant",
+      altEn:"View of the village of La Morera de Montsant — morera del montsant" },
+    { url:"pissarra.jpg", mobileUrl:"pissarra_mobile.jpg",
+      altEs:"Detalle del suelo de llicorella (pizarra) característico del Priorat — pissarra",
+      altCa:"Detall del sòl de llicorella (pissarra) característic del Priorat — pissarra",
+      altEn:"Close-up of Priorat's characteristic llicorella (slate) soil — pissarra" },
+    { url:"riu%20siurana.jpg", mobileUrl:"riu%20siurana_mobile.jpg",
+      altEs:"El río Siurana entre las montañas del Montsant — riu siurana",
+      altCa:"El riu Siurana entre les muntanyes del Montsant — riu siurana",
+      altEn:"The Siurana river running through the Montsant mountains — riu siurana" },
+    { url:"Scala%20Dei.jpg", mobileUrl:"scala_dei_mobile.jpg",
+      altEs:"Ruinas de la Cartoixa d'Escaladei — Scala Dei",
+      altCa:"Ruïnes de la Cartoixa d'Escaladei — Scala Dei",
+      altEn:"Ruins of the Cartoixa d'Escaladei charterhouse — Scala Dei" },
+    { url:"siurana1.jpg", mobileUrl:"Siurana_mobile.jpg",
+      altEs:"El pueblo de Siurana encaramado en el acantilado — siurana1",
+      altCa:"El poble de Siurana enfilat al penya-segat — siurana1",
+      altEn:"The village of Siurana perched on the cliff — siurana1" },
+    { url:"vilella_baixa.jpg", mobileUrl:"Vilella_baixa_mobile.jpg",
+      altEs:"Vistas del pueblo de La Vilella Baixa — vilella_baixa",
+      altCa:"Vistes del poble de la Vilella Baixa — vilella_baixa",
+      altEn:"Views of the village of La Vilella Baixa — vilella_baixa" },
   ];
 
   function initReel(){
     const reel = document.getElementById("photo-reel");
     if (!reel) return;
     reel.innerHTML = REEL_IMAGES.map((img, i) => {
-      return `<img src="${img.url}" alt="${img.altEs}" loading="${i===0?'eager':'lazy'}" class="${i===0?'active':''}" data-idx="${i}">`;
+      return `<picture class="${i===0?'active':''}" data-idx="${i}">
+        <source media="(max-width: 780px)" srcset="${img.mobileUrl}">
+        <img src="${img.url}" alt="${img.altEs}" loading="${i===0?'eager':'lazy'}">
+      </picture>`;
     }).join("") + (REEL_IMAGES.some(i=>i.credit) ? `<div class="credit">${REEL_IMAGES.filter(i=>i.credit).map(i=>i.credit).join(" · ")}</div>` : "");
-    const imgs = reel.querySelectorAll("img");
+    const pics = reel.querySelectorAll("picture");
     let idx = 0;
     setInterval(() => {
-      imgs[idx].classList.remove("active");
-      idx = (idx + 1) % imgs.length;
-      imgs[idx].classList.add("active");
+      pics[idx].classList.remove("active");
+      idx = (idx + 1) % pics.length;
+      pics[idx].classList.add("active");
     }, 4000);
   }
 
   function updateReelAlt(lang){
     const reel = document.getElementById("photo-reel");
     if (!reel) return;
-    reel.querySelectorAll("img").forEach(img => {
-      const data = REEL_IMAGES[Number(img.getAttribute("data-idx"))];
-      if (data) img.alt = lang === "ca" ? data.altCa : lang === "en" ? data.altEn : data.altEs;
+    reel.querySelectorAll("picture").forEach(pic => {
+      const data = REEL_IMAGES[Number(pic.getAttribute("data-idx"))];
+      const img = pic.querySelector("img");
+      if (data && img) img.alt = lang === "ca" ? data.altCa : lang === "en" ? data.altEn : data.altEs;
     });
   }
 

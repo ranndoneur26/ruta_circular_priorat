@@ -78,10 +78,15 @@
   .field input, .field select, .field textarea{
     width:100%; background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami);
     padding:12px 14px; font-family:'Public Sans', sans-serif; font-size:15px;
+    -webkit-appearance:none; appearance:none; border-radius:0;
   }
-  .field select{ appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c69214' stroke-width='1.6' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
+  .field select{ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c69214' stroke-width='1.6' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
   .field textarea{ resize:vertical; min-height:64px; font-family:'Public Sans', sans-serif; }
   .field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color:var(--samfaina); }
+  .field input:-webkit-autofill, .field textarea:-webkit-autofill{
+    -webkit-text-fill-color:var(--pergami); -webkit-box-shadow:0 0 0px 1000px var(--llicorella-2) inset;
+    transition:background-color 5000s ease-in-out 0s;
+  }
   .field .hint{ font-size:12px; color:var(--pergami-dim); opacity:0.75; margin-top:6px; }
   .field .charcount{ font-size:11px; color:var(--pergami-dim); opacity:0.6; margin-top:4px; text-align:right; font-family:'JetBrains Mono', monospace; }
   .field .err{ font-size:12px; color:var(--vinya); margin-top:6px; display:none; }

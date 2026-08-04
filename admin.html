@@ -46,8 +46,9 @@
   .notice strong{ color:var(--pergami); }
 
   #gate{ max-width:360px; }
-  #gate input{ width:100%; background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami); padding:12px 14px; font-family:'Public Sans', sans-serif; font-size:15px; margin-bottom:14px; }
+  #gate input{ width:100%; background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami); padding:12px 14px; font-family:'Public Sans', sans-serif; font-size:15px; margin-bottom:14px; -webkit-appearance:none; appearance:none; border-radius:0; }
   #gate input:focus{ outline:none; border-color:var(--samfaina); }
+  #gate input:-webkit-autofill{ -webkit-text-fill-color:var(--pergami); -webkit-box-shadow:0 0 0px 1000px var(--llicorella-2) inset; transition:background-color 5000s ease-in-out 0s; }
   .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 20px; font-family:'JetBrains Mono', monospace; font-size:12.5px; letter-spacing:0.03em; cursor:pointer; border:1px solid var(--samfaina); background:var(--samfaina); color:var(--llicorella); font-weight:600; }
   .btn:hover{ opacity:0.88; }
   .btn:disabled{ opacity:0.5; cursor:not-allowed; }
@@ -65,11 +66,16 @@
   .search-box{
     background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami);
     padding:8px 12px; font-family:'Public Sans', sans-serif; font-size:13.5px; min-width:220px;
+    -webkit-appearance:none; appearance:none; border-radius:0;
   }
+  .search-box:-webkit-autofill{ -webkit-text-fill-color:var(--pergami); -webkit-box-shadow:0 0 0px 1000px var(--llicorella-2) inset; transition:background-color 5000s ease-in-out 0s; }
   .search-box:focus{ outline:none; border-color:var(--samfaina); }
   .filter-select{
     background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami-dim);
-    padding:8px 10px; font-family:'JetBrains Mono', monospace; font-size:12px;
+    padding:8px 28px 8px 10px; font-family:'JetBrains Mono', monospace; font-size:12px;
+    -webkit-appearance:none; appearance:none; border-radius:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c69214' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 8px center;
   }
   .toolbar-right{ display:flex; gap:8px; }
 
@@ -223,6 +229,19 @@
       const data = await res.json();
       return !!(data && data.ok);
     } catch(e){ return false; }
+  }
+
+  async function sheetsNotify(id){
+    if (!SHEETS_CONFIGURED) return { ok:false, error:"Sheets no configurado" };
+    try {
+      const res = await fetch(SHEETS_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ action:"notify", id, token: ADMIN_PASS })
+      });
+      const data = await res.json();
+      return data || { ok:false, error:"sin respuesta" };
+    } catch(e){ return { ok:false, error:String(e) }; }
   }
 
   function tryRestoreSession(){
@@ -401,7 +420,14 @@
     rows.innerHTML = visible.map((entry, i) => {
       const w = entry.data;
       const verified = !!w.verified;
+      const notified = !!w.notified;
       const t = T[currentLang];
+      let notifyHtml = "";
+      if (verified && entry.source === "sheets"){
+        notifyHtml = notified
+          ? `<span class="badge verified" style="border-color:var(--herba);">${t.action.notified}</span>`
+          : `<button class="mini-btn verify" data-action="notify">${t.action.notify}</button>`;
+      }
       return `<tr data-idx="${i}">
         <td>${escapeHtml(w.alias)}</td>
         <td>${escapeHtml(w.email)}</td>
@@ -414,6 +440,7 @@
             ${verified
               ? `<button class="mini-btn unverify" data-action="unverify">${t.action.unverify}</button>`
               : `<button class="mini-btn verify" data-action="verify">${t.action.verify}</button>`}
+            ${notifyHtml}
             <span class="save-flash">${t.action.saved}</span>
           </div>
         </td>
@@ -429,6 +456,20 @@
 
         if (action === "unverify"){
           openConfirm(entry);
+          return;
+        }
+        if (action === "notify"){
+          btn.disabled = true;
+          btn.textContent = T[currentLang].action.notifying;
+          const result = await sheetsNotify(entry.key);
+          if (result.ok){
+            entry.data.notified = true;
+            render();
+          } else {
+            btn.disabled = false;
+            btn.textContent = T[currentLang].action.notify;
+            alert(T[currentLang].action.notifyError + (result.error ? " (" + result.error + ")" : ""));
+          }
           return;
         }
         await applyVerify(entry, true, btn, tr);

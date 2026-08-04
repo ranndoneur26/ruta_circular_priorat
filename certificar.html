@@ -57,9 +57,10 @@
 
   #gate .field{ margin-bottom:20px; }
   #gate label{ display:block; font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.05em; text-transform:uppercase; color:var(--samfaina); margin-bottom:8px; }
-  #gate input{ width:100%; background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami); padding:12px 14px; font-family:'Public Sans', sans-serif; font-size:15px; }
+  #gate input{ width:100%; background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami); padding:12px 14px; font-family:'Public Sans', sans-serif; font-size:15px; -webkit-appearance:none; appearance:none; border-radius:0; }
   #gate input:focus{ outline:none; border-color:var(--samfaina); }
   #gate input.invalid{ border-color:var(--vinya); }
+  #gate input:-webkit-autofill{ -webkit-text-fill-color:var(--pergami); -webkit-box-shadow:0 0 0px 1000px var(--llicorella-2) inset; transition:background-color 5000s ease-in-out 0s; }
   #gate .gate-err{ display:none; color:var(--vinya); font-size:13px; margin-top:14px; }
   #gate .gate-err.show{ display:block; }
   #gate .gate-lock{ display:none; color:var(--samfaina); font-size:13px; margin-top:14px; font-family:'JetBrains Mono', monospace; }

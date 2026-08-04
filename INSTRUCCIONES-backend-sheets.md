@@ -98,3 +98,30 @@ tall de xarxa — així res es trenca mentre fas el desplegament pas a pas.
   milers al dia), més que suficients per aquest ús, però no il·limitats.
 - **Els correus mai es mostren** a `finalizados.html`, tal com ja prometia el formulari — això
   no ha canviat en passar a Sheets.
+
+## Novetat: correu de confirmació al caminant
+
+Ara `admin.html` pot enviar un correu automàtic al caminant quan marques la seva
+inscripció com a verificada (botó "✉ Enviar confirmación" a cada fila ja verificada).
+Fa servir `MailApp` d'Apps Script — gratuït, sense cap servei extern nou.
+
+**Passos per activar-ho:**
+
+1. Torna a obrir el teu Google Sheet → **Extensions → Apps Script**.
+2. Substitueix TOT el contingut per la versió actualitzada de `codigo-apps-script.gs`
+   (adjunta de nou).
+3. Edita **`EMAIL_SUBJECT`** i **`EMAIL_BODY_`** al principi del fitxer amb el text
+   real que vulguis enviar (ara mateix hi ha un text de mostra).
+4. **Torna a desplegar**: Desplegar → Gestiona desplegaments → icona del llapis ✏️ al
+   desplegament existent → Versió: **Nova versió** → Desplegar.
+   (Important: si crees un desplegament *nou* en lloc d'editar l'existent, la URL
+   canviarà i l'hauràs de tornar a enganxar als 4 fitxers HTML.)
+5. La primera vegada que Apps Script enviï un correu et pot demanar autoritzar
+   permisos addicionals (enviar correu en nom teu) — accepta-ho.
+
+**Límit del pla gratuït**: Gmail/Apps Script permet fins a ~100 correus/dia amb un
+compte personal de Google (més amb Workspace). Més que suficient per aquest ús.
+
+**Comportament**: un cop enviat, la fila mostra "✓ Notificat" i el botó desapareix,
+per evitar enviar el mateix correu dues vegades per error. Si mai necessites reenviar-lo,
+canvia manualment la cel·la `notified` a `FALSE` al full de càlcul.

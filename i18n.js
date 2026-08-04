@@ -490,7 +490,11 @@
       "action": {
         "verify": "Marcar verificado",
         "unverify": "Quitar verificación",
-        "saved": "Guardado ✓"
+        "saved": "Guardado ✓",
+        "notify": "✉ Enviar confirmación",
+        "notifying": "Enviando…",
+        "notified": "✓ Notificado",
+        "notifyError": "No se pudo enviar el correo."
       },
       "count": "{n} inscripciones",
       "empty": "No hay inscripciones que coincidan.",
@@ -989,7 +993,11 @@
       "action": {
         "verify": "Marcar verificat",
         "unverify": "Treure verificació",
-        "saved": "Desat ✓"
+        "saved": "Desat ✓",
+        "notify": "✉ Enviar confirmació",
+        "notifying": "Enviant…",
+        "notified": "✓ Notificat",
+        "notifyError": "No s'ha pogut enviar el correu."
       },
       "count": "{n} inscripcions",
       "empty": "No hi ha inscripcions que coincideixin.",
@@ -1488,7 +1496,11 @@
       "action": {
         "verify": "Mark verified",
         "unverify": "Remove verification",
-        "saved": "Saved ✓"
+        "saved": "Saved ✓",
+        "notify": "✉ Send confirmation",
+        "notifying": "Sending…",
+        "notified": "✓ Notified",
+        "notifyError": "Couldn't send the email."
       },
       "count": "{n} sign-ups",
       "empty": "No sign-ups match.",
