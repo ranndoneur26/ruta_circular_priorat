@@ -94,9 +94,35 @@
   .field.invalid input, .field.invalid select{ border-color:var(--vinya); }
   .field.invalid .err{ display:block; }
 
+  .manifest{
+    margin:36px 0 8px; padding:28px 26px; border:1px solid var(--line); border-left:2px solid var(--samfaina);
+    background:rgba(198,146,20,0.04);
+  }
+  .manifest .eyebrow{ margin-bottom:14px; }
+  .manifest-intro{
+    font-family:'Fraunces', serif; font-style:italic; font-size:16.5px; line-height:1.6;
+    color:var(--pergami); max-width:64ch; margin:0 0 24px;
+  }
+  .manifest-block{ margin-bottom:22px; }
+  .manifest-block h4, .manifest-card h4{
+    font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.03em;
+    text-transform:uppercase; color:var(--samfaina); margin:0 0 8px; font-weight:600;
+  }
+  .manifest-block p, .manifest-card p{ font-size:13.5px; line-height:1.65; color:var(--pergami-dim); margin:0; }
+  .manifest-grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); margin-bottom:22px; }
+  @media (max-width:640px){ .manifest-grid{ grid-template-columns:1fr; } }
+  .manifest-card{ background:var(--llicorella-2); padding:18px 20px; }
+  .manifest-signature{
+    font-family:'Fraunces', serif; font-style:italic; font-size:14px; color:var(--samfaina);
+    text-align:right; margin:0; letter-spacing:0.01em;
+  }
+
   .consent{ display:flex; align-items:flex-start; gap:10px; margin:28px 0 26px; }
   .consent input[type=checkbox]{ margin-top:3px; width:16px; height:16px; accent-color:var(--samfaina); flex-shrink:0; }
   .consent label{ font-size:13px; color:var(--pergami-dim); line-height:1.55; }
+  .consent label .consent-main{ display:block; color:var(--pergami-dim); margin-bottom:10px; }
+  .consent label .consent-legal{ display:block; font-size:12px; color:var(--pergami-dim); opacity:0.8; margin-bottom:8px; }
+  .consent label .consent-legal:last-child{ margin-bottom:0; }
   .consent.invalid label{ color:var(--vinya); }
 
   .btn{ display:inline-flex; align-items:center; gap:8px; padding:13px 26px; font-family:'JetBrains Mono', monospace; font-size:13px; letter-spacing:0.03em; text-decoration:none; cursor:pointer; border:1px solid var(--samfaina); background:var(--samfaina); color:var(--llicorella); font-weight:600; }
@@ -194,9 +220,29 @@
       <div class="charcount"><span id="mensaje-count">0</span>/140</div>
     </div>
 
+    <div class="manifest">
+      <div class="eyebrow" data-i18n="manifest.eyebrow">El código del peregrino</div>
+      <p class="manifest-intro" data-i18n="manifest.intro">Esta aventura no es ninguna carrera contra el cronómetro, sino un viaje para el alma.</p>
+      <div class="manifest-block">
+        <h4 data-i18n="manifest.prep.h">Preparación y libertad de ruta</h4>
+        <p data-i18n="manifest.prep.p"></p>
+      </div>
+      <div class="manifest-grid">
+        <div class="manifest-card">
+          <h4 data-i18n="manifest.full.h">La experiencia completa: 8 días</h4>
+          <p data-i18n="manifest.full.p"></p>
+        </div>
+        <div class="manifest-card">
+          <h4 data-i18n="manifest.short.h">La escapada esencial: 3 días</h4>
+          <p data-i18n="manifest.short.p"></p>
+        </div>
+      </div>
+      <p class="manifest-signature" data-i18n="manifest.signature">El Silencio en ruta. Priorat.</p>
+    </div>
+
     <div class="consent" id="field-consent">
       <input type="checkbox" id="consent" name="consent">
-      <label for="consent" data-i18n="form.consent">Acepto que mi alias, la variante elegida, mi origen y mi mensaje (si los relleno) se muestren públicamente en la lista de caminantes. Mi correo nunca se muestra.</label>
+      <label for="consent" data-i18n-html="form.consent"></label>
     </div>
 
     <button type="submit" class="btn" id="submit-btn" data-i18n="form.submit">Inscribirme</button>
