@@ -67,9 +67,9 @@
         "note": "Las 8 etapas verificadas con GPX real (línea sólida).",
         "popupConn": "Conexión",
         "statusVerified": "Las 8 etapas verificadas con GPX real",
-        "statusShortRoute": "Ruta corta (3 días): propuesta, tramo de cierre Bellmunt–Falset pendiente de GPX",
+        "statusShortRoute": "Ruta corta (3 días): las 3 etapas verificadas con GPX real",
         "legendCorta": "Ruta corta (3 días)",
-        "shortRouteLabel": "Ruta corta (3 días) — tramo Bellmunt–Falset, propuesta sin verificar con GPX todavía"
+        "shortRouteLabel": "Ruta corta (3 días) — tramo Bellmunt–Falset, verificado con GPX real"
       },
       "etapas": {
         "eyebrow": "Trazado propuesto",
@@ -194,7 +194,14 @@
           "p": "Por lo que no hay: apenas infraestructura turística, apenas sombra, apenas ruido. Ocho etapas de llicorella, viento y vacío mineral."
         }
       },
-      "backToTop": "Volver arriba"
+      "backToTop": "Volver arriba",
+      "rutacorta": {
+        "eyebrow": "Alternativa de 3 días",
+        "h2": "Ruta Curta, 3 etapes",
+        "p": "Mismo inicio que el circuito completo — etapas 1 y 2 — pero al llegar a Bellmunt del Priorat, un tercer día cierra el círculo directamente hasta Falset, ya verificado con GPX real.",
+        "day": "Día",
+        "total": "Total de la ruta corta: <strong>{km} km</strong> · +{gain} m / −{loss} m de desnivel acumulado, verificado con GPX real en las 3 etapas."
+      }
     },
     "info": {
       "nav": {
@@ -272,7 +279,7 @@
         "v2": {
           "label": "Ruta corta",
           "h": "3 días",
-          "body": "<p>Etapas 1 y 2: Falset → Marçà → Capçanes → Els Guiamets → El Masroig → El Molar → Bellmunt del Priorat. El tercer día cierra el círculo por un tramo directo Bellmunt–Falset, todavía sin verificar con GPX (lo añadiremos en cuanto lo tengamos).</p>\n     <p>Para volver a Falset sin cerrar a pie: línea local de Transports del Priorat i Domènech (977 831 871).</p>"
+          "body": "<p>Etapas 1 y 2: Falset → Marçà → Capçanes → Els Guiamets → El Masroig → El Molar → Bellmunt del Priorat. El tercer día cierra el círculo por un tramo directo Bellmunt–Falset, ya verificado con GPX real (14,3 km, dificultad moderada) — <a href=\"travessa-priorat.html#ruta-corta\">ver la ficha completa de las 3 etapas</a>.</p>\n     <p>Las tres etapas empiezan y terminan en Falset, así que no hace falta transporte de vuelta.</p>"
         },
         "registro": {
           "h": "Apúntate y certifica tu paso",
@@ -321,7 +328,7 @@
         "varianteErr": "Elige la variante que vas a hacer.",
         "variantePlaceholder": "Elige una variante…",
         "variante1": "Circuito completo · 8 días · ~166,4 km",
-        "variante2": "Ruta corta · 3 días · Falset–Bellmunt–Falset (~45 km, tramo de cierre pendiente de GPX)",
+        "variante2": "Ruta corta · 3 días · Falset–Bellmunt–Falset (~53,6 km, verificado con GPX real)",
         "date": "Día de inicio de la ruta",
         "dateErr": "Elige una fecha.",
         "mensaje": "¿Por qué te atreves con el Priorat?",
@@ -572,9 +579,9 @@
         "note": "Les 8 etapes verificades amb GPX real (línia sòlida).",
         "popupConn": "Connexió",
         "statusVerified": "Les 8 etapes verificades amb GPX real",
-        "statusShortRoute": "Ruta curta (3 dies): proposta, tram de tancament Bellmunt–Falset pendent de GPX",
+        "statusShortRoute": "Ruta curta (3 dies): les 3 etapes verificades amb GPX real",
         "legendCorta": "Ruta curta (3 dies)",
-        "shortRouteLabel": "Ruta curta (3 dies) — tram Bellmunt–Falset, proposta sense verificar amb GPX encara"
+        "shortRouteLabel": "Ruta curta (3 dies) — tram Bellmunt–Falset, verificat amb GPX real"
       },
       "etapas": {
         "eyebrow": "Traçat proposat",
@@ -699,7 +706,14 @@
           "p": "Pel que no hi ha: gairebé infraestructura turística, gairebé ombra, gairebé soroll. Vuit etapes de llicorella, vent i buit mineral."
         }
       },
-      "backToTop": "Tornar amunt"
+      "backToTop": "Tornar amunt",
+      "rutacorta": {
+        "eyebrow": "Alternativa de 3 dies",
+        "h2": "Ruta Curta, 3 etapes",
+        "p": "Mateix inici que el circuit complet — etapes 1 i 2 — però en arribar a Bellmunt del Priorat, un tercer dia tanca el cercle directament fins a Falset, ja verificat amb GPX real.",
+        "day": "Dia",
+        "total": "Total de la ruta curta: <strong>{km} km</strong> · +{gain} m / −{loss} m de desnivell acumulat, verificat amb GPX real a les 3 etapes."
+      }
     },
     "info": {
       "nav": {
@@ -777,7 +791,7 @@
         "v2": {
           "label": "Ruta curta",
           "h": "3 dies",
-          "body": "<p>Etapes 1 i 2: Falset → Marçà → Capçanes → els Guiamets → el Masroig → el Molar → Bellmunt del Priorat. El tercer dia tanca el cercle per un tram directe Bellmunt–Falset, encara sense verificar amb GPX (l'afegirem tan bon punt el tinguem).</p>\n     <p>Per tornar a Falset sense tancar-lo a peu: línia local de Transports del Priorat i Domènech (977 831 871).</p>"
+          "body": "<p>Etapes 1 i 2: Falset → Marçà → Capçanes → els Guiamets → el Masroig → el Molar → Bellmunt del Priorat. El tercer dia tanca el cercle per un tram directe Bellmunt–Falset, ja verificat amb GPX real (14,3 km, dificultat moderada) — <a href=\"travessa-priorat.html#ruta-corta\">veure la fitxa completa de les 3 etapes</a>.</p>\n     <p>Les tres etapes comencen i acaben a Falset, així que no cal transport de tornada.</p>"
         },
         "registro": {
           "h": "Inscriu-te i certifica el teu pas",
@@ -826,7 +840,7 @@
         "varianteErr": "Tria la variant que faràs.",
         "variantePlaceholder": "Tria una variant…",
         "variante1": "Circuit complet · 8 dies · ~166,4 km",
-        "variante2": "Ruta curta · 3 dies · Falset–Bellmunt–Falset (~45 km, tram de tancament pendent de GPX)",
+        "variante2": "Ruta curta · 3 dies · Falset–Bellmunt–Falset (~53,6 km, verificat amb GPX real)",
         "date": "Dia d'inici de la ruta",
         "dateErr": "Tria una data.",
         "mensaje": "Per què t'atreveixes amb el Priorat?",
@@ -1077,9 +1091,9 @@
         "note": "All 8 stages verified with a real GPX track (solid line).",
         "popupConn": "Connection",
         "statusVerified": "All 8 stages verified with real GPX",
-        "statusShortRoute": "Short route (3 days): proposal, Bellmunt–Falset closing leg pending GPX",
+        "statusShortRoute": "Short route (3 days): all 3 stages verified with real GPX",
         "legendCorta": "Short route (3 days)",
-        "shortRouteLabel": "Short route (3 days) — Bellmunt–Falset stretch, a proposal not yet verified with GPX"
+        "shortRouteLabel": "Short route (3 days) — Bellmunt–Falset stretch, verified with real GPX"
       },
       "etapas": {
         "eyebrow": "Proposed route",
@@ -1204,7 +1218,14 @@
           "p": "For what isn't there: almost no tourist infrastructure, almost no shade, almost no noise. Eight stages of llicorella, wind, and mineral emptiness."
         }
       },
-      "backToTop": "Back to top"
+      "backToTop": "Back to top",
+      "rutacorta": {
+        "eyebrow": "3-day alternative",
+        "h2": "Short Route, 3 Stages",
+        "p": "Same start as the full circuit — stages 1 and 2 — but on reaching Bellmunt del Priorat, a third day closes the loop directly back to Falset, now verified with real GPX.",
+        "day": "Day",
+        "total": "Total for the short route: <strong>{km} km</strong> · +{gain} m / −{loss} m of accumulated elevation, verified with real GPX across all 3 stages."
+      }
     },
     "info": {
       "nav": {
@@ -1282,7 +1303,7 @@
         "v2": {
           "label": "Short route",
           "h": "3 days",
-          "body": "<p>Stages 1 and 2: Falset → Marçà → Capçanes → Els Guiamets → El Masroig → El Molar → Bellmunt del Priorat. The third day closes the loop via a direct Bellmunt–Falset stretch, not yet verified with GPX (we'll add it once we have it).</p>\n     <p>To get back to Falset without closing it on foot: local line of Transports del Priorat i Domènech (977 831 871).</p>"
+          "body": "<p>Stages 1 and 2: Falset → Marçà → Capçanes → Els Guiamets → El Masroig → El Molar → Bellmunt del Priorat. The third day closes the loop via a direct Bellmunt–Falset stretch, now verified with real GPX (14.3 km, moderate difficulty) — <a href=\"travessa-priorat.html#ruta-corta\">see the full 3-stage breakdown</a>.</p>\n     <p>All three stages start and end in Falset, so no return transport is needed.</p>"
         },
         "registro": {
           "h": "Sign up and certify your crossing",
@@ -1331,7 +1352,7 @@
         "varianteErr": "Choose the variant you'll do.",
         "variantePlaceholder": "Choose a variant…",
         "variante1": "Full circuit · 8 days · ~166.4 km",
-        "variante2": "Short route · 3 days · Falset–Bellmunt–Falset (~45 km, closing leg pending GPX)",
+        "variante2": "Short route · 3 days · Falset–Bellmunt–Falset (~53.6 km, verified with real GPX)",
         "date": "Route start date",
         "dateErr": "Choose a date.",
         "mensaje": "Why are you daring to do the Priorat?",
