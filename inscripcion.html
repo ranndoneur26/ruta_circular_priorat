@@ -397,6 +397,7 @@
     const entry = {
       alias: data.alias, email: data.email, origen: data.origen || "",
       variante: data.variante, startDate: data.date, mensaje: data.mensaje || "",
+      lang: currentLang,
       submittedAt: new Date().toISOString()
     };
     const saved = await saveEntry(entry);

@@ -150,3 +150,19 @@ Nova versió). No cal tocar res a `admin.html`.
 - El compte de Google amb què hauries de crear el full de càlcul i l'Apps
   Script, perquè els correus de confirmació (`MailApp.sendEmail`) surtin
   d'aquesta mateixa adreça.
+
+## Correu de benvinguda automàtic (nou)
+
+En inscriure's a `inscripcion.html`, el caminant rep ara automàticament un correu de
+benvinguda amb disseny HTML (negretes, destacats, enllaços a la llista de caminants,
+certificació, informació pràctica i guia), **en l'idioma que tenia seleccionat a la web**
+en aquell moment (CA/ES/EN).
+
+- Assumpte: "Benvingut/da a la Ruta del Silenci del Priorat 🌿" (i les seves versions ES/EN).
+- Si l'enviament del correu falla per algun motiu, la inscripció es guarda igualment —
+  mai es bloqueja el registre per un problema de correu.
+- Els enllaços del correu apunten a `https://ruta-circular-priorat.vercel.app/...` — si
+  el domini final és un altre, edita la constant `SITE_BASE` a `codigo-apps-script.gs`.
+
+**Cal tornar a desplegar l'Apps Script** (mateix procés d'abans: Desplegar → Gestiona
+desplegaments → editar l'existent → Nova versió) perquè aquest correu comenci a enviar-se.
