@@ -546,9 +546,16 @@
       <svg width="380" height="380" viewBox="0 0 380 380" role="img" aria-label="Esquema circular de las 8 etapas de la travesía">
         <circle cx="190" cy="190" r="128" fill="none" stroke="var(--line)" stroke-width="1"/>
         <circle cx="190" cy="190" r="128" fill="none" stroke="var(--samfaina)" stroke-width="1.4" stroke-dasharray="2 7" stroke-linecap="round"/>
+        <defs>
+          <clipPath id="falset-clip">
+            <circle cx="190" cy="190" r="104"/>
+          </clipPath>
+        </defs>
+        <image href="Falset.png" x="86" y="86" width="208" height="208" preserveAspectRatio="xMidYMid slice" clip-path="url(#falset-clip)"/>
+        <circle cx="190" cy="190" r="104" fill="none" stroke="var(--llicorella)" stroke-width="2" opacity="0.5"/>
         <g id="nodes"></g>
-        <text x="190" y="182" text-anchor="middle" font-family="Fraunces, serif" font-size="15" fill="var(--pergami)">Falset</text>
-        <text x="190" y="200" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--pergami-dim)" data-i18n="hero.hub">nudo central</text>
+        <text x="190" y="345" text-anchor="middle" font-family="Fraunces, serif" font-size="15" fill="var(--pergami)">Falset</text>
+        <text x="190" y="361" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--pergami-dim)" data-i18n="hero.hub">nudo central</text>
       </svg>
     </div>
   </div>
