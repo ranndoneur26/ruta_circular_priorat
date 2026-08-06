@@ -234,9 +234,14 @@
         headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         body: JSON.stringify(Object.assign({ action: 'add' }, entry))
       });
+      if (!res.ok) {
+        console.error('sheetsAdd HTTP error:', res.status, res.statusText);
+      }
       const data = await res.json();
+      if (!data || !data.ok) console.error('sheetsAdd response error:', data);
       return data && data.ok ? { ok:true, data } : { ok:false, error:(data && data.error) || 'Unknown error' };
     } catch(e) {
+      console.error('sheetsAdd fetch/parse error:', e);
       return { ok:false, error:String(e && e.message ? e.message : e) };
     }
   }
@@ -329,6 +334,7 @@
       form.style.display = 'none';
       successBox.classList.add('show');
     } else {
+      console.error('Fallo inscripción:', result.error);
       errBox.textContent = 'No hemos podido completar la inscripción. Revisa la URL del Apps Script y vuelve a intentarlo.';
       errBox.classList.add('show');
     }
