@@ -38,9 +38,33 @@
   header.top .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:20px; max-width:1120px; }
   .brand{ font-family:'Fraunces', serif; font-size:18px; font-weight:600; white-space:nowrap; text-decoration:none; color:var(--pergami); }
   .brand span{ color:var(--samfaina); }
-  .top-links{ display:flex; gap:22px; font-size:13px; }
-  .top-links a{ text-decoration:none; color:var(--pergami-dim); }
-  .top-links a:hover{ color:var(--pergami); }
+  nav.top-nav{ display:flex; gap:22px; font-size:13px; align-items:center; }
+  nav.top-nav a{ text-decoration:none; color:var(--pergami-dim); }
+  nav.top-nav a:hover{ color:var(--pergami); }
+  .nav-toggle{
+    display:none; flex-direction:column; justify-content:center; align-items:center; gap:5px;
+    background:transparent; border:1px solid var(--line); width:40px; height:36px;
+    padding:0; cursor:pointer; flex-shrink:0;
+  }
+  .nav-toggle .bar{
+    display:block; width:18px; height:1.5px; background:var(--pergami);
+    transition:transform .25s ease, opacity .2s ease;
+  }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(2){ opacity:0; }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+  #mobile-nav{
+    display:none; flex-direction:column; max-height:0; overflow:hidden;
+    transition:max-height .3s ease; background:var(--llicorella-2); border-bottom:1px solid var(--line);
+  }
+  #mobile-nav.open{ max-height:420px; }
+  #mobile-nav a{ display:block; padding:14px 24px; text-decoration:none; color:var(--pergami-dim); border-top:1px solid var(--line); font-size:14px; }
+  #mobile-nav a:first-child{ border-top:none; }
+  @media (max-width:860px){
+    nav.top-nav{ display:none; }
+    .nav-toggle{ display:flex; order:3; }
+    #mobile-nav{ display:flex; }
+  }
   .lang-switch{ display:flex; border:1px solid var(--line); flex-shrink:0; }
   .lang-switch button{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.05em; background:transparent; color:var(--pergami-dim); border:none; padding:5px 9px; cursor:pointer; }
   .lang-switch button + button{ border-left:1px solid var(--line); }
@@ -105,15 +129,22 @@
 <header class="top">
   <div class="wrap">
     <a href="travessa-priorat.html" class="brand">Travessa del <span>Priorat</span></a>
-    <div class="top-links">
+    <nav class="top-nav">
       <a href="travessa-priorat.html" data-i18n="nav.back">← Volver al circuito</a>
       <a href="finalizados.html" data-i18n="nav.list">Ver caminantes</a>
-    </div>
+    </nav>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
     <div class="lang-switch" role="group" aria-label="Idioma / Llengua / Language">
       <button type="button" data-lang="es" aria-pressed="false">ES</button>
       <button type="button" data-lang="ca" aria-pressed="true">CA</button>
       <button type="button" data-lang="en" aria-pressed="false">ENG</button>
     </div>
+  </div>
+  <div id="mobile-nav">
+    <a href="travessa-priorat.html" data-i18n="nav.back">← Volver al circuito</a>
+    <a href="finalizados.html" data-i18n="nav.list">Ver caminantes</a>
   </div>
 </header>
 <div class="phero" id="main-content">
@@ -216,6 +247,21 @@
   document.querySelectorAll('.lang-switch button').forEach(btn => {
     btn.addEventListener('click', () => applyStaticText(I18N.setLanguage(btn.getAttribute('data-lang'))));
   });
+
+  const navToggle = document.getElementById('nav-toggle');
+  const mobileNav = document.getElementById('mobile-nav');
+  if (navToggle && mobileNav){
+    navToggle.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileNav.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
 
   applyStaticText(I18N.setLanguage(I18N.resolveInitialLanguage()));
 
