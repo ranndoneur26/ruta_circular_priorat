@@ -30,11 +30,36 @@
   header.top .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:20px; }
   .brand{ font-family:'Fraunces', serif; font-size:18px; font-weight:600; white-space:nowrap; text-decoration:none; color:var(--pergami); }
   .brand span{ color:var(--samfaina); }
-  .top-links{ display:flex; gap:22px; font-size:13px; align-items:center; flex-wrap:wrap; }
-  .top-links a{ text-decoration:none; color:var(--pergami-dim); }
-  .top-links a:hover{ color:var(--pergami); }
-  .top-links .cta{ border:1px solid var(--samfaina); color:var(--samfaina); padding:5px 12px; font-family:'JetBrains Mono', monospace; font-size:11.5px; letter-spacing:0.03em; }
-  .top-links .cta:hover{ background:var(--samfaina); color:var(--llicorella); }
+  nav.top-nav{ display:flex; gap:22px; font-size:13px; align-items:center; }
+  nav.top-nav a{ text-decoration:none; color:var(--pergami-dim); }
+  nav.top-nav a:hover{ color:var(--pergami); }
+  .nav-cta{ border:1px solid var(--samfaina); color:var(--samfaina) !important; padding:5px 12px; font-family:'JetBrains Mono', monospace; font-size:11.5px !important; letter-spacing:0.03em; }
+  .nav-cta:hover{ background:var(--samfaina); color:var(--llicorella) !important; }
+  .nav-toggle{
+    display:none; flex-direction:column; justify-content:center; align-items:center; gap:5px;
+    background:transparent; border:1px solid var(--line); width:40px; height:36px;
+    padding:0; cursor:pointer; flex-shrink:0;
+  }
+  .nav-toggle .bar{
+    display:block; width:18px; height:1.5px; background:var(--pergami);
+    transition:transform .25s ease, opacity .2s ease;
+  }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(2){ opacity:0; }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+  #mobile-nav{
+    display:none; flex-direction:column; max-height:0; overflow:hidden;
+    transition:max-height .3s ease; background:var(--llicorella-2); border-bottom:1px solid var(--line);
+  }
+  #mobile-nav.open{ max-height:420px; }
+  #mobile-nav a{ display:block; padding:14px 24px; text-decoration:none; color:var(--pergami-dim); border-top:1px solid var(--line); font-size:14px; }
+  #mobile-nav a:first-child{ border-top:none; }
+  #mobile-nav .mnav-cta{ color:var(--samfaina); font-weight:600; }
+  @media (max-width:860px){
+    nav.top-nav{ display:none; }
+    .nav-toggle{ display:flex; order:3; }
+    #mobile-nav{ display:flex; }
+  }
   .lang-switch{ display:flex; border:1px solid var(--line); flex-shrink:0; }
   .lang-switch button{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.05em; background:transparent; color:var(--pergami-dim); border:none; padding:5px 9px; cursor:pointer; }
   .lang-switch button + button{ border-left:1px solid var(--line); }
@@ -107,15 +132,22 @@
 <header class="top">
   <div class="wrap">
     <a href="travessa-priorat.html" class="brand">Travessa del <span>Priorat</span></a>
-    <div class="top-links">
+    <nav class="top-nav">
       <a href="travessa-priorat.html" data-i18n="nav.back">← Volver al circuito</a>
-      <a href="inscripcion.html" class="cta" data-i18n="nav.signup">Inscribirme</a>
-    </div>
+      <a href="inscripcion.html" class="nav-cta" data-i18n="nav.signup">Inscribirme</a>
+    </nav>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
     <div class="lang-switch" role="group" aria-label="Idioma / Llengua / Language">
       <button type="button" data-lang="es" aria-pressed="false">ES</button>
       <button type="button" data-lang="ca" aria-pressed="true">CA</button>
       <button type="button" data-lang="en" aria-pressed="false">ENG</button>
     </div>
+  </div>
+  <div id="mobile-nav">
+    <a href="travessa-priorat.html" data-i18n="nav.back">← Volver al circuito</a>
+    <a href="inscripcion.html" class="mnav-cta" data-i18n="nav.signup">Inscribirme</a>
   </div>
 </header>
 
@@ -176,10 +208,25 @@
     btn.addEventListener("click", ()=> applyStaticText(I18N.setLanguage(btn.getAttribute("data-lang"))));
   });
 
+  const navToggle = document.getElementById("nav-toggle");
+  const mobileNav = document.getElementById("mobile-nav");
+  if (navToggle && mobileNav){
+    navToggle.addEventListener("click", () => {
+      const open = mobileNav.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    mobileNav.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
   // --- Load entries: Google Sheets backend (real, cross-device) as primary source,
   // plus shared window.storage and localStorage as fallback for continuity. ---
   const LOCAL_KEY = "travessa_priorat_walkers";
-  const SHEETS_API_URL = "PASTE_YOUR_APPS_SCRIPT_URL_HERE";
+  const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbzLtjHdGQ8yVZRN7RAA5HRTFZh3AVrd7e4vaAuic5X4zg2fT19gNDqrMic5BIFQ8bRS_w/exec";
   const SHEETS_CONFIGURED = /^https:\/\/script\.google(usercontent)?\.com\//.test(SHEETS_API_URL);
 
   async function sheetsList(){
