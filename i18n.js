@@ -332,7 +332,7 @@
         "date": "Día de inicio de la ruta",
         "dateErr": "Elige una fecha.",
         "mensaje": "¿Por qué te atreves con el Priorat?",
-        "consent": "<span class=\"consent-main\">Acepto que mi alias, la variante elegida, mi origen y mi mensaje (si los relleno) se muestren públicamente en la lista de caminantes. Mi correo nunca se muestra.</span>\n    <span class=\"consent-legal\">He leído y entendido todas las recomendaciones publicadas en esta web y acepto realizar la ruta del silencio bajo mi exclusiva responsabilidad. Declaro que soy consciente de que no se trata de una ruta organizada ni guiada, sino de una propuesta planificada para disfrutarla libremente y de forma autónoma, sin ningún tipo de apoyo, supervisión ni asistencia por parte de los creadores de esta web.</span>\n    <span class=\"consent-legal\">En consecuencia, exonero a los creadores y administradores de este sitio web de cualquier responsabilidad derivada de accidentes, lesiones, pérdidas, daños personales o materiales, o de cualquier otro problema que pueda surgir antes, durante o después de la realización de la ruta. Cada participante es el único responsable de su seguridad, de su estado físico, de su equipo y de las decisiones que tome durante el recorrido.</span>",
+        "consent": "Acepto que mi alias, la variante elegida, mi origen y mi mensaje (si los relleno) se muestren públicamente en la lista de caminantes. Mi correo nunca se muestra.",
         "consentErr": "Marca la casilla para poder inscribirte.",
         "submit": "Inscribirme",
         "submitting": "Guardando…",
@@ -341,6 +341,23 @@
         "emailPlaceholder": "tú@ejemplo.com",
         "origenPlaceholder": "Ciudad o país",
         "mensajePlaceholder": "Una frase corta — se mostrará junto a tu alias"
+      },
+      "manifest": {
+        "eyebrow": "El código del peregrino",
+        "intro": "Esta aventura no es ninguna carrera contra el cronómetro, sino un viaje para el alma.",
+        "prep": {
+          "h": "Preparación y libertad de ruta",
+          "p": "La Travessa no está señalizada ni asistida: cada persona camina bajo su propia responsabilidad, con el equipo, el ritmo y las provisiones que considere necesarias."
+        },
+        "full": {
+          "h": "La experiencia completa: 8 días",
+          "p": "El circuito íntegro de 166,4 km por las 19 villas, viviendo el Priorat a fondo, etapa a etapa, de refugio en refugio."
+        },
+        "short": {
+          "h": "La escapada esencial: 3 días",
+          "p": "La ruta corta de 53,6 km entre Falset y Bellmunt del Priorat, ideal si dispones de menos tiempo pero quieres sentir el silencio de la llicorella."
+        },
+        "signature": "El Silencio en ruta. Priorat."
       },
       "success": {
         "h": "¡Listo!",
@@ -352,23 +369,6 @@
       "meta": {
         "title": "Inscripción · Travessa del Priorat",
         "description": "Apúntate a la Travessa del Priorat: la Ruta del Priorat a pie, la ruta de los eremitas, la ruta del silencio. 166 km, 8 etapas, 19 pueblos."
-      },
-      "manifest": {
-        "eyebrow": "El código del peregrino",
-        "intro": "Esta aventura no es ninguna carrera contra el cronómetro, sino un viaje para el alma. Te invitamos a disfrutar de una travesía introspectiva, paso a paso, por parajes solitarios, agrestes y profundamente auténticos; paisajes antaño dominados por monjes y ermitaños que supieron preservar toda su esencia mágica. Para disfrutar plenamente de la «Ruta del Silencio» y fluir con el entorno, solo te pedimos que sigas unas pequeñas normas de orden, convivencia y sentido común, tal como hacían los antiguos habitantes de estas tierras.",
-        "prep": {
-          "h": "Preparación y libertad de ruta",
-          "p": "Antes de dar el primer paso, es fundamental que leas la información práctica de nuestra web y la Guía Práctica del Peregrino. Recuerda que tú eres el dueño de tu viaje: las etapas están planificadas con un kilometraje recomendado, pero tienes total libertad para adaptarlo a tu ritmo de marcha. Si te apetece parar a pasar la noche en un pueblo que no estaba marcado como final de etapa, ¡adelante! Eso sí, te aconsejamos buscar y reservar tus alojamientos con antelación. En nuestra web encontrarás algunas recomendaciones, pero te animamos a hacer tu propia búsqueda para diseñar la aventura a tu medida."
-        },
-        "full": {
-          "h": "La experiencia completa: 8 días",
-          "p": "Si quieres vivir la inmersión total, esta es tu opción. Tendrás 8 días para completar todo el recorrido a pie. Puedes moldear las jornadas como quieras, con dos únicas reglas innegociables: cumplir con los días establecidos y respetar siempre el sentido original de la ruta. Además, esta modalidad tiene un pequeño reto añadido: deberás hacer 4 fotografías específicas durante el trayecto. Cuando llegues a la meta en Falset, envíalas por correo a nuestro centro de verificación. ¡Estas imágenes serán tu pasaporte para recibir un obsequio exclusivo que acreditará que has conquistado la Ruta del Silencio del Priorat!"
-        },
-        "short": {
-          "h": "La escapada esencial: 3 días",
-          "p": "¿Dispones de menos tiempo pero necesitas desconectar? La ruta corta es una variante perfecta de 3 días pensada para quienes quieren dedicarse un tiempo a sí mismos sin prisas. Igual que en la versión larga, puedes adaptar las distancias a tus necesidades, pero aquí la libertad es absoluta: puedes caminarla en el sentido que prefieras y no hace falta preocuparte por hacer fotos en lugares concretos. Aunque esta opción no incluye el obsequio final de verificación, te garantizará una experiencia igualmente inolvidable y te permitirá disfrutar de toda la paz del entorno a cada paso."
-        },
-        "signature": "El Silencio en ruta. Priorat."
       }
     },
     "certificar": {
@@ -861,7 +861,7 @@
         "date": "Dia d'inici de la ruta",
         "dateErr": "Tria una data.",
         "mensaje": "Per què t'atreveixes amb el Priorat?",
-        "consent": "<span class=\"consent-main\">Accepto que el meu àlies, la variant escollida, el meu origen i el meu missatge (si els emplo) es mostrin públicament a la llista de caminants. El meu correu mai es mostra.</span>\n    <span class=\"consent-legal\">He llegit i entès totes les recomanacions publicades a aquesta web i accepto realitzar la ruta del silenci sota la meva exclusiva responsabilitat. Declaro que sóc conscient que no es tracta d'una ruta organitzada ni guiada, sinó d'una proposta planificada per gaudir-la lliurement i de manera autònoma, sense cap tipus de suport, supervisió ni assistència per part dels creadors d'aquesta web.</span>\n    <span class=\"consent-legal\">En conseqüència, eximeixo els creadors i administradors d'aquest lloc web de qualsevol responsabilitat derivada d'accidents, lesions, pèrdues, danys personals o materials, o de qualsevol altre problema que pugui sorgir abans, durant o després de la realització de la ruta. Cada participant és l'únic responsable de la seva seguretat, del seu estat físic, del seu equipament i de les decisions que prengui durant el recorregut.</span>",
+        "consent": "Accepto que el meu àlies, la variant escollida, el meu origen i el meu missatge (si els emplo) es mostrin públicament a la llista de caminants. El meu correu mai es mostra.",
         "consentErr": "Marca la casella per poder inscriure't.",
         "submit": "Inscriure'm",
         "submitting": "Desant…",
@@ -870,6 +870,23 @@
         "emailPlaceholder": "tu@exemple.com",
         "origenPlaceholder": "Ciutat o país",
         "mensajePlaceholder": "Una frase curta — es mostrarà al costat del teu àlies"
+      },
+      "manifest": {
+        "eyebrow": "El codi del pelegrí",
+        "intro": "Aquesta aventura no és cap carrera contra el cronòmetre, sinó un viatge per a l'ànima.",
+        "prep": {
+          "h": "Preparació i llibertat de ruta",
+          "p": "La Travessa no està senyalitzada ni assistida: cada persona camina sota la seva pròpia responsabilitat, amb l'equip, el ritme i les provisions que consideri necessàries."
+        },
+        "full": {
+          "h": "L'experiència completa: 8 dies",
+          "p": "El circuit íntegre de 166,4 km per les 19 viles, vivint el Priorat a fons, etapa a etapa, de refugi en refugi."
+        },
+        "short": {
+          "h": "L'escapada essencial: 3 dies",
+          "p": "La ruta curta de 53,6 km entre Falset i Bellmunt del Priorat, ideal si disposes de menys temps però vols sentir el silenci de la llicorella."
+        },
+        "signature": "El Silenci en ruta. Priorat."
       },
       "success": {
         "h": "Fet!",
@@ -881,23 +898,6 @@
       "meta": {
         "title": "Inscripció · Travessa del Priorat",
         "description": "Inscriu-te a la Travessa del Priorat: la Ruta del Priorat a peu, la ruta dels eremites, la ruta del silenci. 166 km, 8 etapes, 19 pobles."
-      },
-      "manifest": {
-        "eyebrow": "El codi del pelegrí",
-        "intro": "Aquesta aventura no és cap cursa contra el cronòmetre, sinó un viatge per a l'ànima. Et convidem a gaudir d'una travessa introspectiva, pas a pas, per paratges solitaris, feréstecs i profundament autèntics; paisatges dominats antigament per monjos i ermitans que n'han sabut preservar tota l'essència màgica. Per gaudir plenament de la «Ruta del Silenci» i fluir amb l'entorn, només et demanem que segueixis unes petites normes d'ordre, convivència i sentit comú, tal com feien els antics estadants d'aquestes terres.",
-        "prep": {
-          "h": "Preparació i llibertat de ruta",
-          "p": "Abans de fer el primer pas, és fonamental que llegeixis la informació pràctica de la nostra web i la Guia Pràctica del Pelegrí. Recorda que tu ets l'amo del teu viatge: les etapes estan planificades amb un quilometratge recomanat, però tens total llibertat per adaptar-lo al teu ritme de caminada. Si et ve de gust aturar-te a fer nit en un poblet que no estava marcat com a final d'etapa, endavant! Això sí, t'aconsellem buscar i reservar els teus allotjaments amb antelació. A la nostra web hi trobaràs algunes recomanacions, però t'animem a fer la teva pròpia recerca per dissenyar l'aventura a la teva mida."
-        },
-        "full": {
-          "h": "L'experiència completa: 8 dies",
-          "p": "Si vols viure la immersió total, aquesta és la teva opció. Tindràs 8 dies per completar tot el recorregut a peu. Pots modelar les jornades com vulguis, amb dues úniques regles innegociables: complir amb els dies establerts i respectar sempre el sentit original de la ruta. A més, aquesta modalitat té un petit repte afegit: hauràs de fer 4 fotografies específiques durant el trajecte. Quan arribis a la meta a Falset, envia-les per correu al nostre centre de verificació. Aquestes imatges seran el teu passaport per rebre un obsequi exclusiu que acreditarà que has conquerit la Ruta del Silenci del Priorat!"
-        },
-        "short": {
-          "h": "L'escapada essencial: 3 dies",
-          "p": "Disposes de menys temps però necessites desconnectar? La ruta curta és una variant perfecta de 3 dies pensada per als que volen dedicar-se un temps per a ells mateixos sense presses. Igual que en la versió llarga, pots adaptar les distàncies a les teves necessitats, però aquí la llibertat és absoluta: pots caminar-la en el sentit que prefereixis i no cal patir per fer fotos a llocs concrets. Tot i que aquesta opció no inclou l'obsequi final de verificació, et garantirà una experiència igualment inoblidable i et permetrà gaudir de tota la pau de l'entorn a cada passa."
-        },
-        "signature": "El Silenci en ruta. Priorat."
       }
     },
     "certificar": {
@@ -1390,7 +1390,7 @@
         "date": "Route start date",
         "dateErr": "Choose a date.",
         "mensaje": "Why are you daring to do the Priorat?",
-        "consent": "<span class=\"consent-main\">I agree that my alias, chosen route variant, origin, and message (if provided) will be shown publicly on the list of walkers. My email is never shown.</span>\n    <span class=\"consent-legal\">I have read and understood all the recommendations published on this website and agree to undertake the Route of Silence under my own exclusive responsibility. I declare that I am aware this is not an organized or guided route, but a proposal designed to be enjoyed freely and autonomously, without any support, supervision, or assistance from the creators of this website.</span>\n    <span class=\"consent-legal\">Accordingly, I release the creators and administrators of this website from any liability arising from accidents, injuries, losses, personal or material damage, or any other problem that may arise before, during, or after undertaking the route. Each participant is solely responsible for their own safety, physical condition, equipment, and the decisions they make during the journey.</span>",
+        "consent": "I agree that my alias, chosen variant, origin and message (if filled in) will be shown publicly on the list of walkers. My email is never shown.",
         "consentErr": "Check the box to sign up.",
         "submit": "Sign me up",
         "submitting": "Saving…",
@@ -1399,6 +1399,23 @@
         "emailPlaceholder": "you@example.com",
         "origenPlaceholder": "City or country",
         "mensajePlaceholder": "A short line — shown next to your alias"
+      },
+      "manifest": {
+        "eyebrow": "The pilgrim's code",
+        "intro": "This adventure is no race against the clock, but a journey for the soul.",
+        "prep": {
+          "h": "Preparation and route freedom",
+          "p": "The Travessa isn't waymarked or assisted: each person walks under their own responsibility, with the gear, pace and supplies they see fit."
+        },
+        "full": {
+          "h": "The full experience: 8 days",
+          "p": "The complete 166.4 km circuit through the 19 villages, living the Priorat in depth, stage by stage, shelter by shelter."
+        },
+        "short": {
+          "h": "The essential getaway: 3 days",
+          "p": "The 53.6 km short route between Falset and Bellmunt del Priorat, ideal if you have less time but still want to feel the silence of the llicorella."
+        },
+        "signature": "The Silence on the trail. Priorat."
       },
       "success": {
         "h": "Done!",
@@ -1410,23 +1427,6 @@
       "meta": {
         "title": "Sign up · Travessa del Priorat",
         "description": "Sign up for the Travessa del Priorat: the Priorat Walking Route, the hermits' route, the route of silence. 166 km, 8 stages, 19 villages."
-      },
-      "manifest": {
-        "eyebrow": "The pilgrim's code",
-        "intro": "This adventure isn't a race against the clock, but a journey for the soul. We invite you to enjoy an introspective crossing, step by step, through solitary, wild, and profoundly authentic places; landscapes once ruled by monks and hermits who knew how to preserve all their magical essence. To fully enjoy the «Route of Silence» and flow with your surroundings, we only ask that you follow a few small rules of order, coexistence, and common sense, just as the ancient inhabitants of these lands once did.",
-        "prep": {
-          "h": "Preparation and freedom of the road",
-          "p": "Before taking your first step, it's essential that you read the practical information on our website and the Pilgrim's Practical Guide. Remember: you're the owner of your journey. The stages are planned with a recommended distance, but you have complete freedom to adapt it to your own walking pace. If you feel like stopping for the night in a village that wasn't marked as the end of a stage, go for it! That said, we recommend finding and booking your accommodation in advance. Our website lists a few recommendations, but we encourage you to do your own research to design the adventure that fits you."
-        },
-        "full": {
-          "h": "The full experience: 8 days",
-          "p": "If you want total immersion, this is your option. You'll have 8 days to complete the whole route on foot. You can shape the days however you like, with only two non-negotiable rules: stick to the number of days set and always respect the route's original direction. This option also comes with a small extra challenge: you'll need to take 4 specific photographs along the way. Once you reach the finish line in Falset, send them by email to our verification address. These photos are your passport to an exclusive gift that proves you've conquered Priorat's Route of Silence!"
-        },
-        "short": {
-          "h": "The essential escape: 3 days",
-          "p": "Short on time but need to disconnect? The short route is a perfect 3-day variant for anyone who wants to give themselves some unhurried time. Just like the long version, you can adapt the distances to your needs, but here the freedom is absolute: you can walk it in whichever direction you prefer, and there's no need to worry about photographing specific spots. While this option doesn't include the final verification gift, it guarantees an equally unforgettable experience and lets you enjoy all the surrounding peace with every step."
-        },
-        "signature": "Silence on the road. Priorat."
       }
     },
     "certificar": {
