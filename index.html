@@ -1447,6 +1447,13 @@
       entries.forEach(e => { if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
     }, { threshold: 0, rootMargin: "0px 0px -10% 0px" });
     els.forEach(el => io.observe(el));
+    // Red de seguridad: si por cualquier motivo el IntersectionObserver no llega a
+    // disparar en algún dispositivo/navegador concreto, el contenido se hace visible
+    // igualmente pasado un momento, para que nunca quede invisible de forma permanente.
+    setTimeout(() => {
+      els.forEach(el => el.classList.add("in"));
+      io.disconnect();
+    }, 2500);
   }
 
   // Reel de fotos: 10 imágenes reales del Priorat, cada una con versión desktop (1920×728)
