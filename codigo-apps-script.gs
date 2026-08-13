@@ -41,8 +41,35 @@ function doPost(e) {
   }
 }
 
-function doGet() {
+function doGet(e) {
+  const action = e && e.parameter ? e.parameter.action : null;
+  if (action === 'list') {
+    return jsonResponse(listInscripciones_());
+  }
   return jsonResponse({ ok: true, service: 'travessa-priorat-inscripcions' });
+}
+
+function listInscripciones_() {
+  const sheet = getSheet_();
+  const values = sheet.getDataRange().getValues();
+  const rows = [];
+  // Columnas: submittedAt, alias, email, origen, variante, startDate, mensaje, lang, pageUrl, userAgent
+  for (let i = 1; i < values.length; i++) {
+    const r = values[i];
+    const alias = String(r[1] || '').trim();
+    const email = String(r[2] || '').trim();
+    if (!alias || !email) continue;
+    rows.push({
+      id: 'row-' + (i + 1),
+      alias: alias,
+      email: email,
+      origen: r[3] || '',
+      variante: r[4] || '',
+      startDate: r[5] || '',
+      lang: r[7] || 'es'
+    });
+  }
+  return rows;
 }
 
 function getSheet_() {
