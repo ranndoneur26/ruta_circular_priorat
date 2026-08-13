@@ -5,37 +5,107 @@ const ALLOWED_ORIGINS = [
   'http://127.0.0.1:5500'
 ];
 
+// Contraseña simple del panel admin. CÁMBIALA por la tuya.
+// No es seguridad real (así lo advierte también admin.html): solo evita que
+// un visitante casual verifique o notifique inscripciones por error.
+const ADMIN_PASSWORD = 'CAMBIA_ESTA_CONTRASEÑA';
+
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents || '{}');
-    if (data.action !== 'add') return jsonResponse({ ok: false, error: 'Invalid action' });
-
-    if (!isValidSubmission(data)) {
-      return jsonResponse({ ok: false, error: 'Validation failed' });
+    switch (data.action) {
+      case 'add':    return handleAdd_(data);
+      case 'login':  return handleLogin_(data);
+      case 'verify': return handleVerify_(data);
+      case 'notify': return handleNotify_(data);
+      default:       return jsonResponse({ ok: false, error: 'Invalid action' });
     }
+  } catch (err) {
+    return jsonResponse({ ok: false, error: String(err && err.message ? err.message : err) });
+  }
+}
 
-    const sheet = getSheet_();
-    const submittedAt = new Date();
-    sheet.appendRow([
-      submittedAt,
-      data.alias || '',
-      data.email || '',
-      data.origen || '',
-      data.variante || '',
-      data.startDate || '',
-      data.mensaje || '',
-      data.lang || 'es',
-      data.pageUrl || '',
-      data.userAgent || ''
-    ]);
+function handleAdd_(data) {
+  if (!isValidSubmission(data)) {
+    return jsonResponse({ ok: false, error: 'Validation failed' });
+  }
+  const sheet = getSheet_();
+  const header = ensureColumns_(sheet);
+  const idx = headerIndex_(header);
+  const row = new Array(header.length).fill('');
+  row[idx.submittedAt] = new Date();
+  row[idx.alias] = data.alias || '';
+  row[idx.email] = data.email || '';
+  row[idx.origen] = data.origen || '';
+  row[idx.variante] = data.variante || '';
+  row[idx.startDate] = data.startDate || '';
+  row[idx.mensaje] = data.mensaje || '';
+  row[idx.lang] = data.lang || 'es';
+  row[idx.pageUrl] = data.pageUrl || '';
+  row[idx.userAgent] = data.userAgent || '';
+  row[idx.verified] = false;
+  row[idx.notified] = false;
+  sheet.appendRow(row);
 
-    const mailResult = sendThankYouEmail_(data);
+  const mailResult = sendThankYouEmail_(data);
 
-    return jsonResponse({
-      ok: true,
-      emailSent: !!mailResult.sent,
-      messageId: mailResult.messageId || null
-    });
+  return jsonResponse({
+    ok: true,
+    emailSent: !!mailResult.sent,
+    messageId: mailResult.messageId || null
+  });
+}
+
+function checkAuth_(token) {
+  return typeof token === 'string' && token.length > 0 && token === ADMIN_PASSWORD;
+}
+
+function handleLogin_(data) {
+  if (checkAuth_(data.password)) return jsonResponse({ ok: true });
+  return jsonResponse({ ok: false, error: 'Contraseña incorrecta' });
+}
+
+function rowNumberFromId_(id) {
+  const m = /^row-(\d+)$/.exec(String(id || ''));
+  return m ? Number(m[1]) : null;
+}
+
+function handleVerify_(data) {
+  if (!checkAuth_(data.token)) return jsonResponse({ ok: false, error: 'No autorizado' });
+  const rowNum = rowNumberFromId_(data.id);
+  if (!rowNum) return jsonResponse({ ok: false, error: 'ID inválido' });
+
+  const sheet = getSheet_();
+  const header = ensureColumns_(sheet);
+  const idx = headerIndex_(header);
+  if (rowNum < 2 || rowNum > sheet.getLastRow()) {
+    return jsonResponse({ ok: false, error: 'Fila fuera de rango' });
+  }
+  sheet.getRange(rowNum, idx.verified + 1).setValue(!!data.verified);
+  return jsonResponse({ ok: true });
+}
+
+function handleNotify_(data) {
+  if (!checkAuth_(data.token)) return jsonResponse({ ok: false, error: 'No autorizado' });
+  const rowNum = rowNumberFromId_(data.id);
+  if (!rowNum) return jsonResponse({ ok: false, error: 'ID inválido' });
+
+  const sheet = getSheet_();
+  const header = ensureColumns_(sheet);
+  const idx = headerIndex_(header);
+  if (rowNum < 2 || rowNum > sheet.getLastRow()) {
+    return jsonResponse({ ok: false, error: 'Fila fuera de rango' });
+  }
+  const rowValues = sheet.getRange(rowNum, 1, 1, header.length).getValues()[0];
+  const alias = String(rowValues[idx.alias] || '').trim();
+  const email = String(rowValues[idx.email] || '').trim();
+  const lang = String(rowValues[idx.lang] || 'es').toLowerCase();
+  if (!email) return jsonResponse({ ok: false, error: 'Esa fila no tiene correo' });
+
+  try {
+    sendVerifiedEmail_(alias, email, lang);
+    sheet.getRange(rowNum, idx.notified + 1).setValue(true);
+    return jsonResponse({ ok: true });
   } catch (err) {
     return jsonResponse({ ok: false, error: String(err && err.message ? err.message : err) });
   }
@@ -49,24 +119,37 @@ function doGet(e) {
   return jsonResponse({ ok: true, service: 'travessa-priorat-inscripcions' });
 }
 
+function headerIndex_(header) {
+  const idx = {};
+  header.forEach((h, i) => { idx[h] = i; });
+  return idx;
+}
+
+function toBool_(v) {
+  return v === true || v === 'true' || v === 'TRUE' || v === 1;
+}
+
 function listInscripciones_() {
   const sheet = getSheet_();
+  const header = ensureColumns_(sheet);
+  const idx = headerIndex_(header);
   const values = sheet.getDataRange().getValues();
   const rows = [];
-  // Columnas: submittedAt, alias, email, origen, variante, startDate, mensaje, lang, pageUrl, userAgent
   for (let i = 1; i < values.length; i++) {
     const r = values[i];
-    const alias = String(r[1] || '').trim();
-    const email = String(r[2] || '').trim();
+    const alias = String(r[idx.alias] || '').trim();
+    const email = String(r[idx.email] || '').trim();
     if (!alias || !email) continue;
     rows.push({
       id: 'row-' + (i + 1),
       alias: alias,
       email: email,
-      origen: r[3] || '',
-      variante: r[4] || '',
-      startDate: r[5] || '',
-      lang: r[7] || 'es'
+      origen: r[idx.origen] || '',
+      variante: r[idx.variante] || '',
+      startDate: r[idx.startDate] || '',
+      lang: r[idx.lang] || 'es',
+      verified: toBool_(r[idx.verified]),
+      notified: toBool_(r[idx.notified])
     });
   }
   return rows;
@@ -87,10 +170,26 @@ function getSheet_() {
       'mensaje',
       'lang',
       'pageUrl',
-      'userAgent'
+      'userAgent',
+      'verified',
+      'notified'
     ]);
   }
   return sheet;
+}
+
+// Añade las columnas 'verified' y 'notified' si el sheet es de antes de este cambio.
+// Las filas ya existentes quedan con esas celdas vacías (= no verificado, no notificado).
+function ensureColumns_(sheet) {
+  const lastCol = sheet.getLastColumn();
+  let header = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+  ['verified', 'notified'].forEach(col => {
+    if (header.indexOf(col) === -1) {
+      sheet.getRange(1, header.length + 1).setValue(col);
+      header = header.concat([col]);
+    }
+  });
+  return header;
 }
 
 function isValidSubmission(data) {
@@ -103,6 +202,47 @@ function isValidSubmission(data) {
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const lang = ['es', 'ca', 'en'].indexOf(String(data.lang || '').toLowerCase()) !== -1;
   return alias.length >= 2 && alias.length <= 30 && emailOk && !!origen && !!variante && !!startDate && consent && lang;
+}
+
+function sendVerifiedEmail_(alias, email, lang) {
+  const safeAlias = escapeHtml_(alias || '');
+  const walkersUrl = 'https://ruta-circular-priorat.vercel.app/finalizados.html';
+  const templates = {
+    es: {
+      subject: '¡Tu Travessa del Priorat está verificada!',
+      html: `<div style="font-family:Arial,sans-serif;line-height:1.6;color:#28251d;max-width:640px;margin:0 auto;padding:24px;">
+        <h2 style="margin:0 0 16px;color:#7a1f2b;">¡Enhorabuena, ${safeAlias}!</h2>
+        <p>Hemos revisado tus 4 fotografías y confirmamos que has completado la Travessa del Priorat. Tu alias ya aparece marcado como <strong>verificado</strong> en la lista de caminantes.</p>
+        <p><a href="${walkersUrl}">→ Ver la lista de caminantes</a></p>
+        <p style="margin-top:28px;">Gracias por recorrer la Ruta del Silencio,<br>Travessa del Priorat</p>
+      </div>`
+    },
+    ca: {
+      subject: 'La teva Travessa del Priorat ja està verificada!',
+      html: `<div style="font-family:Arial,sans-serif;line-height:1.6;color:#28251d;max-width:640px;margin:0 auto;padding:24px;">
+        <h2 style="margin:0 0 16px;color:#7a1f2b;">Enhorabona, ${safeAlias}!</h2>
+        <p>Hem revisat les teves 4 fotografies i confirmem que has completat la Travessa del Priorat. El teu alias ja apareix marcat com a <strong>verificat</strong> a la llista de caminants.</p>
+        <p><a href="${walkersUrl}">→ Veure la llista de caminants</a></p>
+        <p style="margin-top:28px;">Gràcies per recórrer la Ruta del Silenci,<br>Travessa del Priorat</p>
+      </div>`
+    },
+    en: {
+      subject: 'Your Travessa del Priorat is verified!',
+      html: `<div style="font-family:Arial,sans-serif;line-height:1.6;color:#28251d;max-width:640px;margin:0 auto;padding:24px;">
+        <h2 style="margin:0 0 16px;color:#7a1f2b;">Congratulations, ${safeAlias}!</h2>
+        <p>We've reviewed your 4 photos and confirmed you completed the Travessa del Priorat. Your alias is now marked as <strong>verified</strong> on the walkers list.</p>
+        <p><a href="${walkersUrl}">→ View the walkers list</a></p>
+        <p style="margin-top:28px;">Thanks for walking the Route of Silence,<br>Travessa del Priorat</p>
+      </div>`
+    }
+  };
+  const chosen = templates[lang] || templates.es;
+  MailApp.sendEmail({
+    to: email,
+    subject: chosen.subject,
+    htmlBody: chosen.html,
+    name: 'Travessa del Priorat'
+  });
 }
 
 function sendThankYouEmail_(data) {
