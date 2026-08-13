@@ -407,6 +407,7 @@
   const MAX_DIM = 1920;
   const JPEG_QUALITY = 0.82;
   const fileState = {1:null, 2:null, 3:null, 4:null};
+  const FOTO_NAMES = {1:"foto_bellmunt", 2:"foto_cornudella", 3:"foto_escaladei", 4:"foto_falset"};
 
   function humanSize(bytes){
     if (bytes < 1024) return bytes + " B";
@@ -492,11 +493,12 @@
     try {
       const compressed = await compressImage(file);
       fileState[i] = compressed;
-      setInputFile(document.getElementById("foto"+i), compressed);
       renderDropzone(i, compressed, originalSize, false);
+      setInputFile(document.getElementById("foto"+i), compressed);
     } catch(err){
       fileState[i] = file;
       renderDropzone(i, file, null, false);
+      setInputFile(document.getElementById("foto"+i), file);
     }
     updateProgress();
   }
@@ -510,7 +512,7 @@
       ? `<span class="fsize compressing" id="info-${i}">${T[currentLang].cp.compressing}</span>`
       : `<span class="fsize" id="info-${i}" data-state="ready" data-size="${file.size}">✓ ${humanSize(file.size)}${pctSaved>0 ? " (−" + pctSaved + "%)" : ""} · ${T[currentLang].cp.ready}</span>`;
     dz.innerHTML = `
-      <input type="file" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;">
+      <input type="file" name="${FOTO_NAMES[i]}" id="foto${i}" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;">
       <div class="preview-wrap">
         <img src="${url}" alt="">
         <div class="preview-info">
@@ -534,7 +536,7 @@
     const dz = document.getElementById("dz-"+i);
     dz.classList.remove("has-preview");
     dz.innerHTML = `
-      <input type="file" name="foto_${i}" id="foto${i}" accept="image/*" required>
+      <input type="file" name="${FOTO_NAMES[i]}" id="foto${i}" accept="image/*" required>
       <span class="dz-icon">📷</span>
       <span class="dz-text"><span class="hl">${T[currentLang].cp.dzHl}</span> ${T[currentLang].cp.dzOr}</span>
     `;
