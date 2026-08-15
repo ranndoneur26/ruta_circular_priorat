@@ -170,6 +170,13 @@
 
   .patr-intro{ font-size:14.5px; color:var(--pergami-dim); max-width:72ch; margin:0 0 30px; }
   .patr-intro strong{ color:var(--pergami); }
+  .anacoretes-box{
+    background:var(--llicorella-2); border-left:2px solid var(--samfaina);
+    padding:16px 20px; max-width:72ch; margin:0 0 30px; font-size:13.5px; color:var(--pergami-dim);
+  }
+  .anacoretes-box strong{ color:var(--pergami); }
+  .anacoretes-box a{ color:var(--samfaina); text-decoration:none; border-bottom:1px dotted var(--samfaina); }
+  .anacoretes-box a:hover{ opacity:0.85; }
   .cluster{ margin-bottom:36px; }
   .cluster-head{ display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:6px; }
   .cluster-head h3{ font-size:19px; }
@@ -300,6 +307,7 @@
     </div>
 
     <p class="patr-intro" data-i18n-html="patrimonio.intro"></p>
+    <div class="anacoretes-box" id="anacoretes-box"></div>
 
     <div class="card">
       <h3 data-i18n="patrimonio.escaladei.h">Cartoixa d'Escaladei <span class="badge" data-i18n="patrimonio.badge.monasterio">Monasterio · s. XII</span></h3>
@@ -490,9 +498,9 @@
           traitEn:"Former episcopal rest house, now in ruins." },
         { name:"Sant Joan de Codolar", muni:"Cornudella de Montsant",
           centuryEs:"Finales s. XV", centuryCa:"Finals s. XV", centuryEn:"Late 15th c.",
-          traitEs:"Ermita todavía habitada hoy por una ermitaña.",
-          traitCa:"Ermita encara habitada avui per una ermitana.",
-          traitEn:"Hermitage still inhabited today by a hermit woman." },
+          traitEs:"Ermita todavía habitada hoy por una ermitaña: <a href=\"https://anacoretes.netlify.app/montserrat.html\" target=\"_blank\" rel=\"noopener\">la última eremita de Cataluña</a>.",
+          traitCa:"Ermita encara habitada avui per una ermitana: <a href=\"https://anacoretes.netlify.app/montserrat.html\" target=\"_blank\" rel=\"noopener\">la darrera eremita de Catalunya</a>.",
+          traitEn:"Hermitage still inhabited today by a hermit woman: <a href=\"https://anacoretes.netlify.app/montserrat.html\" target=\"_blank\" rel=\"noopener\">the last hermit in Catalonia</a>." },
         { name:"Celler Cooperatiu de Cornudella de Montsant", muni:"Cornudella de Montsant",
           centuryEs:"1920s, Cèsar Martinell", centuryCa:"Dècada de 1920, Cèsar Martinell", centuryEn:"1920s, Cèsar Martinell",
           traitEs:"Otra «catedral del vino» del mismo arquitecto que la de Falset, dentro de la ruta de cellers modernistas del Camp de Tarragona.",
@@ -667,9 +675,20 @@
 
   const get = I18N.get;
 
+  const ANACORETES_TEXT = {
+    es: `<strong>Anacoretes.cat</strong> — un archivo fotográfico y documental sobre los últimos eremitas y ermitañas de Cataluña, con sus ermitas y su forma de vida contemplativa. Incluye una ficha dedicada a la ermitaña de Sant Joan de Codolar, aquí en el Priorat. <a href="https://anacoretes.netlify.app/" target="_blank" rel="noopener">→ Ver anacoretes.netlify.app</a>`,
+    ca: `<strong>Anacoretes.cat</strong> — un arxiu fotogràfic i documental sobre els darrers ermitans i ermitanes de Catalunya, amb les seves ermites i la seva forma de vida contemplativa. Inclou una fitxa dedicada a l'ermitana de Sant Joan de Codolar, aquí al Priorat. <a href="https://anacoretes.netlify.app/" target="_blank" rel="noopener">→ Veure anacoretes.netlify.app</a>`,
+    en: `<strong>Anacoretes.cat</strong> — a photographic and documentary archive about Catalonia's last hermits, their hermitages and their contemplative way of life. It includes a page dedicated to the hermit woman of Sant Joan de Codolar, here in the Priorat. <a href="https://anacoretes.netlify.app/" target="_blank" rel="noopener">→ View anacoretes.netlify.app</a>`
+  };
+  function renderAnacoretes(lang){
+    const box = document.getElementById("anacoretes-box");
+    if (box) box.innerHTML = ANACORETES_TEXT[lang] || ANACORETES_TEXT.es;
+  }
+
   function applyStaticText(lang){
     I18N.applyDom(T, lang);
     renderHeritage(lang);
+    renderAnacoretes(lang);
   }
 
   document.querySelectorAll(".lang-switch button").forEach(btn=>{
