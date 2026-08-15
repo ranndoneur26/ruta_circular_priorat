@@ -402,6 +402,76 @@
 
   footer{ padding:40px 0 60px; border-top:1px solid var(--line); font-size:12.5px; color:var(--pergami-dim); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
 
+  /* ---------- footer legal row (discreet, compact on mobile) ---------- */
+  .footer-legal{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+    gap:8px 16px; width:100%; margin-top:14px; padding-top:14px;
+    border-top:1px solid var(--line); font-size:11px; color:var(--pergami-dim); opacity:0.8;
+  }
+  .footer-legal-links{ display:flex; gap:14px; flex-wrap:wrap; }
+  .footer-legal-link{
+    background:none; border:none; padding:0; margin:0; color:var(--pergami-dim);
+    font-family:'JetBrains Mono', monospace; font-size:11px; text-decoration:underline;
+    text-underline-offset:2px; cursor:pointer;
+  }
+  .footer-legal-link:hover{ color:var(--samfaina); }
+  a.footer-legal-link{ display:inline-block; }
+  @media (max-width:480px){
+    .footer-legal{ font-size:10px; gap:6px 12px; margin-top:10px; padding-top:10px; }
+  }
+
+  /* ---------- cookie banner (slim, fixed bottom, minimal on mobile) ---------- */
+  .cookie-banner{
+    position:fixed; left:0; right:0; bottom:0; z-index:60;
+    background:var(--llicorella-2); border-top:1px solid var(--line);
+    padding:10px 16px; padding-bottom:calc(10px + env(safe-area-inset-bottom, 0px));
+    transform:translateY(110%); transition:transform 0.3s ease;
+  }
+  .cookie-banner.show{ transform:translateY(0); }
+  .cookie-banner-inner{
+    max-width:var(--maxw); margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
+  }
+  .cookie-banner p{ margin:0; font-size:12px; color:var(--pergami-dim); flex:1 1 220px; line-height:1.45; }
+  .cookie-actions{ display:flex; align-items:center; gap:12px; flex-shrink:0; }
+  .cookie-link{
+    background:none; border:none; padding:4px 0; color:var(--samfaina);
+    font-family:'JetBrains Mono', monospace; font-size:11px; text-decoration:underline;
+    text-underline-offset:2px; cursor:pointer; white-space:nowrap;
+  }
+  .cookie-accept{
+    background:var(--samfaina); color:var(--llicorella); border:none; font-weight:600;
+    font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.03em;
+    padding:8px 16px; cursor:pointer; white-space:nowrap;
+  }
+  .cookie-accept:hover{ opacity:0.88; }
+  @media (max-width:480px){
+    .cookie-banner{ padding:8px 12px; padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px)); }
+    .cookie-banner p{ font-size:11px; flex-basis:100%; }
+    .cookie-actions{ width:100%; justify-content:flex-end; }
+    .cookie-accept{ padding:7px 13px; font-size:10.5px; }
+  }
+
+  /* ---------- legal info modal (aviso legal / privacidad / cookies) ---------- */
+  .legal-modal{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:70;
+    align-items:center; justify-content:center; padding:20px;
+  }
+  .legal-modal.show{ display:flex; }
+  .legal-modal-card{
+    background:var(--llicorella-2); border:1px solid var(--line); max-width:560px; width:100%;
+    max-height:80vh; overflow-y:auto; padding:28px 26px; position:relative;
+  }
+  .legal-modal-close{
+    position:absolute; top:12px; right:12px; background:none; border:none;
+    color:var(--pergami-dim); font-size:22px; line-height:1; cursor:pointer; padding:6px;
+  }
+  .legal-modal-close:hover{ color:var(--pergami); }
+  .legal-modal-card h3{ font-size:16px; margin:0 0 14px; padding-right:22px; }
+  .legal-modal-card p{ font-size:13px; color:var(--pergami-dim); margin:0 0 12px; line-height:1.55; }
+  .legal-modal-card p:last-child{ margin-bottom:0; }
+  .legal-modal-card strong{ color:var(--pergami); }
+
   /* ---------- guía práctica ---------- */
   .guide-subnav{
     display:flex; flex-wrap:wrap; gap:2px;
@@ -484,7 +554,7 @@
 <a href="#main-content" class="skip-link">Saltar al contenido</a>
 <header class="top">
   <div class="wrap">
-    <div class="brand">Travessa del <span>Priorat</span></div>
+    <div class="brand">Ruta del <span>Silenci</span></div>
     <nav class="top-nav">
       <a href="#red" data-i18n="nav.red">La red</a>
       <a href="#pueblos" data-i18n="nav.pueblos">19 pueblos</a>
@@ -813,7 +883,33 @@
     <span data-i18n="footer.left">Travessa del Priorat — maqueta de estructura, sin verificar sobre el terreno.</span>
     <span class="mono" data-i18n="footer.right">v0.2 · mapa interactivo (esquemático)</span>
   </div>
+  <div class="wrap footer-legal">
+    <span class="mono" id="footer-copy"></span>
+    <nav class="footer-legal-links">
+      <button type="button" class="footer-legal-link" id="footer-link-aviso"></button>
+      <button type="button" class="footer-legal-link" id="footer-link-privacidad"></button>
+      <button type="button" class="footer-legal-link" id="footer-link-cookies"></button>
+      <a class="footer-legal-link" href="mailto:ruta.silenci@gmail.com" id="footer-link-contacto"></a>
+    </nav>
+  </div>
 </footer>
+
+<div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookies">
+  <div class="cookie-banner-inner">
+    <p id="cookie-text"></p>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-link" id="cookie-info-btn"></button>
+      <button type="button" class="cookie-accept" id="cookie-accept-btn"></button>
+    </div>
+  </div>
+</div>
+
+<div class="legal-modal" id="legal-modal">
+  <div class="legal-modal-card">
+    <button type="button" class="legal-modal-close" id="legal-modal-close" aria-label="Cerrar">&times;</button>
+    <div id="legal-modal-body"></div>
+  </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="anonymous"></script>
 <button type="button" class="back-to-top" id="back-to-top" data-i18n-aria-label="backToTop" aria-label="Volver arriba" title="Volver arriba">
@@ -1552,6 +1648,200 @@
     if (mapEl) mapEl.innerHTML = '<div style="padding:20px;font-family:JetBrains Mono, monospace;font-size:12px;color:var(--pergami-dim);">No se pudo cargar el mapa interactivo (sin conexión a la red de mapas). El resto de la página funciona con normalidad.</div>';
     console.error("Map init failed:", err);
   }
+</script>
+
+<script>
+  // ---------- Cookies, © footer legal y modal de aviso legal / privacidad / cookies ----------
+  // Contenido trilingüe autocontenido: no depende de i18n.js para no arriesgar el
+  // sistema de traducción existente. Se sincroniza con los mismos botones de idioma.
+  (function(){
+    const COOKIE_KEY = "travessa_cookie_consent";
+    const CONTACT_EMAIL = "ruta.silenci@gmail.com";
+    const SITE_NAME = "Travessa del Priorat";
+    // Placeholder: sustituye por tu identidad legal real (nombre completo o, si
+    // procede, razón social) antes de publicar. No es obligatorio ser una empresa
+    // para tener un aviso legal — basta con identificarte como responsable del sitio.
+    const OWNER_NAME = "[Nombre y apellidos del titular]";
+
+    const YEAR = new Date().getFullYear();
+
+    const L = {
+      es: {
+        footerCopy: `© ${YEAR} Ruta del Silenci, la travessa del Priorat`,
+        aviso: "Aviso legal", privacidad: "Privacidad", cookies: "Cookies", contacto: "Contacto",
+        cookieText: "Usamos solo cookies técnicas necesarias (idioma, preferencias). Sin seguimiento ni publicidad.",
+        cookieInfo: "Más info", cookieAccept: "Vale",
+        legal: {
+          aviso: {
+            title: "Aviso legal",
+            body: [
+              `<strong>Titular del sitio:</strong> ${OWNER_NAME}. Contacto: <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `${SITE_NAME} es un proyecto informativo sobre una ruta de senderismo circular por el Priorat (Catalunya). El contenido (etapas, distancias, tracks GPX) se ofrece con fines orientativos; recorrer la ruta es responsabilidad exclusiva de quien la realiza.`,
+              `No se garantiza la disponibilidad continua ni la ausencia de errores en la web. El titular no se responsabiliza de daños derivados del uso de la información aquí publicada.`
+            ]
+          },
+          privacidad: {
+            title: "Política de privacidad",
+            body: [
+              `<strong>Responsable:</strong> ${OWNER_NAME} — <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `<strong>Datos que recogemos:</strong> si te inscribes o envías tu certificación, guardamos tu alias, correo electrónico, población de origen, variante elegida, fecha de inicio y, si lo escribes, un mensaje. Se almacenan en una hoja de cálculo de Google (Google Sheets), gestionada mediante Google Apps Script.`,
+              `<strong>Finalidad:</strong> gestionar tu inscripción, mostrar tu alias en la lista de caminantes y, si completas la ruta, verificar tu certificación y contactarte al respecto.`,
+              `<strong>Destinatarios:</strong> Google, como proveedor técnico del almacenamiento (Google Sheets) y del envío de correos. No se cede tu información a terceros con fines comerciales.`,
+              `<strong>Conservación:</strong> mientras el proyecto esté activo, o hasta que solicites su eliminación.`,
+              `<strong>Tus derechos:</strong> puedes pedir acceder, corregir o eliminar tus datos escribiendo a <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`
+            ]
+          },
+          cookies: {
+            title: "Política de cookies",
+            body: [
+              `Esta web no utiliza cookies de seguimiento ni publicitarias.`,
+              `<strong>Almacenamiento técnico usado:</strong> guardamos en tu navegador (localStorage) tu idioma preferido y si ya has aceptado este aviso, para no repetírtelo. En el panel de administración, se guarda una sesión temporal (sessionStorage) mientras dura la visita.`,
+              `<strong>Terceros:</strong> las fuentes tipográficas (Google Fonts) y el mapa interactivo (Leaflet, vía cdnjs) se cargan desde redes de distribución externas, que pueden establecer cookies técnicas propias necesarias para servir esos archivos.`,
+              `Puedes borrar estos datos en cualquier momento desde la configuración de tu navegador.`
+            ]
+          }
+        }
+      },
+      ca: {
+        footerCopy: `© ${YEAR} Ruta del Silenci, la travessa del Priorat`,
+        aviso: "Avís legal", privacidad: "Privacitat", cookies: "Cookies", contacto: "Contacte",
+        cookieText: "Fem servir només cookies tècniques necessàries (idioma, preferències). Sense seguiment ni publicitat.",
+        cookieInfo: "Més info", cookieAccept: "D'acord",
+        legal: {
+          aviso: {
+            title: "Avís legal",
+            body: [
+              `<strong>Titular del lloc:</strong> ${OWNER_NAME}. Contacte: <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `${SITE_NAME} és un projecte informatiu sobre una ruta de senderisme circular pel Priorat (Catalunya). El contingut (etapes, distàncies, tracks GPX) s'ofereix amb finalitat orientativa; recórrer la ruta és responsabilitat exclusiva de qui la realitza.`,
+              `No es garanteix la disponibilitat contínua ni l'absència d'errors al lloc web. El titular no es fa responsable dels danys derivats de l'ús de la informació aquí publicada.`
+            ]
+          },
+          privacidad: {
+            title: "Política de privacitat",
+            body: [
+              `<strong>Responsable:</strong> ${OWNER_NAME} — <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `<strong>Dades que recollim:</strong> si t'inscrius o envies la teva certificació, guardem el teu alies, correu electrònic, població d'origen, variant escollida, data d'inici i, si l'escrius, un missatge. Es guarden en un full de càlcul de Google (Google Sheets), gestionat mitjançant Google Apps Script.`,
+              `<strong>Finalitat:</strong> gestionar la teva inscripció, mostrar el teu alies a la llista de caminants i, si completes la ruta, verificar la teva certificació i contactar-te al respecte.`,
+              `<strong>Destinataris:</strong> Google, com a proveïdor tècnic de l'emmagatzematge (Google Sheets) i de l'enviament de correus. No es cedeix la teva informació a tercers amb finalitats comercials.`,
+              `<strong>Conservació:</strong> mentre el projecte estigui actiu, o fins que en sol·licitis l'eliminació.`,
+              `<strong>Els teus drets:</strong> pots demanar accedir, corregir o eliminar les teves dades escrivint a <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`
+            ]
+          },
+          cookies: {
+            title: "Política de cookies",
+            body: [
+              `Aquest lloc web no fa servir cookies de seguiment ni publicitàries.`,
+              `<strong>Emmagatzematge tècnic utilitzat:</strong> guardem al teu navegador (localStorage) el teu idioma preferit i si ja has acceptat aquest avís, per no repetir-t'ho. Al panell d'administració, es guarda una sessió temporal (sessionStorage) mentre dura la visita.`,
+              `<strong>Tercers:</strong> les fonts tipogràfiques (Google Fonts) i el mapa interactiu (Leaflet, via cdnjs) es carreguen des de xarxes de distribució externes, que poden establir cookies tècniques pròpies necessàries per servir aquests fitxers.`,
+              `Pots esborrar aquestes dades en qualsevol moment des de la configuració del teu navegador.`
+            ]
+          }
+        }
+      },
+      en: {
+        footerCopy: `© ${YEAR} Ruta del Silenci, la travessa del Priorat`,
+        aviso: "Legal notice", privacidad: "Privacy", cookies: "Cookies", contacto: "Contact",
+        cookieText: "We only use necessary technical cookies (language, preferences). No tracking or advertising.",
+        cookieInfo: "More info", cookieAccept: "Got it",
+        legal: {
+          aviso: {
+            title: "Legal notice",
+            body: [
+              `<strong>Site owner:</strong> ${OWNER_NAME}. Contact: <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `${SITE_NAME} is an informational project about a circular hiking route through Priorat (Catalonia). Content (stages, distances, GPX tracks) is provided for guidance only; walking the route is the sole responsibility of the person doing so.`,
+              `Continuous availability and absence of errors on the site are not guaranteed. The owner is not liable for damages arising from the use of the information published here.`
+            ]
+          },
+          privacidad: {
+            title: "Privacy policy",
+            body: [
+              `<strong>Data controller:</strong> ${OWNER_NAME} — <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `<strong>Data we collect:</strong> if you register or submit your certification, we store your alias, email, home town, chosen route variant, start date and, if you write one, a message. This is stored in a Google Sheet, managed via Google Apps Script.`,
+              `<strong>Purpose:</strong> to manage your registration, show your alias on the walkers list and, if you complete the route, verify your certification and contact you about it.`,
+              `<strong>Recipients:</strong> Google, as the technical provider of storage (Google Sheets) and email delivery. Your data is not shared with third parties for commercial purposes.`,
+              `<strong>Retention:</strong> for as long as the project is active, or until you request deletion.`,
+              `<strong>Your rights:</strong> you can request access, correction or deletion of your data by writing to <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`
+            ]
+          },
+          cookies: {
+            title: "Cookies policy",
+            body: [
+              `This site does not use tracking or advertising cookies.`,
+              `<strong>Technical storage used:</strong> we save your preferred language and whether you've already accepted this notice in your browser (localStorage), so we don't ask again. The admin panel keeps a temporary session (sessionStorage) for the duration of your visit.`,
+              `<strong>Third parties:</strong> web fonts (Google Fonts) and the interactive map (Leaflet, via cdnjs) are loaded from external content delivery networks, which may set their own technical cookies needed to serve those files.`,
+              `You can clear this data at any time from your browser settings.`
+            ]
+          }
+        }
+      }
+    };
+
+    function currentLegalLang(){
+      try {
+        const active = document.querySelector('.lang-switch button[aria-pressed="true"]');
+        if (active) return active.getAttribute("data-lang");
+      } catch(e){}
+      return (window.I18N && I18N.FALLBACK) ? I18N.FALLBACK : "ca";
+    }
+
+    function renderLegalTexts(){
+      const lang = currentLegalLang();
+      const t = L[lang] || L.ca;
+
+      document.getElementById("footer-copy").textContent = t.footerCopy;
+      document.getElementById("footer-link-aviso").textContent = t.aviso;
+      document.getElementById("footer-link-privacidad").textContent = t.privacidad;
+      document.getElementById("footer-link-cookies").textContent = t.cookies;
+      document.getElementById("footer-link-contacto").textContent = t.contacto;
+
+      document.getElementById("cookie-text").textContent = t.cookieText;
+      document.getElementById("cookie-info-btn").textContent = t.cookieInfo;
+      document.getElementById("cookie-accept-btn").textContent = t.cookieAccept;
+    }
+
+    function openLegal(key){
+      const lang = currentLegalLang();
+      const t = (L[lang] || L.ca).legal[key];
+      if (!t) return;
+      document.getElementById("legal-modal-body").innerHTML =
+        `<h3>${t.title}</h3>` + t.body.map(p => `<p>${p}</p>`).join("");
+      document.getElementById("legal-modal").classList.add("show");
+    }
+    function closeLegal(){
+      document.getElementById("legal-modal").classList.remove("show");
+    }
+
+    document.getElementById("footer-link-aviso").addEventListener("click", () => openLegal("aviso"));
+    document.getElementById("footer-link-privacidad").addEventListener("click", () => openLegal("privacidad"));
+    document.getElementById("footer-link-cookies").addEventListener("click", () => openLegal("cookies"));
+    document.getElementById("cookie-info-btn").addEventListener("click", () => openLegal("cookies"));
+    document.getElementById("legal-modal-close").addEventListener("click", closeLegal);
+    document.getElementById("legal-modal").addEventListener("click", (e) => {
+      if (e.target.id === "legal-modal") closeLegal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeLegal();
+    });
+
+    const banner = document.getElementById("cookie-banner");
+    document.getElementById("cookie-accept-btn").addEventListener("click", () => {
+      try { localStorage.setItem(COOKIE_KEY, "accepted"); } catch(e){}
+      banner.classList.remove("show");
+    });
+
+    // Se sincroniza con los botones de idioma ya existentes en la página.
+    document.querySelectorAll(".lang-switch button").forEach(btn => {
+      btn.addEventListener("click", renderLegalTexts);
+    });
+
+    renderLegalTexts();
+
+    let alreadyAccepted = false;
+    try { alreadyAccepted = localStorage.getItem(COOKIE_KEY) === "accepted"; } catch(e){}
+    if (!alreadyAccepted){
+      setTimeout(() => banner.classList.add("show"), 600);
+    }
+  })();
 </script>
 
 </body>
