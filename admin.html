@@ -227,7 +227,9 @@
     try {
       const res = await fetch(SHEETS_API_URL + "?action=list");
       const data = await res.json();
-      return Array.isArray(data) ? data : [];
+      if (Array.isArray(data)) return data;
+      if (data && Array.isArray(data.rows)) return data.rows;
+      return [];
     } catch(e){ return []; }
   }
 
