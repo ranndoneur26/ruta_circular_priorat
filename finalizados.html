@@ -1,362 +1,240 @@
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1a1715">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<title>Caminantes · Travessa del Priorat</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --llicorella: #1a1715; --llicorella-2: #241f1c;
-    --pergami: #ede6d6; --pergami-dim: #cfc6b2;
-    --samfaina: #c69214; --vinya: #7a1f2b; --herba: #6e7858;
-    --line: rgba(237,230,214,0.14); --maxw: 1040px;
-  }
-  *{box-sizing:border-box;}
-  body{ margin:0; background:var(--llicorella); color:var(--pergami); font-family:'Public Sans', sans-serif; font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
-  a{ color:inherit; }
-  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
-  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
-  .eyebrow{ font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--samfaina); display:flex; align-items:center; gap:10px; }
-  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--samfaina); display:inline-block; }
-
-  header.top{ position:sticky; top:0; z-index:30; background:rgba(26,23,21,0.9); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
-  header.top .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:20px; }
-  .brand{ font-family:'Fraunces', serif; font-size:18px; font-weight:600; white-space:nowrap; text-decoration:none; color:var(--pergami); }
-  .brand span{ color:var(--samfaina); }
-  nav.top-nav{ display:flex; gap:22px; font-size:13px; align-items:center; }
-  nav.top-nav a{ text-decoration:none; color:var(--pergami-dim); }
-  nav.top-nav a:hover{ color:var(--pergami); }
-  .nav-cta{ border:1px solid var(--samfaina); color:var(--samfaina) !important; padding:5px 12px; font-family:'JetBrains Mono', monospace; font-size:11.5px !important; letter-spacing:0.03em; }
-  .nav-cta:hover{ background:var(--samfaina); color:var(--llicorella) !important; }
-  .nav-toggle{
-    display:none; flex-direction:column; justify-content:center; align-items:center; gap:5px;
-    background:transparent; border:1px solid var(--line); width:40px; height:36px;
-    padding:0; cursor:pointer; flex-shrink:0;
-  }
-  .nav-toggle .bar{
-    display:block; width:18px; height:1.5px; background:var(--pergami);
-    transition:transform .25s ease, opacity .2s ease;
-  }
-  .nav-toggle[aria-expanded="true"] .bar:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
-  .nav-toggle[aria-expanded="true"] .bar:nth-child(2){ opacity:0; }
-  .nav-toggle[aria-expanded="true"] .bar:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
-  #mobile-nav{
-    display:none; flex-direction:column; max-height:0; overflow:hidden;
-    transition:max-height .3s ease; background:var(--llicorella-2); border-bottom:1px solid var(--line);
-  }
-  #mobile-nav.open{ max-height:420px; }
-  #mobile-nav a{ display:block; padding:14px 24px; text-decoration:none; color:var(--pergami-dim); border-top:1px solid var(--line); font-size:14px; }
-  #mobile-nav a:first-child{ border-top:none; }
-  #mobile-nav .mnav-cta{ color:var(--samfaina); font-weight:600; }
-  @media (max-width:860px){
-    nav.top-nav{ display:none; }
-    .nav-toggle{ display:flex; order:3; }
-    #mobile-nav{ display:flex; }
-  }
-  .lang-switch{ display:flex; border:1px solid var(--line); flex-shrink:0; }
-  .lang-switch button{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.05em; background:transparent; color:var(--pergami-dim); border:none; padding:5px 9px; cursor:pointer; }
-  .lang-switch button + button{ border-left:1px solid var(--line); }
-  .lang-switch button[aria-pressed="true"]{ background:var(--samfaina); color:var(--llicorella); font-weight:600; }
-  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{ outline:2px solid var(--samfaina); outline-offset:3px; }
-  .skip-link{
-    position:absolute; left:12px; top:-60px; z-index:100;
-    background:var(--samfaina); color:var(--llicorella); font-weight:600;
-    padding:10px 18px; text-decoration:none; font-family:'JetBrains Mono', monospace;
-    font-size:13px; transition:top .2s ease;
-  }
-  .skip-link:focus{ top:12px; }
-
-  .phero{ padding:56px 0 30px; border-bottom:1px solid var(--line); position:relative; overflow:hidden; }
-  .phero::before{ content:""; position:absolute; top:-40%; right:-10%; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle, rgba(198,146,20,0.10) 0%, transparent 70%); pointer-events:none; }
-  .phero h1{ font-size:clamp(30px,4.6vw,44px); line-height:1.06; margin-top:14px; max-width:20ch; }
-  .phero p{ font-size:15.5px; color:var(--pergami-dim); margin-top:14px; max-width:58ch; }
-
-  .stat-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:26px; }
-  @media (max-width:680px){ .stat-row{ grid-template-columns:1fr 1fr; } }
-  .stat-cell{ background:var(--llicorella-2); padding:16px 18px; }
-  .stat-cell .n{ font-family:'JetBrains Mono', monospace; font-size:24px; font-weight:600; color:var(--samfaina); display:block; }
-  .stat-cell .l{ font-size:11.5px; color:var(--pergami-dim); margin-top:4px; display:block; }
-
-  main{ padding:36px 0 70px; }
-
-  .toolbar{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:28px; }
-  .search-box{ background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami); padding:10px 14px; font-family:'Public Sans', sans-serif; font-size:14px; flex:1 1 220px; min-width:180px; -webkit-appearance:none; appearance:none; border-radius:0; }
-  .search-box:focus{ outline:none; border-color:var(--samfaina); }
-  .filter-select, .sort-select{
-    background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami-dim);
-    padding:10px 30px 10px 12px; font-family:'JetBrains Mono', monospace; font-size:11.5px;
-    -webkit-appearance:none; appearance:none; border-radius:0;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c69214' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");
-    background-repeat:no-repeat; background-position:right 10px center;
-  }
-  .search-box:-webkit-autofill{ -webkit-text-fill-color:var(--pergami); -webkit-box-shadow:0 0 0px 1000px var(--llicorella-2) inset; transition:background-color 5000s ease-in-out 0s; }
-  .filter-select:focus, .sort-select:focus{ outline:none; border-color:var(--samfaina); }
-
-  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
-  @media (max-width:900px){ .grid{ grid-template-columns:1fr 1fr; } }
-  @media (max-width:620px){ .grid{ grid-template-columns:1fr; } }
-
-  .walker-card{ background:var(--llicorella-2); padding:22px 22px; display:flex; flex-direction:column; min-height:180px; }
-  .walker-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:8px; }
-  .walker-alias{ font-family:'Fraunces', serif; font-size:19px; font-weight:600; line-height:1.2; }
-  .badge{ flex-shrink:0; font-family:'JetBrains Mono', monospace; font-size:9.5px; letter-spacing:0.04em; padding:2px 7px; border:1px solid var(--line); color:var(--pergami-dim); white-space:nowrap; margin-top:2px; }
-  .badge.verified{ border-color:var(--herba); color:var(--herba); }
-  .walker-meta{ font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.03em; color:var(--samfaina); text-transform:uppercase; margin-bottom:4px; }
-  .walker-origen{ font-size:12.5px; color:var(--pergami-dim); margin-bottom:10px; }
-  .walker-msg{ font-family:'Fraunces', serif; font-style:italic; font-size:14px; color:var(--pergami); line-height:1.5; flex:1; margin-bottom:10px; }
-  .walker-msg::before{ content:"\201C"; color:var(--samfaina); }
-  .walker-msg::after{ content:"\201D"; color:var(--samfaina); }
-  .walker-date{ font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--pergami-dim); opacity:0.7; margin-top:auto; }
-
-  .empty{ padding:60px 30px; text-align:center; border:1px dashed var(--line); color:var(--pergami-dim); }
-  .empty h3{ font-size:18px; color:var(--pergami); margin-bottom:8px; }
-  .empty p{ font-size:14px; margin:0 0 20px; }
-  .empty .btn{ display:inline-flex; padding:12px 24px; font-family:'JetBrains Mono', monospace; font-size:13px; letter-spacing:0.03em; text-decoration:none; border:1px solid var(--samfaina); background:var(--samfaina); color:var(--llicorella); font-weight:600; }
-  .empty .btn:hover{ opacity:0.88; }
-
-  .loading{ padding:60px 0; text-align:center; color:var(--pergami-dim); font-family:'JetBrains Mono', monospace; font-size:12.5px; }
-
-  footer{ padding:30px 0 50px; border-top:1px solid var(--line); font-size:12px; color:var(--pergami-dim); }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caminantes · Travessa del Priorat</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0; background: #1a1715; color: #ede6d6; }
+    a { color: inherit; }
+    header, main { max-width: 1040px; margin: 0 auto; padding: 1.5rem; }
+    header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3a332d; position: sticky; top: 0; background: rgba(26,23,21,0.92); backdrop-filter: blur(6px); z-index: 10; }
+    .brand { font-weight: 600; letter-spacing: 0.03em; }
+    .brand span { color: #c69214; }
+    nav { display: flex; gap: 1rem; font-size: 0.85rem; }
+    nav a { text-decoration: none; opacity: 0.9; }
+    .nav-cta { border: 1px solid #c69214; padding: 0.25rem 0.75rem; border-radius: 999px; }
+    h1 { font-size: 2rem; margin: 0.75rem 0 0.25rem; }
+    .eyebrow { text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.18em; color: #c69214; }
+    .hero-copy { max-width: 40rem; font-size: 0.95rem; color: #cfc6b2; }
+    .stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 1px; margin-top: 1.5rem; border: 1px solid #3a332d; background: #3a332d; }
+    .stat { background: #241f1c; padding: 0.75rem 0.9rem; }
+    .stat .n { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 1.3rem; color: #c69214; }
+    .stat .l { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: #cfc6b2; }
+    @media (max-width: 680px) { .stats { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    main { padding-bottom: 3rem; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 1.5rem; }
+    .toolbar input, .toolbar select { background: #241f1c; border: 1px solid #3a332d; color: #ede6d6; padding: 0.6rem 0.75rem; font-size: 0.9rem; }
+    .toolbar input { flex: 1 1 220px; min-width: 160px; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1px; border: 1px solid #3a332d; background: #3a332d; }
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 620px) { .grid { grid-template-columns: minmax(0,1fr); } }
+    .walker-card { background: #241f1c; padding: 1.1rem; display: flex; flex-direction: column; min-height: 180px; }
+    .walker-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; margin-bottom: 0.4rem; }
+    .walker-alias { font-weight: 600; font-size: 1.1rem; }
+    .badge { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.12em; border-radius: 999px; padding: 0.1rem 0.5rem; border: 1px solid #3a332d; color: #cfc6b2; white-space: nowrap; }
+    .badge.verified { border-color: #6e7858; color: #6e7858; }
+    .walker-meta { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: #c69214; margin-bottom: 0.3rem; }
+    .walker-origen { font-size: 0.8rem; color: #cfc6b2; margin-bottom: 0.5rem; }
+    .walker-msg { font-style: italic; font-size: 0.9rem; color: #ede6d6; flex: 1 1 auto; margin-bottom: 0.5rem; }
+    .walker-date { font-size: 0.7rem; color: #cfc6b2; opacity: 0.75; margin-top: auto; }
+    .empty { border: 1px dashed #3a332d; padding: 2.4rem 1.4rem; text-align: center; color: #cfc6b2; }
+    .empty h3 { margin-bottom: 0.6rem; }
+    .empty p { margin-bottom: 1.1rem; }
+    .empty a { display: inline-flex; border: 1px solid #c69214; padding: 0.6rem 1.2rem; text-decoration: none; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .loading { padding: 2.4rem 1.4rem; text-align: center; font-size: 0.8rem; color: #cfc6b2; }
+    footer { border-top: 1px solid #3a332d; padding: 1.5rem; font-size: 0.75rem; color: #cfc6b2; max-width: 1040px; margin: 0 auto 2.5rem; }
+  </style>
 </head>
 <body>
-
-<a href="#main-content" class="skip-link">Saltar al contenido</a>
-<header class="top">
-  <div class="wrap">
-    <a href="travessa-priorat.html" class="brand">Ruta del <span>Silenci</span></a>
-    <nav class="top-nav">
-      <a href="travessa-priorat.html" data-i18n="nav.back">← Volver al circuito</a>
-      <a href="inscripcion.html" class="nav-cta" data-i18n="nav.signup">Inscribirme</a>
+  <a href="#main" class="skip-link" style="position:absolute;left:-999px;top:auto;">Saltar al contenido</a>
+  <header>
+    <div class="brand">Ruta del <span>Silenci</span></div>
+    <nav>
+      <a href="travessa-priorat.html">Volver al circuito</a>
+      <a class="nav-cta" href="inscripcion.html">Inscribirme</a>
     </nav>
-    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú">
-      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-    </button>
-    <div class="lang-switch" role="group" aria-label="Idioma / Llengua / Language">
-      <button type="button" data-lang="es" aria-pressed="false">ES</button>
-      <button type="button" data-lang="ca" aria-pressed="true">CA</button>
-      <button type="button" data-lang="en" aria-pressed="false">ENG</button>
+  </header>
+
+  <main id="main">
+    <p class="eyebrow">Quién ya se ha atrevido</p>
+    <h1>Caminantes de la travessa</h1>
+    <p class="hero-copy">Lista informal, tipo libro de firmas: nadie ha verificado que estos alias hayan completado realmente la ruta. El «Verificado» solo indica que alguien del proyecto ha revisado fotos o certificaciones enviadas.</p>
+
+    <section class="stats" aria-label="Resumen de caminantes">
+      <div class="stat"><span class="n" id="stat-total">0</span><span class="l">Inscritos</span></div>
+      <div class="stat"><span class="n" id="stat-verified">0</span><span class="l">Verificados</span></div>
+      <div class="stat"><span class="n" id="stat-completo">0</span><span class="l">Circuito completo</span></div>
+      <div class="stat"><span class="n" id="stat-origenes">0</span><span class="l">Orígenes distintos</span></div>
+    </section>
+
+    <section class="toolbar" aria-label="Filtros de caminantes">
+      <input type="text" id="search-box" placeholder="Buscar por alias u origen" />
+      <select id="filter-select">
+        <option value="all">Todas las variantes</option>
+        <option value="completo">Circuito completo</option>
+        <option value="corta">Ruta corta</option>
+      </select>
+      <select id="sort-select">
+        <option value="recent">Más recientes</option>
+        <option value="alias">Por alias</option>
+      </select>
+    </section>
+
+    <div class="loading" id="loading">Cargando caminantes…</div>
+    <div class="grid" id="grid" style="display:none;"></div>
+    <div class="empty" id="empty" style="display:none;">
+      <h3>Todavía nadie se ha apuntado</h3>
+      <p>Sé la primera persona en dejar tu alias escrito en esta lista.</p>
+      <a href="inscripcion.html">Inscribirme</a>
     </div>
-  </div>
-  <div id="mobile-nav">
-    <a href="travessa-priorat.html" data-i18n="nav.back">← Volver al circuito</a>
-    <a href="inscripcion.html" class="mnav-cta" data-i18n="nav.signup">Inscribirme</a>
-  </div>
-</header>
+  </main>
 
-<div class="phero" id="main-content">
-  <div class="wrap">
-    <div class="eyebrow" data-i18n="hero.eyebrow">Quién ya se ha atrevido</div>
-    <h1 data-i18n="hero.h1">Caminantes de la travessa</h1>
-    <p data-i18n="hero.p">Lista informal, tipo libro de firmas: nadie ha verificado que estos alias hayan completado realmente la ruta. El «Verificado» solo indica que alguien del proyecto ha revisado fotos enviadas por correo.</p>
-    <div class="stat-row">
-      <div class="stat-cell"><span class="n" id="stat-total">0</span><span class="l" data-i18n="stats.total">Inscritos</span></div>
-      <div class="stat-cell"><span class="n" id="stat-verified">0</span><span class="l" data-i18n="stats.verified">Verificados</span></div>
-      <div class="stat-cell"><span class="n" id="stat-completo">0</span><span class="l" data-i18n="stats.completo">Circuito completo</span></div>
-      <div class="stat-cell"><span class="n" id="stat-origenes">0</span><span class="l" data-i18n="stats.origenes">Orígenes distintos</span></div>
-    </div>
-  </div>
-</div>
+  <footer>
+    Travessa del Priorat · lista pública informal, sin verificación de identidad. Los correos nunca se muestran.
+  </footer>
 
-<main class="wrap">
-  <div class="toolbar">
-    <input type="text" class="search-box" id="search-box" data-i18n-placeholder="toolbar.search" placeholder="Buscar por alias u origen…">
-    <select class="filter-select" id="filter-select">
-      <option value="all" data-i18n="toolbar.allVariants">Todas las variantes</option>
-      <option value="completo" data-i18n="toolbar.vCompleto">Circuito completo</option>
-      <option value="corta" data-i18n="toolbar.vCorta">Ruta corta (3 días)</option>
-    </select>
-    <select class="sort-select" id="sort-select">
-      <option value="recent" data-i18n="toolbar.sortRecent">Más recientes</option>
-      <option value="alias" data-i18n="toolbar.sortAlias">Por alias</option>
-    </select>
-  </div>
+  <script>
+    const LOCALKEY = "travessaprioratwalkers";
+    const SHEETSAPIURL = "https://script.google.com/macros/s/AKfycbys7Ig8er3AThbtBR0cK5y2HfmocLKUdbGAFdHl18eKX3r3Yakd5bR06rTGAXQKbihYA/exec";
+    const USE_SHEETS = true; // pon a false si no tienes Apps Script configurado
 
-  <div class="loading" id="loading" data-i18n="toolbar.loading">Cargando caminantes…</div>
-  <div class="grid" id="grid" style="display:none;"></div>
-  <div class="empty" id="empty" style="display:none;">
-    <h3 data-i18n="empty.h">Todavía nadie se ha apuntado</h3>
-    <p data-i18n="empty.p">Sé la primera persona en dejar su alias escrito en esta lista.</p>
-    <a href="inscripcion.html" class="btn" data-i18n="empty.cta">Inscribirme →</a>
-  </div>
-</main>
-
-<footer>
-  <div class="wrap" data-i18n="footer.text">Travessa del Priorat — lista pública informal, sin verificación de identidad. Los correos nunca se muestran.</div>
-</footer>
-
-<script src="i18n.js"></script>
-<script>
-  const T = { es: I18N.dict.es.finalizados, ca: I18N.dict.ca.finalizados, en: I18N.dict.en.finalizados };
-
-  let currentLang = I18N.FALLBACK;
-  const get = I18N.get;
-
-  function applyStaticText(lang){
-    currentLang = lang;
-    I18N.applyDom(T, lang);
-    render();
-  }
-  document.querySelectorAll(".lang-switch button").forEach(btn=>{
-    btn.addEventListener("click", ()=> applyStaticText(I18N.setLanguage(btn.getAttribute("data-lang"))));
-  });
-
-  const navToggle = document.getElementById("nav-toggle");
-  const mobileNav = document.getElementById("mobile-nav");
-  if (navToggle && mobileNav){
-    navToggle.addEventListener("click", () => {
-      const open = mobileNav.classList.toggle("open");
-      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-    mobileNav.querySelectorAll("a").forEach(a => {
-      a.addEventListener("click", () => {
-        mobileNav.classList.remove("open");
-        navToggle.setAttribute("aria-expanded", "false");
-      });
-    });
-  }
-
-  // --- Load entries: Google Sheets backend (real, cross-device) as primary source,
-  // plus shared window.storage and localStorage as fallback for continuity. ---
-  const LOCAL_KEY = "travessa_priorat_walkers";
-  const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbys7Ig8er3AThbtBR0cK5y2HfmocLKUdbGAFdHl18eKX3r3Yakd5bR06rTGAXQKbi_hYA/exec";
-  const SHEETS_CONFIGURED = /^https:\/\/script\.google(usercontent)?\.com\//.test(SHEETS_API_URL);
-
-  async function sheetsList(){
-    if (!SHEETS_CONFIGURED) return [];
-    try {
-      const res = await fetch(SHEETS_API_URL + "?action=list");
-      const data = await res.json();
-      return Array.isArray(data) ? data : [];
-    } catch(e){ return []; }
-  }
-
-  async function loadEntries(){
-    let entries = await sheetsList();
-    if (window.storage && typeof window.storage.list === "function"){
+    async function loadFromSheets() {
+      if (!USE_SHEETS || !SHEETSAPIURL) return [];
       try {
-        const listResult = await window.storage.list("walker:", true);
-        if (listResult && listResult.keys && listResult.keys.length){
-          for (const key of listResult.keys){
-            try {
-              const r = await window.storage.get(key, true);
-              if (r && r.value) entries.push(JSON.parse(r.value));
-            } catch(e){}
-          }
-        }
-      } catch(e){}
-    }
-    try {
-      const raw = localStorage.getItem(LOCAL_KEY);
-      if (raw){
-        const local = JSON.parse(raw);
-        if (Array.isArray(local)) entries = entries.concat(local);
+        const res = await fetch(SHEETSAPIURL + "?action=list");
+        if (!res.ok) return [];
+        const data = await res.json();
+        return Array.isArray(data) ? data : [];
+      } catch (e) {
+        console.error("Error cargando desde Sheets", e);
+        return [];
       }
-    } catch(e){}
-    return entries;
-  }
-
-  function escapeHtml(s){
-    const div = document.createElement("div");
-    div.textContent = s || "";
-    return div.innerHTML;
-  }
-  function formatDate(iso){
-    if (!iso) return "";
-    const d = new Date(iso + "T00:00:00");
-    if (isNaN(d.getTime())) return iso;
-    return d.toLocaleDateString(currentLang === "ca" ? "ca-ES" : currentLang === "en" ? "en-GB" : "es-ES", { day:"numeric", month:"short", year:"numeric" });
-  }
-
-  let allEntries = [];
-  let searchTerm = "";
-  let variantFilter = "all";
-  let sortMode = "recent";
-
-  document.getElementById("search-box").addEventListener("input", (e) => {
-    searchTerm = e.target.value.trim().toLowerCase();
-    render();
-  });
-  document.getElementById("filter-select").addEventListener("change", (e) => {
-    variantFilter = e.target.value;
-    render();
-  });
-  document.getElementById("sort-select").addEventListener("change", (e) => {
-    sortMode = e.target.value;
-    render();
-  });
-
-  function render(){
-    const grid = document.getElementById("grid");
-    const empty = document.getElementById("empty");
-    const t = T[currentLang];
-
-    document.getElementById("stat-total").textContent = allEntries.length;
-    document.getElementById("stat-verified").textContent = allEntries.filter(w => w.verified).length;
-    document.getElementById("stat-completo").textContent = allEntries.filter(w => w.variante === "completo").length;
-    const origSet = new Set(allEntries.map(w => (w.origen||"").trim().toLowerCase()).filter(Boolean));
-    document.getElementById("stat-origenes").textContent = origSet.size;
-
-    if (allEntries.length === 0){
-      grid.style.display = "none";
-      empty.style.display = "block";
-      return;
     }
 
-    let visible = allEntries.filter(w => {
-      const matchesSearch = !searchTerm ||
-        (w.alias||"").toLowerCase().includes(searchTerm) ||
-        (w.origen||"").toLowerCase().includes(searchTerm);
-      const matchesFilter = variantFilter === "all" || w.variante === variantFilter;
-      return matchesSearch && matchesFilter;
-    });
-
-    visible.sort((a,b) => {
-      if (sortMode === "alias") return (a.alias||"").localeCompare(b.alias||"");
-      return (b.submittedAt||"").localeCompare(a.submittedAt||"");
-    });
-
-    if (visible.length === 0){
-      grid.style.display = "none";
-      empty.style.display = "block";
-      empty.querySelector("h3").textContent = t.empty.h;
-      empty.querySelector("p").textContent = t.empty.p;
-      return;
+    function loadFromLocal() {
+      try {
+        const raw = localStorage.getItem(LOCALKEY);
+        if (!raw) return [];
+        const list = JSON.parse(raw);
+        return Array.isArray(list) ? list : [];
+      } catch (e) {
+        console.error("Error leyendo localStorage", e);
+        return [];
+      }
     }
 
-    empty.style.display = "none";
-    grid.style.display = "grid";
-    grid.innerHTML = visible.map(w => {
-      const variantLabel = t.variant[w.variante] || escapeHtml(w.variante || "");
-      const verifiedBadge = w.verified ? `<span class="badge verified">${t.card.verified}</span>` : "";
-      const origen = w.origen ? `<div class="walker-origen">${escapeHtml(w.origen)}</div>` : "";
-      const msg = w.mensaje ? `<div class="walker-msg">${escapeHtml(w.mensaje)}</div>` : `<div class="walker-msg" style="opacity:0.35;">—</div>`;
-      const date = w.startDate ? `${t.card.start}: ${formatDate(w.startDate)}` : "";
-      return `<div class="walker-card">
-        <div class="walker-top">
-          <div class="walker-alias">${escapeHtml(w.alias)}</div>
-          ${verifiedBadge}
-        </div>
-        <div class="walker-meta">${variantLabel}</div>
-        ${origen}
-        ${msg}
-        <div class="walker-date">${date}</div>
-      </div>`;
-    }).join("");
-  }
+    function escapeHtml(str) {
+      const div = document.createElement("div");
+      div.textContent = str || "";
+      return div.innerHTML;
+    }
 
-  (async function init(){
-    allEntries = await loadEntries();
-    document.getElementById("loading").style.display = "none";
-    applyStaticText(I18N.setLanguage(I18N.resolveInitialLanguage()));
-  })();
-</script>
+    function formatDate(iso) {
+      if (!iso) return "";
+      const d = new Date(iso);
+      if (isNaN(d.getTime())) return iso;
+      return d.toLocaleDateString("es-ES", { day: "numeric", month: "short", year: "numeric" });
+    }
+
+    let allEntries = [];
+    let searchTerm = "";
+    let variantFilter = "all";
+    let sortMode = "recent";
+
+    document.getElementById("search-box").addEventListener("input", (e) => {
+      searchTerm = e.target.value.trim().toLowerCase();
+      render();
+    });
+    document.getElementById("filter-select").addEventListener("change", (e) => {
+      variantFilter = e.target.value;
+      render();
+    });
+    document.getElementById("sort-select").addEventListener("change", (e) => {
+      sortMode = e.target.value;
+      render();
+    });
+
+    function render() {
+      const grid = document.getElementById("grid");
+      const empty = document.getElementById("empty");
+
+      document.getElementById("stat-total").textContent = allEntries.length;
+      document.getElementById("stat-verified").textContent = allEntries.filter(w => w.verified).length;
+      document.getElementById("stat-completo").textContent = allEntries.filter(w => w.variante === "completo").length;
+      const origenes = new Set(
+        allEntries
+          .map(w => (w.origen || "").trim().toLowerCase())
+          .filter(Boolean)
+      );
+      document.getElementById("stat-origenes").textContent = origenes.size;
+
+      if (!allEntries.length) {
+        grid.style.display = "none";
+        empty.style.display = "block";
+        return;
+      }
+
+      let visible = allEntries.filter(w => {
+        const matchesSearch = !searchTerm ||
+          (w.alias || "").toLowerCase().includes(searchTerm) ||
+          (w.origen || "").toLowerCase().includes(searchTerm);
+        const matchesFilter = variantFilter === "all" || (w.variante === variantFilter);
+        return matchesSearch && matchesFilter;
+      });
+
+      visible.sort((a, b) => {
+        if (sortMode === "alias") {
+          return (a.alias || "").localeCompare(b.alias || "");
+        }
+        const aDate = a.submittedAt || a.startDate || "";
+        const bDate = b.submittedAt || b.startDate || "";
+        return (bDate || "").localeCompare(aDate || "");
+      });
+
+      if (!visible.length) {
+        grid.style.display = "none";
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+      grid.style.display = "grid";
+      grid.innerHTML = visible.map(w => {
+        const varianteLabel = w.variante === "completo" ? "Circuito completo" : (w.variante === "corta" ? "Ruta corta" : (w.variante || ""));
+        const verifiedBadge = w.verified ? '<span class="badge verified">Verificado</span>' : "";
+        const origenHtml = w.origen ? `<div class=\"walker-origen\">${escapeHtml(w.origen)}</div>` : "";
+        const msgHtml = w.mensaje ? `<div class=\"walker-msg\">${escapeHtml(w.mensaje)}</div>` : "";
+        const dateLabel = w.startDate ? `Inicio: ${formatDate(w.startDate)}` : "";
+
+        return `
+          <article class=\"walker-card\">
+            <div class=\"walker-top\">
+              <div>
+                <div class=\"walker-alias\">${escapeHtml(w.alias || "(sin alias)")}</div>
+                <div class=\"walker-meta\">${escapeHtml(varianteLabel)}</div>
+              </div>
+              ${verifiedBadge}
+            </div>
+            ${origenHtml}
+            ${msgHtml}
+            <div class=\"walker-date\">${escapeHtml(dateLabel)}</div>
+          </article>
+        `;
+      }).join("\n");
+    }
+
+    async function init() {
+      const loadingEl = document.getElementById("loading");
+      loadingEl.style.display = "block";
+      const sheetsEntries = await loadFromSheets();
+      const localEntries = loadFromLocal();
+      allEntries = [...sheetsEntries, ...localEntries];
+      loadingEl.style.display = "none";
+      render();
+    }
+
+    init();
+  </script>
 </body>
 </html>
