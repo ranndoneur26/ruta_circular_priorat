@@ -393,6 +393,10 @@
     text-decoration:none; margin-left:auto;
   }
   .gpx-download:hover{ opacity:0.85; }
+  .gpx-disclaimer{
+    display:block; width:100%; margin-top:6px; font-family:'JetBrains Mono', monospace;
+    font-size:10.5px; letter-spacing:0.01em; color:var(--pergami-dim); opacity:0.8; line-height:1.4;
+  }
   .stage-source{
     margin-top:22px; font-family:'JetBrains Mono', monospace; font-size:11px;
     color:var(--pergami-dim); opacity:0.75;
@@ -1343,6 +1347,7 @@
              <span class="stage-fact">${t.loss}: <b>−${info.lossM} m</b></span>
              <span class="gpx-badge">✓ ${t.gpxVerified}</span>
              <a class="gpx-download" href="${gpxData.file}" download>${t.gpxDownload}</a>
+             <span class="gpx-disclaimer">${t.gpxDisclaimer}</span>
            </div>`
         : `<div class="meta">${t.meta}</div>`;
       row.innerHTML = `
@@ -1415,7 +1420,7 @@
               <span class="stage-fact">${te.gain}: <b>+${info.gainM} m</b></span>
               <span class="stage-fact">${te.loss}: <b>−${info.lossM} m</b></span>
               <span class="gpx-badge">✓ ${te.gpxVerified}</span>
-              ${d.gpxData.file ? `<a class="gpx-download" href="${d.gpxData.file}" download>${te.gpxDownload}</a>` : ""}
+              ${d.gpxData.file ? `<a class="gpx-download" href="${d.gpxData.file}" download>${te.gpxDownload}</a><span class="gpx-disclaimer">${te.gpxDisclaimer}</span>` : ""}
             </div>
             ${extra}
           </div>
