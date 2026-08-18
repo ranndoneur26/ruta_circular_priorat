@@ -227,7 +227,7 @@
         },
         "alfa": {
           "h": "Pla Alfa: riesgo diario de incendio",
-          "body": "<p>Catalunya regula el acceso a espacios forestales con el Pla Alfa, un mapa que se actualiza cada día según el riesgo real de incendio. En niveles altos, algunas actividades —incluido el senderismo— pueden quedar directamente prohibidas en ciertas zonas.</p>\n           <p><strong>Consúltalo la misma mañana de cada etapa</strong>, no la noche anterior: el nivel puede cambiar con el pronóstico del día.</p>",
+          "body": "<p>Catalunya regula el acceso a espacios forestales con el Pla Alfa, un mapa que se actualiza cada día según el riesgo real de incendio. En niveles altos, algunas actividades —incluido el senderismo— pueden quedar directamente prohibidas en ciertas zonas.</p>\n           <p><strong>Consúltalo la misma mañana de cada etapa</strong>, no la noche anterior: el nivel puede cambiar con el pronóstico del día.</p>\n           <iframe src='https://experience.arcgis.com/experience/2cf7ebbe492f401db826cb21eae9bfae' title='Mapa del Pla Alfa de riesgo de incendio' frameborder='0' allowfullscreen width='100%' style='height:min(650px, 80vh);'></iframe>",
           "lvl0": "Bajo",
           "lvl1": "Medio",
           "lvl2": "Alto",
@@ -760,7 +760,7 @@
         },
         "alfa": {
           "h": "Pla Alfa: risc diari d'incendi",
-          "body": "<p>Catalunya regula l'accés a espais forestals amb el Pla Alfa, un mapa que s'actualitza cada dia segons el risc real d'incendi. En nivells alts, algunes activitats —inclòs el senderisme— poden quedar directament prohibides en certes zones.</p>\n           <p><strong>Consulta'l el mateix matí de cada etapa</strong>, no la nit anterior: el nivell pot canviar amb la previsió del dia.</p>",
+          "body": "<p>Catalunya regula l'accés a espais forestals amb el Pla Alfa, un mapa que s'actualitza cada dia segons el risc real d'incendi. En nivells alts, algunes activitats —inclòs el senderisme— poden quedar directament prohibides en certes zones.</p>\n           <p><strong>Consulta'l el mateix matí de cada etapa</strong>, no la nit anterior: el nivell pot canviar amb la previsió del dia.</p>\n           <iframe src='https://experience.arcgis.com/experience/2cf7ebbe492f401db826cb21eae9bfae' title='Mapa del Pla Alfa de risc d&#39;incendi' frameborder='0' allowfullscreen width='100%' style='height:min(650px, 80vh);'></iframe>",
           "lvl0": "Baix",
           "lvl1": "Mitjà",
           "lvl2": "Alt",
@@ -1293,7 +1293,7 @@
         },
         "alfa": {
           "h": "Pla Alfa: daily fire risk",
-          "body": "<p>Catalonia regulates access to forest land through the Pla Alfa, a map updated daily according to real fire risk. At high levels, some activities — including hiking — can be directly banned in certain areas.</p>\n           <p><strong>Check it the same morning of each stage</strong>, not the night before: the level can change with the day's forecast.</p>",
+          "body": "<p>Catalonia regulates access to forest land through the Pla Alfa, a map updated daily according to real fire risk. At high levels, some activities — including hiking — can be directly banned in certain areas.</p>\n           <p><strong>Check it the same morning of each stage</strong>, not the night before: the level can change with the day's forecast.</p>\n           <iframe src='https://experience.arcgis.com/experience/2cf7ebbe492f401db826cb21eae9bfae' title='Pla Alfa fire risk map' frameborder='0' allowfullscreen width='100%' style='height:min(650px, 80vh);'></iframe>",
           "lvl0": "Low",
           "lvl1": "Medium",
           "lvl2": "High",
