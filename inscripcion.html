@@ -10,7 +10,7 @@
 <title>Inscripció · Travessa del Priorat</title>
 <meta name="description" id="meta-description" content="Apúntate a la Travessa del Priorat: la Ruta del Priorat a pie, la ruta de los eremitas, la ruta del silencio. 166 km, 8 etapas, 19 pueblos. Deja tu alias escrito junto al de quienes ya se han atrevido.">
 <meta name="keywords" content="inscripción Travessa del Priorat, apuntarse ruta del Priorat, ruta de los eremitas, ruta del silencio, senderismo Priorat inscripción">
-<link rel="canonical" href="PASTE_YOUR_SITE_URL_HERE/inscripcion.html">
+<link rel="canonical" href="https://ruta-circular-priorat.vercel.app/inscripcion.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Inscríbete · Travessa del Priorat">
 <meta property="og:description" content="La Ruta del Priorat a pie, la ruta de los eremitas, la ruta del silencio. Apúntate antes de salir.">
@@ -298,9 +298,9 @@
       <label for="consentPublic" data-i18n-html="form.consentPublic"></label>
     </div>
     <button type="submit" class="btn" id="submit-btn" data-i18n="form.submit">Inscribirme</button>
-    <div class="submit-err" id="submit-err" data-i18n="form.submitErr">No hemos podido guardar tu inscripción. Comprueba tu conexión e inténtalo de nuevo.</div>
+    <div class="submit-err" id="submit-err" role="alert" aria-live="assertive" data-i18n="form.submitErr">No hemos podido guardar tu inscripción. Comprueba tu conexión e inténtalo de nuevo.</div>
   </form>
-  <div class="success" id="success-box">
+  <div class="success" id="success-box" role="status" aria-live="polite">
     <h3 data-i18n="success.h">¡Listo!</h3>
     <p data-i18n-html="success.p"></p>
   </div>

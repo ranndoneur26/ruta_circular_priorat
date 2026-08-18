@@ -8,6 +8,12 @@
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <title>Certificar la travessa · Travessa del Priorat</title>
+<meta name="description" content="Certifica que has completado la Travessa del Priorat enviando tus 4 fotos de los puntos de control de la ruta.">
+<link rel="canonical" href="https://ruta-circular-priorat.vercel.app/certificar.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Certificar la travessa · Travessa del Priorat">
+<meta property="og:description" content="Envía tus 4 fotos de los puntos de control y certifica tu Travessa del Priorat.">
+<meta property="og:locale" content="ca_ES">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -160,7 +166,7 @@
       <input type="email" id="g-email" autocomplete="off">
     </div>
     <button type="button" class="btn" id="gate-btn" data-i18n="gate.submit">Acceder</button>
-    <div class="gate-err" id="gate-err" data-i18n="gate.err">No encontramos esa combinación de alias y correo entre las inscripciones. Revisa que los escribiste igual que al inscribirte.</div>
+    <div class="gate-err" id="gate-err" role="alert" aria-live="assertive" data-i18n="gate.err">No encontramos esa combinación de alias y correo entre las inscripciones. Revisa que los escribiste igual que al inscribirte.</div>
     <div class="gate-lock" id="gate-lock"></div>
   </div>
 
@@ -234,10 +240,10 @@
       </div>
 
       <button type="submit" class="btn" id="submit-btn" data-i18n="cp.submit">Enviar fotos</button>
-      <div class="file-err" id="submit-err" data-i18n="cp.submitErr">No se ha podido enviar. Comprueba tu conexión e inténtalo de nuevo.</div>
+      <div class="file-err" id="submit-err" role="alert" aria-live="assertive" data-i18n="cp.submitErr">No se ha podido enviar. Comprueba tu conexión e inténtalo de nuevo.</div>
     </form>
 
-    <div class="success" id="success-box">
+    <div class="success" id="success-box" role="status" aria-live="polite">
       <h3 data-i18n="success.h">¡Fotos enviadas!</h3>
       <p data-i18n="success.p">Las revisaremos y, si todo encaja, tu alias aparecerá marcado como verificado en la lista de caminantes. Esto no es automático: alguien las mira a mano.</p>
     </div>
