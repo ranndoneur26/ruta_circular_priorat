@@ -127,7 +127,7 @@
         },
         "calor": {
           "h": "Gestión del calor",
-          "body": "<p>Con etapas de hasta 18&nbsp;km y poca sombra, el golpe de calor es un riesgo más real en esta ruta que perderse.</p>\n           <p><strong>Agotamiento por calor</strong> (frecuente, se resuelve parando): sudoración excesiva, debilidad, mareo, piel pálida y húmeda. Para, busca sombra, bebe agua con sales, descansa al menos 30 minutos.</p>\n           <div class=\"g-warn\"><p><strong>Golpe de calor</strong> (urgencia médica): piel caliente y seca, confusión, temperatura corporal muy alta. Llama al <strong>112</strong>, enfría a la persona con lo que tengas mientras llega ayuda.</p></div>\n           <p>Señal de alarma temprana: si dejas de sudar con calor fuerte y sigues caminando, es momento de parar, no de continuar.</p>"
+          "body": "<p>Con etapas de hasta 32,8&nbsp;km y hasta 14,5&nbsp;horas de caminata (etapas 2 y 5, las más largas y expuestas), y con poca sombra en general, el golpe de calor es un riesgo más real en esta ruta que perderse.</p>\n           <p><strong>Agotamiento por calor</strong> (frecuente, se resuelve parando): sudoración excesiva, debilidad, mareo, piel pálida y húmeda. Para, busca sombra, bebe agua con sales, descansa al menos 30 minutos.</p>\n           <div class=\"g-warn\"><p><strong>Golpe de calor</strong> (urgencia médica): piel caliente y seca, confusión, temperatura corporal muy alta. Llama al <strong>112</strong>, enfría a la persona con lo que tengas mientras llega ayuda.</p></div>\n           <p>Señal de alarma temprana: si dejas de sudar con calor fuerte y sigues caminando, es momento de parar, no de continuar.</p>"
         },
         "terreno": {
           "h": "Terreno y calzado",
@@ -656,7 +656,7 @@
         },
         "calor": {
           "h": "Gestió de la calor",
-          "body": "<p>Amb etapes de fins a 18&nbsp;km i poca ombra, el cop de calor és un risc més real en aquesta ruta que perdre's.</p>\n           <p><strong>Esgotament per calor</strong> (freqüent, es resol parant): suor excessiva, feblesa, marejos, pell pàl·lida i humida. Para, busca ombra, beu aigua amb sals, descansa almenys 30 minuts.</p>\n           <div class=\"g-warn\"><p><strong>Cop de calor</strong> (urgència mèdica): pell calenta i seca, confusió, temperatura corporal molt alta. Truca al <strong>112</strong>, refreda la persona amb el que tinguis mentre arriba ajuda.</p></div>\n           <p>Senyal d'alarma primerenca: si deixes de suar amb calor forta i continues caminant, és moment de parar, no de continuar.</p>"
+          "body": "<p>Amb etapes de fins a 32,8&nbsp;km i fins a 14,5&nbsp;hores de caminada (etapes 2 i 5, les més llargues i exposades), i amb poca ombra en general, el cop de calor és un risc més real en aquesta ruta que perdre's.</p>\n           <p><strong>Esgotament per calor</strong> (freqüent, es resol parant): suor excessiva, feblesa, marejos, pell pàl·lida i humida. Para, busca ombra, beu aigua amb sals, descansa almenys 30 minuts.</p>\n           <div class=\"g-warn\"><p><strong>Cop de calor</strong> (urgència mèdica): pell calenta i seca, confusió, temperatura corporal molt alta. Truca al <strong>112</strong>, refreda la persona amb el que tinguis mentre arriba ajuda.</p></div>\n           <p>Senyal d'alarma primerenca: si deixes de suar amb calor forta i continues caminant, és moment de parar, no de continuar.</p>"
         },
         "terreno": {
           "h": "Terreny i calçat",
@@ -1185,7 +1185,7 @@
         },
         "calor": {
           "h": "Managing the heat",
-          "body": "<p>With stages of up to 18&nbsp;km and little shade, heatstroke is a more real risk on this route than getting lost.</p>\n           <p><strong>Heat exhaustion</strong> (common, resolved by stopping): excessive sweating, weakness, dizziness, pale and clammy skin. Stop, find shade, drink water with salts, rest at least 30 minutes.</p>\n           <div class=\"g-warn\"><p><strong>Heatstroke</strong> (medical emergency): hot, dry skin, confusion, very high body temperature. Call <strong>112</strong>, cool the person with whatever you have while help arrives.</p></div>\n           <p>Early warning sign: if you stop sweating in strong heat and keep walking, it's time to stop, not to continue.</p>"
+          "body": "<p>With stages of up to 32.8&nbsp;km and up to 14.5&nbsp;hours of walking (stages 2 and 5, the longest and most exposed), and with little shade overall, heatstroke is a more real risk on this route than getting lost.</p>\n           <p><strong>Heat exhaustion</strong> (common, resolved by stopping): excessive sweating, weakness, dizziness, pale and clammy skin. Stop, find shade, drink water with salts, rest at least 30 minutes.</p>\n           <div class=\"g-warn\"><p><strong>Heatstroke</strong> (medical emergency): hot, dry skin, confusion, very high body temperature. Call <strong>112</strong>, cool the person with whatever you have while help arrives.</p></div>\n           <p>Early warning sign: if you stop sweating in strong heat and keep walking, it's time to stop, not to continue.</p>"
         },
         "terreno": {
           "h": "Terrain and footwear",
