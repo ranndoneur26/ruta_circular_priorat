@@ -391,6 +391,7 @@
         "email": "Tu correo (el mismo de la inscripción)",
         "submit": "Acceder",
         "err": "No encontramos esa combinación de alias y correo entre las inscripciones. Revisa que los escribiste igual que al inscribirte.",
+        "serverErr": "No hemos podido comprobarlo ahora mismo. Comprueba tu conexión e inténtalo de nuevo en un momento.",
         "lock": "Demasiados intentos. Espera {s} segundos antes de volver a probar."
       },
       "welcome": "Hola, {alias} — sube tus 4 fotos cuando quieras.",
@@ -415,7 +416,8 @@
         "remove": "Quitar",
         "submit": "Enviar fotos",
         "submitting": "Enviando…",
-        "missing": "Faltan {n} fotos por subir."
+        "missing": "Faltan {n} fotos por subir.",
+        "submitErr": "No se ha podido enviar. Comprueba tu conexión e inténtalo de nuevo."
       },
       "success": {
         "h": "¡Fotos enviadas!",
@@ -921,6 +923,7 @@
         "email": "El teu correu (el mateix de la inscripció)",
         "submit": "Accedir",
         "err": "No hem trobat aquesta combinació d'àlies i correu entre les inscripcions. Revisa que els vas escriure igual que en inscriure't.",
+        "serverErr": "No ho hem pogut comprovar ara mateix. Comprova la teva connexió i torna-ho a provar en un moment.",
         "lock": "Massa intents. Espera {s} segons abans de tornar a provar."
       },
       "welcome": "Hola, {alias} — puja les teves 4 fotos quan vulguis.",
@@ -945,7 +948,8 @@
         "remove": "Treure",
         "submit": "Enviar fotos",
         "submitting": "Enviant…",
-        "missing": "Falten {n} fotos per pujar."
+        "missing": "Falten {n} fotos per pujar.",
+        "submitErr": "No s'ha pogut enviar. Comprova la teva connexió i torna-ho a provar."
       },
       "success": {
         "h": "Fotos enviades!",
@@ -1451,6 +1455,7 @@
         "email": "Your email (same as sign-up)",
         "submit": "Access",
         "err": "We couldn't find that alias/email combination among sign-ups. Check you typed them exactly as when you registered.",
+        "serverErr": "We couldn't check that right now. Check your connection and try again in a moment.",
         "lock": "Too many attempts. Wait {s} seconds before trying again."
       },
       "welcome": "Hi, {alias} — upload your 4 photos whenever you're ready.",
@@ -1475,7 +1480,8 @@
         "remove": "Remove",
         "submit": "Send photos",
         "submitting": "Sending…",
-        "missing": "{n} photos still missing."
+        "missing": "{n} photos still missing.",
+        "submitErr": "Couldn't send it. Check your connection and try again."
       },
       "success": {
         "h": "Photos sent!",

@@ -234,6 +234,7 @@
       </div>
 
       <button type="submit" class="btn" id="submit-btn" data-i18n="cp.submit">Enviar fotos</button>
+      <div class="file-err" id="submit-err" data-i18n="cp.submitErr">No se ha podido enviar. Comprueba tu conexión e inténtalo de nuevo.</div>
     </form>
 
     <div class="success" id="success-box">
@@ -369,13 +370,44 @@
 
     const gateBtn = document.getElementById("gate-btn");
     gateBtn.disabled = true;
-    const entries = await loadEntries();
+
+    let found = null;
+    let serverError = null;
+    if (SHEETS_CONFIGURED){
+      try {
+        const res = await fetch(SHEETS_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ action: "checkwalker", alias, email })
+        });
+        const result = await res.json();
+        if (result && result.ok === false){
+          serverError = result.error || "server-error";
+        } else if (result && result.ok === true && result.found){
+          found = { key: "sheet", data: Object.assign({ email }, result.data) };
+        }
+      } catch(e){
+        serverError = "network-error";
+      }
+    }
+
+    // Compatibilidad con entradas de prueba locales (window.storage / localStorage),
+    // que sí incluyen email porque no pasan por el endpoint público.
+    if (!found && !serverError){
+      const localEntries = await loadEntries();
+      found = localEntries.find(e =>
+        (e.data.alias || "").trim().toLowerCase() === alias &&
+        (e.data.email || "").trim().toLowerCase() === email
+      );
+    }
+
     gateBtn.disabled = false;
 
-    const found = entries.find(e =>
-      (e.data.alias || "").trim().toLowerCase() === alias &&
-      (e.data.email || "").trim().toLowerCase() === email
-    );
+    if (serverError){
+      errBox.textContent = T[currentLang].gate.serverErr || errBox.textContent;
+      errBox.classList.add("show");
+      return;
+    }
 
     if (!found){
       const next = { count:a.count+1, lockUntil:0 };
@@ -566,23 +598,47 @@
   for (let i=1; i<=4; i++) wireDropzone(i);
 
   const certForm = document.getElementById("cert-form");
-  certForm.addEventListener("submit", (e) => {
+  const FORMSUBMIT_AJAX_URL = "https://formsubmit.co/ajax/ruta.silenci@gmail.com";
+
+  certForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const submitErrBox = document.getElementById("submit-err");
+    if (submitErrBox) submitErrBox.classList.remove("show");
+
     const hp = document.getElementById("website").value;
     if (hp){
-      e.preventDefault();
       certForm.style.display = "none";
       document.getElementById("success-box").classList.add("show");
       return;
     }
     const missing = [1,2,3,4].filter(i => !fileState[i]);
     if (missing.length){
-      e.preventDefault();
       alert(T[currentLang].cp.missing.replace("{n}", missing.length));
       return;
     }
+
     const btn = document.getElementById("submit-btn");
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span> ' + T[currentLang].cp.submitting;
+
+    try {
+      const formData = new FormData(certForm);
+      const res = await fetch(FORMSUBMIT_AJAX_URL, {
+        method: "POST",
+        body: formData,
+        headers: { "Accept": "application/json" }
+      });
+      if (!res.ok) throw new Error("http-" + res.status);
+
+      certForm.style.display = "none";
+      document.getElementById("success-box").classList.add("show");
+    } catch(err){
+      btn.disabled = false;
+      btn.innerHTML = T[currentLang].cp.submit;
+      const submitErrEl = document.getElementById("submit-err");
+      if (submitErrEl) submitErrEl.classList.add("show");
+      else alert(T[currentLang].cp.submitErr || "No se ha podido enviar. Comprueba tu conexión e inténtalo de nuevo.");
+    }
   });
 
   applyStaticText(I18N.setLanguage(I18N.resolveInitialLanguage()));
