@@ -225,7 +225,11 @@
   async function sheetsList(){
     if (!SHEETS_CONFIGURED) return [];
     try {
-      const res = await fetch(SHEETS_API_URL + "?action=list");
+      const res = await fetch(SHEETS_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ action:"adminlist", token: adminPass })
+      });
       const data = await res.json();
       if (Array.isArray(data)) return data;
       if (data && Array.isArray(data.rows)) return data.rows;
@@ -460,7 +464,7 @@
           : `<button class="mini-btn verify" data-action="notify">${t.action.notify}</button>`;
       }
       return `<tr data-idx="${i}">
-        <td>${escapeHtml(w.alias)}</td>
+        <td>${escapeHtml(w.alias)}${w.publicDisplay === false ? '<span class="badge" style="margin-left:6px;border-color:var(--llicorella);font-size:10px;" title="No aparece en la lista pública">🔒 privado</span>' : ""}</td>
         <td>${escapeHtml(w.email)}</td>
         <td>${t.variant[w.variante] || escapeHtml(w.variante || "—")}</td>
         <td>${escapeHtml(w.startDate)}</td>

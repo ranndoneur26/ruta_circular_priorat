@@ -291,7 +291,11 @@
     </div>
     <div class="consent" id="field-consent">
       <input type="checkbox" id="consent" name="consent">
-      <label for="consent" data-i18n-html="form.consent"></label>
+      <label for="consent" data-i18n-html="form.consentRequired"></label>
+    </div>
+    <div class="consent" id="field-consent-public">
+      <input type="checkbox" id="consentPublic" name="consentPublic" checked>
+      <label for="consentPublic" data-i18n-html="form.consentPublic"></label>
     </div>
     <button type="submit" class="btn" id="submit-btn" data-i18n="form.submit">Inscribirme</button>
     <div class="submit-err" id="submit-err" data-i18n="form.submitErr">No hemos podido guardar tu inscripción. Comprueba tu conexión e inténtalo de nuevo.</div>
@@ -303,8 +307,8 @@
 </main>
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; width:100%;">
-    <span data-i18n="footer.left">Travessa del Priorat — maqueta de estructura, sin verificar sobre el terreno.</span>
-    <span class="mono" data-i18n="footer.right">v0.2 · mapa interactivo (esquemático)</span>
+    <span data-i18n="footer.left">Travessa del Priorat — las 8 etapas verificadas sobre el terreno con GPX real.</span>
+    <span class="mono" data-i18n="footer.right">v1.0 · circuito cerrado, 19 pueblos, 8/8 etapas verificadas</span>
   </div>
   <div class="wrap footer-legal">
     <span class="mono" id="footer-copy"></span>
@@ -407,6 +411,7 @@
     const date = document.getElementById('startdate').value;
     const mensaje = document.getElementById('mensaje').value.trim();
     const consent = document.getElementById('consent').checked;
+    const consentPublic = document.getElementById('consentPublic').checked;
 
     const aliasField = document.getElementById('field-alias');
     const emailField = document.getElementById('field-email');
@@ -434,7 +439,7 @@
     consentField.classList.toggle('invalid', !consent);
     if (!consent) ok = false;
 
-    return ok ? { alias, email, origen, variante, date, mensaje, consent } : null;
+    return ok ? { alias, email, origen, variante, date, mensaje, consent, consentPublic } : null;
   }
 
   form.addEventListener('submit', async (e) => {
@@ -465,6 +470,7 @@
       startDate: data.date,
       mensaje: data.mensaje || '',
       consent: true,
+      publicDisplay: data.consentPublic,
       lang: currentLang,
       pageUrl: window.location.href,
       userAgent: navigator.userAgent,
@@ -650,6 +656,13 @@
     document.getElementById("footer-link-privacidad").addEventListener("click", () => openLegal("privacidad"));
     document.getElementById("footer-link-cookies").addEventListener("click", () => openLegal("cookies"));
     document.getElementById("cookie-info-btn").addEventListener("click", () => openLegal("cookies"));
+    document.getElementById("field-consent").addEventListener("click", (e) => {
+      const link = e.target.closest("#open-legal-consent");
+      if (!link) return;
+      e.preventDefault();
+      e.stopPropagation();
+      openLegal("privacidad");
+    });
     document.getElementById("legal-modal-close").addEventListener("click", closeLegal);
     document.getElementById("legal-modal").addEventListener("click", (e) => {
       if (e.target.id === "legal-modal") closeLegal();
