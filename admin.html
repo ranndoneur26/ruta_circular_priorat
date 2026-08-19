@@ -184,6 +184,7 @@
   </div>
 </div>
 
+<script src="config.js"></script>
 <script src="i18n.js"></script>
 <script>
   const T = { es: I18N.dict.es.admin, ca: I18N.dict.ca.admin, en: I18N.dict.en.admin };
@@ -207,7 +208,7 @@
   const LOCAL_KEY = "travessa_priorat_walkers";
 
   // --- Backend real: Google Sheets vía Apps Script (ver INSTRUCCIONES.md). ---
-  const SHEETS_API_URL = "https://script.google.com/macros/s/AKfycbys7Ig8er3AThbtBR0cK5y2HfmocLKUdbGAFdHl18eKX3r3Yakd5bR06rTGAXQKbi_hYA/exec";
+  const SHEETS_API_URL = window.APP_CONFIG.SHEETS_API_URL;
   const SHEETS_CONFIGURED = /^https:\/\/script\.google(usercontent)?\.com\//.test(SHEETS_API_URL);
 
   async function sheetsLogin(password){

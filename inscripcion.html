@@ -337,6 +337,7 @@
     <div id="legal-modal-body"></div>
   </div>
 </div>
+<script src="config.js"></script>
 <script src="i18n.js"></script>
 <script>
   const T = { es: I18N.dict.es.inscripcion, ca: I18N.dict.ca.inscripcion, en: I18N.dict.en.inscripcion };
@@ -372,7 +373,7 @@
   const mensajeCount = document.getElementById('mensaje-count');
   mensajeEl.addEventListener('input', () => { mensajeCount.textContent = mensajeEl.value.length; });
 
-  const SHEETS_API_URL = 'https://script.google.com/macros/s/AKfycbys7Ig8er3AThbtBR0cK5y2HfmocLKUdbGAFdHl18eKX3r3Yakd5bR06rTGAXQKbi_hYA/exec';
+  const SHEETS_API_URL = window.APP_CONFIG.SHEETS_API_URL;
   const SHEETS_CONFIGURED = /^https:\/\/script\.google(usercontent)?\.com\//.test(SHEETS_API_URL);
 
   async function sheetsAdd(entry){
