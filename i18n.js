@@ -396,6 +396,10 @@
         "lock": "Demasiados intentos. Espera {s} segundos antes de volver a probar."
       },
       "welcome": "Hola, {alias} — sube tus 4 fotos cuando quieras.",
+      "alreadyCert": {
+        "title": "Ya recibimos tu certificación",
+        "body": "Este alias y correo ya enviaron sus 4 fotos desde este mismo dispositivo el {date}. Si crees que es un error o necesitas reenviarlas, escríbenos a ruta.silenci@gmail.com."
+      },
       "cp": {
         "label1": "Punto 1 · fin etapa 2",
         "h1": "Bellmunt del Priorat",
@@ -485,8 +489,8 @@
       "hdrList": "Ver caminantes",
       "hdrBack": "← Volver al circuito",
       "notice": {
-        "strong": "Esto no es seguridad de nivel empresarial.",
-        "body": "La contraseña se valida en el servidor, no está expuesta en el código de esta página. Aun así, es un sistema simple, pensado para evitar que un visitante casual toque algo por error — no para resistir un ataque dirigido. No la reutilices en otros sitios."
+        "strong": "Esto no es seguridad real.",
+        "body": "Es solo una contraseña simple en el propio JavaScript de la página, pensada para que un visitante casual no toque nada por error — cualquiera que mire el código fuente puede verla. No la uses para nada sensible."
       },
       "gate": {
         "placeholder": "Contraseña de administración",
@@ -929,6 +933,10 @@
         "lock": "Massa intents. Espera {s} segons abans de tornar a provar."
       },
       "welcome": "Hola, {alias} — puja les teves 4 fotos quan vulguis.",
+      "alreadyCert": {
+        "title": "Ja hem rebut la teva certificació",
+        "body": "Aquest alies i correu ja van enviar les 4 fotos des d'aquest mateix dispositiu el {date}. Si creus que és un error o necessites tornar-les a enviar, escriu-nos a ruta.silenci@gmail.com."
+      },
       "cp": {
         "label1": "Punt 1 · final etapa 2",
         "h1": "Bellmunt del Priorat",
@@ -1018,8 +1026,8 @@
       "hdrList": "Veure caminants",
       "hdrBack": "← Tornar al circuit",
       "notice": {
-        "strong": "Això no és seguretat de nivell empresarial.",
-        "body": "La contrasenya es valida al servidor, no està exposada al codi d'aquesta pàgina. Tot i així, és un sistema senzill, pensat per evitar que un visitant casual toqui res per error — no per resistir un atac dirigit. No la reutilitzis en altres llocs."
+        "strong": "Això no és seguretat real.",
+        "body": "Només és una contrasenya simple en el propi JavaScript de la pàgina, pensada perquè un visitant casual no toqui res per error — qualsevol que miri el codi font la pot veure. No la facis servir per a res sensible."
       },
       "gate": {
         "placeholder": "Contrasenya d'administració",
@@ -1462,6 +1470,10 @@
         "lock": "Too many attempts. Wait {s} seconds before trying again."
       },
       "welcome": "Hi, {alias} — upload your 4 photos whenever you're ready.",
+      "alreadyCert": {
+        "title": "We already received your certification",
+        "body": "This alias and email already sent the 4 photos from this same device on {date}. If you think this is a mistake or need to resend them, email us at ruta.silenci@gmail.com."
+      },
       "cp": {
         "label1": "Point 1 · end of stage 2",
         "h1": "Bellmunt del Priorat",
@@ -1551,8 +1563,8 @@
       "hdrList": "See walkers",
       "hdrBack": "← Back to the circuit",
       "notice": {
-        "strong": "This is not enterprise-grade security.",
-        "body": "The password is checked on the server, it's not exposed in this page's code. Still, it's a simple system meant to stop a casual visitor from touching anything by accident — not to withstand a targeted attack. Don't reuse it on other sites."
+        "strong": "This is not real security.",
+        "body": "It's just a simple password inside the page's own JavaScript, meant to stop a casual visitor from touching anything by accident — anyone who views the page source can see it. Don't use it for anything sensitive."
       },
       "gate": {
         "placeholder": "Admin password",

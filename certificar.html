@@ -170,6 +170,11 @@
     <div class="gate-lock" id="gate-lock"></div>
   </div>
 
+  <div class="success" id="already-cert-box" role="status" aria-live="polite">
+    <h3 id="already-cert-title"></h3>
+    <p id="already-cert-body"></p>
+  </div>
+
   <div id="upload-area">
     <p class="welcome-back" id="welcome-back"></p>
     <div class="progress-row" id="progress-row">
@@ -296,6 +301,33 @@
   }
 
   const LOCAL_KEY = "travessa_priorat_walkers";
+
+  // ---------- Registro local de "ya certificado" (evita reenvíos accidentales
+  // desde este mismo navegador/dispositivo; no es un bloqueo a prueba de fallos,
+  // ver nota más abajo junto a isAlreadyCertifiedLocally). ----------
+  const CERTIFIED_REGISTRY_KEY = "travessa_certified_registry";
+
+  function certifiedKey(alias, email){
+    return (alias || "").trim().toLowerCase() + "|" + (email || "").trim().toLowerCase();
+  }
+  function getCertifiedRegistry(){
+    try {
+      const raw = localStorage.getItem(CERTIFIED_REGISTRY_KEY);
+      const parsed = raw ? JSON.parse(raw) : {};
+      return (parsed && typeof parsed === "object") ? parsed : {};
+    } catch(e){ return {}; }
+  }
+  function isAlreadyCertifiedLocally(alias, email){
+    const reg = getCertifiedRegistry();
+    return reg[certifiedKey(alias, email)] || null;
+  }
+  function markCertifiedLocally(alias, email){
+    try {
+      const reg = getCertifiedRegistry();
+      reg[certifiedKey(alias, email)] = new Date().toISOString();
+      localStorage.setItem(CERTIFIED_REGISTRY_KEY, JSON.stringify(reg));
+    } catch(e){}
+  }
 
   async function loadEntries(){
     let entries = [];
@@ -436,6 +468,20 @@
     saveAttempts({ count:0, lockUntil:0 });
     matchedWalker = found.data;
     matchedKey = found.key;
+
+    const alreadyAt = isAlreadyCertifiedLocally(matchedWalker.alias, matchedWalker.email);
+    if (alreadyAt){
+      document.getElementById("gate").style.display = "none";
+      const dateStr = new Date(alreadyAt).toLocaleDateString(
+        currentLang === "en" ? "en-GB" : (currentLang === "ca" ? "ca-ES" : "es-ES"),
+        { day: "numeric", month: "long", year: "numeric" }
+      );
+      document.getElementById("already-cert-title").textContent = T[currentLang].alreadyCert.title;
+      document.getElementById("already-cert-body").textContent = T[currentLang].alreadyCert.body.replace("{date}", dateStr);
+      document.getElementById("already-cert-box").classList.add("show");
+      return;
+    }
+
     document.getElementById("gate").style.display = "none";
     document.getElementById("upload-area").classList.add("show");
     document.getElementById("hidden-alias").value = matchedWalker.alias;
@@ -660,6 +706,7 @@
     if (!formSubmitted) return;
     clearTimeout(submitTimeout);
     formSubmitted = false;
+    if (matchedWalker) markCertifiedLocally(matchedWalker.alias, matchedWalker.email);
     certForm.style.display = "none";
     document.getElementById("success-box").classList.add("show");
   });
