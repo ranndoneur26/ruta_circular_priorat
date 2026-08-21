@@ -171,12 +171,12 @@
         "cta": "Inscribirme →"
       },
       "footer": {
-        "left": "Ruta del Silenci — las 8 etapas verificadas sobre el terreno con GPX real.",
+        "left": "Travessa del Priorat — las 8 etapas verificadas sobre el terreno con GPX real.",
         "right": "v1.0 · circuito cerrado, 19 pueblos, 8/8 etapas verificadas"
       },
       "meta": {
-        "title": "Ruta del Silenci · Travessa del Priorat, la ruta de los eremitas",
-        "description": "La Ruta del Silenci, también llamada Travessa del Priorat o la ruta de los eremitas: una travesía circular de 166 km y 8 etapas por los 19 pueblos del Priorat, verificada con GPX real."
+        "title": "Travessa del Priorat · Gran travesía circular a pie",
+        "description": "La Ruta del Priorat a pie, también llamada la ruta de los eremitas o la ruta del silencio: una travesía circular de 166 km y 8 etapas por los 19 pueblos del Priorat, verificada con GPX real."
       },
       "also": {
         "eyebrow": "También conocida como",
@@ -289,11 +289,11 @@
         "sello": "Información de esta página contrastada con el directorio oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a> y fuentes patrimoniales citadas (Viquipèdia, enciclopedia.cat, Generalitat de Catalunya). Actualizada por última vez en julio de 2026."
       },
       "footer": {
-        "left": "Ruta del Silenci — información práctica, sujeta a cambios normativos.",
+        "left": "Travessa del Priorat — información práctica, sujeta a cambios normativos.",
         "right": "v1.0 · normativa, patrimonio y servicios"
       },
       "meta": {
-        "title": "Información práctica · Ruta del Silenci"
+        "title": "Información práctica · Travessa del Priorat"
       },
       "backToTop": "Volver arriba"
     },
@@ -366,11 +366,11 @@
         "p": "Tu alias ya está en la lista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Ver la lista de caminantes →</a><br>Cuando termines la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifícala con 4 fotos →</a>"
       },
       "footer": {
-        "text": "Ruta del Silenci — inscripción informal, sin verificación de identidad."
+        "text": "Travessa del Priorat — inscripción informal, sin verificación de identidad."
       },
       "meta": {
-        "title": "Inscripción · Ruta del Silenci",
-        "description": "Apúntate a la Ruta del Silenci (Travessa del Priorat): la ruta de los eremitas. 166 km, 8 etapas, 19 pueblos."
+        "title": "Inscripción · Travessa del Priorat",
+        "description": "Apúntate a la Travessa del Priorat: la Ruta del Priorat a pie, la ruta de los eremitas, la ruta del silencio. 166 km, 8 etapas, 19 pueblos."
       }
     },
     "certificar": {
@@ -425,10 +425,10 @@
         "p": "Las revisaremos y, si todo encaja, tu alias aparecerá marcado como verificado en la lista de caminantes. Esto no es automático: alguien las mira a mano."
       },
       "footer": {
-        "text": "Ruta del Silenci — verificación manual, no automática."
+        "text": "Travessa del Priorat — verificación manual, no automática."
       },
       "meta": {
-        "title": "Certificar la travessa · Ruta del Silenci"
+        "title": "Certificar la travessa · Travessa del Priorat"
       }
     },
     "finalizados": {
@@ -470,23 +470,23 @@
         "cta": "Inscribirme →"
       },
       "footer": {
-        "text": "Ruta del Silenci — lista pública informal, sin verificación de identidad. Los correos nunca se muestran."
+        "text": "Travessa del Priorat — lista pública informal, sin verificación de identidad. Los correos nunca se muestran."
       },
       "meta": {
-        "title": "Caminantes · Ruta del Silenci"
+        "title": "Caminantes · Travessa del Priorat"
       }
     },
     "admin": {
       "meta": {
-        "title": "Admin · Ruta del Silenci"
+        "title": "Admin · Travessa del Priorat"
       },
-      "h1": "Ruta del Silenci — admin",
+      "h1": "Travessa del Priorat — admin",
       "sub": "Panel para marcar como verificadas las inscripciones cuyas 4 fotos ya has revisado en tu correo.",
       "hdrList": "Ver caminantes",
       "hdrBack": "← Volver al circuito",
       "notice": {
-        "strong": "Esto no es seguridad real.",
-        "body": "Es solo una contraseña simple en el propio JavaScript de la página, pensada para que un visitante casual no toque nada por error — cualquiera que mire el código fuente puede verla. No la uses para nada sensible."
+        "strong": "Esto no es seguridad de nivel empresarial.",
+        "body": "La contraseña se valida en el servidor, no está expuesta en el código de esta página. Aun así, es un sistema simple, pensado para evitar que un visitante casual toque algo por error — no para resistir un ataque dirigido. No la reutilices en otros sitios."
       },
       "gate": {
         "placeholder": "Contraseña de administración",
@@ -704,12 +704,12 @@
         "cta": "Inscriure'm →"
       },
       "footer": {
-        "left": "Ruta del Silenci — les 8 etapes verificades sobre el terreny amb GPX real.",
+        "left": "Travessa del Priorat — les 8 etapes verificades sobre el terreny amb GPX real.",
         "right": "v1.0 · circuit tancat, 19 pobles, 8/8 etapes verificades"
       },
       "meta": {
-        "title": "Ruta del Silenci · Travessa del Priorat, la ruta dels eremites",
-        "description": "La Ruta del Silenci, també anomenada Travessa del Priorat o la ruta dels eremites: una travessa circular de 166 km i 8 etapes pels 19 pobles del Priorat, verificada amb GPX real."
+        "title": "Travessa del Priorat · Gran travessa circular a peu",
+        "description": "La Ruta del Priorat a peu, també anomenada la ruta dels eremites o la ruta del silenci: una travessa circular de 166 km i 8 etapes pels 19 pobles del Priorat, verificada amb GPX real."
       },
       "also": {
         "eyebrow": "També coneguda com",
@@ -822,11 +822,11 @@
         "sello": "Informació d'aquesta pàgina contrastada amb el directori oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a> i fonts patrimonials citades (Viquipèdia, enciclopedia.cat, Generalitat de Catalunya). Actualitzada per última vegada el juliol de 2026."
       },
       "footer": {
-        "left": "Ruta del Silenci — informació pràctica, subjecta a canvis normatius.",
+        "left": "Travessa del Priorat — informació pràctica, subjecta a canvis normatius.",
         "right": "v1.0 · normativa, patrimoni i serveis"
       },
       "meta": {
-        "title": "Informació pràctica · Ruta del Silenci"
+        "title": "Informació pràctica · Travessa del Priorat"
       },
       "backToTop": "Tornar amunt"
     },
@@ -899,11 +899,11 @@
         "p": "El teu àlies ja és a la llista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Veure la llista de caminants →</a><br>Quan acabis la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifica-la amb 4 fotos →</a>"
       },
       "footer": {
-        "text": "Ruta del Silenci — inscripció informal, sense verificació d'identitat."
+        "text": "Travessa del Priorat — inscripció informal, sense verificació d'identitat."
       },
       "meta": {
-        "title": "Inscripció · Ruta del Silenci",
-        "description": "Inscriu-te a la Ruta del Silenci (Travessa del Priorat): la ruta dels eremites. 166 km, 8 etapes, 19 pobles."
+        "title": "Inscripció · Travessa del Priorat",
+        "description": "Inscriu-te a la Travessa del Priorat: la Ruta del Priorat a peu, la ruta dels eremites, la ruta del silenci. 166 km, 8 etapes, 19 pobles."
       }
     },
     "certificar": {
@@ -958,10 +958,10 @@
         "p": "Les revisarem i, si tot encaixa, el teu àlies apareixerà marcat com a verificat a la llista de caminants. Això no és automàtic: algú les mira a mà."
       },
       "footer": {
-        "text": "Ruta del Silenci — verificació manual, no automàtica."
+        "text": "Travessa del Priorat — verificació manual, no automàtica."
       },
       "meta": {
-        "title": "Certificar la travessa · Ruta del Silenci"
+        "title": "Certificar la travessa · Travessa del Priorat"
       }
     },
     "finalizados": {
@@ -1003,23 +1003,23 @@
         "cta": "Inscriure'm →"
       },
       "footer": {
-        "text": "Ruta del Silenci — llista pública informal, sense verificació d'identitat. Els correus mai es mostren."
+        "text": "Travessa del Priorat — llista pública informal, sense verificació d'identitat. Els correus mai es mostren."
       },
       "meta": {
-        "title": "Caminants · Ruta del Silenci"
+        "title": "Caminants · Travessa del Priorat"
       }
     },
     "admin": {
       "meta": {
-        "title": "Admin · Ruta del Silenci"
+        "title": "Admin · Travessa del Priorat"
       },
-      "h1": "Ruta del Silenci — admin",
+      "h1": "Travessa del Priorat — admin",
       "sub": "Panell per marcar com a verificades les inscripcions les 4 fotos de les quals ja has revisat al teu correu.",
       "hdrList": "Veure caminants",
       "hdrBack": "← Tornar al circuit",
       "notice": {
-        "strong": "Això no és seguretat real.",
-        "body": "Només és una contrasenya simple en el propi JavaScript de la pàgina, pensada perquè un visitant casual no toqui res per error — qualsevol que miri el codi font la pot veure. No la facis servir per a res sensible."
+        "strong": "Això no és seguretat de nivell empresarial.",
+        "body": "La contrasenya es valida al servidor, no està exposada al codi d'aquesta pàgina. Tot i així, és un sistema senzill, pensat per evitar que un visitant casual toqui res per error — no per resistir un atac dirigit. No la reutilitzis en altres llocs."
       },
       "gate": {
         "placeholder": "Contrasenya d'administració",
@@ -1237,12 +1237,12 @@
         "cta": "Sign me up →"
       },
       "footer": {
-        "left": "Ruta del Silenci — all 8 stages verified on the ground with real GPX.",
+        "left": "Travessa del Priorat — all 8 stages verified on the ground with real GPX.",
         "right": "v1.0 · closed loop, 19 villages, 8/8 stages verified"
       },
       "meta": {
-        "title": "Ruta del Silenci · Travessa del Priorat, the hermits' route",
-        "description": "Ruta del Silenci, also known as Travessa del Priorat or the hermits' route: a circular 166 km, 8-stage crossing through Priorat's 19 villages, verified with real GPX."
+        "title": "Travessa del Priorat · A great circular walking route",
+        "description": "The Priorat Walking Route, also known as the hermits' route or the route of silence: a circular 166 km, 8-stage crossing through Priorat's 19 villages, verified with real GPX."
       },
       "also": {
         "eyebrow": "Also known as",
@@ -1355,11 +1355,11 @@
         "sello": "Information on this page cross-checked against the official directory of <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a> and cited heritage sources (Viquipèdia, enciclopedia.cat, Generalitat de Catalunya). Last updated July 2026."
       },
       "footer": {
-        "left": "Ruta del Silenci — practical information, subject to regulatory changes.",
+        "left": "Travessa del Priorat — practical information, subject to regulatory changes.",
         "right": "v1.0 · regulations, heritage and services"
       },
       "meta": {
-        "title": "Practical information · Ruta del Silenci"
+        "title": "Practical information · Travessa del Priorat"
       },
       "backToTop": "Back to top"
     },
@@ -1432,11 +1432,11 @@
         "p": "Your alias is now on the list. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">See the list of walkers →</a><br>Once you finish the route, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certify it with 4 photos →</a>"
       },
       "footer": {
-        "text": "Ruta del Silenci — informal sign-up, no identity verification."
+        "text": "Travessa del Priorat — informal sign-up, no identity verification."
       },
       "meta": {
-        "title": "Sign up · Ruta del Silenci",
-        "description": "Sign up for the Ruta del Silenci (Travessa del Priorat): the hermits' route. 166 km, 8 stages, 19 villages."
+        "title": "Sign up · Travessa del Priorat",
+        "description": "Sign up for the Travessa del Priorat: the Priorat Walking Route, the hermits' route, the route of silence. 166 km, 8 stages, 19 villages."
       }
     },
     "certificar": {
@@ -1491,10 +1491,10 @@
         "p": "We'll review them and, if everything checks out, your alias will appear marked as verified on the list of walkers. This isn't automatic: someone looks at them by hand."
       },
       "footer": {
-        "text": "Ruta del Silenci — manual verification, not automatic."
+        "text": "Travessa del Priorat — manual verification, not automatic."
       },
       "meta": {
-        "title": "Certify your crossing · Ruta del Silenci"
+        "title": "Certify your crossing · Travessa del Priorat"
       }
     },
     "finalizados": {
@@ -1536,23 +1536,23 @@
         "cta": "Sign up →"
       },
       "footer": {
-        "text": "Ruta del Silenci — informal public list, no identity verification. Emails are never shown."
+        "text": "Travessa del Priorat — informal public list, no identity verification. Emails are never shown."
       },
       "meta": {
-        "title": "Walkers · Ruta del Silenci"
+        "title": "Walkers · Travessa del Priorat"
       }
     },
     "admin": {
       "meta": {
-        "title": "Admin · Ruta del Silenci"
+        "title": "Admin · Travessa del Priorat"
       },
-      "h1": "Ruta del Silenci — admin",
+      "h1": "Travessa del Priorat — admin",
       "sub": "Panel to mark as verified the sign-ups whose 4 photos you've already reviewed by email.",
       "hdrList": "See walkers",
       "hdrBack": "← Back to the circuit",
       "notice": {
-        "strong": "This is not real security.",
-        "body": "It's just a simple password inside the page's own JavaScript, meant to stop a casual visitor from touching anything by accident — anyone who views the page source can see it. Don't use it for anything sensitive."
+        "strong": "This is not enterprise-grade security.",
+        "body": "The password is checked on the server, it's not exposed in this page's code. Still, it's a simple system meant to stop a casual visitor from touching anything by accident — not to withstand a targeted attack. Don't reuse it on other sites."
       },
       "gate": {
         "placeholder": "Admin password",
