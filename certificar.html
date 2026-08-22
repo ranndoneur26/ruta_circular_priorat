@@ -329,6 +329,17 @@
     } catch(e){}
   }
 
+  function showAlreadyCert(dateVal){
+    const dateStr = new Date(dateVal).toLocaleDateString(
+      currentLang === "en" ? "en-GB" : (currentLang === "ca" ? "ca-ES" : "es-ES"),
+      { day: "numeric", month: "long", year: "numeric" }
+    );
+    document.getElementById("upload-area").classList.remove("show");
+    document.getElementById("already-cert-title").textContent = T[currentLang].alreadyCert.title;
+    document.getElementById("already-cert-body").textContent = T[currentLang].alreadyCert.body.replace("{date}", dateStr);
+    document.getElementById("already-cert-box").classList.add("show");
+  }
+
   async function loadEntries(){
     let entries = [];
     const sheetRows = await sheetsList();
@@ -469,16 +480,16 @@
     matchedWalker = found.data;
     matchedKey = found.key;
 
-    const alreadyAt = isAlreadyCertifiedLocally(matchedWalker.alias, matchedWalker.email);
-    if (alreadyAt){
+    // El servidor (Sheets) es la fuente de verdad cuando está disponible;
+    // localStorage es solo un respaldo rápido para cuando no lo está
+    // (SHEETS_CONFIGURED === false) o para entradas de prueba locales.
+    const serverCertifiedAt = matchedWalker.certified ? matchedWalker.certifiedAt : null;
+    const localCertifiedAt = isAlreadyCertifiedLocally(matchedWalker.alias, matchedWalker.email);
+    const effectiveCertifiedAt = serverCertifiedAt || (!SHEETS_CONFIGURED ? localCertifiedAt : null);
+
+    if (effectiveCertifiedAt){
       document.getElementById("gate").style.display = "none";
-      const dateStr = new Date(alreadyAt).toLocaleDateString(
-        currentLang === "en" ? "en-GB" : (currentLang === "ca" ? "ca-ES" : "es-ES"),
-        { day: "numeric", month: "long", year: "numeric" }
-      );
-      document.getElementById("already-cert-title").textContent = T[currentLang].alreadyCert.title;
-      document.getElementById("already-cert-body").textContent = T[currentLang].alreadyCert.body.replace("{date}", dateStr);
-      document.getElementById("already-cert-box").classList.add("show");
+      showAlreadyCert(effectiveCertifiedAt);
       return;
     }
 
@@ -660,32 +671,80 @@
   let submitTimeout = null;
   let formSubmitted = false;
 
-  certForm.addEventListener("submit", (e) => {
+  certForm.addEventListener("submit", async (e) => {
+    // Siempre bloqueamos el envío automático del navegador: primero
+    // comprobamos con el servidor (acción "certify") si esta persona ya
+    // había certificado antes. Si el servidor confirma que no, disparamos
+    // el envío real nosotros mismos con certForm.submit() (ver más abajo),
+    // que sí respeta el target="cert-upload-frame" y el enctype multipart.
+    e.preventDefault();
+
     const submitErrBox = document.getElementById("submit-err");
     if (submitErrBox) submitErrBox.classList.remove("show");
 
     const hp = document.getElementById("website").value;
     if (hp){
-      e.preventDefault();
       certForm.style.display = "none";
       document.getElementById("success-box").classList.add("show");
       return;
     }
     const missing = [1,2,3,4].filter(i => !fileState[i]);
     if (missing.length){
-      e.preventDefault();
       alert(T[currentLang].cp.missing.replace("{n}", missing.length));
       return;
     }
 
-    // No se llama a e.preventDefault(): dejamos que el navegador haga el
-    // envío real (POST multipart) hacia el iframe oculto. Esto es necesario
-    // porque el endpoint /ajax/ de formsubmit.co no soporta adjuntos — solo
-    // el envío nativo del <form> con enctype="multipart/form-data" los envía.
-    formSubmitted = true;
     const btn = document.getElementById("submit-btn");
     btn.disabled = true;
     btn.innerHTML = '<span class="spinner"></span> ' + T[currentLang].cp.submitting;
+
+    if (SHEETS_CONFIGURED && matchedWalker){
+      try {
+        const res = await fetch(SHEETS_API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({
+            action: "certify",
+            alias: matchedWalker.alias,
+            email: matchedWalker.email
+          })
+        });
+        const result = await res.json();
+
+        if (!result || result.ok === false){
+          throw new Error((result && result.error) || "certify-failed");
+        }
+
+        if (result.alreadyCertified){
+          // Alguien (quizá esta misma persona, en otra pestaña o dispositivo)
+          // ya certificó entre que se abrió el formulario y ahora. No se
+          // envían las fotos: mostramos el aviso en vez del formulario.
+          btn.disabled = false;
+          btn.innerHTML = T[currentLang].cp.submit;
+          markCertifiedLocally(matchedWalker.alias, matchedWalker.email);
+          showAlreadyCert(result.certifiedAt || Date.now());
+          return;
+        }
+
+        // El servidor ha marcado esta inscripción como certificada. A partir
+        // de aquí, aunque el envío de las fotos a formsubmit.co fallase, el
+        // backend ya no permitirá una segunda certificación — por eso es
+        // importante que esta llamada ocurra ANTES del envío real.
+        markCertifiedLocally(matchedWalker.alias, matchedWalker.email);
+      } catch(err){
+        btn.disabled = false;
+        btn.innerHTML = T[currentLang].cp.submit;
+        if (submitErrBox) submitErrBox.classList.add("show");
+        else alert(T[currentLang].cp.submitErr || "No se ha podido enviar. Comprueba tu conexión e inténtalo de nuevo.");
+        return;
+      }
+    }
+
+    // No se llama a fetch() para el envío de las fotos: dejamos que el
+    // navegador haga el envío real (POST multipart) hacia el iframe oculto.
+    // Esto es necesario porque el endpoint /ajax/ de formsubmit.co no
+    // soporta adjuntos — solo el envío nativo del <form> los envía.
+    formSubmitted = true;
 
     // No podemos leer la respuesta del iframe (es cross-origin), así que usamos
     // su evento "load" como señal de que formsubmit.co ya ha procesado el envío.
@@ -694,10 +753,11 @@
       // Si tras 20s no ha cargado nada, asumimos fallo de red y lo mostramos.
       btn.disabled = false;
       btn.innerHTML = T[currentLang].cp.submit;
-      const submitErrEl = document.getElementById("submit-err");
-      if (submitErrEl) submitErrEl.classList.add("show");
+      if (submitErrBox) submitErrBox.classList.add("show");
       else alert(T[currentLang].cp.submitErr || "No se ha podido enviar. Comprueba tu conexión e inténtalo de nuevo.");
     }, 20000);
+
+    certForm.submit();
   });
 
   uploadFrame.addEventListener("load", () => {
@@ -706,7 +766,6 @@
     if (!formSubmitted) return;
     clearTimeout(submitTimeout);
     formSubmitted = false;
-    if (matchedWalker) markCertifiedLocally(matchedWalker.alias, matchedWalker.email);
     certForm.style.display = "none";
     document.getElementById("success-box").classList.add("show");
   });

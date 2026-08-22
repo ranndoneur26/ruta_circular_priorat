@@ -6,6 +6,8 @@ const SHEET_NAME = 'inscripciones';
  * Endpoints:
  *   POST { action: 'add', ... }
  *   POST { action: 'login', password: '...' }
+ *   POST { action: 'checkwalker', alias: '...', email: '...' }
+ *   POST { action: 'certify', alias: '...', email: '...' }
  *   POST { action: 'verify', token: '...', id: 'row-2', verified: true }
  *   POST { action: 'notify', token: '...', id: 'row-2' }
  *   POST { action: 'notify', token: '...', id: 'row-2', force: true }
@@ -74,6 +76,9 @@ function doPost(e) {
 
       case 'checkwalker':
         return handleCheckWalker_(data);
+
+      case 'certify':
+        return handleCertify_(data);
 
       case 'verify':
         return handleVerify_(data);
@@ -193,6 +198,8 @@ function handleAdd_(data) {
   row[idx.userAgent] = userAgent;
   row[idx.verified] = false;
   row[idx.notified] = false;
+  row[idx.certified] = false;
+  row[idx.certifiedAt] = '';
   row[idx.publicDisplay] = data.publicDisplay === false ? false : true;
 
   const lock = LockService.getScriptLock();
@@ -422,7 +429,9 @@ function handleCheckWalker_(data) {
           origen: String(row[idx.origen] || ''),
           variante: String(row[idx.variante] || ''),
           startDate: serializeCell_(row[idx.startDate]),
-          lang: normalizeLanguage_(row[idx.lang])
+          lang: normalizeLanguage_(row[idx.lang]),
+          certified: toBool_(row[idx.certified]),
+          certifiedAt: serializeCell_(row[idx.certifiedAt])
         };
         break;
       }
@@ -439,6 +448,123 @@ function handleCheckWalker_(data) {
       found: !!match,
       data: match
     });
+  } catch (err) {
+    console.error(err);
+
+    return jsonResponse_({
+      ok: false,
+      error: getErrorMessage_(err)
+    });
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* CERTIFICAR                                                                  */
+/* -------------------------------------------------------------------------- */
+
+/*
+ * Marca una inscripción como certificada (ya envió sus 4 fotos).
+ *
+ * Se llama justo antes de que el navegador envíe las fotos a formsubmit.co
+ * (ese envío no pasa por este backend, va directo por email). Este endpoint
+ * es la única fuente de verdad server-side de "ya certificó", y es idempotente:
+ * si ya estaba certificada, no vuelve a marcar nada ni da error, simplemente
+ * informa `alreadyCertified: true` para que el frontend bloquee un reenvío.
+ */
+function handleCertify_(data) {
+  try {
+    const alias = normalizeText_(data.alias).toLowerCase();
+    const email = normalizeEmail_(data.email);
+
+    if (!alias || !email) {
+      return jsonResponse_({
+        ok: false,
+        error: 'Faltan alias o correo'
+      });
+    }
+
+    const rateLimitKey = 'certify_' + email;
+    const cache = CacheService.getScriptCache();
+    const attempts = Number(cache.get(rateLimitKey) || 0);
+
+    if (attempts >= 5) {
+      return jsonResponse_({
+        ok: false,
+        error: 'Demasiados intentos. Espera un minuto antes de volver a intentarlo.'
+      });
+    }
+
+    const sheet = getSheet_();
+    const header = ensureColumns_(sheet);
+    const idx = headerIndex_(header);
+
+    const lock = LockService.getScriptLock();
+
+    try {
+      lock.waitLock(10000);
+
+      /*
+       * Volvemos a leer los datos DESPUÉS de adquirir el lock, para evitar
+       * una carrera entre dos peticiones simultáneas (p. ej. dos pestañas
+       * enviando el mismo formulario a la vez).
+       */
+      const values = sheet.getDataRange().getValues();
+      let rowNumber = null;
+      let rowValues = null;
+
+      for (let i = 1; i < values.length; i++) {
+        const row = values[i];
+        const rowAlias = String(row[idx.alias] || '').trim().toLowerCase();
+        const rowEmail = String(row[idx.email] || '').trim().toLowerCase();
+
+        if (rowAlias === alias && rowEmail === email) {
+          rowNumber = i + 1;
+          rowValues = row;
+          break;
+        }
+      }
+
+      if (!rowNumber) {
+        cache.put(rateLimitKey, String(attempts + 1), 60);
+
+        return jsonResponse_({
+          ok: false,
+          error: 'No se ha encontrado la inscripción'
+        });
+      }
+
+      const alreadyCertified = toBool_(rowValues[idx.certified]);
+
+      if (alreadyCertified) {
+        return jsonResponse_({
+          ok: true,
+          alreadyCertified: true,
+          certifiedAt: serializeCell_(rowValues[idx.certifiedAt])
+        });
+      }
+
+      const now = new Date();
+
+      sheet
+        .getRange(rowNumber, idx.certified + 1)
+        .setValue(true);
+
+      sheet
+        .getRange(rowNumber, idx.certifiedAt + 1)
+        .setValue(now);
+
+      return jsonResponse_({
+        ok: true,
+        alreadyCertified: false,
+        certifiedAt: serializeCell_(now)
+      });
+    } finally {
+      try {
+        lock.releaseLock();
+      } catch (_) {
+        // No hacer nada.
+      }
+    }
   } catch (err) {
     console.error(err);
 
@@ -667,6 +793,8 @@ function handleAdminList_(data) {
         lang: normalizeLanguage_(row[idx.lang]),
         verified: toBool_(row[idx.verified]),
         notified: toBool_(row[idx.notified]),
+        certified: toBool_(row[idx.certified]),
+        certifiedAt: serializeCell_(row[idx.certifiedAt]),
         publicDisplay: toBool_(
           row[idx.publicDisplay] === '' || row[idx.publicDisplay] == null
             ? true
@@ -754,6 +882,8 @@ function getRequiredColumns_() {
     'userAgent',
     'verified',
     'notified',
+    'certified',
+    'certifiedAt',
     'publicDisplay'
   ];
 }
