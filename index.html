@@ -388,7 +388,7 @@
     font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.08em;
     text-transform:uppercase; color:var(--samfaina); margin:0 0 6px;
   }
-  .stage-minimap-wrap{ position:relative; }
+  .stage-minimap-wrap{ position:relative; isolation:isolate; }
   .stage-minimap{
     height:200px; border:1px solid var(--line); background:var(--pergami-dim);
   }
@@ -405,7 +405,7 @@
   .stage-minimap-caption{ font-size:11px; color:var(--pergami-dim); margin-top:6px; font-style:italic; }
 
   .map-modal{
-    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:80;
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999;
     align-items:center; justify-content:center; padding:20px;
   }
   .map-modal.show{ display:flex; }
@@ -1503,6 +1503,12 @@
       (t.etapaLabel || "Etapa") + " " + String(i + 1).padStart(2, "0");
     document.getElementById("map-modal").classList.add("show");
 
+    // Mientras el modal está abierto, ocultamos el mini-mapa de origen (no lo destruimos,
+    // solo visibility:hidden) para evitar cualquier solape visual de sus panes de Leaflet
+    // con el mapa ampliado, sea cual sea la causa exacta del conflicto de apilamiento.
+    const originEl = document.getElementById("stage-minimap-" + i);
+    if (originEl) originEl.style.visibility = "hidden";
+
     // El contenedor tiene que estar visible antes de crear el mapa, si no Leaflet
     // calcula mal su tamaño inicial.
     if (stageModalMap){ stageModalMap.remove(); stageModalMap = null; }
@@ -1529,6 +1535,8 @@
   function closeStageMapModal(){
     document.getElementById("map-modal").classList.remove("show");
     if (stageModalMap){ stageModalMap.remove(); stageModalMap = null; }
+    // Restauramos la visibilidad de todos los mini-mapas de origen que se hubieran ocultado.
+    document.querySelectorAll('[id^="stage-minimap-"]').forEach(el => { el.style.visibility = ""; });
   }
   document.getElementById("map-modal-close").addEventListener("click", closeStageMapModal);
   document.getElementById("map-modal").addEventListener("click", (e) => {
