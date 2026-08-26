@@ -1389,14 +1389,13 @@
       const row = document.createElement("div");
       row.className = "stage";
       const distLabel = info.gpx ? t.distReal : t.dist;
-      // --- PRUEBA: mini-mapa de previsualización real del track, solo en la etapa 1 (i===0).
-      // Si el resultado convence, quitar la condición "i === 0" para activarlo en las 8 etapas.
+      // Mini-mapa de previsualización real del track (extraído del GPX) para las 8 etapas.
       const minimapCaption = lang === "ca"
         ? "Traçat real extret del GPX — mateix track que es descarrega a sota."
         : lang === "en"
         ? "Real track extracted from the GPX — same track downloaded below."
         : "Trazado real extraído del GPX — mismo track que se descarga más abajo.";
-      const minimapHtml = (i === 0 && gpxData && gpxData.coords)
+      const minimapHtml = (gpxData && gpxData.coords)
         ? `<div class="stage-minimap-block">
              <h5>${t.mapPreview || "Vista previa del trazado"}</h5>
              <div class="stage-minimap-wrap">
