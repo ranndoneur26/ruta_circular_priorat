@@ -383,6 +383,18 @@
   }
   .elev-svg{ width:100%; height:64px; display:block; }
   .elev-caption{ margin-top:4px; font-size:11px; color:var(--pergami-dim); font-style:italic; opacity:0.8; }
+  .stage-minimap-block{ margin-top:14px; }
+  .stage-minimap-block h5{
+    font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--samfaina); margin:0 0 6px;
+  }
+  .stage-minimap{
+    height:200px; border:1px solid var(--line); background:var(--llicorella-2);
+  }
+  .stage-minimap .leaflet-control-zoom,
+  .stage-minimap .leaflet-control-attribution{ display:none; }
+  .stage-minimap-caption{ font-size:11px; color:var(--pergami-dim); margin-top:6px; font-style:italic; }
+
   .gpx-facts{ margin-top:12px; align-items:center; }
   .gpx-badge{
     font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.03em;
@@ -1133,6 +1145,9 @@
 
   let currentLang = I18N.FALLBACK;
   let map, markerLayer, lineLayer, shortRouteLine;
+  // Registro de mini-mapas Leaflet de previsualización por etapa (uno por índice de stage).
+  // Se destruyen y recrean en cada renderStages() porque el idioma reconstruye el DOM.
+  let stageMiniMaps = {};
 
   const get = I18N.get;
 
@@ -1326,6 +1341,8 @@
     }
     const stageList = document.getElementById("stage-list");
     stageList.innerHTML = "";
+    Object.values(stageMiniMaps).forEach(m => { try { m.remove(); } catch(e){} });
+    stageMiniMaps = {};
     stages.forEach((s, i) => {
       const info = stageInfo[i];
       const gpxData = GPX_TRACKS[i];
@@ -1335,6 +1352,20 @@
       const row = document.createElement("div");
       row.className = "stage";
       const distLabel = info.gpx ? t.distReal : t.dist;
+      // --- PRUEBA: mini-mapa de previsualización real del track, solo en la etapa 1 (i===0).
+      // Si el resultado convence, quitar la condición "i === 0" para activarlo en las 8 etapas.
+      const minimapCaption = lang === "ca"
+        ? "Traçat real extret del GPX — mateix track que es descarrega a sota."
+        : lang === "en"
+        ? "Real track extracted from the GPX — same track downloaded below."
+        : "Trazado real extraído del GPX — mismo track que se descarga más abajo.";
+      const minimapHtml = (i === 0 && gpxData && gpxData.coords)
+        ? `<div class="stage-minimap-block">
+             <h5>${t.mapPreview || "Vista previa del trazado"}</h5>
+             <div class="stage-minimap" id="stage-minimap-${i}"></div>
+             <div class="stage-minimap-caption">${minimapCaption}</div>
+           </div>`
+        : "";
       const metaOrGain = info.gpx
         ? `<div class="stage-facts gpx-facts">
              <span class="stage-fact">${t.gain}: <b>+${info.gainM} m</b></span>
@@ -1349,6 +1380,7 @@
         <div>
           <div class="route">${s.join(' <span class="arrow">&rarr;</span> ')}</div>
           <div class="highlight">${highlight}</div>
+          ${minimapHtml}
           <div class="stage-facts">
             <span class="stage-fact">${distLabel}: <b>${info.distKm.toFixed(1)} km</b></span>
             <span class="stage-fact">${t.time}: <b>${info.time}</b></span>
@@ -1369,8 +1401,46 @@
       `;
       stageList.appendChild(row);
     });
+    initStageMiniMaps();
     const srcEl = document.getElementById("stage-source");
     if (srcEl) srcEl.innerHTML = t.source;
+  }
+
+  // Mini-mapa Leaflet de solo-lectura por etapa: mismos tiles oscuros que el mapa
+  // principal, con el track GPX real ya embebido en GPX_TRACKS. Sin controles,
+  // sin interacción — es una previsualización, no un mapa navegable.
+  function initStageMiniMaps(){
+    stages.forEach((s, i) => {
+      const el = document.getElementById("stage-minimap-" + i);
+      if (!el) return;
+      const gpxData = GPX_TRACKS[i];
+      if (!gpxData || !gpxData.coords || !gpxData.coords.length) return;
+
+      const m = L.map(el, {
+        zoomControl: false,
+        attributionControl: false,
+        dragging: false,
+        scrollWheelZoom: false,
+        doubleClickZoom: false,
+        boxZoom: false,
+        touchZoom: false,
+        keyboard: false,
+        tap: false
+      });
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd',
+        maxZoom: 18
+      }).addTo(m);
+      const line = L.polyline(gpxData.coords, { color: '#c69214', weight: 3, opacity: 0.9 }).addTo(m);
+      m.fitBounds(line.getBounds(), { padding: [14, 14] });
+      // Marcadores de inicio (verde) y fin (rojo) para orientar de un vistazo el sentido del recorrido.
+      const start = gpxData.coords[0];
+      const end = gpxData.coords[gpxData.coords.length - 1];
+      L.circleMarker(start, { radius: 5, color: '#6e7858', fillColor: '#6e7858', fillOpacity: 1, weight: 1 }).addTo(m);
+      L.circleMarker(end, { radius: 5, color: '#7a1f2b', fillColor: '#7a1f2b', fillOpacity: 1, weight: 1 }).addTo(m);
+
+      stageMiniMaps[i] = m;
+    });
   }
 
   function renderRutaCorta(lang){
