@@ -98,6 +98,7 @@
         "elevNote": "Altitud real de cada núcleo, unida en línea recta — no sigue el perfil real del sendero, pendiente de trazado GPX.",
         "elevNoteReal": "Perfil real extraído del track GPX verificado, punto a punto sobre el sendero.",
         "mapPreview": "Vista previa del trazado",
+        "mapExpand": "Ampliar",
         "source": "Comer y dormir: directorio oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, contrastado puntualmente con reseñas de Google/Tripadvisor/Booking en los establecimientos marcados con ★ (no en los 40 negocios listados). Altitudes: Idescat y Consell Regulador DOQ Priorat. Verifica horarios, disponibilidad y teléfonos antes de salir. Datos de restauración y alojamiento de las etapas 3–8 revisados y actualizados en julio de 2026."
       },
       "guia": {
@@ -637,6 +638,7 @@
         "elevNote": "Altitud real de cada nucli, unida en línia recta — no segueix el perfil real del sender, pendent de traçat GPX.",
         "elevNoteReal": "Perfil real extret del track GPX verificat, punt a punt sobre el sender.",
         "mapPreview": "Vista prèvia del traçat",
+        "mapExpand": "Ampliar",
         "source": "Menjar i dormir: directori oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, contrastat puntualment amb ressenyes de Google/Tripadvisor/Booking als establiments marcats amb ★ (no als 40 negocis llistats). Altituds: Idescat i Consell Regulador DOQ Priorat. Comprova horaris, disponibilitat i telèfons abans de sortir. Dades de restauració i allotjament de les etapes 3–8 revisades i actualitzades el juliol de 2026."
       },
       "guia": {
@@ -1176,6 +1178,7 @@
         "elevNote": "Real altitude of each village, joined in a straight line — does not follow the trail's real profile, pending GPX track.",
         "elevNoteReal": "Real profile extracted from the verified GPX track, point by point along the trail.",
         "mapPreview": "Route preview",
+        "mapExpand": "Expand",
         "source": "Eating and sleeping: official directory of <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, spot-checked against Google/Tripadvisor/Booking reviews for the venues marked with ★ (not all 40 businesses listed). Altitudes: Idescat and the DOQ Priorat Regulatory Board. Check opening hours, availability and phone numbers before setting out. Dining and lodging data for stages 3–8 reviewed and updated in July 2026."
       },
       "guia": {

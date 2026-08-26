@@ -388,12 +388,39 @@
     font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.08em;
     text-transform:uppercase; color:var(--samfaina); margin:0 0 6px;
   }
+  .stage-minimap-wrap{ position:relative; }
   .stage-minimap{
-    height:200px; border:1px solid var(--line); background:var(--llicorella-2);
+    height:200px; border:1px solid var(--line); background:var(--pergami-dim);
   }
   .stage-minimap .leaflet-control-zoom,
   .stage-minimap .leaflet-control-attribution{ display:none; }
+  .stage-minimap-expand{
+    position:absolute; top:8px; right:8px; z-index:410;
+    display:flex; align-items:center; gap:6px;
+    font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.03em;
+    background:var(--llicorella); color:var(--pergami); border:1px solid var(--line);
+    padding:6px 10px; cursor:pointer; opacity:0.92;
+  }
+  .stage-minimap-expand:hover{ opacity:1; border-color:var(--samfaina); color:var(--samfaina); }
   .stage-minimap-caption{ font-size:11px; color:var(--pergami-dim); margin-top:6px; font-style:italic; }
+
+  .map-modal{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:80;
+    align-items:center; justify-content:center; padding:20px;
+  }
+  .map-modal.show{ display:flex; }
+  .map-modal-card{
+    background:var(--llicorella-2); border:1px solid var(--line);
+    width:100%; max-width:900px; padding:16px; position:relative;
+  }
+  .map-modal-close{
+    position:absolute; top:10px; right:10px; z-index:410; background:var(--llicorella);
+    border:1px solid var(--line); color:var(--pergami-dim); font-size:20px; line-height:1;
+    cursor:pointer; padding:4px 10px;
+  }
+  .map-modal-close:hover{ color:var(--pergami); border-color:var(--samfaina); }
+  .map-modal-title{ font-size:14px; margin:0 0 10px; padding-right:30px; }
+  .map-modal-map{ height:70vh; max-height:560px; border:1px solid var(--line); }
 
   .gpx-facts{ margin-top:12px; align-items:center; }
   .gpx-badge{
@@ -921,6 +948,14 @@
   </div>
 </div>
 
+<div class="map-modal" id="map-modal">
+  <div class="map-modal-card">
+    <button type="button" class="map-modal-close" id="map-modal-close" aria-label="Cerrar">&times;</button>
+    <h3 class="map-modal-title" id="map-modal-title"></h3>
+    <div class="map-modal-map" id="map-modal-map"></div>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="anonymous"></script>
 <button type="button" class="back-to-top" id="back-to-top" data-i18n-aria-label="backToTop" aria-label="Volver arriba" title="Volver arriba">
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
@@ -1362,7 +1397,10 @@
       const minimapHtml = (i === 0 && gpxData && gpxData.coords)
         ? `<div class="stage-minimap-block">
              <h5>${t.mapPreview || "Vista previa del trazado"}</h5>
-             <div class="stage-minimap" id="stage-minimap-${i}"></div>
+             <div class="stage-minimap-wrap">
+               <div class="stage-minimap" id="stage-minimap-${i}"></div>
+               <button type="button" class="stage-minimap-expand" data-expand-stage="${i}">⤢ ${t.mapExpand || "Ampliar"}</button>
+             </div>
              <div class="stage-minimap-caption">${minimapCaption}</div>
            </div>`
         : "";
@@ -1402,13 +1440,32 @@
       stageList.appendChild(row);
     });
     initStageMiniMaps();
+    stageList.querySelectorAll("[data-expand-stage]").forEach(btn => {
+      btn.addEventListener("click", () => openStageMapModal(Number(btn.getAttribute("data-expand-stage"))));
+    });
     const srcEl = document.getElementById("stage-source");
     if (srcEl) srcEl.innerHTML = t.source;
   }
 
-  // Mini-mapa Leaflet de solo-lectura por etapa: mismos tiles oscuros que el mapa
-  // principal, con el track GPX real ya embebido en GPX_TRACKS. Sin controles,
-  // sin interacción — es una previsualización, no un mapa navegable.
+  // Tiles claros (no oscuros) para los mapas de previsualización de etapa: el trazado
+  // naranja se lee mejor sobre fondo claro que el mapa principal en modo oscuro.
+  const STAGE_MAP_TILES = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+
+  // Dibuja el track GPX (línea + marcador de inicio/fin) sobre un mapa Leaflet ya creado,
+  // y encuadra la vista a su extensión. Se usa tanto en el mini-mapa como en el modal ampliado.
+  function drawTrackOnMap(m, coords){
+    const line = L.polyline(coords, { color: '#c69214', weight: 3, opacity: 0.9 }).addTo(m);
+    m.fitBounds(line.getBounds(), { padding: [14, 14] });
+    const start = coords[0];
+    const end = coords[coords.length - 1];
+    L.circleMarker(start, { radius: 5, color: '#6e7858', fillColor: '#6e7858', fillOpacity: 1, weight: 1 }).addTo(m);
+    L.circleMarker(end, { radius: 5, color: '#7a1f2b', fillColor: '#7a1f2b', fillOpacity: 1, weight: 1 }).addTo(m);
+    return line;
+  }
+
+  // Mini-mapa Leaflet de solo-lectura por etapa: previsualización compacta con el track
+  // GPX real ya embebido en GPX_TRACKS. Sin controles, sin interacción — el botón "Ampliar"
+  // abre el modal con el mapa completo e interactivo (openStageMapModal).
   function initStageMiniMaps(){
     stages.forEach((s, i) => {
       const el = document.getElementById("stage-minimap-" + i);
@@ -1427,21 +1484,56 @@
         keyboard: false,
         tap: false
       });
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        subdomains: 'abcd',
-        maxZoom: 18
-      }).addTo(m);
-      const line = L.polyline(gpxData.coords, { color: '#c69214', weight: 3, opacity: 0.9 }).addTo(m);
-      m.fitBounds(line.getBounds(), { padding: [14, 14] });
-      // Marcadores de inicio (verde) y fin (rojo) para orientar de un vistazo el sentido del recorrido.
-      const start = gpxData.coords[0];
-      const end = gpxData.coords[gpxData.coords.length - 1];
-      L.circleMarker(start, { radius: 5, color: '#6e7858', fillColor: '#6e7858', fillOpacity: 1, weight: 1 }).addTo(m);
-      L.circleMarker(end, { radius: 5, color: '#7a1f2b', fillColor: '#7a1f2b', fillOpacity: 1, weight: 1 }).addTo(m);
+      L.tileLayer(STAGE_MAP_TILES, { subdomains: 'abcd', maxZoom: 18 }).addTo(m);
+      drawTrackOnMap(m, gpxData.coords);
 
       stageMiniMaps[i] = m;
     });
   }
+
+  // Modal de mapa ampliado: mapa Leaflet completo (zoom, arrastre, doble clic) con el
+  // mismo track. Se crea al abrir y se destruye al cerrar, para no acumular instancias.
+  let stageModalMap = null;
+  function openStageMapModal(i){
+    const gpxData = GPX_TRACKS[i];
+    if (!gpxData || !gpxData.coords || !gpxData.coords.length) return;
+    const t = T[currentLang].etapas;
+
+    document.getElementById("map-modal-title").textContent =
+      (t.etapaLabel || "Etapa") + " " + String(i + 1).padStart(2, "0");
+    document.getElementById("map-modal").classList.add("show");
+
+    // El contenedor tiene que estar visible antes de crear el mapa, si no Leaflet
+    // calcula mal su tamaño inicial.
+    if (stageModalMap){ stageModalMap.remove(); stageModalMap = null; }
+    stageModalMap = L.map("map-modal-map", {
+      zoomControl: true,
+      attributionControl: true
+    });
+    L.tileLayer(STAGE_MAP_TILES, {
+      subdomains: 'abcd', maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
+    }).addTo(stageModalMap);
+    drawTrackOnMap(stageModalMap, gpxData.coords);
+    // fitBounds calculado con el contenedor recién mostrado: forzamos un recálculo
+    // de tamaño en el siguiente frame para evitar el "mapa gris" típico de Leaflet
+    // cuando se inicializa dentro de un elemento que acaba de pasar a visible.
+    setTimeout(() => {
+      if (stageModalMap){
+        stageModalMap.invalidateSize();
+        const bounds = L.latLngBounds(gpxData.coords);
+        stageModalMap.fitBounds(bounds, { padding: [20, 20] });
+      }
+    }, 60);
+  }
+  function closeStageMapModal(){
+    document.getElementById("map-modal").classList.remove("show");
+    if (stageModalMap){ stageModalMap.remove(); stageModalMap = null; }
+  }
+  document.getElementById("map-modal-close").addEventListener("click", closeStageMapModal);
+  document.getElementById("map-modal").addEventListener("click", (e) => {
+    if (e.target.id === "map-modal") closeStageMapModal();
+  });
 
   function renderRutaCorta(lang){
     const t = T[lang].rutacorta;
