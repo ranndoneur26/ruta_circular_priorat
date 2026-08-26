@@ -513,6 +513,7 @@
         "email": "Correo",
         "variante": "Variante",
         "inicio": "Inicio",
+        "recibido": "Recibido",
         "mensaje": "Mensaje",
         "estado": "Estado",
         "accion": "Acción"
@@ -1050,6 +1051,7 @@
         "email": "Correu",
         "variante": "Variant",
         "inicio": "Inici",
+        "recibido": "Rebut",
         "mensaje": "Missatge",
         "estado": "Estat",
         "accion": "Acció"
@@ -1587,6 +1589,7 @@
         "email": "Email",
         "variante": "Variant",
         "inicio": "Start",
+        "recibido": "Received",
         "mensaje": "Message",
         "estado": "Status",
         "accion": "Action"

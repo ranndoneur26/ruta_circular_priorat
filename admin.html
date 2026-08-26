@@ -162,6 +162,7 @@
           <th data-sort="email"><span data-i18n="table.email">Correo</span> <span class="arrow" data-arrow="email"></span></th>
           <th data-sort="variante"><span data-i18n="table.variante">Variante</span> <span class="arrow" data-arrow="variante"></span></th>
           <th data-sort="startDate"><span data-i18n="table.inicio">Inicio</span> <span class="arrow" data-arrow="startDate"></span></th>
+          <th data-sort="submittedAt"><span data-i18n="table.recibido">Recibido</span> <span class="arrow" data-arrow="submittedAt"></span></th>
           <th data-i18n="table.mensaje">Mensaje</th>
           <th data-sort="verified"><span data-i18n="table.estado">Estado</span> <span class="arrow" data-arrow="verified"></span></th>
           <th data-i18n="table.accion">Acción</th>
@@ -366,6 +367,15 @@
     div.textContent = s || "";
     return div.innerHTML;
   }
+  function formatSubmittedAt(v){
+    if (!v) return "—";
+    const d = new Date(v);
+    if (isNaN(d.getTime())) return escapeHtml(String(v));
+    return escapeHtml(d.toLocaleString(
+      currentLang === "es" ? "es-ES" : currentLang === "en" ? "en-GB" : "ca-ES",
+      { day:"2-digit", month:"2-digit", year:"numeric", hour:"2-digit", minute:"2-digit" }
+    ));
+  }
   function csvEscape(s){
     const str = String(s == null ? "" : s);
     if (/[",\n]/.test(str)) return '"' + str.replace(/"/g, '""') + '"';
@@ -395,7 +405,7 @@
     th.addEventListener("click", () => {
       const key = th.getAttribute("data-sort");
       if (sortKey === key) sortDir *= -1;
-      else { sortKey = key; sortDir = key === "startDate" ? -1 : 1; }
+      else { sortKey = key; sortDir = (key === "startDate" || key === "submittedAt") ? -1 : 1; }
       render();
     });
   });
@@ -436,11 +446,24 @@
     const arrowEl = document.querySelector('.arrow[data-arrow="'+sortKey+'"]');
     if (arrowEl) arrowEl.textContent = sortDir === 1 ? "↑" : "↓";
 
+    const DATE_KEYS = { startDate:1, submittedAt:1 };
     let visible = currentEntries.filter(e => matchesSearch(e.data) && matchesFilter(e.data));
     visible.sort((a,b) => {
       let va = a.data[sortKey], vb = b.data[sortKey];
-      if (sortKey === "verified"){ va = va?1:0; vb = vb?1:0; }
-      else { va = (va||"").toString().toLowerCase(); vb = (vb||"").toString().toLowerCase(); }
+      if (sortKey === "verified"){
+        va = va?1:0; vb = vb?1:0;
+      } else if (DATE_KEYS[sortKey]){
+        const da = va ? new Date(va).getTime() : NaN;
+        const db = vb ? new Date(vb).getTime() : NaN;
+        const aValid = !isNaN(da), bValid = !isNaN(db);
+        // Las entradas sin fecha válida quedan siempre al final, sea cual sea el sentido.
+        if (!aValid && !bValid) return 0;
+        if (!aValid) return 1;
+        if (!bValid) return -1;
+        return (da - db) * sortDir;
+      } else {
+        va = (va||"").toString().toLowerCase(); vb = (vb||"").toString().toLowerCase();
+      }
       if (va < vb) return -1*sortDir;
       if (va > vb) return 1*sortDir;
       return 0;
@@ -470,6 +493,7 @@
         <td>${escapeHtml(w.email)}</td>
         <td>${t.variant[w.variante] || escapeHtml(w.variante || "—")}</td>
         <td>${escapeHtml(w.startDate)}</td>
+        <td>${formatSubmittedAt(w.submittedAt)}</td>
         <td class="msg">${w.mensaje ? '"' + escapeHtml(w.mensaje) + '"' : "—"}</td>
         <td><span class="badge ${verified ? "verified" : "pending"}">${verified ? t.badge.verified : t.badge.pending}</span></td>
         <td>
