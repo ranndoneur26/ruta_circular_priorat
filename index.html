@@ -392,8 +392,10 @@
   .stage-minimap{
     height:200px; border:1px solid var(--line); background:var(--pergami-dim);
   }
-  .stage-minimap .leaflet-control-zoom,
-  .stage-minimap .leaflet-control-attribution{ display:none; }
+  .stage-minimap .leaflet-control-zoom{ display:none; }
+  .stage-minimap .leaflet-control-attribution{
+    font-size:9px; background:rgba(255,255,255,0.75); padding:0 4px; line-height:1.4;
+  }
   .stage-minimap-expand{
     position:absolute; top:8px; right:8px; z-index:410;
     display:flex; align-items:center; gap:6px;
@@ -1447,9 +1449,10 @@
     if (srcEl) srcEl.innerHTML = t.source;
   }
 
-  // Tiles claros (no oscuros) para los mapas de previsualización de etapa: el trazado
-  // naranja se lee mejor sobre fondo claro que el mapa principal en modo oscuro.
-  const STAGE_MAP_TILES = 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+  // OpenStreetMap estándar: gratuito, sin API key. (CartoDB dejó de servir sus tiles
+  // gratuitos sin clave y muestra una marca de agua "Api key required" si se usan así).
+  const STAGE_MAP_TILES = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  const STAGE_MAP_TILES_OPTS = { subdomains: 'abc', maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' };
 
   // Dibuja el track GPX (línea + marcador de inicio/fin) sobre un mapa Leaflet ya creado,
   // y encuadra la vista a su extensión. Se usa tanto en el mini-mapa como en el modal ampliado.
@@ -1475,7 +1478,9 @@
 
       const m = L.map(el, {
         zoomControl: false,
-        attributionControl: false,
+        // La atribución a OpenStreetMap es obligatoria por su política de uso de tiles;
+        // se mantiene visible pero compacta (ver CSS .stage-minimap .leaflet-control-attribution).
+        attributionControl: true,
         dragging: false,
         scrollWheelZoom: false,
         doubleClickZoom: false,
@@ -1484,7 +1489,8 @@
         keyboard: false,
         tap: false
       });
-      L.tileLayer(STAGE_MAP_TILES, { subdomains: 'abcd', maxZoom: 18 }).addTo(m);
+      L.tileLayer(STAGE_MAP_TILES, STAGE_MAP_TILES_OPTS).addTo(m);
+      m.attributionControl.setPrefix(false);
       drawTrackOnMap(m, gpxData.coords);
 
       stageMiniMaps[i] = m;
@@ -1516,10 +1522,8 @@
       zoomControl: true,
       attributionControl: true
     });
-    L.tileLayer(STAGE_MAP_TILES, {
-      subdomains: 'abcd', maxZoom: 18,
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO'
-    }).addTo(stageModalMap);
+    L.tileLayer(STAGE_MAP_TILES, STAGE_MAP_TILES_OPTS).addTo(stageModalMap);
+    stageModalMap.attributionControl.setPrefix(false);
     drawTrackOnMap(stageModalMap, gpxData.coords);
     // fitBounds calculado con el contenedor recién mostrado: forzamos un recálculo
     // de tamaño en el siguiente frame para evitar el "mapa gris" típico de Leaflet
