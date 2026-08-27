@@ -302,10 +302,11 @@
     border:1px solid var(--line);
     background:var(--llicorella-2);
   }
-  /* Aclara un 30% las teselas del mapa (CARTO Dark Matter es casi negro por defecto)
-     para que las líneas topográficas se distingan mejor al ampliar. Solo afecta al
-     pane de teselas, no a marcadores, líneas de etapa ni popups. */
-  #map .leaflet-tile-pane{ filter:brightness(1.3); }
+  /* El mapa usa tiles claros de OpenStreetMap (gratuitos, sin API key). Como no existe
+     una variante oscura gratuita sin clave, simulamos el aspecto oscuro invirtiendo los
+     colores de las teselas por CSS. Solo afecta al pane de teselas, no a marcadores,
+     líneas de etapa ni popups (que quedan en panes distintos, fuera de este filtro). */
+  #map .leaflet-tile-pane{ filter:invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); }
   .map-caption{
     display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;
     margin-top:14px;
@@ -1442,7 +1443,12 @@
     });
     initStageMiniMaps();
     stageList.querySelectorAll("[data-expand-stage]").forEach(btn => {
-      btn.addEventListener("click", () => openStageMapModal(Number(btn.getAttribute("data-expand-stage"))));
+      btn.addEventListener("click", () => {
+        const i = Number(btn.getAttribute("data-expand-stage"));
+        const t = T[currentLang].etapas;
+        const title = (t.etapaLabel || "Etapa") + " " + String(i + 1).padStart(2, "0");
+        openStageMapModal(GPX_TRACKS[i].coords, title, "stage-minimap-" + i);
+      });
     });
     const srcEl = document.getElementById("stage-source");
     if (srcEl) srcEl.innerHTML = t.source;
@@ -1496,22 +1502,44 @@
     });
   }
 
+  // Mismo patrón que initStageMiniMaps(), pero solo para el mini-mapa del día 3 de
+  // "Ruta Curta" (tramo de enlace Bellmunt–Falset, ENLLAC_TRACK, que no forma parte
+  // del array GPX_TRACKS de las 8 etapas oficiales).
+  function initRutaCortaMiniMap(){
+    const el = document.getElementById("rc-minimap-3");
+    if (!el || !ENLLAC_TRACK || !ENLLAC_TRACK.coords || !ENLLAC_TRACK.coords.length) return;
+    const m = L.map(el, {
+      zoomControl: false,
+      attributionControl: true,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      boxZoom: false,
+      touchZoom: false,
+      keyboard: false,
+      tap: false
+    });
+    L.tileLayer(STAGE_MAP_TILES, STAGE_MAP_TILES_OPTS).addTo(m);
+    m.attributionControl.setPrefix(false);
+    drawTrackOnMap(m, ENLLAC_TRACK.coords);
+    stageMiniMaps["rc-3"] = m;
+  }
+
   // Modal de mapa ampliado: mapa Leaflet completo (zoom, arrastre, doble clic) con el
   // mismo track. Se crea al abrir y se destruye al cerrar, para no acumular instancias.
+  // coords: array de [lat,lon]. title: texto del modal. originElId: id del mini-mapa que
+  // lo abrió (se oculta mientras el modal está abierto, ver nota más abajo).
   let stageModalMap = null;
-  function openStageMapModal(i){
-    const gpxData = GPX_TRACKS[i];
-    if (!gpxData || !gpxData.coords || !gpxData.coords.length) return;
-    const t = T[currentLang].etapas;
+  function openStageMapModal(coords, title, originElId){
+    if (!coords || !coords.length) return;
 
-    document.getElementById("map-modal-title").textContent =
-      (t.etapaLabel || "Etapa") + " " + String(i + 1).padStart(2, "0");
+    document.getElementById("map-modal-title").textContent = title;
     document.getElementById("map-modal").classList.add("show");
 
     // Mientras el modal está abierto, ocultamos el mini-mapa de origen (no lo destruimos,
     // solo visibility:hidden) para evitar cualquier solape visual de sus panes de Leaflet
     // con el mapa ampliado, sea cual sea la causa exacta del conflicto de apilamiento.
-    const originEl = document.getElementById("stage-minimap-" + i);
+    const originEl = document.getElementById(originElId);
     if (originEl) originEl.style.visibility = "hidden";
 
     // El contenedor tiene que estar visible antes de crear el mapa, si no Leaflet
@@ -1523,14 +1551,14 @@
     });
     L.tileLayer(STAGE_MAP_TILES, STAGE_MAP_TILES_OPTS).addTo(stageModalMap);
     stageModalMap.attributionControl.setPrefix(false);
-    drawTrackOnMap(stageModalMap, gpxData.coords);
+    drawTrackOnMap(stageModalMap, coords);
     // fitBounds calculado con el contenedor recién mostrado: forzamos un recálculo
     // de tamaño en el siguiente frame para evitar el "mapa gris" típico de Leaflet
     // cuando se inicializa dentro de un elemento que acaba de pasar a visible.
     setTimeout(() => {
       if (stageModalMap){
         stageModalMap.invalidateSize();
-        const bounds = L.latLngBounds(gpxData.coords);
+        const bounds = L.latLngBounds(coords);
         stageModalMap.fitBounds(bounds, { padding: [20, 20] });
       }
     }, 60);
@@ -1538,8 +1566,9 @@
   function closeStageMapModal(){
     document.getElementById("map-modal").classList.remove("show");
     if (stageModalMap){ stageModalMap.remove(); stageModalMap = null; }
-    // Restauramos la visibilidad de todos los mini-mapas de origen que se hubieran ocultado.
-    document.querySelectorAll('[id^="stage-minimap-"]').forEach(el => { el.style.visibility = ""; });
+    // Restauramos la visibilidad de todos los mini-mapas de origen que se hubieran ocultado
+    // (tanto los de "Etapas" como el de "Ruta Curta").
+    document.querySelectorAll('[id^="stage-minimap-"], [id^="rc-minimap-"]').forEach(el => { el.style.visibility = ""; });
   }
   document.getElementById("map-modal-close").addEventListener("click", closeStageMapModal);
   document.getElementById("map-modal").addEventListener("click", (e) => {
@@ -1551,6 +1580,7 @@
     const te = T[lang].etapas;
     const container = document.getElementById("ruta-corta-list");
     if (!container) return;
+    if (stageMiniMaps["rc-3"]){ try { stageMiniMaps["rc-3"].remove(); } catch(e){} delete stageMiniMaps["rc-3"]; }
 
     const days = [
       { num: 1, route: "Falset → Marçà → Capçanes → Els Guiamets", info: stageInfo[0], gpxData: GPX_TRACKS[0], full: false },
@@ -1574,12 +1604,31 @@
             ${renderElevationSVGFromProfile(d.gpxData.profile)}
             <div class="elev-caption">${te.elevNoteReal}</div>
           </div>` : "";
+      // Mini-mapa de previsualización real del track, solo en el día 3 (tramo de enlace
+      // Bellmunt–Falset): los días 1 y 2 reutilizan las etapas 1 y 2 ya mostradas con su
+      // propio mapa en la sección "Etapas", así que no hace falta duplicarlo aquí.
+      const rcMinimapCaption = lang === "ca"
+        ? "Traçat real extret del GPX — mateix track que es descarrega a sota."
+        : lang === "en"
+        ? "Real track extracted from the GPX — same track downloaded below."
+        : "Trazado real extraído del GPX — mismo track que se descarga más abajo.";
+      const minimapHtml = (d.full && d.gpxData && d.gpxData.coords)
+        ? `<div class="stage-minimap-block">
+             <h5>${te.mapPreview || "Vista previa del trazado"}</h5>
+             <div class="stage-minimap-wrap">
+               <div class="stage-minimap" id="rc-minimap-${d.num}"></div>
+               <button type="button" class="stage-minimap-expand" data-expand-rc="${d.num}">⤢ ${te.mapExpand || "Ampliar"}</button>
+             </div>
+             <div class="stage-minimap-caption">${rcMinimapCaption}</div>
+           </div>`
+        : "";
       return `
         <div class="stage rc-day">
           <div class="day"><span class="num">${String(d.num).padStart(2,"0")}</span><span class="lbl">${t.day}</span></div>
           <div>
             <div class="route">${d.route.split(" → ").join(' <span class="arrow">&rarr;</span> ')}</div>
             <div class="highlight">${highlight}</div>
+            ${minimapHtml}
             <div class="stage-facts gpx-facts">
               <span class="stage-fact">${te.distReal}: <b>${info.distKm.toFixed(1)} km</b></span>
               <span class="stage-fact">${te.time}: <b>${info.time}</b></span>
@@ -1593,6 +1642,13 @@
           </div>
         </div>`;
     }).join("");
+    initRutaCortaMiniMap();
+    container.querySelectorAll("[data-expand-rc]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const title = t.day + " 03 · Bellmunt del Priorat → Falset";
+        openStageMapModal(ENLLAC_TRACK.coords, title, "rc-minimap-3");
+      });
+    });
 
     const totalKm = (stageInfo[0].distKm + stageInfo[1].distKm + ENLLAC_INFO.distKm);
     const totalGain = stageInfo[0].gainM + stageInfo[1].gainM + ENLLAC_INFO.gainM;
@@ -1618,11 +1674,12 @@
 
   function initMap(){
     map = L.map('map', { scrollWheelZoom:false, attributionControl:true }).setView([41.21, 0.80], 11);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-      subdomains: 'abcd',
-      maxZoom: 18
-    }).addTo(map);
+    // OpenStreetMap estándar: gratuito, sin API key (CartoDB dejó de servir tiles oscuros
+    // gratis sin clave y mostraba la marca de agua "Api key required"). Como OSM solo
+    // ofrece estilo claro, el aspecto oscuro se simula con un filtro CSS sobre el propio
+    // panel de tiles: ver regla "#map .leaflet-tile-pane" más arriba en el CSS.
+    L.tileLayer(STAGE_MAP_TILES, STAGE_MAP_TILES_OPTS).addTo(map);
+    map.attributionControl.setPrefix(false);
 
     lineLayer = L.layerGroup().addTo(map);
     stages.forEach((s, i)=>{
