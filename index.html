@@ -425,6 +425,36 @@
   .map-modal-title{ font-size:14px; margin:0 0 10px; padding-right:30px; }
   .map-modal-map{ height:70vh; max-height:560px; border:1px solid var(--line); }
 
+  .stage-search-widget{
+    margin-top:16px; padding-top:16px; border-top:1px solid var(--line);
+  }
+  .stage-search-widget h5{
+    margin:0 0 4px; font-family:'JetBrains Mono', monospace; font-size:10px;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--samfaina);
+  }
+  .stage-search-widget .search-widget-hint{
+    font-size:11px; color:var(--pergami-dim); margin:0 0 10px; opacity:0.85;
+  }
+  .search-widget-row{
+    display:flex; flex-wrap:wrap; gap:8px; align-items:stretch;
+  }
+  .search-widget-topic, .search-widget-input{
+    font-family:inherit; font-size:13px; background:var(--llicorella-2);
+    border:1px solid var(--line); color:var(--pergami); padding:8px 10px;
+  }
+  .search-widget-topic{ flex:0 0 auto; min-width:170px; }
+  .search-widget-input{ flex:1 1 200px; min-width:140px; }
+  .search-widget-topic:focus, .search-widget-input:focus{ outline:none; border-color:var(--samfaina); }
+  .search-widget-btn{
+    flex:0 0 auto; font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.03em;
+    color:var(--llicorella); background:var(--samfaina); border:none; padding:9px 16px;
+    cursor:pointer; white-space:nowrap;
+  }
+  .search-widget-btn:hover{ opacity:0.85; }
+  @media (max-width:520px){
+    .search-widget-topic, .search-widget-input, .search-widget-btn{ flex:1 1 100%; }
+  }
+
   .gpx-facts{ margin-top:12px; align-items:center; }
   .gpx-badge{
     font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.03em;
@@ -1102,17 +1132,20 @@
       poiEs:["Celler Cooperatiu de Falset-Marçà (modernista, Cèsar Martinell)","Pantà dels Guiamets"],
       poiCa:["Celler Cooperatiu de Falset-Marçà (modernista, Cèsar Martinell)","Pantà dels Guiamets"],
       poiEn:["Falset-Marçà Cooperative Winery (Modernist, Cèsar Martinell)","Guiamets reservoir"],
-      eat:['Bar el Casal (Capçanes) — <a href="tel:+34637337005">637 337 005</a>',
+      eat:['Celler la Miloquera (Marçà, Carrer de la Bassa 10) — cocina catalana <span class="verified">★4.4 Google, 400+ reseñas</span> · <a href="https://www.google.com/maps/search/?api=1&query=Celler+la+Miloquera+Marc%C3%A0+Priorat" target="_blank" rel="noopener">ver en Google Maps</a>',
+           'Bar el Casal (Capçanes) — <a href="tel:+34637337005">637 337 005</a>',
            'Restaurant Mestral (Els Guiamets) — <a href="tel:+34977413073">977 413 073</a> <span class="verified">★4.4 Google, 258 reseñas</span>'],
       sleep:['Hotel Rural Cal Torner (Els Guiamets) — tel. no publicado, ver Turisme Priorat',
-             'Ca la Tieta Quima (Els Guiamets) — tel. no publicado, ver Turisme Priorat'] },
+             'Ca la Tieta Quima (Els Guiamets) — tel. no publicado, ver Turisme Priorat',
+             'Casa Priorat (Marçà) — casa rural completa · <a href="https://www.casapriorat.com/es/" target="_blank" rel="noopener">casapriorat.com</a>'] },
     { distKm:24.71, diff:"exigente", time:"7,5–9 h", gainM:591, lossM:552, gpx:true, hEs:"Antiguas minas de Bellmunt y los caminos de les Barraques del Camí Ral.", hCa:"Antigues mines de Bellmunt i els camins de les Barraques del Camí Ral.",
       hEn:"Bellmunt's old mines and the Barraques del Camí Ral tracks.",
       poiEs:["Museu de les Mines de Bellmunt (mina Eugènia, plomo y plata)","Barraques del Camí Ral (El Masroig)"],
       poiCa:["Museu de les Mines de Bellmunt (mina Eugènia, plom i plata)","Barraques del Camí Ral (el Masroig)"],
       poiEn:["Bellmunt Mines Museum (Eugènia mine, lead and silver)","Barraques del Camí Ral (El Masroig)"],
       eat:['Nou 21 (El Masroig) — <a href="tel:+34977825501">977 825 501</a>',
-           'Forn Bocinets (El Masroig, panadería) — <a href="tel:+34609541921">609 541 921</a>'],
+           'Forn Bocinets (El Masroig, panadería) — <a href="tel:+34609541921">609 541 921</a>',
+           'Lo Safreig (El Molar, Carrer Sant Isidre 2) — cocina mediterránea · <a href="https://www.restaurantelosafreig.com/es" target="_blank" rel="noopener">web</a>'],
       sleep:['La Colònia Bellmunt (Bellmunt del Priorat) — <a href="tel:+34977178481">977 178 481</a>',
              'Riu Montsant (Bellmunt del Priorat) — <a href="tel:+34608422013">608 422 013</a>'] },
     { distKm:22.92, diff:"exigente", time:"7,5–9 h", gainM:792, lossM:713, gpx:true, hEs:"Mirador de La Figuera (575 m) y el núcleo antiguo de Cabacés. El trazado real dobla la distancia prevista: sube y baja varias veces entre las tres poblaciones.", hCa:"Mirador de la Figuera (575 m) i el nucli antic de Cabacés. El traçat real duplica la distància prevista: puja i baixa diverses vegades entre les tres poblacions.",
@@ -1122,7 +1155,8 @@
       poiEn:["La Figuera viewpoint (575 m)","Ermita de la Foia, Cabacés"],
       eat:['Forn de Pa El Mulo (Cabacés, panadería) — <a href="tel:+34696854390">696 854 390</a>'],
       sleep:['Les Fonts (Cabacés) — <a href="https://www.google.com/maps/search/?api=1&query=Les+Fonts+Cabac%C3%A9s+Priorat" target="_blank" rel="noopener">ver en Google Maps</a>',
-             'Casa la Canal (Cabacés) — <a href="tel:+34659321718">659 321 718</a>'] },
+             'Casa la Canal (Cabacés) — <a href="tel:+34659321718">659 321 718</a>',
+             "L'Eremita (La Figuera) — <a href=\"https://eremita.es\" target=\"_blank\" rel=\"noopener\">eremita.es</a>"] },
     { distKm:12.29,  diff:"moderada",    time:"4–5 h", gainM:472, lossM:438, gpx:true, hEs:"Cuevas de La Bisbal y las paredes de escalada de Margalef.", hCa:"Coves de la Bisbal i les parets d'escalada de Margalef.",
       hEn:"La Bisbal's caves and Margalef's climbing walls.",
       poiEs:["Cuevas y abrigos de La Bisbal de Falset","Paredes de escalada de Margalef"],
@@ -1130,7 +1164,8 @@
       poiEn:["Caves and rock shelters of La Bisbal de Falset","Margalef climbing walls"],
       eat:['La Fonda Margalef (Margalef) — <a href="tel:+34977054922">977 054 922</a>',
            'El Tros de Llúpol (Margalef) — carnes a la brasa',
-           'Cafè Vernet (Margalef) — desayunos y bar'],
+           'Cafè Vernet (Margalef) — desayunos y bar',
+           'Ateneu Bisbalenc (La Bisbal de Falset) — bar-cafè del poble, fundado en 1917 · <a href="https://www.google.com/maps/search/?api=1&query=Ateneu+Bisbalenc+La+Bisbal+de+Falset" target="_blank" rel="noopener">ver en Google Maps</a>'],
       sleep:['La Fonda Margalef (Margalef) — <a href="tel:+34977054922">977 054 922</a> · hostal con restaurante',
              'Cal Roig (Margalef) — <a href="https://calroigmargalef.com" target="_blank" rel="noopener">calroigmargalef.com</a>'] },
     { distKm:32.84, diff:"exigente", time:"12–14,5 h", gainM:1600, lossM:1468, gpx:true, hEs:"La etapa reina del circuito: sube al filo del Montsant. El trazado real casi duplica la distancia y el desnivel previstos — valora partirla en dos días, pernoctando en Ulldemolins.", hCa:"L'etapa reina del circuit: puja a la carena del Montsant. El traçat real gairebé duplica la distància i el desnivell previstos — valora partir-la en dos dies, pernoctant a Ulldemolins.",
@@ -1139,28 +1174,34 @@
       poiCa:["Ermita de Sant Antoni (Ulldemolins)","Carena del Montsant"],
       poiEn:["Ermita de Sant Antoni (Ulldemolins)","Montsant ridge"],
       eat:['Fonda Toldrà (Ulldemolins) — <a href="tel:+34977561537">977 561 537</a> <span class="verified">★4.5 Google, 674 reseñas</span>',
-           'Forn Eduard (Cornudella de Montsant, panadería) — <a href="tel:+34977821068">977 821 068</a>'],
+           'Forn Eduard (Cornudella de Montsant, panadería) — <a href="tel:+34977821068">977 821 068</a>',
+           'Restaurant Quatre Molins (Cornudella de Montsant) — <a href="tel:+34977821004">977 821 004</a> · <a href="https://www.quatremolins.com" target="_blank" rel="noopener">web</a>',
+           "La Venta d'en Pubill (Cornudella de Montsant) — <a href=\"tel:+34977821077\">977 821 077</a>"],
       sleep:['Fonda Toldrà (Ulldemolins) — <a href="tel:+34977561537">977 561 537</a> · hotel rural, punto útil para partir la etapa en dos',
              'Can Molone (Cornudella de Montsant) — <a href="https://www.google.com/maps/search/?api=1&query=Can+Molone+Carrer+Major+11+Cornudella+de+Montsant" target="_blank" rel="noopener">ver en Google Maps</a>',
-             'El Palauet del Priorat (Cornudella de Montsant) — <a href="https://www.google.com/maps/search/?api=1&query=El+Palauet+del+Priorat+Cornudella+de+Montsant" target="_blank" rel="noopener">ver en Google Maps</a>'] },
+             "El Palauet del Priorat (Cornudella de Montsant) — <a href=\"tel:+34622554820\">622 554 820</a> · <a href=\"https://elpalauetdelpriorat.com\" target=\"_blank\" rel=\"noopener\">web</a>"] },
     { distKm:24.56, diff:"exigente", time:"8,5–10 h", gainM:1066, lossM:1235, gpx:true, hEs:"Siurana, la última fortaleza musulmana de Catalunya, en lo alto de un acantilado. El trazado real triplica la distancia recta prevista, con fuerte desnivel acumulado.", hCa:"Siurana, l'última fortalesa musulmana de Catalunya, dalt d'un penya-segat. El traçat real triplica la distància recta prevista, amb fort desnivell acumulat.",
       hEn:"Siurana, Catalonia's last Muslim stronghold, atop a cliff. The real track roughly triples the earlier straight-line estimate, with substantial accumulated elevation change.",
       poiEs:["Restos del castillo de Siurana (s. XII)","Paredes de escalada de fama internacional"],
       poiCa:["Restes del castell de Siurana (s. XII)","Parets d'escalada de fama internacional"],
       poiEn:["Remains of Siurana castle (12th c.)","Internationally famous climbing walls"],
       eat:['Restaurant Siurana (Siurana) — <a href="tel:+34977821027">977 821 027</a>',
-           'Els Tallers (Siurana) — <a href="tel:+34977821144">977 821 144</a>'],
+           'Els Tallers (Siurana) — <a href="tel:+34977821144">977 821 144</a>',
+           'Brots Restaurant (Poboleda) — cocina de autor, chef Pieter Truyts <span class="verified">Travellers\' Choice Tripadvisor</span>'],
       sleep:['Hotel Siuranella (Siurana) — <a href="tel:+34630871462">630 871 462</a>',
-             'Refugi de Siurana – Ciríac Bonet (Siurana) — <a href="tel:+34977821382">977 821 382</a> · reabierto con nueva gestión (CEC); bar-restaurante y reactivando pernoctaciones'] },
+             'Refugi de Siurana – Ciríac Bonet (Siurana) — <a href="tel:+34977821382">977 821 382</a> · reabierto con nueva gestión (CEC); bar-restaurante y reactivando pernoctaciones',
+             'Hostal-Restaurant Populetus (Poboleda, Carrer Raval 16) — <a href="tel:+34977827010">977 827 010</a> · <a href="http://www.populetus.com" target="_blank" rel="noopener">web</a>'] },
     { distKm:14.89, diff:"moderada", time:"5–6 h", gainM:534, lossM:558, gpx:true, hEs:"La Cartoixa d'Escaladei, cuna del nombre «Priorat», de camino a Torroja.", hCa:"La Cartoixa d'Escaladei, bressol del nom «Priorat», de camí a Torroja.",
       hEn:"The Escaladei Charterhouse, birthplace of the name «Priorat», on the way to Torroja.",
       poiEs:["Cartoixa d'Escaladei (monasterio, s. XII)","Torre Roja i seu del Consell Regulador DOQ, Torroja"],
       poiCa:["Cartoixa d'Escaladei (monestir, s. XII)","Torre Roja i seu del Consell Regulador DOQ, Torroja"],
       poiEn:["Escaladei Charterhouse (monastery, 12th c.)","Torre Roja and DOQ Regulatory Board headquarters, Torroja"],
       eat:['Vinum (Torroja del Priorat, Gran Hotel Mas d\'en Bruno) — cocina de autor, chef Josep Queralt',
-           'Tarraco (Torroja del Priorat, Gran Hotel Mas d\'en Bruno) — junto a la piscina'],
+           'Tarraco (Torroja del Priorat, Gran Hotel Mas d\'en Bruno) — junto a la piscina',
+           'Restaurant Mater Terrae (Escaladei, Hotel Terra Dominicata) — <a href="tel:+34877912292">877 912 292</a> · <a href="https://terradominicata.com/restaurante-mater-terrae/" target="_blank" rel="noopener">web</a>, chef Fran López'],
       sleep:['Gran Hotel Mas d\'en Bruno (Torroja del Priorat) — <a href="https://www.google.com/maps/search/?api=1&query=Gran+Hotel+Mas+d%27en+Bruno+Torroja+del+Priorat" target="_blank" rel="noopener">ver en Google Maps</a>',
-             'Ora Hotel Priorat (Torroja del Priorat) — <a href="tel:+34977099488">977 099 488</a>'] },
+             'Ora Hotel Priorat (Torroja del Priorat) — <a href="tel:+34977099488">977 099 488</a>',
+             'Terra Dominicata - Hotel & Winery (Escaladei) — <a href="tel:+34877912292">877 912 292</a> · <a href="https://terradominicata.com" target="_blank" rel="noopener">terradominicata.com</a>, 5★, solo adultos'] },
     { distKm:19.55, diff:"exigente", time:"7–8,5 h", gainM:816, lossM:797, gpx:true, hEs:"Cierre del círculo: los relojes de sol de Porrera y la vuelta a Falset.", hCa:"Tancament del cercle: els rellotges de sol de Porrera i la tornada a Falset.",
       hEn:"Closing the loop: Porrera's sundials and the return to Falset.",
       poiEs:["Ruta dels Rellotges de Sol (Porrera)","Cierre del círculo en Falset, capital del Priorat"],
@@ -1371,6 +1412,89 @@
     </svg>`;
   }
 
+  // ---------- Widget de búsqueda avanzada (reutilizable, debajo de cada etapa) ----------
+  // Cada "tema" combina el nombre de los pueblos de la etapa con operadores avanzados de
+  // Google (site:, filetype:, intitle:, comillas exactas) para acotar resultados relevantes
+  // más allá de lo que ya listamos a mano. El usuario puede además añadir su propia palabra
+  // clave, que se incorpora entrecomillada a la consulta.
+  const SEARCH_TOPICS = {
+    alojamiento: {
+      label: { es:"Alojamiento", ca:"Allotjament", en:"Accommodation" },
+      terms: '(hotel OR "casa rural" OR hostal OR alojamiento OR pernoctar)',
+      sites: '(site:booking.com OR site:tripadvisor.es OR site:airbnb.es OR site:turismepriorat.org)'
+    },
+    restaurantes: {
+      label: { es:"Restaurantes", ca:"Restaurants", en:"Restaurants" },
+      terms: '(restaurante OR bar OR "menú del día" OR taberna)',
+      sites: '(site:tripadvisor.es OR site:google.com/maps OR site:turismepriorat.org)'
+    },
+    rutas: {
+      label: { es:"Rutas y tracks GPX", ca:"Rutes i tracks GPX", en:"Routes and GPX tracks" },
+      terms: '(ruta OR sendero OR senderismo OR track)',
+      sites: '(site:wikiloc.com OR filetype:gpx)'
+    },
+    fotos: {
+      label: { es:"Fotos y reseñas", ca:"Fotos i ressenyes", en:"Photos and reviews" },
+      terms: '(fotos OR opiniones OR reseñas)',
+      sites: '(site:tripadvisor.es OR site:google.com/maps OR intitle:fotos)'
+    },
+    eventos: {
+      label: { es:"Fiestas y eventos", ca:"Festes i esdeveniments", en:"Festivals and events" },
+      terms: '("fiesta mayor" OR evento OR "qué hacer")',
+      sites: 'site:turismepriorat.org'
+    }
+  };
+  const SEARCH_WIDGET_LABELS = {
+    es: { title:"Buscar más información", hint:"Combina operadores avanzados de Google (site:, filetype:, intitle:, comillas exactas) para cada pueblo de esta etapa.", placeholder:"Palabra clave adicional (opcional)", button:"Realizar búsqueda" },
+    ca: { title:"Cercar més informació", hint:"Combina operadors avançats de Google (site:, filetype:, intitle:, cometes exactes) per a cada poble d'aquesta etapa.", placeholder:"Paraula clau addicional (opcional)", button:"Fer la cerca" },
+    en: { title:"Search for more information", hint:"Combines advanced Google operators (site:, filetype:, intitle:, exact quotes) for each village on this stage.", placeholder:"Extra keyword (optional)", button:"Run search" }
+  };
+  // Guarda, por id de widget, la lista de pueblos a la que debe acotarse esa búsqueda.
+  const SEARCH_WIDGET_VILLAGES = {};
+
+  function buildSearchQuery(topicKey, extra, villages){
+    const topic = SEARCH_TOPICS[topicKey] || SEARCH_TOPICS.alojamiento;
+    const villagePart = '(' + villages.map(v => '"' + v.replace(/"/g,'') + '"').join(' OR ') + ')';
+    let q = villagePart + ' ' + topic.terms + ' ' + topic.sites;
+    const cleanExtra = (extra || '').trim().replace(/"/g,'');
+    if (cleanExtra) q += ' "' + cleanExtra + '"';
+    return q;
+  }
+  function buildAndOpenSearch(topicKey, extra, villages){
+    const url = 'https://www.google.com/search?q=' + encodeURIComponent(buildSearchQuery(topicKey, extra, villages));
+    window.open(url, '_blank', 'noopener');
+  }
+  function renderSearchWidgetHtml(id, villages, lang){
+    SEARCH_WIDGET_VILLAGES[id] = villages;
+    const l = SEARCH_WIDGET_LABELS[lang] || SEARCH_WIDGET_LABELS.es;
+    const options = Object.keys(SEARCH_TOPICS).map(key =>
+      `<option value="${key}">${SEARCH_TOPICS[key].label[lang] || SEARCH_TOPICS[key].label.es}</option>`
+    ).join("");
+    return `<div class="stage-search-widget" data-search-widget="${id}">
+      <h5>${l.title}</h5>
+      <p class="search-widget-hint">${l.hint}</p>
+      <div class="search-widget-row">
+        <select class="search-widget-topic">${options}</select>
+        <input type="text" class="search-widget-input" placeholder="${l.placeholder}">
+        <button type="button" class="search-widget-btn" data-search-btn data-search-id="${id}">🔍 ${l.button}</button>
+      </div>
+    </div>`;
+  }
+  // Engancha los botones/inputs de todos los widgets de búsqueda presentes en `root`
+  // (Enter en el campo de texto dispara la búsqueda igual que el botón).
+  function wireSearchWidgets(root){
+    root.querySelectorAll("[data-search-btn]").forEach(btn => {
+      const id = btn.getAttribute("data-search-id");
+      const container = root.querySelector('[data-search-widget="' + id + '"]');
+      if (!container) return;
+      const topicSel = container.querySelector(".search-widget-topic");
+      const input = container.querySelector(".search-widget-input");
+      const run = () => buildAndOpenSearch(topicSel.value, input.value, SEARCH_WIDGET_VILLAGES[id] || []);
+      btn.addEventListener("click", run);
+      input.addEventListener("keydown", e => { if (e.key === "Enter") run(); });
+    });
+  }
+
   function renderStages(lang){
     const t = T[lang].etapas;
     const summaryEl = document.getElementById("loop-summary");
@@ -1431,6 +1555,7 @@
             <div><h5>${t.eat}</h5><ul>${listOrEmpty(info.eat, t.noOffer)}</ul></div>
             <div><h5>${t.sleep}</h5><ul>${listOrEmpty(info.sleep, t.noOffer)}</ul></div>
           </div>
+          ${renderSearchWidgetHtml("stage-" + i, s, lang)}
           <div class="elev-block">
             <h5>${t.elev}</h5>
             ${info.gpx ? renderElevationSVGFromProfile(gpxData.profile) : renderElevationSVG(s)}
@@ -1450,6 +1575,7 @@
         openStageMapModal(GPX_TRACKS[i].coords, title, "stage-minimap-" + i);
       });
     });
+    wireSearchWidgets(stageList);
     const srcEl = document.getElementById("stage-source");
     if (srcEl) srcEl.innerHTML = t.source;
   }
@@ -1599,6 +1725,7 @@
             <div><h5>${te.eat}</h5><ul>${listOrEmpty(info.eat, te.noOffer)}</ul></div>
             <div><h5>${te.sleep}</h5><ul>${listOrEmpty(info.sleep, te.noOffer)}</ul></div>
           </div>
+          ${renderSearchWidgetHtml("rc-3", ["Bellmunt del Priorat", "Falset"], lang)}
           <div class="elev-block">
             <h5>${te.elev}</h5>
             ${renderElevationSVGFromProfile(d.gpxData.profile)}
@@ -1649,6 +1776,7 @@
         openStageMapModal(ENLLAC_TRACK.coords, title, "rc-minimap-3");
       });
     });
+    wireSearchWidgets(container);
 
     const totalKm = (stageInfo[0].distKm + stageInfo[1].distKm + ENLLAC_INFO.distKm);
     const totalGain = stageInfo[0].gainM + stageInfo[1].gainM + ENLLAC_INFO.gainM;

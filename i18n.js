@@ -99,7 +99,7 @@
         "elevNoteReal": "Perfil real extraído del track GPX verificado, punto a punto sobre el sendero.",
         "mapPreview": "Vista previa del trazado",
         "mapExpand": "Ampliar",
-        "source": "Comer y dormir: directorio oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, contrastado puntualmente con reseñas de Google/Tripadvisor/Booking en los establecimientos marcados con ★ (no en los 40 negocios listados). Altitudes: Idescat y Consell Regulador DOQ Priorat. Verifica horarios, disponibilidad y teléfonos antes de salir. Datos de restauración y alojamiento de las etapas 3–8 revisados y actualizados en julio de 2026."
+        "source": "Comer y dormir: directorio oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, contrastado puntualmente con reseñas de Google/Tripadvisor/Booking en los establecimientos marcados con ★ (no en los 40 negocios listados). Altitudes: Idescat y Consell Regulador DOQ Priorat. Verifica horarios, disponibilidad y teléfonos antes de salir. Datos de restauración y alojamiento de las 8 etapas revisados y ampliados en agosto de 2026, incorporando opciones en Marçà, El Molar, La Figuera, La Bisbal de Falset, Poboleda y Escaladei."
       },
       "guia": {
         "eyebrow": "Preparación",
@@ -639,7 +639,7 @@
         "elevNoteReal": "Perfil real extret del track GPX verificat, punt a punt sobre el sender.",
         "mapPreview": "Vista prèvia del traçat",
         "mapExpand": "Ampliar",
-        "source": "Menjar i dormir: directori oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, contrastat puntualment amb ressenyes de Google/Tripadvisor/Booking als establiments marcats amb ★ (no als 40 negocis llistats). Altituds: Idescat i Consell Regulador DOQ Priorat. Comprova horaris, disponibilitat i telèfons abans de sortir. Dades de restauració i allotjament de les etapes 3–8 revisades i actualitzades el juliol de 2026."
+        "source": "Menjar i dormir: directori oficial de <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, contrastat puntualment amb ressenyes de Google/Tripadvisor/Booking als establiments marcats amb ★ (no als 40 negocis llistats). Altituds: Idescat i Consell Regulador DOQ Priorat. Comprova horaris, disponibilitat i telèfons abans de sortir. Dades de restauració i allotjament de les 8 etapes revisades i ampliades l'agost de 2026, incorporant opcions a Marçà, El Molar, La Figuera, La Bisbal de Falset, Poboleda i Escaladei."
       },
       "guia": {
         "eyebrow": "Preparació",
@@ -1179,7 +1179,7 @@
         "elevNoteReal": "Real profile extracted from the verified GPX track, point by point along the trail.",
         "mapPreview": "Route preview",
         "mapExpand": "Expand",
-        "source": "Eating and sleeping: official directory of <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, spot-checked against Google/Tripadvisor/Booking reviews for the venues marked with ★ (not all 40 businesses listed). Altitudes: Idescat and the DOQ Priorat Regulatory Board. Check opening hours, availability and phone numbers before setting out. Dining and lodging data for stages 3–8 reviewed and updated in July 2026."
+        "source": "Eating and sleeping: official directory of <a href=\"https://www.turismepriorat.org\" target=\"_blank\" rel=\"noopener\">Turisme Priorat</a>, spot-checked against Google/Tripadvisor/Booking reviews for the venues marked with ★ (not all 40 businesses listed). Altitudes: Idescat and the DOQ Priorat Regulatory Board. Check opening hours, availability and phone numbers before setting out. Dining and lodging data for all 8 stages reviewed and expanded in August 2026, adding options in Marçà, El Molar, La Figuera, La Bisbal de Falset, Poboleda and Escaladei."
       },
       "guia": {
         "eyebrow": "Preparation",
