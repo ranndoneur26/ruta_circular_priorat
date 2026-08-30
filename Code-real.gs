@@ -790,6 +790,7 @@ function handleAdminList_(data) {
         origen: String(row[idx.origen] || ''),
         variante: String(row[idx.variante] || ''),
         startDate: serializeCell_(row[idx.startDate]),
+        submittedAt: serializeDateTime_(row[idx.submittedAt]),
         lang: normalizeLanguage_(row[idx.lang]),
         verified: toBool_(row[idx.verified]),
         notified: toBool_(row[idx.notified]),
@@ -855,6 +856,7 @@ function listInscripciones_() {
       origen: String(row[idx.origen] || ''),
       variante: String(row[idx.variante] || ''),
       startDate: serializeCell_(row[idx.startDate]),
+      mensaje: String(row[idx.mensaje] || ''),
       lang: normalizeLanguage_(row[idx.lang]),
       verified: toBool_(row[idx.verified]),
       notified: toBool_(row[idx.notified])
@@ -1219,7 +1221,7 @@ function sendVerifiedEmail_(alias, email, lang) {
           <h2 style="margin:0 0 16px;color:#7a1f2b;">¡Enhorabuena, ${safeAlias}!</h2>
           <p>Hemos revisado tus 4 fotografías y confirmamos que has completado la Travessa del Priorat. Tu alias ya aparece marcado como <strong>verificado</strong> en la lista de caminantes.</p>
           <p><a href="${walkersUrl}">→ Ver la lista de caminantes</a></p>
-          <p style="margin-top:28px;">Gracias por recorrer la Ruta del Silencio,<br>Travessa del Priorat</p>
+          <p style="margin-top:28px;">Gracias por recorrer El Camí del Prior,<br>Travessa del Priorat</p>
         </div>`
     },
 
@@ -1230,7 +1232,7 @@ function sendVerifiedEmail_(alias, email, lang) {
           <h2 style="margin:0 0 16px;color:#7a1f2b;">Enhorabona, ${safeAlias}!</h2>
           <p>Hem revisat les teves 4 fotografies i confirmem que has completat la Travessa del Priorat. El teu alias ja apareix marcat com a <strong>verificat</strong> a la llista de caminants.</p>
           <p><a href="${walkersUrl}">→ Veure la llista de caminants</a></p>
-          <p style="margin-top:28px;">Gràcies per recórrer la Ruta del Silenci,<br>Travessa del Priorat</p>
+          <p style="margin-top:28px;">Gràcies per recórrer El Camí del Prior,<br>Travessa del Priorat</p>
         </div>`
     },
 
@@ -1241,7 +1243,7 @@ function sendVerifiedEmail_(alias, email, lang) {
           <h2 style="margin:0 0 16px;color:#7a1f2b;">Congratulations, ${safeAlias}!</h2>
           <p>We've reviewed your 4 photos and confirmed you completed the Travessa del Priorat. Your alias is now marked as <strong>verified</strong> on the walkers list.</p>
           <p><a href="${walkersUrl}">→ View the walkers list</a></p>
-          <p style="margin-top:28px;">Thanks for walking the Route of Silence,<br>Travessa del Priorat</p>
+          <p style="margin-top:28px;">Thanks for walking El Camí del Prior,<br>Travessa del Priorat</p>
         </div>`
     }
   };
@@ -1288,7 +1290,7 @@ function sendThankYouEmail_(data) {
 
   const templates = {
     es: {
-      subject: 'Gracias por inscribirte en la Ruta del Silencio',
+      subject: 'Gracias por inscribirte en El Camí del Prior',
       html: `
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#28251d;max-width:640px;margin:0 auto;padding:24px;">
           <h2 style="margin:0 0 16px;color:#7a1f2b;">Gracias por inscribirte, ${alias}</h2>
@@ -1309,7 +1311,7 @@ function sendThankYouEmail_(data) {
 
           <p>Esta aventura no es una carrera contra el cronómetro, sino un viaje para el alma. Te invitamos a disfrutar de una travesía introspectiva, paso a paso, por parajes solitarios, salvajes y profundamente auténticos; paisajes dominados antiguamente por monjes y ermitaños que han sabido preservar toda su esencia mágica.</p>
 
-          <p>Para disfrutar plenamente de la &ldquo;Ruta del Silencio&rdquo; y fluir con el entorno, solo te pedimos que sigas unas pequeñas normas de orden, convivencia y sentido común, tal como hacían los antiguos habitantes de estas tierras.</p>
+          <p>Para disfrutar plenamente de &ldquo;El Camí del Prior&rdquo; y fluir con el entorno, solo te pedimos que sigas unas pequeñas normas de orden, convivencia y sentido común, tal como hacían los antiguos habitantes de estas tierras.</p>
 
           <h3 style="color:#7a1f2b;margin:28px 0 8px;">Preparación y libertad de ruta</h3>
 
@@ -1317,7 +1319,7 @@ function sendThankYouEmail_(data) {
 
           <p>Eso sí, te aconsejamos <strong>buscar y reservar tus alojamientos con antelación</strong>. En nuestra web encontrarás algunas recomendaciones, pero te animamos a hacer tu propia búsqueda para diseñar la aventura a tu medida.</p>
 
-          <p><a href="${guideUrl}">→ Guía de la Ruta del Silencio</a></p>
+          <p><a href="${guideUrl}">→ Guía de El Camí del Prior</a></p>
 
           ${
             !isCorta
@@ -1326,9 +1328,9 @@ function sendThankYouEmail_(data) {
 
                 <p>Esta es la opción de inmersión total. Tendrás entre 8 y 9 días para completar todo el recorrido a pie. Puedes organizar las jornadas como quieras, con dos únicas reglas innegociables: <strong>cumplir con los días establecidos</strong> y <strong>respetar siempre el sentido original de la ruta</strong>.</p>
 
-                <p>Además, esta modalidad tiene un pequeño reto añadido: deberás hacer <strong>4 fotografías específicas</strong> durante el trayecto. Cuando llegues a la meta en Falset, envíalas por correo a nuestro centro de verificación. Estas imágenes serán tu pasaporte para recibir un obsequio exclusivo que acreditará que has conquistado la Ruta del Silencio del Priorat.</p>
+                <p>Además, esta modalidad tiene un pequeño reto añadido: deberás hacer <strong>4 fotografías específicas</strong> durante el trayecto. Cuando llegues a la meta en Falset, envíalas por correo a nuestro centro de verificación. Estas imágenes serán tu pasaporte para recibir un obsequio exclusivo que acreditará que has conquistado El Camí del Prior.</p>
 
-                <p><a href="${stagesUrl}">→ Ruta del Silencio 8 días</a></p>
+                <p><a href="${stagesUrl}">→ El Camí del Prior · 8 días</a></p>
 
                 <p><strong>Importante:</strong> recuerda tu &ldquo;Alias&rdquo; (<strong>${alias}</strong>) y tu correo electrónico (${safeEmail}). Cuando termines la ruta larga, envíanos las fotos para poder verificar tu recorrido.</p>
 
@@ -1357,7 +1359,7 @@ function sendThankYouEmail_(data) {
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#28251d;max-width:640px;margin:0 auto;padding:24px;">
           <h2 style="margin:0 0 16px;color:#7a1f2b;">Gràcies per inscriure’t, ${alias}</h2>
 
-          <p>Hem rebut la teva inscripció a la Ruta del Silenci.</p>
+          <p>Hem rebut la teva inscripció a El Camí del Prior.</p>
 
           <p>Aquí tens la informació útil per preparar la ruta:</p>
 
@@ -1373,7 +1375,7 @@ function sendThankYouEmail_(data) {
 
           <p>Aquesta aventura no és cap cursa contra el cronòmetre, sinó un viatge per a l’ànima. Et convidem a gaudir d’una travessa introspectiva, pas a pas, per paratges solitaris, feréstecs i profundament autèntics; paisatges dominats antigament per monjos i ermitans que n’han sabut preservar tota l’essència màgica.</p>
 
-          <p>Per gaudir plenament de la &ldquo;Ruta del Silenci&rdquo; i fluir amb l’entorn, només et demanem que segueixis unes petites normes d’ordre, convivència i sentit comú.</p>
+          <p>Per gaudir plenament d’&ldquo;El Camí del Prior&rdquo; i fluir amb l’entorn, només et demanem que segueixis unes petites normes d’ordre, convivència i sentit comú.</p>
 
           <h3 style="color:#7a1f2b;margin:28px 0 8px;">Preparació i llibertat de ruta</h3>
 
@@ -1381,7 +1383,7 @@ function sendThankYouEmail_(data) {
 
           <p>Això sí, t’aconsellem <strong>buscar i reservar els teus allotjaments amb antelació</strong>.</p>
 
-          <p><a href="${guideUrl}">→ Guia de la Ruta del Silenci</a></p>
+          <p><a href="${guideUrl}">→ Guia d’El Camí del Prior</a></p>
 
           ${
             !isCorta
@@ -1392,7 +1394,7 @@ function sendThankYouEmail_(data) {
 
                 <p>A més, hauràs de fer <strong>4 fotografies específiques</strong> durant el trajecte. Quan arribis a la meta a Falset, envia-les al nostre centre de verificació.</p>
 
-                <p><a href="${stagesUrl}">→ Ruta del Silenci 8 dies</a></p>
+                <p><a href="${stagesUrl}">→ El Camí del Prior · 8 dies</a></p>
 
                 <p><strong>Important:</strong> recorda el teu &ldquo;Alias&rdquo; (<strong>${alias}</strong>) i el teu correu electrònic (${safeEmail}). Quan acabis la ruta llarga, envia’ns les fotos perquè puguem verificar el teu recorregut.</p>
 
@@ -1416,7 +1418,7 @@ function sendThankYouEmail_(data) {
     },
 
     en: {
-      subject: 'Thanks for registering for the Silence Route',
+      subject: 'Thanks for registering for El Camí del Prior',
       html: `
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#28251d;max-width:640px;margin:0 auto;padding:24px;">
           <h2 style="margin:0 0 16px;color:#7a1f2b;">Thanks for registering, ${alias}</h2>
@@ -1437,7 +1439,7 @@ function sendThankYouEmail_(data) {
 
           <p>This adventure is not a race against the clock, but a journey for the soul. We invite you to enjoy an introspective trek, step by step, through solitary, wild and deeply authentic landscapes; places once inhabited by monks and hermits who have preserved their magical essence.</p>
 
-          <p>To fully enjoy the Route of Silence, we only ask that you follow a few simple rules of order, coexistence and common sense.</p>
+          <p>To fully enjoy El Camí del Prior, we only ask that you follow a few simple rules of order, coexistence and common sense.</p>
 
           <h3 style="color:#7a1f2b;margin:28px 0 8px;">Preparation and freedom of route</h3>
 
@@ -1445,7 +1447,7 @@ function sendThankYouEmail_(data) {
 
           <p>We recommend that you <strong>search for and book your accommodation in advance</strong>.</p>
 
-          <p><a href="${guideUrl}">→ Route of Silence Guide</a></p>
+          <p><a href="${guideUrl}">→ El Camí del Prior Guide</a></p>
 
           ${
             !isCorta
@@ -1456,7 +1458,7 @@ function sendThankYouEmail_(data) {
 
                 <p>You must also take <strong>4 specific photographs</strong> along the way. When you reach Falset, send them to our verification centre.</p>
 
-                <p><a href="${stagesUrl}">→ Route of Silence – 8 days</a></p>
+                <p><a href="${stagesUrl}">→ El Camí del Prior – 8 days</a></p>
 
                 <p><strong>Important:</strong> remember your &ldquo;Alias&rdquo; (<strong>${alias}</strong>) and your email address (${safeEmail}). When you finish the long route, send us the photos so we can verify your journey.</p>
 
@@ -1507,6 +1509,20 @@ function serializeCell_(value) {
       Session.getScriptTimeZone() || 'Europe/Madrid',
       'yyyy-MM-dd'
     );
+  }
+
+  return String(value == null ? '' : value);
+}
+
+/*
+ * A diferencia de serializeCell_ (que trunca a solo fecha, pensado para
+ * startDate donde la hora no importa), esta función conserva fecha y hora
+ * completas. Se usa para submittedAt, donde el orden exacto de entrada sí
+ * importa (varias inscripciones pueden llegar el mismo día).
+ */
+function serializeDateTime_(value) {
+  if (value instanceof Date) {
+    return value.toISOString();
   }
 
   return String(value == null ? '' : value);
