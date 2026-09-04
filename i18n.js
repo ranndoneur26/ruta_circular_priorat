@@ -82,6 +82,12 @@
         "diffFacil": "Fácil",
         "diffModerada": "Moderada",
         "diffExigente": "Exigente",
+        "tableCaption": "Toca una fila para abrir esa etapa",
+        "tableEtapa": "Etapa",
+        "tableKm": "Km",
+        "tableTiempo": "Tiempo",
+        "tableDesnivel": "Desnivel +",
+        "tableDificultad": "Dificultad",
         "summary": "Circuito cerrado · 19 municipios, cada uno una vez · <strong>{km} km</strong> reales, verificados con GPX en las 8 etapas",
         "meta": "desnivel y distancia real del sendero — pendientes de trazado GPX verificado",
         "poi": "Qué visitar",
@@ -146,11 +152,25 @@
         }
       },
       "terrain": {
-        "h": "Condiciones del terreno",
-        "i1": "Terreno agreste, llicorella y desniveles fuertes: ruta exigente",
+        "eyebrow": "Antes de venir",
+        "h": "¿Es para ti? Lo esencial en 10 segundos",
+        "i1": "166,4 km en 8 etapas (o 53,6 km en 3 etapas) — ruta exigente, llicorella y desniveles fuertes",
+        "iSeason": "Mejor época: abril–junio y septiembre–noviembre. Evita julio y agosto (35–38&nbsp;°C)",
+        "iAgua": "Agua: 2,5–3&nbsp;L por etapa; 4–5&nbsp;L en las etapas 2 y 5",
         "i2": "Poca sombra, calor intenso en época estival",
         "i3": "Muy poca infraestructura turística fuera de fin de semana",
+        "iSenal": "Señalización discontinua: no es un itinerario propio homologado",
+        "iGpx": "Imprescindible llevar track GPX offline",
         "link": "Ver la guía práctica completa →"
+      },
+      "routeopt": {
+        "h2": "Dos maneras de recorrerla",
+        "fullH": "Travessa completa",
+        "fullP": "166,4 km · 8 etapas · circuito cerrado",
+        "fullBtn": "Ver las 8 etapas",
+        "shortH": "Ruta corta",
+        "shortP": "53,6 km · 3 etapas · primera toma de contacto",
+        "shortBtn": "Ver ruta corta"
       },
       "falset": {
         "eyebrow": "Punto de entrada y salida",
@@ -622,6 +642,12 @@
         "diffFacil": "Fàcil",
         "diffModerada": "Moderada",
         "diffExigente": "Exigent",
+        "tableCaption": "Toca una fila per obrir aquesta etapa",
+        "tableEtapa": "Etapa",
+        "tableKm": "Km",
+        "tableTiempo": "Temps",
+        "tableDesnivel": "Desnivell +",
+        "tableDificultad": "Dificultat",
         "summary": "Circuit tancat · 19 municipis, cadascun una vegada · <strong>{km} km</strong> reals, verificats amb GPX a les 8 etapes",
         "meta": "desnivell i distància real del sender — pendents de traçat GPX verificat",
         "poi": "Què visitar",
@@ -686,11 +712,25 @@
         }
       },
       "terrain": {
-        "h": "Condicions del terreny",
-        "i1": "Terreny agrest, llicorella i desnivells forts: ruta exigent",
+        "eyebrow": "Abans de venir",
+        "h": "És per a tu? L'essencial en 10 segons",
+        "i1": "166,4 km en 8 etapes (o 53,6 km en 3 etapes) — ruta exigent, llicorella i desnivells forts",
+        "iSeason": "Millor època: abril–juny i setembre–novembre. Evita juliol i agost (35–38&nbsp;°C)",
+        "iAgua": "Aigua: 2,5–3&nbsp;L per etapa; 4–5&nbsp;L a les etapes 2 i 5",
         "i2": "Poca ombra, calor intensa en època estival",
         "i3": "Molt poca infraestructura turística fora de cap de setmana",
+        "iSenal": "Senyalització discontínua: no és un itinerari propi homologat",
+        "iGpx": "Imprescindible portar track GPX offline",
         "link": "Veure la guia pràctica completa →"
+      },
+      "routeopt": {
+        "h2": "Dues maneres de recorrer-la",
+        "fullH": "Travessa completa",
+        "fullP": "166,4 km · 8 etapes · circuit tancat",
+        "fullBtn": "Veure les 8 etapes",
+        "shortH": "Ruta curta",
+        "shortP": "53,6 km · 3 etapes · primer contacte",
+        "shortBtn": "Veure ruta curta"
       },
       "falset": {
         "eyebrow": "Punt d'entrada i sortida",
@@ -1162,6 +1202,12 @@
         "diffFacil": "Easy",
         "diffModerada": "Moderate",
         "diffExigente": "Demanding",
+        "tableCaption": "Tap a row to open that stage",
+        "tableEtapa": "Stage",
+        "tableKm": "Km",
+        "tableTiempo": "Time",
+        "tableDesnivel": "Elevation +",
+        "tableDificultad": "Difficulty",
         "summary": "Closed loop · 19 municipalities, each visited once · <strong>{km} km</strong> real, verified with GPX across all 8 stages",
         "meta": "real elevation gain and trail distance — pending verified GPX track",
         "poi": "What to see",
@@ -1226,11 +1272,25 @@
         }
       },
       "terrain": {
-        "h": "Terrain conditions",
-        "i1": "Rugged terrain, llicorella slate and steep gradients: a demanding route",
+        "eyebrow": "Before you come",
+        "h": "Is this for you? The essentials in 10 seconds",
+        "i1": "166.4 km over 8 stages (or 53.6 km over 3 stages) — a demanding route with llicorella slate and steep gradients",
+        "iSeason": "Best season: April–June and September–November. Avoid July and August (35–38&nbsp;°C)",
+        "iAgua": "Water: 2.5–3&nbsp;L per stage; 4–5&nbsp;L on stages 2 and 5",
         "i2": "Little shade, intense heat in summer",
         "i3": "Very little tourist infrastructure outside weekends",
+        "iSenal": "Discontinuous waymarking: not an officially approved route of its own",
+        "iGpx": "An offline GPX track is essential",
         "link": "See the full practical guide →"
+      },
+      "routeopt": {
+        "h2": "Two ways to walk it",
+        "fullH": "Full crossing",
+        "fullP": "166.4 km · 8 stages · closed loop",
+        "fullBtn": "See the 8 stages",
+        "shortH": "Short route",
+        "shortP": "53.6 km · 3 stages · first taste of the trail",
+        "shortBtn": "See short route"
       },
       "falset": {
         "eyebrow": "Entry and exit point",

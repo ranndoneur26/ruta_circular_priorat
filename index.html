@@ -226,11 +226,25 @@
   .terrain-warn{ padding:36px 0; border-bottom:1px solid var(--line); background:var(--llicorella-2); }
   .tw-box{ display:grid; grid-template-columns:auto 1fr; gap:20px; align-items:flex-start; }
   .tw-box svg{ flex-shrink:0; margin-top:2px; }
+  .tw-box .eyebrow{ display:block; margin-bottom:6px; }
   .tw-box h3{ font-size:17px; margin-bottom:10px; }
   .tw-list{ display:flex; flex-wrap:wrap; gap:10px 28px; list-style:none; margin:0; padding:0; }
   .tw-list li{ font-size:13.5px; color:var(--pergami-dim); padding-left:15px; position:relative; }
   .tw-list li::before{ content:"·"; position:absolute; left:0; color:var(--vinya); font-weight:700; }
   .tw-list a{ color:var(--samfaina); text-decoration:none; border-bottom:1px dotted var(--samfaina); }
+
+  /* ---------- route options (travessa completa vs ruta corta) ---------- */
+  .route-options{ padding:44px 0; border-bottom:1px solid var(--line); }
+  .route-options h2{ font-size:24px; margin-bottom:22px; }
+  .options-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:640px){ .options-grid{ grid-template-columns:1fr; } }
+  .option-card{
+    border:1px solid var(--line); padding:26px 24px; background:var(--llicorella-2);
+  }
+  .option-card h3{ font-size:19px; margin-bottom:8px; }
+  .option-card p{ font-size:14px; color:var(--pergami-dim); margin:0 0 18px; }
+  .option-card .btn{ width:100%; justify-content:center; }
+  .option-card--accent{ border-color:var(--samfaina); background:rgba(198,146,20,0.06); }
 
   /* ---------- falset callout ---------- */
   .falset-callout{ padding:44px 0; border-bottom:1px solid var(--line); }
@@ -340,14 +354,39 @@
   }
   .loop-summary strong{ color:var(--samfaina); font-weight:600; }
   .stage-list{ display:flex; flex-direction:column; }
-  .stage{ display:grid; grid-template-columns:110px 1fr; gap:24px; padding:26px 0; border-bottom:1px solid var(--line); }
-  .stage:first-child{ border-top:1px solid var(--line); }
-  @media (max-width:640px){ .stage{grid-template-columns:60px 1fr;} }
-  .stage .day{ font-family:'JetBrains Mono', monospace; color:var(--samfaina); }
-  .stage .day .num{ font-size:34px; display:block; line-height:1; }
-  .stage .day .lbl{ font-size:10px; letter-spacing:0.1em; color:var(--pergami-dim); text-transform:uppercase; }
-  .stage .route{ font-size:17px; }
-  .stage .route .arrow{ color:var(--pergami-dim); margin:0 6px; }
+  .stage-card{ border-bottom:1px solid var(--line); }
+  .stage-card:first-child{ border-top:1px solid var(--line); }
+  .stage-summary{
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    gap:16px 24px; padding:22px 0; cursor:pointer; list-style:none;
+  }
+  .stage-summary::-webkit-details-marker{ display:none; }
+  .stage-summary-main{ display:flex; align-items:baseline; gap:20px; min-width:0; }
+  .stage-summary .day{ font-family:'JetBrains Mono', monospace; color:var(--samfaina); flex-shrink:0; }
+  .stage-summary .day .num{ font-size:30px; display:block; line-height:1; }
+  .stage-summary .day .lbl{ font-size:10px; letter-spacing:0.1em; color:var(--pergami-dim); text-transform:uppercase; }
+  .stage-summary .route{ font-size:16px; }
+  .stage-summary .route .arrow{ color:var(--pergami-dim); margin:0 6px; }
+  .stage-metrics{
+    display:flex; flex-wrap:wrap; gap:8px; list-style:none; margin:0; padding:0;
+  }
+  .stage-metrics li{
+    font-family:'JetBrains Mono', monospace; font-size:11.5px; color:var(--pergami-dim);
+    padding:5px 11px; border:1px solid var(--line); white-space:nowrap;
+  }
+  .stage-metrics li.diff-pill.moderada{ border-color:var(--samfaina); color:var(--samfaina); }
+  .stage-metrics li.diff-pill.exigente{ border-color:var(--vinya); color:var(--vinya); }
+  .stage-toggle-icon{
+    font-family:'JetBrains Mono', monospace; font-size:20px; color:var(--samfaina);
+    flex-shrink:0; width:24px; text-align:center; transition:transform 0.2s ease;
+  }
+  .stage-card[open] .stage-toggle-icon{ transform:rotate(45deg); }
+  .stage-body{ padding-bottom:26px; }
+  @media (max-width:640px){
+    .stage-summary{ align-items:flex-start; }
+    .stage-summary-main{ gap:12px; }
+    .stage-summary .day .num{ font-size:22px; }
+  }
   .stage-facts{
     display:flex; flex-wrap:wrap; gap:10px 22px;
     margin-top:14px; padding-top:14px; border-top:1px solid var(--line);
@@ -361,7 +400,7 @@
   .diff-badge.facil{ border-color:var(--herba); color:var(--herba); }
   .diff-badge.moderada{ border-color:var(--samfaina); color:var(--samfaina); }
   .diff-badge.exigente{ border-color:var(--vinya); color:var(--vinya); }
-  .stage .highlight{ margin-top:10px; font-size:13.5px; color:var(--pergami-dim); font-style:italic; }
+  .stage-body .highlight{ font-size:13.5px; color:var(--pergami-dim); font-style:italic; }
   .stage-extra{
     margin-top:16px; padding-top:16px; border-top:1px solid var(--line);
     display:grid; grid-template-columns:repeat(3, 1fr); gap:18px;
@@ -475,7 +514,44 @@
     color:var(--pergami-dim); opacity:0.75;
   }
   .stage-source a{ color:var(--samfaina); text-decoration:none; border-bottom:1px dotted var(--samfaina); }
-  .stage .meta{ margin-top:10px; font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--pergami-dim); opacity:0.75; }
+  .stage-body .meta{ margin-top:10px; font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--pergami-dim); opacity:0.75; }
+
+  /* ---------- ruta corta: mantiene el layout plano original (no es acordeón) ---------- */
+  .rc-day{ display:grid; grid-template-columns:110px 1fr; gap:24px; padding:26px 0; border-bottom:1px solid var(--line); }
+  .rc-day:first-child{ border-top:1px solid var(--line); }
+  @media (max-width:640px){ .rc-day{grid-template-columns:60px 1fr;} }
+  .rc-day .day{ font-family:'JetBrains Mono', monospace; color:var(--samfaina); }
+  .rc-day .day .num{ font-size:34px; display:block; line-height:1; }
+  .rc-day .day .lbl{ font-size:10px; letter-spacing:0.1em; color:var(--pergami-dim); text-transform:uppercase; }
+  .rc-day .route{ font-size:17px; }
+  .rc-day .route .arrow{ color:var(--pergami-dim); margin:0 6px; }
+  .rc-day .highlight{ margin-top:10px; font-size:13.5px; color:var(--pergami-dim); font-style:italic; }
+  .rc-day .meta{ margin-top:10px; font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--pergami-dim); opacity:0.75; }
+
+  /* ---------- stages comparator table ---------- */
+  .stages-table-wrap{ margin-bottom:32px; overflow-x:auto; }
+  .stages-table{ width:100%; border-collapse:collapse; font-size:13px; }
+  .stages-table caption{ text-align:left; font-size:11px; color:var(--pergami-dim); margin-bottom:8px; }
+  .stages-table th, .stages-table td{
+    padding:9px 14px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap;
+  }
+  .stages-table thead th{
+    font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.06em;
+    text-transform:uppercase; color:var(--samfaina); border-bottom:1px solid var(--samfaina);
+  }
+  .stages-table tbody tr{ cursor:pointer; transition:background 0.15s ease; }
+  .stages-table tbody tr:hover{ background:var(--llicorella-2); }
+  .stages-table td.diff-cell.moderada{ color:var(--samfaina); }
+  .stages-table td.diff-cell.exigente{ color:var(--vinya); }
+
+  /* ---------- notice boxes (avisos críticos) ---------- */
+  .notice{ padding:14px 18px; margin:16px 0; border:1px solid var(--line); border-left:3px solid var(--pergami-dim); }
+  .notice p{ margin:0; font-size:13px; color:var(--pergami-dim); }
+  .notice strong{ color:var(--pergami); }
+  .notice--info{ border-left-color:var(--samfaina); }
+  .notice--warning{ border-left-color:var(--vinya); background:rgba(122,31,43,0.06); }
+  .notice--danger{ border-left-color:var(--vinya); background:rgba(122,31,43,0.12); }
+  .notice--danger strong{ color:var(--vinya); }
 
   footer{ padding:40px 0 60px; border-top:1px solid var(--line); font-size:12.5px; color:var(--pergami-dim); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; }
 
@@ -705,6 +781,49 @@
   <polyline points="0,50 60,30 130,45 210,15 300,42 380,20 460,48 560,10 660,40 760,25 860,46 960,18 1060,44 1150,28 1200,40" fill="none" stroke="var(--samfaina)" stroke-width="1.5"/>
 </svg>
 
+<div class="terrain-warn">
+  <div class="wrap">
+    <div class="tw-box">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+        <path d="M13 2 L24 22 L2 22 Z" stroke="var(--vinya)" stroke-width="2" stroke-linejoin="round"/>
+        <line x1="13" y1="10" x2="13" y2="16" stroke="var(--vinya)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="13" cy="19" r="1.2" fill="var(--vinya)"/>
+      </svg>
+      <div>
+        <span class="eyebrow" data-i18n="terrain.eyebrow">Antes de venir</span>
+        <h3 data-i18n="terrain.h">¿Es para ti? Lo esencial en 10 segundos</h3>
+        <ul class="tw-list">
+          <li data-i18n="terrain.i1">166,4 km en 8 etapas (o 53,6 km en 3 etapas) — ruta exigente, llicorella y desniveles fuertes</li>
+          <li data-i18n="terrain.iSeason">Mejor época: abril–junio y septiembre–noviembre. Evita julio y agosto (35–38&nbsp;°C)</li>
+          <li data-i18n="terrain.iAgua">Agua: 2,5–3&nbsp;L por etapa; 4–5&nbsp;L en las etapas 2 y 5</li>
+          <li data-i18n="terrain.i3">Muy poca infraestructura turística fuera de fin de semana</li>
+          <li data-i18n="terrain.iSenal">Señalización discontinua: no es un itinerario propio homologado</li>
+          <li data-i18n="terrain.iGpx">Imprescindible llevar track GPX offline</li>
+          <li><a href="#guia" data-i18n="terrain.link">Ver la guía práctica completa →</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="route-options" id="dos-formas" aria-labelledby="route-options-title">
+  <div class="wrap">
+    <h2 id="route-options-title" data-i18n="routeopt.h2">Dos maneras de recorrerla</h2>
+    <div class="options-grid">
+      <article class="option-card">
+        <h3 data-i18n="routeopt.fullH">Travessa completa</h3>
+        <p data-i18n="routeopt.fullP">166,4&nbsp;km · 8 etapas · circuito cerrado</p>
+        <a href="#etapas" class="btn btn-primary" data-i18n="routeopt.fullBtn">Ver las 8 etapas</a>
+      </article>
+      <article class="option-card option-card--accent">
+        <h3 data-i18n="routeopt.shortH">Ruta corta</h3>
+        <p data-i18n="routeopt.shortP">53,6&nbsp;km · 3 etapas · primera toma de contacto</p>
+        <a href="#ruta-corta" class="btn btn-secondary" data-i18n="routeopt.shortBtn">Ver ruta corta</a>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section id="tambe-conegut" class="reveal">
   <div class="wrap">
     <div class="section-head">
@@ -801,27 +920,6 @@
   </div>
 </section>
 
-<div class="terrain-warn">
-  <div class="wrap">
-    <div class="tw-box">
-      <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-        <path d="M13 2 L24 22 L2 22 Z" stroke="var(--vinya)" stroke-width="2" stroke-linejoin="round"/>
-        <line x1="13" y1="10" x2="13" y2="16" stroke="var(--vinya)" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="13" cy="19" r="1.2" fill="var(--vinya)"/>
-      </svg>
-      <div>
-        <h3 data-i18n="terrain.h">Condiciones del terreno</h3>
-        <ul class="tw-list">
-          <li data-i18n="terrain.i1">Terreno agreste, llicorella y desniveles fuertes: ruta exigente</li>
-          <li data-i18n="terrain.i2">Poca sombra, calor intenso en época estival</li>
-          <li data-i18n="terrain.i3">Muy poca infraestructura turística fuera de fin de semana</li>
-          <li><a href="#guia" data-i18n="terrain.link">Ver la guía práctica completa →</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-
 <section id="pueblos" class="dark-alt reveal">
   <div class="wrap">
     <div class="section-head">
@@ -845,6 +943,7 @@
       <p data-i18n="etapas.p">Distancia, desnivel y tiempo reales de las 8 etapas, verificados con GPX.</p>
     </div>
     <div class="loop-summary" id="loop-summary"></div>
+    <div class="stages-table-wrap" id="stages-table"></div>
     <div class="stage-list" id="stage-list"></div>
     <div class="stage-source" id="stage-source"></div>
   </div>
@@ -1495,6 +1594,48 @@
     });
   }
 
+  // Tabla-resumen de las 8 etapas (km/tiempo/desnivel/dificultad de un vistazo). Al hacer
+  // clic en una fila, abre esa etapa en el acordeón de abajo y hace scroll hasta ella.
+  function renderStagesTable(lang){
+    const t = T[lang].etapas;
+    const wrap = document.getElementById("stages-table");
+    if (!wrap) return;
+    const rows = stages.map((s, i) => {
+      const info = stageInfo[i];
+      const diffLabel = t[DIFF_LABEL_KEY[info.diff]];
+      return `<tr data-jump-stage="${i}">
+        <td>${String(i + 1).padStart(2, "0")}</td>
+        <td>${info.distKm.toFixed(1)}</td>
+        <td>${info.time}</td>
+        <td>+${info.gainM} m</td>
+        <td class="diff-cell ${info.diff}">${diffLabel}</td>
+      </tr>`;
+    }).join("");
+    wrap.innerHTML = `<table class="stages-table">
+        <caption>${t.tableCaption || "Toca una fila para abrir esa etapa"}</caption>
+        <thead>
+          <tr>
+            <th>${t.tableEtapa || "Etapa"}</th>
+            <th>${t.tableKm || "Km"}</th>
+            <th>${t.tableTiempo || "Tiempo"}</th>
+            <th>${t.tableDesnivel || "Desnivel +"}</th>
+            <th>${t.tableDificultad || "Dificultad"}</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>`;
+    wrap.querySelectorAll("tr[data-jump-stage]").forEach(tr => {
+      tr.addEventListener("click", () => {
+        const i = Number(tr.getAttribute("data-jump-stage"));
+        const details = document.querySelector('.stage-card[data-stage-index="' + i + '"]');
+        if (!details) return;
+        details.open = true;
+        initSingleStageMiniMap(i);
+        details.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  }
+
   function renderStages(lang){
     const t = T[lang].etapas;
     const summaryEl = document.getElementById("loop-summary");
@@ -1511,9 +1652,6 @@
       const highlight = lang === "ca" ? info.hCa : lang === "en" ? info.hEn : info.hEs;
       const poi = lang === "ca" ? info.poiCa : lang === "en" ? info.poiEn : info.poiEs;
       const diffLabel = t[DIFF_LABEL_KEY[info.diff]];
-      const row = document.createElement("div");
-      row.className = "stage";
-      const distLabel = info.gpx ? t.distReal : t.dist;
       // Mini-mapa de previsualización real del track (extraído del GPX) para las 8 etapas.
       const minimapCaption = lang === "ca"
         ? "Traçat real extret del GPX — mateix track que es descarrega a sota."
@@ -1539,17 +1677,26 @@
              <span class="gpx-disclaimer">${t.gpxDisclaimer}</span>
            </div>`
         : `<div class="meta">${t.meta}</div>`;
+      const row = document.createElement("details");
+      row.className = "stage-card";
+      row.dataset.stageIndex = i;
       row.innerHTML = `
-        <div class="day"><span class="num">${String(i+1).padStart(2,"0")}</span><span class="lbl">${t.etapaLabel}</span></div>
-        <div>
-          <div class="route">${s.join(' <span class="arrow">&rarr;</span> ')}</div>
+        <summary class="stage-summary">
+          <div class="stage-summary-main">
+            <div class="day"><span class="num">${String(i+1).padStart(2,"0")}</span><span class="lbl">${t.etapaLabel}</span></div>
+            <div class="route">${s.join(' <span class="arrow">&rarr;</span> ')}</div>
+          </div>
+          <ul class="stage-metrics" role="list">
+            <li>${info.distKm.toFixed(1)} km</li>
+            <li>${info.time}</li>
+            <li>+${info.gainM} m</li>
+            <li class="diff-pill ${info.diff}">${diffLabel}</li>
+          </ul>
+          <span class="stage-toggle-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="stage-body">
           <div class="highlight">${highlight}</div>
           ${minimapHtml}
-          <div class="stage-facts">
-            <span class="stage-fact">${distLabel}: <b>${info.distKm.toFixed(1)} km</b></span>
-            <span class="stage-fact">${t.time}: <b>${info.time}</b></span>
-            <span class="stage-fact">${t.diff}: <span class="diff-badge ${info.diff}">${diffLabel}</span></span>
-          </div>
           <div class="stage-extra">
             <div><h5>${t.poi}</h5><ul>${listOrEmpty(poi, "—")}</ul></div>
             <div><h5>${t.eat}</h5><ul>${listOrEmpty(info.eat, t.noOffer)}</ul></div>
@@ -1566,7 +1713,16 @@
       `;
       stageList.appendChild(row);
     });
-    initStageMiniMaps();
+    // El mini-mapa Leaflet NO se inicializa aquí: si el <details> está cerrado, su
+    // contenido no se renderiza (display:none nativo del navegador) y Leaflet calcularía
+    // mal el tamaño del mapa al crearse dentro de un contenedor sin dimensiones reales.
+    // En su lugar, cada etapa inicializa su propio mini-mapa la primera vez que se abre
+    // (ver listener "toggle" más abajo).
+    stageList.querySelectorAll(".stage-card").forEach(details => {
+      details.addEventListener("toggle", () => {
+        if (details.open) initSingleStageMiniMap(Number(details.dataset.stageIndex));
+      });
+    });
     stageList.querySelectorAll("[data-expand-stage]").forEach(btn => {
       btn.addEventListener("click", () => {
         const i = Number(btn.getAttribute("data-expand-stage"));
@@ -1576,6 +1732,7 @@
       });
     });
     wireSearchWidgets(stageList);
+    renderStagesTable(lang);
     const srcEl = document.getElementById("stage-source");
     if (srcEl) srcEl.innerHTML = t.source;
   }
@@ -1600,32 +1757,38 @@
   // Mini-mapa Leaflet de solo-lectura por etapa: previsualización compacta con el track
   // GPX real ya embebido en GPX_TRACKS. Sin controles, sin interacción — el botón "Ampliar"
   // abre el modal con el mapa completo e interactivo (openStageMapModal).
-  function initStageMiniMaps(){
-    stages.forEach((s, i) => {
-      const el = document.getElementById("stage-minimap-" + i);
-      if (!el) return;
-      const gpxData = GPX_TRACKS[i];
-      if (!gpxData || !gpxData.coords || !gpxData.coords.length) return;
+  // Inicializa el mini-mapa Leaflet de UNA sola etapa (llamado de forma perezosa cuando
+  // el <details> de esa etapa se abre por primera vez — ver listener "toggle" en
+  // renderStages). No hace nada si ya existe (evita recrear el mapa en aperturas repetidas).
+  function initSingleStageMiniMap(i){
+    if (stageMiniMaps[i]) return;
+    const el = document.getElementById("stage-minimap-" + i);
+    if (!el) return;
+    const gpxData = GPX_TRACKS[i];
+    if (!gpxData || !gpxData.coords || !gpxData.coords.length) return;
 
-      const m = L.map(el, {
-        zoomControl: false,
-        // La atribución a OpenStreetMap es obligatoria por su política de uso de tiles;
-        // se mantiene visible pero compacta (ver CSS .stage-minimap .leaflet-control-attribution).
-        attributionControl: true,
-        dragging: false,
-        scrollWheelZoom: false,
-        doubleClickZoom: false,
-        boxZoom: false,
-        touchZoom: false,
-        keyboard: false,
-        tap: false
-      });
-      L.tileLayer(STAGE_MAP_TILES, STAGE_MAP_TILES_OPTS).addTo(m);
-      m.attributionControl.setPrefix(false);
-      drawTrackOnMap(m, gpxData.coords);
-
-      stageMiniMaps[i] = m;
+    const m = L.map(el, {
+      zoomControl: false,
+      // La atribución a OpenStreetMap es obligatoria por su política de uso de tiles;
+      // se mantiene visible pero compacta (ver CSS .stage-minimap .leaflet-control-attribution).
+      attributionControl: true,
+      dragging: false,
+      scrollWheelZoom: false,
+      doubleClickZoom: false,
+      boxZoom: false,
+      touchZoom: false,
+      keyboard: false,
+      tap: false
     });
+    L.tileLayer(STAGE_MAP_TILES, STAGE_MAP_TILES_OPTS).addTo(m);
+    m.attributionControl.setPrefix(false);
+    drawTrackOnMap(m, gpxData.coords);
+    // El <details> acaba de pasar de cerrado a abierto en este mismo evento "toggle";
+    // el navegador puede no haber terminado el reflow todavía, así que recalculamos
+    // el tamaño del mapa en el siguiente frame para evitar tiles mal encajados.
+    setTimeout(() => m.invalidateSize(), 50);
+
+    stageMiniMaps[i] = m;
   }
 
   // Mismo patrón que initStageMiniMaps(), pero solo para el mini-mapa del día 3 de
