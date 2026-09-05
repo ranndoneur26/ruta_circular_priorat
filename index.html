@@ -1079,7 +1079,7 @@
   <div class="video-modal-card">
     <button type="button" class="video-modal-close" id="video-modal-close" aria-label="Cerrar vídeo">&times;</button>
     <div class="video-modal-frame">
-      <video id="video-modal-player" controls playsinline preload="metadata">
+      <video id="video-modal-player" controls playsinline autoplay muted preload="auto">
         <source src="Video_cami%20del%20prior.mp4" type="video/mp4">
       </video>
     </div>
@@ -1843,6 +1843,14 @@
     if (!alreadyShown){
       modal.classList.add("show");
       try { sessionStorage.setItem(ALREADY_SHOWN_KEY, "1"); } catch(e){}
+      // Refuerzo del atributo autoplay: algunos navegadores/webviews solo reproducen
+      // de forma fiable si play() se llama explícitamente por JS. El vídeo ya está
+      // silenciado (muted), que es el requisito universal de todos los navegadores
+      // para permitir autoplay; el catch evita un error en consola si aun así lo bloquean.
+      const playPromise = player.play();
+      if (playPromise && typeof playPromise.catch === "function"){
+        playPromise.catch(() => {});
+      }
     }
   })();
 
