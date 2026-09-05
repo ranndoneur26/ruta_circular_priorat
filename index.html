@@ -516,37 +516,10 @@
   .stage-source a{ color:var(--samfaina); text-decoration:none; border-bottom:1px dotted var(--samfaina); }
   .stage-body .meta{ margin-top:10px; font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--pergami-dim); opacity:0.75; }
 
-  /* ---------- ruta corta: mantiene el layout plano original (no es acordeón) ---------- */
-  .rc-day{ display:grid; grid-template-columns:110px 1fr; gap:24px; padding:26px 0; border-bottom:1px solid var(--line); }
-  .rc-day:first-child{ border-top:1px solid var(--line); }
-  @media (max-width:640px){ .rc-day{grid-template-columns:60px 1fr;} }
-  .rc-day .day{ font-family:'JetBrains Mono', monospace; color:var(--samfaina); }
-  .rc-day .day .num{ font-size:34px; display:block; line-height:1; }
-  .rc-day .day .lbl{ font-size:10px; letter-spacing:0.1em; color:var(--pergami-dim); text-transform:uppercase; }
-  .rc-day .route{ font-size:17px; }
-  .rc-day .route .arrow{ color:var(--pergami-dim); margin:0 6px; }
-  .rc-day .highlight{ margin-top:10px; font-size:13.5px; color:var(--pergami-dim); font-style:italic; }
-  .rc-day .meta{ margin-top:10px; font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--pergami-dim); opacity:0.75; }
-
-  /* ---------- stages comparator table ---------- */
-  .stages-table-wrap{ margin-bottom:32px; overflow-x:auto; }
-  .stages-table{ width:100%; border-collapse:collapse; font-size:13px; }
-  .stages-table caption{ text-align:left; font-size:11px; color:var(--pergami-dim); margin-bottom:8px; }
-  .stages-table th, .stages-table td{
-    padding:9px 14px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap;
-  }
-  .stages-table thead th{
-    font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.06em;
-    text-transform:uppercase; color:var(--samfaina); border-bottom:1px solid var(--samfaina);
-  }
-  .stages-table tbody tr{ cursor:pointer; transition:background 0.15s ease; }
-  .stages-table tbody tr:hover{ background:var(--llicorella-2); }
-  .stages-table td.diff-cell.moderada{ color:var(--samfaina); }
-  .stages-table td.diff-cell.exigente{ color:var(--vinya); }
-
   /* ---------- notice boxes (avisos críticos) ---------- */
   .notice{ padding:14px 18px; margin:16px 0; border:1px solid var(--line); border-left:3px solid var(--pergami-dim); }
   .notice p{ margin:0; font-size:13px; color:var(--pergami-dim); }
+  .notice p + p{ margin-top:6px; }
   .notice strong{ color:var(--pergami); }
   .notice--info{ border-left-color:var(--samfaina); }
   .notice--warning{ border-left-color:var(--vinya); background:rgba(122,31,43,0.06); }
@@ -794,8 +767,8 @@
         <h3 data-i18n="terrain.h">¿Es para ti? Lo esencial en 10 segundos</h3>
         <ul class="tw-list">
           <li data-i18n="terrain.i1">166,4 km en 8 etapas (o 53,6 km en 3 etapas) — ruta exigente, llicorella y desniveles fuertes</li>
-          <li data-i18n="terrain.iSeason">Mejor época: abril–junio y septiembre–noviembre. Evita julio y agosto (35–38&nbsp;°C)</li>
-          <li data-i18n="terrain.iAgua">Agua: 2,5–3&nbsp;L por etapa; 4–5&nbsp;L en las etapas 2 y 5</li>
+          <li data-i18n-html="terrain.iSeason">Mejor época: abril–junio y septiembre–noviembre. Evita julio y agosto (35–38&nbsp;°C)</li>
+          <li data-i18n-html="terrain.iAgua">Agua: 2,5–3&nbsp;L por etapa; 4–5&nbsp;L en las etapas 2 y 5</li>
           <li data-i18n="terrain.i3">Muy poca infraestructura turística fuera de fin de semana</li>
           <li data-i18n="terrain.iSenal">Señalización discontinua: no es un itinerario propio homologado</li>
           <li data-i18n="terrain.iGpx">Imprescindible llevar track GPX offline</li>
@@ -943,7 +916,6 @@
       <p data-i18n="etapas.p">Distancia, desnivel y tiempo reales de las 8 etapas, verificados con GPX.</p>
     </div>
     <div class="loop-summary" id="loop-summary"></div>
-    <div class="stages-table-wrap" id="stages-table"></div>
     <div class="stage-list" id="stage-list"></div>
     <div class="stage-source" id="stage-source"></div>
   </div>
@@ -957,6 +929,10 @@
         <h2 data-i18n="rutacorta.h2">Ruta Curta, 3 etapes</h2>
       </div>
       <p data-i18n="rutacorta.p">Mismo inicio que el circuito completo — etapas 1 y 2 — pero al llegar a Bellmunt del Priorat, un tercer día cierra el círculo directamente hasta Falset, ya verificado con GPX real.</p>
+    </div>
+    <div class="notice notice--warning">
+      <p data-i18n-html="terrain.iSeason">Mejor época: abril–junio y septiembre–noviembre. Evita julio y agosto (35–38&nbsp;°C)</p>
+      <p data-i18n-html="terrain.iAgua">Agua: 2,5–3&nbsp;L por etapa; 4–5&nbsp;L en las etapas 2 y 5</p>
     </div>
     <div class="stage-list" id="ruta-corta-list"></div>
     <div class="stage-source" id="ruta-corta-total"></div>
@@ -1594,48 +1570,6 @@
     });
   }
 
-  // Tabla-resumen de las 8 etapas (km/tiempo/desnivel/dificultad de un vistazo). Al hacer
-  // clic en una fila, abre esa etapa en el acordeón de abajo y hace scroll hasta ella.
-  function renderStagesTable(lang){
-    const t = T[lang].etapas;
-    const wrap = document.getElementById("stages-table");
-    if (!wrap) return;
-    const rows = stages.map((s, i) => {
-      const info = stageInfo[i];
-      const diffLabel = t[DIFF_LABEL_KEY[info.diff]];
-      return `<tr data-jump-stage="${i}">
-        <td>${String(i + 1).padStart(2, "0")}</td>
-        <td>${info.distKm.toFixed(1)}</td>
-        <td>${info.time}</td>
-        <td>+${info.gainM} m</td>
-        <td class="diff-cell ${info.diff}">${diffLabel}</td>
-      </tr>`;
-    }).join("");
-    wrap.innerHTML = `<table class="stages-table">
-        <caption>${t.tableCaption || "Toca una fila para abrir esa etapa"}</caption>
-        <thead>
-          <tr>
-            <th>${t.tableEtapa || "Etapa"}</th>
-            <th>${t.tableKm || "Km"}</th>
-            <th>${t.tableTiempo || "Tiempo"}</th>
-            <th>${t.tableDesnivel || "Desnivel +"}</th>
-            <th>${t.tableDificultad || "Dificultad"}</th>
-          </tr>
-        </thead>
-        <tbody>${rows}</tbody>
-      </table>`;
-    wrap.querySelectorAll("tr[data-jump-stage]").forEach(tr => {
-      tr.addEventListener("click", () => {
-        const i = Number(tr.getAttribute("data-jump-stage"));
-        const details = document.querySelector('.stage-card[data-stage-index="' + i + '"]');
-        if (!details) return;
-        details.open = true;
-        initSingleStageMiniMap(i);
-        details.scrollIntoView({ behavior: "smooth", block: "start" });
-      });
-    });
-  }
-
   function renderStages(lang){
     const t = T[lang].etapas;
     const summaryEl = document.getElementById("loop-summary");
@@ -1732,7 +1666,6 @@
       });
     });
     wireSearchWidgets(stageList);
-    renderStagesTable(lang);
     const srcEl = document.getElementById("stage-source");
     if (srcEl) srcEl.innerHTML = t.source;
   }
@@ -1791,12 +1724,20 @@
     stageMiniMaps[i] = m;
   }
 
-  // Mismo patrón que initStageMiniMaps(), pero solo para el mini-mapa del día 3 de
-  // "Ruta Curta" (tramo de enlace Bellmunt–Falset, ENLLAC_TRACK, que no forma parte
-  // del array GPX_TRACKS de las 8 etapas oficiales).
-  function initRutaCortaMiniMap(){
-    const el = document.getElementById("rc-minimap-3");
-    if (!el || !ENLLAC_TRACK || !ENLLAC_TRACK.coords || !ENLLAC_TRACK.coords.length) return;
+  // Mismo patrón que initSingleStageMiniMap(), pero para cualquiera de los 3 días de
+  // "Ruta Curta". Los días 1 y 2 usan GPX_TRACKS[0]/[1] (mismo track que las etapas 1 y 2
+  // de la sección "Etapas"); el día 3 usa ENLLAC_TRACK (tramo de enlace Bellmunt–Falset,
+  // que no forma parte del array GPX_TRACKS de las 8 etapas oficiales). Perezoso: se llama
+  // desde el listener "toggle" de cada <details>, solo la primera vez que se abre.
+  function initSingleRutaCortaMiniMap(dayNum){
+    const key = "rc-" + dayNum;
+    if (stageMiniMaps[key]) return;
+    const el = document.getElementById("rc-minimap-" + dayNum);
+    if (!el) return;
+    const coords = dayNum === 1 ? GPX_TRACKS[0].coords
+                 : dayNum === 2 ? GPX_TRACKS[1].coords
+                 : ENLLAC_TRACK.coords;
+    if (!coords || !coords.length) return;
     const m = L.map(el, {
       zoomControl: false,
       attributionControl: true,
@@ -1810,8 +1751,9 @@
     });
     L.tileLayer(STAGE_MAP_TILES, STAGE_MAP_TILES_OPTS).addTo(m);
     m.attributionControl.setPrefix(false);
-    drawTrackOnMap(m, ENLLAC_TRACK.coords);
-    stageMiniMaps["rc-3"] = m;
+    drawTrackOnMap(m, coords);
+    setTimeout(() => m.invalidateSize(), 50);
+    stageMiniMaps[key] = m;
   }
 
   // Modal de mapa ampliado: mapa Leaflet completo (zoom, arrastre, doble clic) con el
@@ -1869,7 +1811,9 @@
     const te = T[lang].etapas;
     const container = document.getElementById("ruta-corta-list");
     if (!container) return;
-    if (stageMiniMaps["rc-3"]){ try { stageMiniMaps["rc-3"].remove(); } catch(e){} delete stageMiniMaps["rc-3"]; }
+    ["rc-1","rc-2","rc-3"].forEach(key => {
+      if (stageMiniMaps[key]){ try { stageMiniMaps[key].remove(); } catch(e){} delete stageMiniMaps[key]; }
+    });
 
     const days = [
       { num: 1, route: "Falset → Marçà → Capçanes → Els Guiamets", info: stageInfo[0], gpxData: GPX_TRACKS[0], full: false },
@@ -1877,7 +1821,8 @@
       { num: 3, route: "Bellmunt del Priorat → Falset", info: ENLLAC_INFO, gpxData: ENLLAC_TRACK, full: true }
     ];
 
-    container.innerHTML = days.map(d => {
+    container.innerHTML = "";
+    days.forEach(d => {
       const info = d.info;
       const highlight = lang === "ca" ? info.hCa : lang === "en" ? info.hEn : info.hEs;
       const poi = lang === "ca" ? info.poiCa : lang === "en" ? info.poiEn : info.poiEs;
@@ -1894,15 +1839,16 @@
             ${renderElevationSVGFromProfile(d.gpxData.profile)}
             <div class="elev-caption">${te.elevNoteReal}</div>
           </div>` : "";
-      // Mini-mapa de previsualización real del track, solo en el día 3 (tramo de enlace
-      // Bellmunt–Falset): los días 1 y 2 reutilizan las etapas 1 y 2 ya mostradas con su
-      // propio mapa en la sección "Etapas", así que no hace falta duplicarlo aquí.
+      // Mini-mapa de previsualización real del track para los 3 días. Los días 1 y 2
+      // reutilizan el mismo track GPX real que las etapas 1 y 2 de la sección "Etapas"
+      // (misma información, mostrada aquí también porque esta sección es ahora un
+      // acordeón independiente y no debe obligar a saltar a la otra sección para verlo).
       const rcMinimapCaption = lang === "ca"
         ? "Traçat real extret del GPX — mateix track que es descarrega a sota."
         : lang === "en"
         ? "Real track extracted from the GPX — same track downloaded below."
         : "Trazado real extraído del GPX — mismo track que se descarga más abajo.";
-      const minimapHtml = (d.full && d.gpxData && d.gpxData.coords)
+      const minimapHtml = (d.gpxData && d.gpxData.coords)
         ? `<div class="stage-minimap-block">
              <h5>${te.mapPreview || "Vista previa del trazado"}</h5>
              <div class="stage-minimap-wrap">
@@ -1912,31 +1858,46 @@
              <div class="stage-minimap-caption">${rcMinimapCaption}</div>
            </div>`
         : "";
-      return `
-        <div class="stage rc-day">
-          <div class="day"><span class="num">${String(d.num).padStart(2,"0")}</span><span class="lbl">${t.day}</span></div>
-          <div>
-            <div class="route">${d.route.split(" → ").join(' <span class="arrow">&rarr;</span> ')}</div>
-            <div class="highlight">${highlight}</div>
-            ${minimapHtml}
-            <div class="stage-facts gpx-facts">
-              <span class="stage-fact">${te.distReal}: <b>${info.distKm.toFixed(1)} km</b></span>
-              <span class="stage-fact">${te.time}: <b>${info.time}</b></span>
-              <span class="stage-fact">${te.diff}: <span class="diff-badge ${info.diff}">${diffLabel}</span></span>
-              <span class="stage-fact">${te.gain}: <b>+${info.gainM} m</b></span>
-              <span class="stage-fact">${te.loss}: <b>−${info.lossM} m</b></span>
+      const metaOrGain = `<div class="stage-facts gpx-facts">
               <span class="gpx-badge">✓ ${te.gpxVerified}</span>
               ${d.gpxData.file ? `<a class="gpx-download" href="${d.gpxData.file}" download>${te.gpxDownload}</a><span class="gpx-disclaimer">${te.gpxDisclaimer}</span>` : ""}
-            </div>
-            ${extra}
+            </div>`;
+      const row = document.createElement("details");
+      row.className = "stage-card";
+      row.dataset.rcDay = d.num;
+      row.innerHTML = `
+        <summary class="stage-summary">
+          <div class="stage-summary-main">
+            <div class="day"><span class="num">${String(d.num).padStart(2,"0")}</span><span class="lbl">${t.day}</span></div>
+            <div class="route">${d.route.split(" → ").join(' <span class="arrow">&rarr;</span> ')}</div>
           </div>
-        </div>`;
-    }).join("");
-    initRutaCortaMiniMap();
+          <ul class="stage-metrics" role="list">
+            <li>${info.distKm.toFixed(1)} km</li>
+            <li>${info.time}</li>
+            <li>+${info.gainM} m</li>
+            <li class="diff-pill ${info.diff}">${diffLabel}</li>
+          </ul>
+          <span class="stage-toggle-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="stage-body">
+          <div class="highlight">${highlight}</div>
+          ${minimapHtml}
+          ${metaOrGain}
+          ${extra}
+        </div>
+      `;
+      container.appendChild(row);
+    });
+    container.querySelectorAll(".stage-card").forEach(details => {
+      details.addEventListener("toggle", () => {
+        if (details.open) initSingleRutaCortaMiniMap(Number(details.dataset.rcDay));
+      });
+    });
     container.querySelectorAll("[data-expand-rc]").forEach(btn => {
       btn.addEventListener("click", () => {
-        const title = t.day + " 03 · Bellmunt del Priorat → Falset";
-        openStageMapModal(ENLLAC_TRACK.coords, title, "rc-minimap-3");
+        const num = Number(btn.getAttribute("data-expand-rc"));
+        const d = days[num - 1];
+        openStageMapModal(d.gpxData.coords, t.day + " " + String(num).padStart(2,"0") + " · " + d.route, "rc-minimap-" + num);
       });
     });
     wireSearchWidgets(container);
