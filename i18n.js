@@ -32,7 +32,6 @@
         "stat2": "Etapas",
         "stat3": "Tramos de red existente",
         "stat4": "Circuito cerrado",
-        "hub": "nudo central",
         "cta1": "Explorar las etapas",
         "cta2": "Ver mapa interactivo"
       },
@@ -196,19 +195,15 @@
       },
       "also": {
         "eyebrow": "También conocida como",
-        "h2": "La gran travesía del Priorat: la ruta de los eremitas, la ruta del silencio",
-        "p": "Antes de tener nombre oficial, esta travesía circular de <strong>166 km y 8 etapas</strong> ya se conocía de boca en boca de tres maneras. Aspira a ser la gran travesía de referencia en Catalunya y a nivel estatal — al nivel del Camino de Santiago, pero en un territorio mineral, austero y todavía poco pisado.",
+        "h2": "El camino del Prior: el camino de los eremitas",
+        "p": "Adentrarse en estos 166 kilómetros y 8 etapas es aceptar la invitación a un viaje hacia atrás en el tiempo. Una travesía circular e íntima que traza la misma soledad que antiguamente buscaban los eremitas: un diálogo silencioso entre la piedra caliza, la llicorella cruda y el caminante que busca redescubrir el Priorat más puro, paso a paso y sin huella.",
         "n1": {
-          "h": "La Ruta del Priorat a pie",
-          "p": "El nombre más literal: 19 pueblos de la Denominació d'Origen Qualificada, unidos a pie por primera vez en un único circuito cerrado."
+          "h": "La Ruta del Prior a pie",
+          "p": "19 pueblos de la Denominació d'Origen Qualificada, unidos a pie por primera vez en un único circuito cerrado."
         },
         "n2": {
           "h": "La Ruta de los Eremitas",
           "p": "Por la Cartoixa d'Escaladei y la red de ermitas y monasterios —hoy en ruinas casi todos— que poblaron estas montañas antes que los viñedos."
-        },
-        "n3": {
-          "h": "La Ruta del Silencio",
-          "p": "Por lo que no hay: apenas infraestructura turística, apenas sombra, apenas ruido. Ocho etapas de llicorella, viento y vacío mineral."
         }
       },
       "backToTop": "Volver arriba",
@@ -586,7 +581,6 @@
         "stat2": "Etapes",
         "stat3": "Trams de xarxa existent",
         "stat4": "Circuit tancat",
-        "hub": "node central",
         "cta1": "Explorar les etapes",
         "cta2": "Veure mapa interactiu"
       },
@@ -750,19 +744,15 @@
       },
       "also": {
         "eyebrow": "També coneguda com",
-        "h2": "La gran travessa del Priorat: la ruta dels eremites, la ruta del silenci",
-        "p": "Abans de tenir nom oficial, aquesta travessa circular de <strong>166 km i 8 etapes</strong> ja es coneixia de boca en boca de tres maneres. Aspira a ser la gran travessa de referència a Catalunya i a nivell estatal — al nivell del Camí de Santiago, però en un territori mineral, auster i encara poc trepitjat.",
+        "h2": "El camí del Prior: el camí dels eremites",
+        "p": "Endinsar-se en aquests 166 quilòmetres i 8 etapes és acceptar la invitació a un viatge cap a darrere el temps. Una travessa circular i íntima que traça la mateixa solitud que antigament buscaven els eremites: un diàleg silenciós entre la pedra calcària, la llicorella crua i el caminant que busca redescobrir el Priorat més pur, pas a pas i sense petjada.",
         "n1": {
-          "h": "La Ruta del Priorat a peu",
-          "p": "El nom més literal: 19 pobles de la Denominació d'Origen Qualificada, units a peu per primera vegada en un únic circuit tancat."
+          "h": "La Ruta del Prior a peu",
+          "p": "19 pobles de la Denominació d'Origen Qualificada, units a peu per primera vegada en un únic circuit tancat."
         },
         "n2": {
           "h": "La Ruta dels Eremites",
           "p": "Per la Cartoixa d'Escaladei i la xarxa d'ermites i monestirs —avui en ruïnes gairebé tots— que van poblar aquestes muntanyes abans que les vinyes."
-        },
-        "n3": {
-          "h": "La Ruta del Silenci",
-          "p": "Pel que no hi ha: gairebé infraestructura turística, gairebé ombra, gairebé soroll. Vuit etapes de llicorella, vent i buit mineral."
         }
       },
       "backToTop": "Tornar amunt",
@@ -1140,7 +1130,6 @@
         "stat2": "Stages",
         "stat3": "Existing network stretches",
         "stat4": "Closed loop",
-        "hub": "central hub",
         "cta1": "Explore the stages",
         "cta2": "View interactive map"
       },
@@ -1304,19 +1293,15 @@
       },
       "also": {
         "eyebrow": "Also known as",
-        "h2": "The great crossing of Priorat: the hermits' route, the route of silence",
-        "p": "Before it had an official name, this circular <strong>166 km, 8-stage</strong> crossing was already known by word of mouth in three different ways. It aims to become the great reference walking route in Catalonia and Spain — on the scale of the Camino de Santiago, but across a mineral, austere territory still barely walked.",
+        "h2": "The Prior's path: the hermits' path",
+        "p": "Setting out on these 166 kilometres and 8 stages means accepting an invitation to travel back through time. A circular, intimate crossing that traces the same solitude the hermits once sought: a silent dialogue between limestone rock, raw llicorella slate, and the walker seeking to rediscover the purest Priorat, step by step and without a trace.",
         "n1": {
-          "h": "The Priorat Walking Route",
-          "p": "The most literal name: 19 villages of the Denominació d'Origen Qualificada, linked on foot for the first time in a single closed loop."
+          "h": "The Prior's Walking Route",
+          "p": "19 villages of the Denominació d'Origen Qualificada, linked on foot for the first time in a single closed loop."
         },
         "n2": {
           "h": "The Hermits' Route",
           "p": "For the Cartoixa d'Escaladei and the network of hermitages and monasteries —almost all in ruins today— that settled these mountains before the vineyards did."
-        },
-        "n3": {
-          "h": "The Route of Silence",
-          "p": "For what isn't there: almost no tourist infrastructure, almost no shade, almost no noise. Eight stages of llicorella, wind, and mineral emptiness."
         }
       },
       "backToTop": "Back to top",
