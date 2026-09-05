@@ -70,9 +70,9 @@
     position:sticky; top:0; z-index:30; background:rgba(26,23,21,0.9);
     backdrop-filter:blur(6px); border-bottom:1px solid var(--line);
   }
-  header.top .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:20px; }
-  .brand{ font-family:'Fraunces', serif; font-size:18px; font-weight:600; white-space:nowrap; text-decoration:none; color:var(--pergami); }
-  .brand span{ color:var(--samfaina); }
+  header.top .wrap{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:20px; }
+  .brand{ display:block; flex-shrink:0; line-height:0; }
+  .brand-logo{ display:block; height:76px; width:auto; }
   nav.top-nav{ display:flex; gap:26px; font-size:13px; align-items:center; }
   nav.top-nav a{ text-decoration:none; color:var(--pergami-dim); letter-spacing:0.02em; }
   nav.top-nav a:hover{ color:var(--pergami); }
@@ -106,6 +106,10 @@
     nav.top-nav{ display:none; }
     .nav-toggle{ display:flex; order:3; }
     #mobile-nav{ display:flex; }
+    .brand-logo{ height:66px; }
+  }
+  @media (max-width:480px){
+    .brand-logo{ height:72px; }
   }
 
   .lang-switch{ display:flex; border:1px solid var(--line); flex-shrink:0; }
@@ -231,7 +235,7 @@
 <a href="#main-content" class="skip-link">Saltar al contenido</a>
 <header class="top">
   <div class="wrap">
-    <a href="index.html" class="brand">El Camí del <span>Prior</span></a>
+    <a href="index.html" class="brand"><img src="logo_cami_prior.svg" alt="El Camí del Prior" class="brand-logo"></a>
     <nav class="top-nav">
       <a href="#normativa" data-i18n="nav.normativa">Normativa</a>
       <a href="#patrimonio" data-i18n="nav.patrimonio">Patrimonio</a>

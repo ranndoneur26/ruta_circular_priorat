@@ -99,9 +99,9 @@
     backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
-  header.top .wrap{ display:flex; align-items:center; justify-content:space-between; height:64px; gap:16px; }
-  .brand{ font-family:'Fraunces', serif; font-size:18px; font-weight:600; white-space:nowrap; flex-shrink:0; }
-  .brand span{ color:var(--samfaina); }
+  header.top .wrap{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px; }
+  .brand{ display:block; flex-shrink:0; line-height:0; }
+  .brand-logo{ display:block; height:76px; width:auto; }
   nav.top-nav{ display:flex; gap:18px; font-size:12.5px; align-items:center; flex-wrap:nowrap; }
   nav.top-nav a{ text-decoration:none; color:var(--pergami-dim); letter-spacing:0.02em; white-space:nowrap; }
   nav.top-nav a:hover{ color:var(--pergami); }
@@ -149,6 +149,13 @@
     nav.top-nav{ display:none; }
     .nav-toggle{ display:flex; order:3; }
     #mobile-nav{ display:flex; }
+    .brand-logo{ height:66px; }
+  }
+  /* Por debajo de 480px ya no compite con el nav de escritorio (solo hamburguesa +
+     selector de idioma), así que el logo puede volver a crecer: el texto "DEL PRIOR"
+     del propio dibujo es minúsculo y se lee mejor cuanto más grande se muestre. */
+  @media (max-width:480px){
+    .brand-logo{ height:72px; }
   }
 
   .lang-switch{
@@ -680,7 +687,7 @@
 <a href="#main-content" class="skip-link">Saltar al contenido</a>
 <header class="top">
   <div class="wrap">
-    <div class="brand">El Camí del <span>Prior</span></div>
+    <div class="brand"><img src="logo_cami_prior.svg" alt="El Camí del Prior" class="brand-logo"></div>
     <nav class="top-nav">
       <a href="#red" data-i18n="nav.red">La red</a>
       <a href="#pueblos" data-i18n="nav.pueblos">19 pueblos</a>
