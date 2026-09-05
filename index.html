@@ -1833,6 +1833,9 @@
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && modal.classList.contains("show")) closeVideoPopup();
     });
+    // Se cierra solo en cuanto el vídeo llega al final (sin necesidad de que el
+    // visitante tenga que cerrarlo a mano si lo ha visto entero).
+    player.addEventListener("ended", closeVideoPopup);
 
     const ALREADY_SHOWN_KEY = "elCamiDelPriorVideoShown";
     let alreadyShown = false;
