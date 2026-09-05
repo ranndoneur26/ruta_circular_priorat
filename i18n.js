@@ -312,7 +312,7 @@
         "h1": "Deja tu huella en la llicorella",
         "p": "19 pueblos. 8 etapas. Una tierra que no perdona la improvisación.",
         "kicker": "Apúntate con tu alias y quedará escrito junto al de quienes también <span class=\"accent\">se han atrevido</span>.",
-        "h2": "La Ruta del Priorat a pie · la ruta de los eremitas · la ruta del silencio"
+        "h2": "La Ruta del Prior · la ruta de los eremitas"
       },
       "notice": {
         "text": "Esto es una inscripción informal, tipo libro de firmas: <strong>no hay verificación de identidad ni de que hayas completado realmente la ruta</strong>. Tu correo se guarda solo por si queremos avisarte de novedades — nunca se muestra en la lista pública."
@@ -855,7 +855,7 @@
         "h1": "Deixa la teva empremta a la llicorella",
         "p": "19 pobles. 8 etapes. Una terra que no perdona la improvisació.",
         "kicker": "Inscriu-te amb el teu àlies i quedarà escrit junt amb el de qui també <span class=\"accent\">s'hi ha atrevit</span>.",
-        "h2": "La Ruta del Priorat a peu · la ruta dels eremites · la ruta del silenci"
+        "h2": "La Ruta del Prior · la ruta dels eremites"
       },
       "notice": {
         "text": "Això és una inscripció informal, tipus llibre de signatures: <strong>no hi ha verificació d'identitat ni que hagis completat realment la ruta</strong>. El teu correu es guarda només per si volem avisar-te de novetats — mai es mostra a la llista pública."
@@ -1398,7 +1398,7 @@
         "h1": "Leave your mark on the llicorella",
         "p": "19 villages. 8 stages. A land that doesn't forgive improvisation.",
         "kicker": "Sign up with your alias and it will stand written alongside everyone else who has also <span class=\"accent\">dared</span>.",
-        "h2": "The Priorat Walking Route · the hermits' route · the route of silence"
+        "h2": "The Prior's Route · the hermits' route"
       },
       "notice": {
         "text": "This is an informal sign-up, like a guestbook: <strong>there's no identity check and no verification that you actually completed the route</strong>. Your email is stored only in case we want to notify you of updates — it's never shown on the public list."
