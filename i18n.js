@@ -11,7 +11,6 @@
     "home": {
       "nav": {
         "red": "La red",
-        "pueblos": "19 pueblos",
         "mapa": "Mapa",
         "etapas": "Etapas",
         "guia": "Guía",
@@ -51,11 +50,6 @@
           "h": "Caminos y pistas forestales",
           "p": "Caminos históricos, mineros y agrícolas para las conexiones rurales que aún no tienen sendero homologado."
         }
-      },
-      "pueblos": {
-        "eyebrow": "Directorio",
-        "h2": "Los 19 municipios",
-        "p": "Cada pueblo, con el tipo de conexión senderista recomendada para llegar a él."
       },
       "mapa": {
         "eyebrow": "Primera fase interactiva",
@@ -560,7 +554,6 @@
     "home": {
       "nav": {
         "red": "La xarxa",
-        "pueblos": "19 pobles",
         "mapa": "Mapa",
         "etapas": "Etapes",
         "guia": "Guia",
@@ -600,11 +593,6 @@
           "h": "Camins i pistes forestals",
           "p": "Camins històrics, miners i agrícoles per a les connexions rurals que encara no tenen sender homologat."
         }
-      },
-      "pueblos": {
-        "eyebrow": "Directori",
-        "h2": "Els 19 municipis",
-        "p": "Cada poble, amb el tipus de connexió senderista recomanada per arribar-hi."
       },
       "mapa": {
         "eyebrow": "Primera fase interactiva",
@@ -1109,7 +1097,6 @@
     "home": {
       "nav": {
         "red": "The network",
-        "pueblos": "19 villages",
         "mapa": "Map",
         "etapas": "Stages",
         "guia": "Guide",
@@ -1149,11 +1136,6 @@
           "h": "Tracks and forest roads",
           "p": "Historic, mining and farm tracks for the rural connections that still lack an approved trail."
         }
-      },
-      "pueblos": {
-        "eyebrow": "Directory",
-        "h2": "The 19 municipalities",
-        "p": "Each village, with the recommended type of trail connection to reach it."
       },
       "mapa": {
         "eyebrow": "First interactive phase",

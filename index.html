@@ -303,14 +303,6 @@
   .legend-item h3{ font-size:17px; margin-bottom:8px; }
   .legend-item p{ font-size:14px; color:var(--pergami-dim); margin:0; }
 
-  /* ---------- villages directory ---------- */
-  .village-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:0; border-top:1px solid var(--line); }
-  @media (max-width:700px){ .village-grid{grid-template-columns:1fr;} }
-  .village-row{ display:flex; justify-content:space-between; align-items:center; gap:14px; padding:15px 4px; border-bottom:1px solid var(--line); }
-  .village-grid .village-row:nth-child(odd){ padding-right:24px; border-right:1px solid var(--line); }
-  @media (max-width:700px){ .village-grid .village-row:nth-child(odd){ border-right:none; padding-right:4px; } }
-  .village-name{ font-size:15.5px; }
-  .village-name .idx{ font-family:'JetBrains Mono', monospace; font-size:11px; color:var(--pergami-dim); margin-right:10px; }
   .tag{ font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.03em; padding:4px 8px; border:1px solid var(--line); color:var(--pergami-dim); white-space:nowrap; }
   .tag.gr{ border-color:var(--vinya); color:var(--vinya); background:rgba(122,31,43,0.12); }
   .tag.pr{ border-color:var(--samfaina); color:var(--samfaina); background:rgba(198,146,20,0.1); }
@@ -691,7 +683,6 @@
     <div class="brand"><img src="logo_cami_prior.svg" alt="El Camí del Prior" class="brand-logo"></div>
     <nav class="top-nav">
       <a href="#red" data-i18n="nav.red">La red</a>
-      <a href="#pueblos" data-i18n="nav.pueblos">19 pueblos</a>
       <a href="#mapa" data-i18n="nav.mapa">Mapa</a>
       <a href="#etapas" data-i18n="nav.etapas">Etapas</a>
       <a href="#guia" data-i18n="nav.guia">Guía</a>
@@ -710,7 +701,6 @@
   </div>
   <div id="mobile-nav">
     <a href="#red" data-i18n="nav.red">La red</a>
-    <a href="#pueblos" data-i18n="nav.pueblos">19 pueblos</a>
     <a href="#mapa" data-i18n="nav.mapa">Mapa</a>
     <a href="#etapas" data-i18n="nav.etapas">Etapas</a>
     <a href="#guia" data-i18n="nav.guia">Guía</a>
@@ -888,19 +878,6 @@
       <span><span class="dot" style="background:var(--vinya)"></span><span data-i18n="mapa.legendGr">Nudo GR-174</span> &nbsp; <span class="dot" style="background:var(--samfaina)"></span><span data-i18n="mapa.legendPr">Municipio</span> &nbsp; <span class="dot" style="background:#ffffff;border:1px solid var(--line);"></span><span data-i18n="mapa.legendCorta">Ruta corta (3 días)</span></span>
       <span data-i18n="mapa.note">Las 8 etapas verificadas con GPX real (línea sólida).</span>
     </div>
-  </div>
-</section>
-
-<section id="pueblos" class="dark-alt reveal">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow" data-i18n="pueblos.eyebrow">Directorio</div>
-        <h2 data-i18n="pueblos.h2">Los 19 municipios</h2>
-      </div>
-      <p data-i18n="pueblos.p">Cada pueblo, con el tipo de conexión senderista recomendada para llegar a él.</p>
-    </div>
-    <div class="village-grid" id="village-grid"></div>
   </div>
 </section>
 
@@ -1305,21 +1282,6 @@
 
   function applyStaticText(lang){
     I18N.applyDom(T, lang);
-  }
-
-  function renderVillages(lang){
-    const grid = document.getElementById("village-grid");
-    grid.innerHTML = "";
-    villages.forEach((v, i) => {
-      const conn = lang === "ca" ? v[5] : lang === "en" ? v[6] : v[4];
-      const row = document.createElement("div");
-      row.className = "village-row";
-      row.innerHTML = `
-        <span class="village-name"><span class="idx">${String(i+1).padStart(2,"0")}</span>${v[0]}</span>
-        <span class="tag ${v[3]}">${conn}</span>
-      `;
-      grid.appendChild(row);
-    });
   }
 
   // Transporte: datos reales de turismepriorat.org/es/transportes (RENFE R15, autobuses
@@ -1970,7 +1932,6 @@
   function renderAll(lang){
     currentLang = lang;
     applyStaticText(lang);
-    renderVillages(lang);
     renderStages(lang);
     renderRutaCorta(lang);
     renderMapPopups(lang);
