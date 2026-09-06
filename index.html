@@ -104,8 +104,8 @@
   .brand{ display:block; flex-shrink:0; line-height:0; }
   .brand-logo{ display:block; height:76px; width:auto; }
   nav.top-nav{ display:flex; gap:18px; font-size:12.5px; align-items:center; flex-wrap:nowrap; }
-  nav.top-nav a{ text-decoration:none; color:var(--pergami-dim); letter-spacing:0.02em; white-space:nowrap; }
-  nav.top-nav a:hover{ color:var(--pergami); }
+  nav.top-nav a{ text-decoration:none; color:var(--pergami-dim); letter-spacing:0.02em; white-space:nowrap; transition:color 0.15s ease; }
+  nav.top-nav a:hover{ color:var(--samfaina); }
   nav.top-nav a:focus-visible, a:focus-visible, button:focus-visible{
     outline:2px solid var(--samfaina); outline-offset:3px;
   }
@@ -139,10 +139,11 @@
   #mobile-nav.open{ max-height:min(70vh, 620px); overflow-y:auto; }
   #mobile-nav a, #mobile-nav .mnav-cta{
     display:block; padding:14px 24px; text-decoration:none; color:var(--pergami-dim);
-    border-top:1px solid var(--line); font-size:14px;
+    border-top:1px solid var(--line); font-size:14px; transition:color 0.15s ease, background-color 0.15s ease;
   }
   #mobile-nav a:first-child{ border-top:none; }
   #mobile-nav .mnav-cta{ color:var(--samfaina); font-weight:600; }
+  #mobile-nav a:hover, #mobile-nav a:focus-visible{ color:var(--samfaina); background:rgba(198,146,20,0.08); }
 
   /* Punto de corte subido: con 7 enlaces + botón, el nav de escritorio necesita más
      ancho para no apretarse. Por debajo de 1100px se usa directamente el menú móvil. */
@@ -270,11 +271,32 @@
   .closing{ padding:70px 0; text-align:center; border-bottom:1px solid var(--line); }
   .closing p{ font-family:'Fraunces', serif; font-style:italic; font-size:20px; line-height:1.6; color:var(--pergami); max-width:56ch; margin:0 auto 28px; }
   .closing .accent{ color:var(--samfaina); }
-  .soon-box{ padding:40px 0; }
-  .soon-box .inner{ border:1px solid var(--line); padding:30px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; }
-  .soon-box h4{ font-size:16px; margin-bottom:6px; }
-  .soon-box p{ font-size:13.5px; color:var(--pergami-dim); margin:0; max-width:52ch; }
-  .soon-box a.btn{ flex-shrink:0; }
+  .soon-box{
+    padding:64px 0; margin:20px 0;
+    background:linear-gradient(135deg, rgba(198,146,20,0.14), rgba(122,31,43,0.08));
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .soon-box .inner{
+    border:none; padding:0; display:flex; flex-direction:column; align-items:center;
+    text-align:center; gap:22px; max-width:620px; margin:0 auto;
+  }
+  .soon-box h4{
+    font-family:'Fraunces', serif; font-weight:700; font-size:clamp(26px, 4vw, 38px);
+    color:var(--pergami); margin:0; line-height:1.15;
+  }
+  .soon-box p{ font-size:16px; line-height:1.5; color:var(--pergami-dim); margin:0; max-width:50ch; }
+  .soon-box a.btn{
+    flex-shrink:0; font-size:15px; padding:16px 38px; border-radius:2px;
+    animation:soonPulse 2.6s ease-in-out infinite;
+  }
+  .soon-box a.btn:hover{ animation-play-state:paused; }
+  @keyframes soonPulse{
+    0%, 100%{ box-shadow:0 0 0 0 rgba(198,146,20,0.45); }
+    50%{ box-shadow:0 0 0 14px rgba(198,146,20,0); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .soon-box a.btn{ animation:none; }
+  }
 
   .loop-wrap{ display:flex; justify-content:center; }
   .loop-emblem{ width:100%; max-width:300px; height:auto; }
@@ -1025,14 +1047,14 @@
   </div>
 </div>
 
-<div class="soon-box">
+<div class="soon-box reveal">
   <div class="wrap">
     <div class="inner">
       <div>
         <h4 data-i18n="soon.h">¿Ya te animas?</h4>
         <p data-i18n="soon.p">Apúntate con tu alias y la fecha en la que empiezas: verás tu nombre en la lista de caminantes junto a los demás.</p>
       </div>
-      <a href="inscripcion.html" class="btn btn-secondary" data-i18n="soon.cta">Inscribirme →</a>
+      <a href="inscripcion.html" class="btn btn-primary" data-i18n="soon.cta">Inscribirme →</a>
     </div>
   </div>
 </div>
