@@ -478,6 +478,11 @@
         "p": "Sé la primera persona en dejar su alias escrito en esta lista.",
         "cta": "Inscribirme →"
       },
+      "pagination": {
+        "prev": "← Anterior",
+        "next": "Siguiente →",
+        "pageOf": "Página {page} de {total}"
+      },
       "footer": {
         "text": "Travessa del Priorat — lista pública informal, sin verificación de identidad. Los correos nunca se muestran."
       },
@@ -1021,6 +1026,11 @@
         "p": "Sigues la primera persona a deixar el teu àlies escrit en aquesta llista.",
         "cta": "Inscriure'm →"
       },
+      "pagination": {
+        "prev": "← Anterior",
+        "next": "Següent →",
+        "pageOf": "Pàgina {page} de {total}"
+      },
       "footer": {
         "text": "Travessa del Priorat — llista pública informal, sense verificació d'identitat. Els correus mai es mostren."
       },
@@ -1563,6 +1573,11 @@
         "h": "No one has signed up yet",
         "p": "Be the first to leave your alias written on this list.",
         "cta": "Sign up →"
+      },
+      "pagination": {
+        "prev": "← Previous",
+        "next": "Next →",
+        "pageOf": "Page {page} of {total}"
       },
       "footer": {
         "text": "Travessa del Priorat — informal public list, no identity verification. Emails are never shown."
