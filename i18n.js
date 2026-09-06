@@ -20,7 +20,7 @@
       },
       "hero": {
         "eyebrow": "Gran travesía circular · 100% senderista",
-        "h1": "Los 19 pueblos del Priorat, <em>unidos a pie</em>.",
+        "h1": "19 pueblos del Priorat, <em>unidos a pie</em>.",
         "lead": "El Priorat es una tierra dura y solitaria, de laderas imposibles y suelos de llicorella donde la vida siempre ha sido una batalla cuerpo a cuerpo con la roca. <span class=\"accent\">Seguir la ruta de sus 19 pueblos es una experiencia épica</span>: un viaje interior entre viñas de viticultura heroica, ermitas y barrancos silenciosos, donde cada curva del camino te invita a sentir más intensamente el paisaje y a descubrir una espiritualidad hecha de esfuerzo, contemplación y belleza extrema.",
         "sub": "Circuito propuesto de 8 etapas que aprovecha tramos del GR‑174 y otros senderos señalizados, enlazados mediante caminos rurales y pistas forestales entre los 19 pueblos del Priorat, con Falset como puerta de entrada y salida. No es un itinerario propio homologado ni señalizado de forma continua.",
         "quick1": "19 pueblos",
@@ -568,7 +568,7 @@
       },
       "hero": {
         "eyebrow": "Gran travessa circular · 100% senderista",
-        "h1": "Els 19 pobles del Priorat, <em>units a peu</em>.",
+        "h1": "19 pobles del Priorat, <em>units a peu</em>.",
         "lead": "El Priorat és una terra dura i solitària, de vessants impossibles i sòls de llicorella on la vida sempre ha estat una batalla cos a cos amb la roca. <span class=\"accent\">Seguir la ruta dels seus 19 pobles és una experiència èpica</span>: un viatge interior entre vinyes de viticultura heroica, ermites i barrancs silenciosos, on cada revolt del camí et convida a sentir més intensament el paisatge i a descobrir una espiritualitat feta d'esforç, contemplació i bellesa extrema.",
         "sub": "Circuit proposat de 8 etapes que aprofita trams del GR‑174 i altres senders senyalitzats, enllaçats mitjançant camins rurals i pistes forestals entre els 19 pobles del Priorat, amb Falset com a porta d'entrada i sortida. No és un itinerari propi homologat ni senyalitzat de manera contínua.",
         "quick1": "19 pobles",
@@ -1116,7 +1116,7 @@
       },
       "hero": {
         "eyebrow": "Great circular crossing · 100% on foot",
-        "h1": "The 19 villages of Priorat, <em>joined on foot</em>.",
+        "h1": "19 villages of Priorat, <em>joined on foot</em>.",
         "lead": "Priorat is a harsh, solitary land, of impossible slopes and llicorella soils where life has always been a hand-to-hand battle with rock. <span class=\"accent\">Walking the route of its 19 villages is an epic experience</span>: an inner journey among vineyards of heroic viticulture, hermitages and silent ravines, where every bend in the path invites you to feel the landscape more intensely and to discover a spirituality made of effort, contemplation and extreme beauty.",
         "sub": "A proposed 8-stage circuit that uses stretches of the GR‑174 and other waymarked trails, linked by rural paths and forest tracks between Priorat's 19 villages, with Falset as the entry and exit point. It is not its own approved route, nor is it waymarked continuously.",
         "quick1": "19 villages",
