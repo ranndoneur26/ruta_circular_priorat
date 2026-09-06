@@ -118,6 +118,22 @@
   @keyframes spin{ to{ transform:rotate(360deg); } }
   .submit-err{ display:none; color:var(--vinya); font-size:13px; margin-top:14px; }
   .submit-err.show{ display:block; }
+  .validation-err{
+    display:none; color:var(--vinya); font-size:14px; font-weight:600;
+    margin-top:14px; padding:13px 16px; background:rgba(122,31,43,0.1);
+    border:1px solid var(--vinya); align-items:center; gap:8px;
+  }
+  .validation-err.show{ display:flex; animation:validationShake 0.4s ease; }
+  @keyframes validationShake{
+    0%, 100%{ transform:translateX(0); }
+    20%{ transform:translateX(-6px); }
+    40%{ transform:translateX(5px); }
+    60%{ transform:translateX(-3px); }
+    80%{ transform:translateX(2px); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .validation-err.show{ animation:none; }
+  }
   .btn:hover{ opacity:0.88; }
   .btn:disabled{ opacity:0.5; cursor:not-allowed; }
   .notice{ border:1px solid var(--line); background:var(--llicorella-2); padding:16px 18px; font-size:13px; color:var(--pergami-dim); margin-bottom:34px; }
@@ -302,6 +318,7 @@
       <label for="consentPublic" data-i18n-html="form.consentPublic"></label>
     </div>
     <button type="submit" class="btn" id="submit-btn" data-i18n="form.submit">Inscribirme</button>
+    <div class="validation-err" id="validation-err" role="alert" aria-live="assertive" data-i18n="form.validationErr">⚠ Rellena todos los campos obligatorios para poder inscribirte.</div>
     <div class="submit-err" id="submit-err" role="alert" aria-live="assertive" data-i18n="form.submitErr">No hemos podido guardar tu inscripción. Comprueba tu conexión e inténtalo de nuevo.</div>
   </form>
   <div class="success" id="success-box" role="status" aria-live="polite">
@@ -404,6 +421,7 @@
   const successBox = document.getElementById('success-box');
   const submitBtn = document.getElementById('submit-btn');
   const errBox = document.getElementById('submit-err');
+  const validationErrBox = document.getElementById('validation-err');
   const pageLoadedAt = Date.now();
   const MIN_FILL_TIME_MS = 2500;
 
@@ -460,7 +478,17 @@
     if (Date.now() - pageLoadedAt < MIN_FILL_TIME_MS) return;
 
     const data = validate();
-    if (!data) return;
+    if (!data) {
+      validationErrBox.classList.remove('show');
+      // Forzar reflow para que la animación de "shake" se repita si el usuario
+      // vuelve a enviar el formulario sin haber corregido nada.
+      void validationErrBox.offsetWidth;
+      validationErrBox.classList.add('show');
+      const firstInvalid = form.querySelector('.field.invalid, .consent.invalid');
+      if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+    validationErrBox.classList.remove('show');
 
     errBox.classList.remove('show');
     submitBtn.disabled = true;
