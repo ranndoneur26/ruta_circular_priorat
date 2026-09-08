@@ -1373,39 +1373,39 @@
   // Transporte: datos reales de turismepriorat.org/es/transportes (RENFE R15, autobuses
   // comarcales Domènech/Plana/HIFE/Igualadina, taxis, aeropuerto de Reus).
   const TRANSPORT_ITEMS = [
-    { cat:"tren", title:"RENFE Rodalies R15", titleEn:"RENFE Rodalies R15", phone:null, web:"https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R15.pdf", webLabel:"Horarios",
+    { cat:"tren", title:"RENFE Rodalies R15", titleCa:"RENFE Rodalies R15", titleEn:"RENFE Rodalies R15", phone:null, web:"https://rodalies.gencat.cat/web/.content/02_Horaris/horaris/R15.pdf", webLabel:"Horarios", webLabelCa:"Horaris", webLabelEn:"Timetables",
       noteEs:"Barcelona–Tarragona–Reus–Marçà-Falset–Móra la Nova–Riba-roja. Estación a 2 km de Falset.",
       noteCa:"Barcelona–Tarragona–Reus–Marçà-Falset–Móra la Nova–Riba-roja. Estació a 2 km de Falset.",
       noteEn:"Barcelona–Tarragona–Reus–Marçà-Falset–Móra la Nova–Riba-roja. Station 2 km from Falset." },
-    { cat:"tren", title:"Minibús Falset ↔ estación RENFE", titleEn:"Minibus Falset ↔ RENFE station", phone:"977 831 871", web:"http://www.autocarsdomenech.cat", webLabel:"Autocars Domènech",
+    { cat:"tren", title:"Minibús Falset ↔ estación RENFE", titleCa:"Minibús Falset ↔ estació RENFE", titleEn:"Minibus Falset ↔ RENFE station", phone:"977 831 871", web:"http://www.autocarsdomenech.cat", webLabel:"Autocars Domènech",
       noteEs:"Conecta Falset con la estación de Marçà-Falset (a 2 km del pueblo).",
       noteCa:"Connecta Falset amb l'estació de Marçà-Falset (a 2 km del poble).",
       noteEn:"Connects Falset with the Marçà-Falset station (2 km from the village)." },
-    { cat:"bus", title:"HIFE — Barcelona ↔ Alcañiz", titleEn:"HIFE — Barcelona ↔ Alcañiz", phone:"977 440 300", web:"https://www.hife.es", webLabel:"hife.es",
+    { cat:"bus", title:"HIFE — Barcelona ↔ Alcañiz", titleCa:"HIFE — Barcelona ↔ Alcañiz", titleEn:"HIFE — Barcelona ↔ Alcañiz", phone:"977 440 300", web:"https://www.hife.es", webLabel:"hife.es",
       noteEs:"Pasa por el Priorat, de lunes a viernes.",
       noteCa:"Passa pel Priorat, de dilluns a divendres.",
       noteEn:"Runs through Priorat, Monday to Friday." },
-    { cat:"bus", title:"Hispano Igualadina — Tarragona ↔ Gandesa", titleEn:"Hispano Igualadina — Tarragona ↔ Gandesa", phone:"902 292 900", web:"http://www.igualadina.com", webLabel:"igualadina.com",
+    { cat:"bus", title:"Hispano Igualadina — Tarragona ↔ Gandesa", titleCa:"Hispano Igualadina — Tarragona ↔ Gandesa", titleEn:"Hispano Igualadina — Tarragona ↔ Gandesa", phone:"902 292 900", web:"http://www.igualadina.com", webLabel:"igualadina.com",
       noteEs:"Parada en Falset, en ruta hacia Gandesa.",
       noteCa:"Parada a Falset, en ruta cap a Gandesa.",
       noteEn:"Stops in Falset, on the way to Gandesa." },
-    { cat:"bus", title:"Plana — Reus/Barcelona ↔ Cornudella", titleEn:"Plana — Reus/Barcelona ↔ Cornudella", phone:"977 553 680", web:"http://www.empresaplana.cat", webLabel:"empresaplana.cat",
+    { cat:"bus", title:"Plana — Reus/Barcelona ↔ Cornudella", titleCa:"Plana — Reus/Barcelona ↔ Cornudella", titleEn:"Plana — Reus/Barcelona ↔ Cornudella", phone:"977 553 680", web:"http://www.empresaplana.cat", webLabel:"empresaplana.cat",
       noteEs:"Varias líneas hacia Cornudella de Montsant, Poboleda, La Morera de Montsant y Vilanova de Prades.",
       noteCa:"Diverses línies cap a Cornudella de Montsant, Poboleda, la Morera de Montsant i Vilanova de Prades.",
       noteEn:"Several lines to Cornudella de Montsant, Poboleda, La Morera de Montsant and Vilanova de Prades." },
-    { cat:"bus", title:"Transports del Priorat i Domènech (líneas locales)", titleEn:"Transports del Priorat i Domènech (local lines)", phone:"977 831 871", web:"http://www.autocarsdomenech.cat", webLabel:"autocarsdomenech.cat",
+    { cat:"bus", title:"Transports del Priorat i Domènech (líneas locales)", titleCa:"Transports del Priorat i Domènech (línies locals)", titleEn:"Transports del Priorat i Domènech (local lines)", phone:"977 831 871", web:"http://www.autocarsdomenech.cat", webLabel:"autocarsdomenech.cat",
       noteEs:"Conectan Falset con la mayoría de pueblos de la comarca (estén o no en el circuito de 8 etapas): Gratallops–El Lloar–Torroja, Pradell–Porrera, La Figuera–El Molar–El Masroig–Bellmunt, La Bisbal–Margalef–Cabacés–La Vilella Alta–La Vilella Baixa, Ulldemolins–Cornudella–Porrera.",
       noteCa:"Connecten Falset amb la majoria de pobles de la comarca (siguin o no al circuit de 8 etapes): Gratallops–el Lloar–Torroja, Pradell–Porrera, la Figuera–el Molar–el Masroig–Bellmunt, la Bisbal–Margalef–Cabacés–la Vilella Alta–la Vilella Baixa, Ulldemolins–Cornudella–Porrera.",
       noteEn:"Connect Falset with most villages in the county (whether or not they're on the 8-stage circuit): Gratallops–El Lloar–Torroja, Pradell–Porrera, La Figuera–El Molar–El Masroig–Bellmunt, La Bisbal–Margalef–Cabacés–La Vilella Alta–La Vilella Baixa, Ulldemolins–Cornudella–Porrera." },
-    { cat:"coche", title:"En coche", titleEn:"By car", phone:null, web:null,
+    { cat:"coche", title:"En coche", titleCa:"En cotxe", titleEn:"By car", phone:null, web:null,
       noteEs:"C-242 (Reus–Falset–Móra d'Ebre) o T-702/N-420 desde Tarragona. Aparca en Falset: es el inicio y el cierre del circuito.",
       noteCa:"C-242 (Reus–Falset–Móra d'Ebre) o T-702/N-420 des de Tarragona. Aparca a Falset: és l'inici i el tancament del circuit.",
       noteEn:"C-242 (Reus–Falset–Móra d'Ebre) or T-702/N-420 from Tarragona. Park in Falset: it's the start and finish of the circuit." },
-    { cat:"avion", title:"Aeropuerto de Reus", titleEn:"Reus Airport", phone:null, web:null,
+    { cat:"avion", title:"Aeropuerto de Reus", titleCa:"Aeroport de Reus", titleEn:"Reus Airport", phone:null, web:null,
       noteEs:"A 35 km de Falset. Ryanair, Jet2, EasyJet, TUI, Vueling (a París) y AirNostrum (a Palma). Cierra en temporada de invierno.",
       noteCa:"A 35 km de Falset. Ryanair, Jet2, EasyJet, TUI, Vueling (a París) i AirNostrum (a Palma). Tanca a l'hivern.",
       noteEn:"35 km from Falset. Ryanair, Jet2, EasyJet, TUI, Vueling (to Paris) and AirNostrum (to Palma). Closed in winter season." },
-    { cat:"taxi", title:"Taxis locales", titleEn:"Local taxis", phone:"977 831 871", web:null,
+    { cat:"taxi", title:"Taxis locales", titleCa:"Taxis locals", titleEn:"Local taxis", phone:"977 831 871", web:null,
       noteEs:"Falset (Taxi Priorat 619 022 994, Taxi Domènech 977 831 871), Cornudella de Montsant (Enric Gomis 977 911 329), La Bisbal de Montsant (Josep M. Pardell 977 819 009), Marçà (Taxi Priorat).",
       noteCa:"Falset (Taxi Priorat 619 022 994, Taxi Domènech 977 831 871), Cornudella de Montsant (Enric Gomis 977 911 329), la Bisbal de Montsant (Josep M. Pardell 977 819 009), Marçà (Taxi Priorat).",
       noteEn:"Falset (Taxi Priorat 619 022 994, Taxi Domènech 977 831 871), Cornudella de Montsant (Enric Gomis 977 911 329), La Bisbal de Montsant (Josep M. Pardell 977 819 009), Marçà (Taxi Priorat)." },
@@ -1418,7 +1418,7 @@
       itemsEn:["35–45 L backpack + waterproof cover","2–3 L reservoir, capacity up to 4–5 L on critical stages","Water purification tablets or filter","Electrolyte salts"] },
     { catEs:"Ropa", catCa:"Roba", catEn:"Clothing",
       itemsEs:["2–3 camisetas técnicas transpirables (no algodón)","Pantalón ligero de trekking","Cortavientos ligero + chubasquero","Sombrero de ala ancha o gorra con protección de cuello","2–3 pares de calcetines técnicos"],
-      itemsCa:["2–3 samarretes tècniques transpirables (no cotó)","Pantaló lleuger de trekking","Tallavent lleuger + xubasquer","Barret d'ala ampla o gorra amb protecció de coll","2–3 parells de mitjons tècnics"],
+      itemsCa:["2–3 samarretes tècniques transpirables (no cotó)","Pantaló lleuger de trekking","Tallavent lleuger + impermeable","Barret d'ala ampla o gorra amb protecció de coll","2–3 parells de mitjons tècnics"],
       itemsEn:["2–3 breathable technical t-shirts (no cotton)","Lightweight trekking trousers","Light windbreaker + rain jacket","Wide-brim hat or cap with neck protection","2–3 pairs of technical socks"] },
     { catEs:"Pies y terreno", catCa:"Peus i terreny", catEn:"Feet and terrain",
       itemsEs:["Bota de montaña ya rodada, con buena suela de agarre","Sandalias ligeras para el pueblo por la tarde","Bastones de trekking (etapas 2 y 5)"],
@@ -1426,7 +1426,7 @@
       itemsEn:["Broken-in hiking boots with good grip sole","Light sandals for the village in the evening","Trekking poles (stages 2 and 5)"] },
     { catEs:"Salud y emergencia", catCa:"Salut i emergència", catEn:"Health and emergency",
       itemsEs:["Botiquín básico: tiritas, ampollas, antiinflamatorio, suero oral","Crema solar factor 50 + after-sun","Repelente de insectos","Silbato de emergencia"],
-      itemsCa:["Farmaciola bàsica: tiretes, butllofes, antiinflamatori, sèrum oral","Crema solar factor 50 + after-sun","Repel·lent d'insectes","Xiulet d'emergència"],
+      itemsCa:["Farmaciola bàsica: tiretes, antiinflamatori, sèrum oral","Crema solar factor 50 + after-sun","Repel·lent d'insectes","Xiulet d'emergència"],
       itemsEn:["Basic first-aid kit: plasters, blister care, anti-inflammatory, oral rehydration salts","Factor 50 sunscreen + after-sun","Insect repellent","Emergency whistle"] },
     { catEs:"Navegación y electrónica", catCa:"Navegació i electrònica", catEn:"Navigation and electronics",
       itemsEs:["Móvil con track GPX offline + batería externa","Mapa físico de respaldo (IGN o Alpina de la sierra de Montsant)"],
@@ -1449,10 +1449,11 @@
     if (!grid) return;
     grid.innerHTML = TRANSPORT_ITEMS.map(it => {
       const note = lang === "ca" ? it.noteCa : lang === "en" ? it.noteEn : it.noteEs;
-      const title = lang === "en" ? (it.titleEn || it.title) : it.title;
+      const title = lang === "ca" ? (it.titleCa || it.title) : lang === "en" ? (it.titleEn || it.title) : it.title;
+      const webLabel = lang === "ca" ? (it.webLabelCa || it.webLabel) : lang === "en" ? (it.webLabelEn || it.webLabel) : it.webLabel;
       const catLabel = (TRANSPORT_CAT_LABELS[lang] || TRANSPORT_CAT_LABELS.es)[it.cat] || it.cat;
       const phoneHtml = it.phone ? `<p><a href="tel:+34${it.phone.replace(/\s/g,'')}">${it.phone}</a></p>` : "";
-      const webHtml = it.web ? `<p><a href="${it.web}" target="_blank" rel="noopener">${it.webLabel || it.web.replace(/^https?:\/\//,'')}</a></p>` : "";
+      const webHtml = it.web ? `<p><a href="${it.web}" target="_blank" rel="noopener">${webLabel || it.web.replace(/^https?:\/\//,'')}</a></p>` : "";
       return `<div class="transport-item">
         <span class="tsub">${catLabel}</span>
         <h4>${title}</h4>
