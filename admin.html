@@ -16,7 +16,7 @@
   :root{
     --llicorella: #1a1715; --llicorella-2: #241f1c;
     --pergami: #ede6d6; --pergami-dim: #cfc6b2;
-    --samfaina: #c69214; --vinya: #7a1f2b; --herba: #6e7858;
+    --samfaina: #c69214; --vinya: #7a1f2b; --vinya-light: #f0616b; --herba: #6e7858;
     --line: rgba(237,230,214,0.14); --maxw: 980px;
   }
   *{box-sizing:border-box;}
@@ -43,9 +43,6 @@
   }
   .skip-link:focus{ top:12px; }
 
-  .notice{ border:1px solid var(--vinya); background:rgba(122,31,43,0.08); padding:14px 18px; font-size:13px; color:var(--pergami-dim); margin-bottom:30px; }
-  .notice strong{ color:var(--pergami); }
-
   #gate{ max-width:360px; }
   #gate input{ width:100%; background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami); padding:12px 14px; font-family:'Public Sans', sans-serif; font-size:15px; margin-bottom:14px; -webkit-appearance:none; appearance:none; border-radius:0; }
   #gate input:focus{ outline:none; border-color:var(--samfaina); }
@@ -55,7 +52,7 @@
   .btn:disabled{ opacity:0.5; cursor:not-allowed; }
   .btn.secondary{ background:transparent; color:var(--samfaina); }
   .btn.secondary:hover{ background:rgba(198,146,20,0.08); }
-  .gate-err{ display:none; color:var(--vinya); font-size:13px; margin-top:10px; }
+  .gate-err{ display:none; color:var(--vinya-light); font-size:13px; margin-top:10px; }
   .gate-err.show{ display:block; }
 
   #panel{ display:none; }
@@ -93,9 +90,21 @@
   .mini-btn{ font-family:'JetBrains Mono', monospace; font-size:10.5px; padding:5px 9px; border:1px solid var(--line); background:transparent; color:var(--pergami-dim); cursor:pointer; }
   .mini-btn:hover{ border-color:var(--samfaina); color:var(--samfaina); }
   .mini-btn.verify{ border-color:var(--herba); color:var(--herba); }
-  .mini-btn.unverify{ border-color:var(--vinya); color:var(--vinya); }
+  .mini-btn.unverify{ border-color:var(--vinya-light); color:var(--vinya-light); }
   .mini-btn:disabled{ opacity:0.4; cursor:not-allowed; }
   .empty{ padding:40px; text-align:center; color:var(--pergami-dim); border:1px dashed var(--line); }
+  .pagination{
+    display:flex; align-items:center; justify-content:center; gap:18px;
+    margin-top:20px; font-family:'JetBrains Mono', monospace; font-size:12.5px;
+  }
+  .pagination button{
+    font-family:inherit; font-size:12.5px; letter-spacing:0.03em;
+    background:transparent; border:1px solid var(--line); color:var(--pergami);
+    padding:9px 16px; cursor:pointer; transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .pagination button:hover:not(:disabled){ border-color:var(--samfaina); color:var(--samfaina); }
+  .pagination button:disabled{ opacity:0.35; cursor:default; }
+  .pagination .page-of{ color:var(--pergami-dim); white-space:nowrap; }
   .save-flash{ font-size:11px; color:var(--herba); opacity:0; transition:opacity .3s; }
   .save-flash.show{ opacity:1; }
 
@@ -104,7 +113,7 @@
     align-items:center; justify-content:center; padding:20px;
   }
   .confirm-box.show{ display:flex; }
-  .confirm-card{ background:var(--llicorella-2); border:1px solid var(--vinya); padding:26px 28px; max-width:380px; }
+  .confirm-card{ background:var(--llicorella-2); border:1px solid var(--vinya-light); padding:26px 28px; max-width:380px; }
   .confirm-card h3{ font-size:16px; margin-bottom:10px; }
   .confirm-card p{ font-size:13.5px; color:var(--pergami-dim); margin:0 0 20px; }
   .confirm-actions{ display:flex; gap:10px; justify-content:flex-end; }
@@ -126,11 +135,6 @@
     </div>
   </header>
   <p class="sub" data-i18n="sub">Panel para marcar como verificadas las inscripciones cuyas 4 fotos ya has revisado en tu correo.</p>
-
-  <div class="notice">
-    <strong data-i18n="notice.strong">Esto no es seguridad de nivel empresarial.</strong>
-    <span data-i18n="notice.body">La contraseña se valida en el servidor, no está expuesta en el código de esta página. Aun así, es un sistema simple, pensado para evitar que un visitante casual toque algo por error — no para resistir un ataque dirigido. No la reutilices en otros sitios.</span>
-  </div>
 
   <div id="gate">
     <input type="password" id="passphrase" data-i18n-placeholder="gate.placeholder" placeholder="Contraseña de administración" autocomplete="off">
@@ -170,6 +174,7 @@
       </thead>
       <tbody id="rows"></tbody>
     </table>
+    <div class="pagination" id="pagination" style="display:none;"></div>
     <div class="empty" id="empty-state" style="display:none;" data-i18n="empty">No hay inscripciones que coincidan.</div>
   </div>
 </div>
@@ -180,7 +185,7 @@
     <p id="confirm-text"></p>
     <div class="confirm-actions">
       <button class="btn secondary" id="confirm-cancel" data-i18n="confirm.cancel">Cancelar</button>
-      <button class="btn" id="confirm-ok" style="border-color:var(--vinya); background:var(--vinya); color:var(--pergami);" data-i18n="confirm.ok">Sí, quitarla</button>
+      <button class="btn" id="confirm-ok" style="border-color:var(--vinya-light); background:var(--vinya-light); color:var(--llicorella);" data-i18n="confirm.ok">Sí, quitarla</button>
     </div>
   </div>
 </div>
@@ -387,6 +392,8 @@
   let statusFilter = "all";
   let sortKey = "startDate";
   let sortDir = -1;
+  let currentPage = 1;
+  const PAGE_SIZE = 20;
 
   async function loadAndRender(){
     currentEntries = await loadEntries();
@@ -395,10 +402,12 @@
 
   document.getElementById("search-box").addEventListener("input", (e) => {
     searchTerm = e.target.value.trim().toLowerCase();
+    currentPage = 1;
     render();
   });
   document.getElementById("filter-select").addEventListener("change", (e) => {
     statusFilter = e.target.value;
+    currentPage = 1;
     render();
   });
   document.querySelectorAll("th[data-sort]").forEach(th => {
@@ -406,6 +415,7 @@
       const key = th.getAttribute("data-sort");
       if (sortKey === key) sortDir *= -1;
       else { sortKey = key; sortDir = (key === "startDate" || key === "submittedAt") ? -1 : 1; }
+      currentPage = 1;
       render();
     });
   });
@@ -472,12 +482,18 @@
 
     if (visible.length === 0){
       rows.innerHTML = "";
+      document.getElementById("pagination").style.display = "none";
       empty.style.display = "block";
       return;
     }
     empty.style.display = "none";
 
-    rows.innerHTML = visible.map((entry, i) => {
+    const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = totalPages;
+    const pageStart = (currentPage - 1) * PAGE_SIZE;
+    const pageItems = visible.slice(pageStart, pageStart + PAGE_SIZE);
+
+    rows.innerHTML = pageItems.map((entry, i) => {
       const w = entry.data;
       const verified = !!w.verified;
       const notified = !!w.notified;
@@ -488,7 +504,9 @@
           ? `<span class="badge verified" style="border-color:var(--herba);">${t.action.notified}</span>`
           : `<button class="mini-btn verify" data-action="notify">${t.action.notify}</button>`;
       }
-      return `<tr data-idx="${i}">
+      // data-idx es el índice ABSOLUTO dentro de visibleSorted (no el de esta página),
+      // porque los botones de acción buscan la entrada con visibleSorted[idx].
+      return `<tr data-idx="${pageStart + i}">
         <td>${escapeHtml(w.alias)}${w.publicDisplay === false ? '<span class="badge" style="margin-left:6px;border-color:var(--llicorella);font-size:10px;" title="No aparece en la lista pública">🔒 privado</span>' : ""}</td>
         <td>${escapeHtml(w.email)}</td>
         <td>${t.variant[w.variante] || escapeHtml(w.variante || "—")}</td>
@@ -507,6 +525,8 @@
         </td>
       </tr>`;
     }).join("");
+
+    renderPagination(totalPages);
 
     rows.querySelectorAll("button[data-action]").forEach(btn => {
       btn.addEventListener("click", async (e) => {
@@ -536,6 +556,36 @@
         await applyVerify(entry, true, btn, tr);
       });
     });
+  }
+
+  // Paginación: 20 filas por página. Al cambiar de página se hace scroll suave hasta
+  // arriba de la tabla, y los botones se deshabilitan en los extremos.
+  function renderPagination(totalPages){
+    const pag = document.getElementById("pagination");
+    const tp = (T[currentLang] && T[currentLang].pagination) || {};
+    if (totalPages <= 1){
+      pag.style.display = "none";
+      pag.innerHTML = "";
+      return;
+    }
+    pag.style.display = "flex";
+    const pageLabel = (tp.pageOf || "Página {page} de {total}")
+      .replace("{page}", currentPage).replace("{total}", totalPages);
+    pag.innerHTML = `
+      <button type="button" id="pag-prev" ${currentPage === 1 ? "disabled" : ""}>${tp.prev || "← Anterior"}</button>
+      <span class="page-of">${pageLabel}</span>
+      <button type="button" id="pag-next" ${currentPage === totalPages ? "disabled" : ""}>${tp.next || "Siguiente →"}</button>
+    `;
+    document.getElementById("pag-prev").addEventListener("click", () => {
+      if (currentPage > 1){ currentPage--; render(); scrollTableTop(); }
+    });
+    document.getElementById("pag-next").addEventListener("click", () => {
+      if (currentPage < totalPages){ currentPage++; render(); scrollTableTop(); }
+    });
+  }
+  function scrollTableTop(){
+    const table = document.querySelector("table");
+    if (table) table.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   async function applyVerify(entry, value, btn, tr){

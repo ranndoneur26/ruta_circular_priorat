@@ -499,10 +499,6 @@
       "sub": "Panel para marcar como verificadas las inscripciones cuyas 4 fotos ya has revisado en tu correo.",
       "hdrList": "Ver caminantes",
       "hdrBack": "← Volver al circuito",
-      "notice": {
-        "strong": "Esto no es seguridad real.",
-        "body": "Es solo una contraseña simple en el propio JavaScript de la página, pensada para que un visitante casual no toque nada por error — cualquiera que mire el código fuente puede verla. No la uses para nada sensible."
-      },
       "gate": {
         "placeholder": "Contraseña de administración",
         "btn": "Entrar",
@@ -543,6 +539,11 @@
         "notifyError": "No se pudo enviar el correo."
       },
       "count": "{n} inscripciones",
+      "pagination": {
+        "prev": "← Anterior",
+        "next": "Siguiente →",
+        "pageOf": "Página {page} de {total}"
+      },
       "empty": "No hay inscripciones que coincidan.",
       "confirm": {
         "h": "¿Quitar la verificación?",
@@ -1048,10 +1049,6 @@
       "sub": "Panell per marcar com a verificades les inscripcions les 4 fotos de les quals ja has revisat al teu correu.",
       "hdrList": "Veure caminants",
       "hdrBack": "← Tornar al circuit",
-      "notice": {
-        "strong": "Això no és seguretat real.",
-        "body": "Només és una contrasenya simple en el propi JavaScript de la pàgina, pensada perquè un visitant casual no toqui res per error — qualsevol que miri el codi font la pot veure. No la facis servir per a res sensible."
-      },
       "gate": {
         "placeholder": "Contrasenya d'administració",
         "btn": "Entrar",
@@ -1092,6 +1089,11 @@
         "notifyError": "No s'ha pogut enviar el correu."
       },
       "count": "{n} inscripcions",
+      "pagination": {
+        "prev": "← Anterior",
+        "next": "Següent →",
+        "pageOf": "Pàgina {page} de {total}"
+      },
       "empty": "No hi ha inscripcions que coincideixin.",
       "confirm": {
         "h": "Vols treure la verificació?",
@@ -1597,10 +1599,6 @@
       "sub": "Panel to mark as verified the sign-ups whose 4 photos you've already reviewed by email.",
       "hdrList": "See walkers",
       "hdrBack": "← Back to the circuit",
-      "notice": {
-        "strong": "This is not real security.",
-        "body": "It's just a simple password inside the page's own JavaScript, meant to stop a casual visitor from touching anything by accident — anyone who views the page source can see it. Don't use it for anything sensitive."
-      },
       "gate": {
         "placeholder": "Admin password",
         "btn": "Enter",
@@ -1641,6 +1639,11 @@
         "notifyError": "Couldn't send the email."
       },
       "count": "{n} sign-ups",
+      "pagination": {
+        "prev": "← Previous",
+        "next": "Next →",
+        "pageOf": "Page {page} of {total}"
+      },
       "empty": "No sign-ups match.",
       "confirm": {
         "h": "Remove verification?",
