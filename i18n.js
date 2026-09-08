@@ -495,7 +495,7 @@
       "meta": {
         "title": "Admin · Travessa del Priorat"
       },
-      "h1": "Travessa del Priorat — admin",
+      "h1": "Ruta del Prior — admin",
       "sub": "Panel para marcar como verificadas las inscripciones cuyas 4 fotos ya has revisado en tu correo.",
       "hdrList": "Ver caminantes",
       "hdrBack": "← Volver al circuito",
@@ -1045,7 +1045,7 @@
       "meta": {
         "title": "Admin · Travessa del Priorat"
       },
-      "h1": "Travessa del Priorat — admin",
+      "h1": "Ruta del Prior — admin",
       "sub": "Panell per marcar com a verificades les inscripcions les 4 fotos de les quals ja has revisat al teu correu.",
       "hdrList": "Veure caminants",
       "hdrBack": "← Tornar al circuit",
@@ -1595,7 +1595,7 @@
       "meta": {
         "title": "Admin · Travessa del Priorat"
       },
-      "h1": "Travessa del Priorat — admin",
+      "h1": "Ruta del Prior — admin",
       "sub": "Panel to mark as verified the sign-ups whose 4 photos you've already reviewed by email.",
       "hdrList": "See walkers",
       "hdrBack": "← Back to the circuit",
