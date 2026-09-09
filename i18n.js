@@ -372,7 +372,8 @@
         "p": "Tu alias ya está en la lista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Ver la lista de caminantes →</a><br>Cuando termines la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifícala con 4 fotos →</a>"
       },
       "footer": {
-        "text": "Travessa del Priorat — inscripción informal, sin verificación de identidad."
+        "left": "El Camí del Prior — las 8 etapas verificadas sobre el terreno con GPX real.",
+        "right": "v1.0 · circuito cerrado, 19 pueblos, 8/8 etapas verificadas"
       },
       "meta": {
         "title": "Inscripción · Travessa del Priorat",
@@ -701,7 +702,7 @@
         "link": "Veure la guia pràctica completa →"
       },
       "routeopt": {
-        "h2": "Dues maneres de recorrer-la",
+        "h2": "Dues maneres de recórrer-la",
         "fullH": "Travessa completa",
         "fullP": "166,4 km · 8 etapes · circuit tancat",
         "fullBtn": "Veure les 8 etapes",
@@ -922,7 +923,8 @@
         "p": "El teu àlies ja és a la llista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Veure la llista de caminants →</a><br>Quan acabis la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifica-la amb 4 fotos →</a>"
       },
       "footer": {
-        "text": "Travessa del Priorat — inscripció informal, sense verificació d'identitat."
+        "left": "El Camí del Prior — les 8 etapes verificades sobre el terreny amb GPX real.",
+        "right": "v1.0 · circuit tancat, 19 pobles, 8/8 etapes verificades"
       },
       "meta": {
         "title": "Inscripció · Travessa del Priorat",
@@ -1472,7 +1474,8 @@
         "p": "Your alias is now on the list. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">See the list of walkers →</a><br>Once you finish the route, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certify it with 4 photos →</a>"
       },
       "footer": {
-        "text": "Travessa del Priorat — informal sign-up, no identity verification."
+        "left": "El Camí del Prior — all 8 stages verified on the ground with real GPX.",
+        "right": "v1.0 · closed loop, 19 villages, 8/8 stages verified"
       },
       "meta": {
         "title": "Sign up · Travessa del Priorat",
