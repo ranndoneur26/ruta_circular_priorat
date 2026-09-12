@@ -762,6 +762,8 @@
   .ad-slot--etapa{ width:100%; max-width:760px; min-height:240px; }
   .ad-slot--banner{ width:728px; max-width:100%; height:180px; }
   .ad-slot--soci{ width:100%; max-width:1200px; height:220px; }
+  .ad-banner{ display:block; width:100%; max-width:1200px; margin:22px auto; line-height:0; }
+  .ad-banner img{ display:block; width:100%; height:auto; border:1px solid var(--line); }
   @media (max-width:640px){
     .ad-slot--essencial{ min-height:220px; }
     .ad-slot--etapa{ min-height:200px; }
@@ -2085,14 +2087,20 @@
 
   // --- Espais publicitaris (mostra per a anunciants) ---
   const AD_SLOTS = {
-    essencial: { cls:"ad-slot--essencial", label:"Fitxa Essencial", dim:"100% ample ≈ 760–1.100 px · mòbil 100% ample ≈ 320–430 px" },
-    etapa:     { cls:"ad-slot--etapa", label:"Targeta d'Etapa", dim:"100% ample columna ≈ 500–760 px · mòbil 100% ample ≈ 320–430 px" },
-    banner:    { cls:"ad-slot--banner", label:"Banner editorial", dim:"728 × 180 px (màx. 970 × 250) · mòbil 320 × 120 px (màx. 360 × 140)" },
-    soci1:     { cls:"ad-slot--soci", label:"Soci fundador", dim:"1200 × 220 px · mòbil 360 × 180 px" },
-    soci2:     { cls:"ad-slot--soci", label:"Soci fundador", dim:"1200 × 220 px · mòbil 360 × 180 px" },
+    essencial: { type:"placeholder", cls:"ad-slot--essencial", label:"Fitxa Essencial", dim:"100% ample ≈ 760–1.100 px · mòbil 100% ample ≈ 320–430 px" },
+    etapa:     { type:"placeholder", cls:"ad-slot--etapa", label:"Targeta d'Etapa", dim:"100% ample columna ≈ 500–760 px · mòbil 100% ample ≈ 320–430 px" },
+    banner:    { type:"placeholder", cls:"ad-slot--banner", label:"Banner editorial", dim:"728 × 180 px (màx. 970 × 250) · mòbil 320 × 120 px (màx. 360 × 140)" },
+    soci1:     { type:"image", desktop:"banner_1200x200.jpg", mobile:"Banner_360x180.jpg", alt:"Oficina de Turisme de Falset" },
+    soci2:     { type:"image", desktop:"banner_1200x200.jpg", mobile:"Banner_360x180.jpg", alt:"Oficina de Turisme de Falset" },
   };
   function adSlotHtml(key){
     const s = AD_SLOTS[key];
+    if (s.type === "image"){
+      return `<picture class="ad-banner" data-ad-slot="${key}">
+        <source media="(max-width:640px)" srcset="${s.mobile}">
+        <img src="${s.desktop}" alt="${s.alt}" loading="lazy">
+      </picture>`;
+    }
     return `<div class="ad-slot ${s.cls}" data-ad-slot="${key}">
       <div>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="1.5"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5-9 9"/></svg>
