@@ -15,6 +15,7 @@
         "etapas": "Etapas",
         "guia": "Guía",
         "info": "Info práctica",
+        "colaboradores": "Colaboradores",
         "inscripcion": "Inscribirme",
         "finalizados": "Caminantes"
       },
@@ -302,6 +303,33 @@
       },
       "backToTop": "Volver arriba"
     },
+    "colaboradors": {
+      "nav": {
+        "back": "← Volver al circuito"
+      },
+      "hero": {
+        "eyebrow": "Quiénes lo hacen posible",
+        "h1": "Colaboradores",
+        "p": "Este proyecto es independiente y no oficial, pero se apoya en la información y el trabajo de entidades del territorio. Estas son las que colaboran con El Camí del Prior.",
+        "back": "← Volver al circuito"
+      },
+      "list": {
+        "eyebrow": "Directorio",
+        "h2": "Entidades colaboradoras",
+        "p": "Organismos oficiales que aportan información turística y patrimonial verificada sobre el Priorat."
+      },
+      "card1": {
+        "phoneLabel": "Tel."
+      },
+      "footer": {
+        "left": "El Camí del Prior — entidades y organismos colaboradores.",
+        "right": "v1.0 · directorio de colaboradores"
+      },
+      "meta": {
+        "title": "Colaboradores · El Camí del Prior"
+      },
+      "backToTop": "Volver arriba"
+    },
     "inscripcion": {
       "nav": {
         "back": "← Volver al circuito",
@@ -566,6 +594,7 @@
         "etapas": "Etapes",
         "guia": "Guia",
         "info": "Info pràctica",
+        "colaboradores": "Col·laboradors",
         "inscripcion": "Inscriure'm",
         "finalizados": "Caminants"
       },
@@ -853,6 +882,33 @@
       },
       "backToTop": "Tornar amunt"
     },
+    "colaboradors": {
+      "nav": {
+        "back": "← Tornar al circuit"
+      },
+      "hero": {
+        "eyebrow": "Qui ho fa possible",
+        "h1": "Col·laboradors",
+        "p": "Aquest projecte és independent i no oficial, però es recolza en la informació i la feina d'entitats del territori. Aquestes són les que col·laboren amb El Camí del Prior.",
+        "back": "← Tornar al circuit"
+      },
+      "list": {
+        "eyebrow": "Directori",
+        "h2": "Entitats col·laboradores",
+        "p": "Organismes oficials que aporten informació turística i patrimonial verificada sobre el Priorat."
+      },
+      "card1": {
+        "phoneLabel": "Tel."
+      },
+      "footer": {
+        "left": "El Camí del Prior — entitats i organismes col·laboradors.",
+        "right": "v1.0 · directori de col·laboradors"
+      },
+      "meta": {
+        "title": "Col·laboradors · El Camí del Prior"
+      },
+      "backToTop": "Tornar amunt"
+    },
     "inscripcion": {
       "nav": {
         "back": "← Tornar al circuit",
@@ -1117,6 +1173,7 @@
         "etapas": "Stages",
         "guia": "Guide",
         "info": "Practical info",
+        "colaboradores": "Collaborators",
         "inscripcion": "Sign up",
         "finalizados": "Walkers"
       },
@@ -1401,6 +1458,33 @@
       },
       "meta": {
         "title": "Practical information · Travessa del Priorat"
+      },
+      "backToTop": "Back to top"
+    },
+    "colaboradors": {
+      "nav": {
+        "back": "← Back to the circuit"
+      },
+      "hero": {
+        "eyebrow": "Who makes it possible",
+        "h1": "Collaborators",
+        "p": "This is an independent, unofficial project, but it relies on information and work from organisations in the area. These are the ones collaborating with El Camí del Prior.",
+        "back": "← Back to the circuit"
+      },
+      "list": {
+        "eyebrow": "Directory",
+        "h2": "Collaborating organisations",
+        "p": "Official bodies providing verified tourism and heritage information about the Priorat."
+      },
+      "card1": {
+        "phoneLabel": "Phone:"
+      },
+      "footer": {
+        "left": "El Camí del Prior — collaborating organisations.",
+        "right": "v1.0 · collaborators directory"
+      },
+      "meta": {
+        "title": "Collaborators · El Camí del Prior"
       },
       "backToTop": "Back to top"
     },
