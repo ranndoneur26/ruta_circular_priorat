@@ -2090,16 +2090,18 @@
     essencial: { type:"placeholder", cls:"ad-slot--essencial", label:"Fitxa Essencial", dim:"100% ample ≈ 760–1.100 px · mòbil 100% ample ≈ 320–430 px" },
     etapa:     { type:"placeholder", cls:"ad-slot--etapa", label:"Targeta d'Etapa", dim:"100% ample columna ≈ 500–760 px · mòbil 100% ample ≈ 320–430 px" },
     banner:    { type:"placeholder", cls:"ad-slot--banner", label:"Banner editorial", dim:"728 × 180 px (màx. 970 × 250) · mòbil 320 × 120 px (màx. 360 × 140)" },
-    soci1:     { type:"image", desktop:"banner_1200x200.jpg", mobile:"Banner_360x180.jpg", alt:"Oficina de Turisme de Falset" },
-    soci2:     { type:"image", desktop:"banner_1200x200.jpg", mobile:"Banner_360x180.jpg", alt:"Oficina de Turisme de Falset" },
+    soci1:     { type:"image", desktop:"banner_1200x200.jpg", mobile:"Banner_360x180.jpg", alt:"Oficina de Turisme de Falset", href:"https://www.turismefalset.cat" },
   };
   function adSlotHtml(key){
     const s = AD_SLOTS[key];
     if (s.type === "image"){
-      return `<picture class="ad-banner" data-ad-slot="${key}">
+      const pic = `<picture class="ad-banner" data-ad-slot="${key}">
         <source media="(max-width:640px)" srcset="${s.mobile}">
         <img src="${s.desktop}" alt="${s.alt}" loading="lazy">
       </picture>`;
+      return s.href
+        ? `<a href="${s.href}" target="_blank" rel="noopener sponsored">${pic}</a>`
+        : pic;
     }
     return `<div class="ad-slot ${s.cls}" data-ad-slot="${key}">
       <div>
@@ -2113,7 +2115,7 @@
     const list = document.getElementById("stage-list");
     if (!list) return;
     const cards = Array.from(list.querySelectorAll(".stage-card"));
-    [[1,"essencial"],[2,"etapa"],[3,"banner"],[5,"soci1"],[6,"soci2"]].forEach(([n,key]) => {
+    [[1,"essencial"],[2,"etapa"],[3,"banner"],[8,"soci1"]].forEach(([n,key]) => {
       const card = cards[n-1];
       if (card) card.insertAdjacentHTML("afterend", adSlotHtml(key));
     });
