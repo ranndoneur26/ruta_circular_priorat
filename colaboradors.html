@@ -237,6 +237,8 @@
   .collab-card address a:hover{ text-decoration:underline; }
   .collab-logos{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; padding-top:16px; border-top:1px solid var(--line); }
   .collab-logos img{ height:44px; width:auto; max-width:140px; object-fit:contain; filter:grayscale(0%); }
+  .ad-banner{ display:block; width:100%; max-width:1200px; margin:22px auto 0; line-height:0; }
+  .ad-banner img{ display:block; width:100%; height:auto; border:1px solid var(--line); }
   .collab-logos .logo-fallback{
     height:44px; padding:0 14px; display:flex; align-items:center; justify-content:center;
     border:1px dashed var(--line); font-family:'JetBrains Mono', monospace; font-size:10.5px;
@@ -289,12 +291,10 @@
     <div class="collab-grid">
       <div class="collab-card">
         <h3>Oficina de Turisme del Priorat</h3>
-        <address>
-          Pl. de la Quartera, 1<br>
-          43730 Falset<br>
-          <span data-i18n="card1.phoneLabel">Tel.</span> <a href="tel:+34977831023">977 831 023</a><br>
-          <a href="mailto:oit@priorat.cat">oit@priorat.cat</a>
-        </address>
+        <picture class="ad-banner" data-ad-slot="soci1">
+          <source media="(max-width:640px)" srcset="Banner_360x180.jpg">
+          <img src="banner_1200x200.jpg" alt="Oficina de Turisme de Falset" loading="lazy">
+        </picture>
         <div class="collab-logos">
           <img src="logo-oficines-turisme-catalunya.svg" alt="Xarxa d'Oficines de Turisme de Catalunya" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-fallback',textContent:'Oficines de Turisme de Catalunya'}))">
           <img src="logo-generalitat-catalunya.svg" alt="Generalitat de Catalunya" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-fallback',textContent:'Generalitat de Catalunya'}))">
