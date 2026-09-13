@@ -795,9 +795,26 @@
   .guide-subnav a:hover{ color:var(--samfaina); background:rgba(198,146,20,0.06); }
   @media (max-width:760px){ .guide-subnav{ position:static; } .guide-subnav a{ flex:1 1 45%; } }
 
-  .guide-block{ margin-bottom:56px; scroll-margin-top:80px; }
+  .guide-block{ margin-bottom:0; scroll-margin-top:80px; border-bottom:1px solid var(--line); }
+  .guide-block:first-of-type{ border-top:1px solid var(--line); }
+  .guide-summary{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:22px 4px; margin:0 -4px; cursor:pointer; list-style:none;
+    border-left:3px solid transparent; transition:background-color 0.18s ease, border-color 0.18s ease;
+  }
+  .guide-summary::-webkit-details-marker{ display:none; }
+  .guide-summary:hover, .guide-summary:focus-visible{
+    background:rgba(226,169,74,0.08); border-left-color:var(--samfaina-soft);
+  }
+  .guide-block[open] .stage-toggle-icon{ transform:rotate(45deg); animation-play-state:paused; color:var(--samfaina); }
+  .guide-block[open] .guide-summary:hover .stage-toggle-icon,
+  .guide-block[open] .guide-summary:focus-visible .stage-toggle-icon{ transform:rotate(45deg) scale(1.2); }
+  .guide-summary:hover .stage-toggle-icon, .guide-summary:focus-visible .stage-toggle-icon{
+    transform:scale(1.2); animation-play-state:paused; color:var(--samfaina-soft);
+  }
+  .guide-body{ padding-bottom:32px; }
   .guide-block h3{
-    font-size:22px; margin-bottom:4px; display:flex; align-items:center; gap:12px;
+    font-size:22px; margin-bottom:0; display:flex; align-items:center; gap:12px;
   }
   .guide-block h3 .gnum{ font-family:'JetBrains Mono', monospace; font-size:13px; color:var(--samfaina); }
   .guide-block .gsub{ font-size:13.5px; color:var(--pergami-dim); margin:0 0 20px; max-width:60ch; }
@@ -1168,46 +1185,86 @@
       <a href="#guia-gpx" data-i18n="guia.nav8">Usar los tracks GPX</a>
     </nav>
 
-    <div class="guide-block" id="guia-cuando">
-      <h3><span class="gnum">01</span> <span data-i18n="guia.cuando.h">Cuándo ir</span></h3>
-      <div data-i18n-html="guia.cuando.body"></div>
-    </div>
+    <details class="guide-block" id="guia-cuando">
+      <summary class="guide-summary">
+        <h3><span class="gnum">01</span> <span data-i18n="guia.cuando.h">Cuándo ir</span></h3>
+        <span class="stage-toggle-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="guide-body">
+        <div data-i18n-html="guia.cuando.body"></div>
+      </div>
+    </details>
 
-    <div class="guide-block" id="guia-llegar">
-      <h3><span class="gnum">02</span> <span data-i18n="guia.llegar.h">Cómo llegar</span></h3>
-      <p data-i18n="guia.llegar.intro">Falset es el nudo del circuito y el mejor punto de entrada y salida. Así se llega:</p>
-      <div class="transport-accordion" id="transport-grid"></div>
-    </div>
+    <details class="guide-block" id="guia-llegar">
+      <summary class="guide-summary">
+        <h3><span class="gnum">02</span> <span data-i18n="guia.llegar.h">Cómo llegar</span></h3>
+        <span class="stage-toggle-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="guide-body">
+        <p data-i18n="guia.llegar.intro">Falset es el nudo del circuito y el mejor punto de entrada y salida. Así se llega:</p>
+        <div class="transport-accordion" id="transport-grid"></div>
+      </div>
+    </details>
 
-    <div class="guide-block" id="guia-agua">
-      <h3><span class="gnum">03</span> <span data-i18n="guia.agua.h">Agua: la prioridad número uno</span></h3>
-      <div data-i18n-html="guia.agua.body"></div>
-    </div>
+    <details class="guide-block" id="guia-agua">
+      <summary class="guide-summary">
+        <h3><span class="gnum">03</span> <span data-i18n="guia.agua.h">Agua: la prioridad número uno</span></h3>
+        <span class="stage-toggle-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="guide-body">
+        <div data-i18n-html="guia.agua.body"></div>
+      </div>
+    </details>
 
-    <div class="guide-block" id="guia-comida">
-      <h3><span class="gnum">04</span> <span data-i18n="guia.comida.h">Comida y restauración</span></h3>
-      <div data-i18n-html="guia.comida.body"></div>
-    </div>
+    <details class="guide-block" id="guia-comida">
+      <summary class="guide-summary">
+        <h3><span class="gnum">04</span> <span data-i18n="guia.comida.h">Comida y restauración</span></h3>
+        <span class="stage-toggle-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="guide-body">
+        <div data-i18n-html="guia.comida.body"></div>
+      </div>
+    </details>
 
-    <div class="guide-block" id="guia-calor">
-      <h3><span class="gnum">05</span> <span data-i18n="guia.calor.h">Gestión del calor</span></h3>
-      <div data-i18n-html="guia.calor.body"></div>
-    </div>
+    <details class="guide-block" id="guia-calor">
+      <summary class="guide-summary">
+        <h3><span class="gnum">05</span> <span data-i18n="guia.calor.h">Gestión del calor</span></h3>
+        <span class="stage-toggle-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="guide-body">
+        <div data-i18n-html="guia.calor.body"></div>
+      </div>
+    </details>
 
-    <div class="guide-block" id="guia-terreno">
-      <h3><span class="gnum">06</span> <span data-i18n="guia.terreno.h">Terreno y calzado</span></h3>
-      <div data-i18n-html="guia.terreno.body"></div>
-    </div>
+    <details class="guide-block" id="guia-terreno">
+      <summary class="guide-summary">
+        <h3><span class="gnum">06</span> <span data-i18n="guia.terreno.h">Terreno y calzado</span></h3>
+        <span class="stage-toggle-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="guide-body">
+        <div data-i18n-html="guia.terreno.body"></div>
+      </div>
+    </details>
 
-    <div class="guide-block" id="guia-equipo">
-      <h3><span class="gnum">07</span> <span data-i18n="guia.equipo.h">Lista de equipo para 8 días</span></h3>
-      <div class="kit-grid" id="kit-grid"></div>
-    </div>
+    <details class="guide-block" id="guia-equipo">
+      <summary class="guide-summary">
+        <h3><span class="gnum">07</span> <span data-i18n="guia.equipo.h">Lista de equipo para 8 días</span></h3>
+        <span class="stage-toggle-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="guide-body">
+        <div class="kit-grid" id="kit-grid"></div>
+      </div>
+    </details>
 
-    <div class="guide-block" id="guia-gpx">
-      <h3><span class="gnum">08</span> <span data-i18n="guia.gpx.h">Cómo usar los tracks GPX</span></h3>
-      <div data-i18n-html="guia.gpx.body"></div>
-    </div>
+    <details class="guide-block" id="guia-gpx">
+      <summary class="guide-summary">
+        <h3><span class="gnum">08</span> <span data-i18n="guia.gpx.h">Cómo usar los tracks GPX</span></h3>
+        <span class="stage-toggle-icon" aria-hidden="true">+</span>
+      </summary>
+      <div class="guide-body">
+        <div data-i18n-html="guia.gpx.body"></div>
+      </div>
+    </details>
 
   </div>
 </section>
