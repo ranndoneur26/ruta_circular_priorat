@@ -501,15 +501,24 @@
   .stage-metrics li.diff-pill.moderada{ border-color:var(--samfaina); color:var(--samfaina); }
   .stage-metrics li.diff-pill.exigente{ border-color:var(--vinya); color:var(--vinya); }
   .stage-toggle-icon{
-    font-family:'JetBrains Mono', monospace; font-size:20px; color:var(--samfaina);
-    flex-shrink:0; width:24px; text-align:center; transition:transform 0.2s ease, color 0.18s ease;
+    font-family:'JetBrains Mono', monospace; font-size:24px; color:var(--samfaina);
+    flex-shrink:0; width:28px; text-align:center; transition:transform 0.2s ease;
+    animation: stage-toggle-pulse 5s ease-in-out infinite;
+  }
+  @keyframes stage-toggle-pulse{
+    0%, 100% { color:var(--samfaina); }
+    33% { color:var(--vinya); }
+    66% { color:var(--herba); }
   }
   .stage-summary:hover .stage-toggle-icon, .stage-summary:focus-visible .stage-toggle-icon{
-    color:var(--samfaina-soft); transform:scale(1.2);
+    transform:scale(1.2); animation-play-state:paused; color:var(--samfaina-soft);
   }
-  .stage-card[open] .stage-toggle-icon{ transform:rotate(45deg); }
+  .stage-card[open] .stage-toggle-icon{ transform:rotate(45deg); animation-play-state:paused; color:var(--samfaina); }
   .stage-card[open] .stage-summary:hover .stage-toggle-icon,
   .stage-card[open] .stage-summary:focus-visible .stage-toggle-icon{ transform:rotate(45deg) scale(1.2); }
+  @media (prefers-reduced-motion: reduce){
+    .stage-toggle-icon{ animation:none; }
+  }
   .stage-body{ padding-bottom:26px; }
   @media (max-width:640px){
     .stage-summary{ align-items:flex-start; }
