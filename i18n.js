@@ -204,7 +204,7 @@
       "backToTop": "Volver arriba",
       "rutacorta": {
         "eyebrow": "Alternativa de 3 días",
-        "h2": "Ruta Curta, 3 etapes",
+        "h2": "Ruta Corta, 3 etapas",
         "p": "Mismo inicio que el circuito completo — etapas 1 y 2 — pero al llegar a Bellmunt del Priorat, un tercer día cierra el círculo directamente hasta Falset, ya verificado con GPX real.",
         "day": "Día",
         "total": "Total de la ruta corta: <strong>{km} km</strong> · +{gain} m / −{loss} m de desnivel acumulado, verificado con GPX real en las 3 etapas."
@@ -1266,7 +1266,7 @@
         "nav7": "Gear",
         "cuando": {
           "h": "When to go",
-          "body": "<p><strong>Avoid July and August.</strong> Priorat is one of the hottest inland counties in Catalonia; in summer temperatures easily exceed 35–38&nbsp;°C, with barely any shade on the stretches between vineyards and on the Montsant range.</p>\n           <p><strong>Best season: April–June and September–November.</strong> Moderate temperatures, better light, and the villages tend to have a bit more life.</p>\n           <p>If you must walk in summer, start before 7:00 and stop between 13:00 and 17:00. Stages 5 and 9 (the longest and most exposed) are the most dangerous in strong heat.</p>\n           <div class=\"g-warn\"><p>In winter, Siurana (737&nbsp;m, the highest point on the route) and the Montsant ridge can have frost or occasional snow: more a risk of slippery ground than of cold.</p></div>"
+          "body": "<p><strong>Avoid July and August.</strong> Priorat is one of the hottest inland counties in Catalonia; in summer temperatures easily exceed 35–38&nbsp;°C, with barely any shade on the stretches between vineyards and on the Montsant range.</p>\n           <p><strong>Best season: April–June and September–November.</strong> Moderate temperatures, better light, and the villages tend to have a bit more life.</p>\n           <p>If you must walk in summer, start before 7:00 and stop between 13:00 and 17:00. Stages 2 and 5 (the longest and most exposed) are the most dangerous in strong heat.</p>\n           <div class=\"g-warn\"><p>In winter, Siurana (737&nbsp;m, the highest point on the route) and the Montsant ridge can have frost or occasional snow: more a risk of slippery ground than of cold.</p></div>"
         },
         "llegar": {
           "h": "How to get there",
