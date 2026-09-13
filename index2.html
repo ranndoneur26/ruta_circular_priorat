@@ -209,6 +209,12 @@
   .hero h1 em{ font-style:italic; color:var(--samfaina); }
   .hero p.lead{ margin-top:22px; max-width:52ch; color:var(--pergami); font-size:17px; }
   .hero p.lead .accent{ color:var(--samfaina); }
+  .hero-version-label{
+    display:block; font-family:'JetBrains Mono', monospace; font-size:10.5px;
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--samfaina-soft);
+    margin-top:20px; opacity:0.85;
+  }
+  .hero .lead + .hero-version-label{ margin-top:14px; }
   .hero-sub{
     margin-top:16px; max-width:52ch; font-family:'JetBrains Mono', monospace;
     font-size:12.5px; line-height:1.6; letter-spacing:0.01em; color:var(--pergami-dim);
@@ -269,6 +275,79 @@
   .option-card p{ font-size:14px; color:var(--pergami-dim); margin:0 0 18px; }
   .option-card .btn{ width:100%; justify-content:center; }
   .option-card--accent{ border-color:var(--samfaina); background:rgba(198,146,20,0.06); }
+  .option-compare{ list-style:none; margin:0 0 18px; padding:14px 0 0; border-top:1px solid var(--line); display:flex; flex-direction:column; gap:9px; }
+  .option-compare li{ display:flex; justify-content:space-between; gap:12px; font-size:13px; color:var(--pergami-dim); }
+  .option-compare b{ color:var(--pergami); font-weight:600; text-align:right; }
+
+  /* ---------- checklist "¿Es para ti?" con severidad ---------- */
+  .tw-list{ display:grid; grid-template-columns:1fr 1fr; gap:12px 20px; list-style:none; margin:0; padding:0; }
+  .tw-list li{
+    font-size:14.5px; line-height:1.45; color:var(--pergami-dim);
+    display:flex; align-items:flex-start; gap:10px;
+    padding:9px 10px 9px 12px; border-left:3px solid var(--line); background:rgba(237,230,214,0.03);
+  }
+  .tw-list li::before{ content:none; }
+  .tw-list li strong{ color:var(--pergami); font-weight:700; }
+  .tw-list a{ color:var(--samfaina); text-decoration:none; border-bottom:1px dotted var(--samfaina); }
+  .tw-list li.tw-link{ border-left-color:transparent; background:none; padding-left:0; }
+  .tw-icon{
+    flex-shrink:0; width:19px; height:19px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:800; margin-top:1px; font-family:'JetBrains Mono', monospace;
+  }
+  .tw-item--danger{ border-left-color:var(--vinya); }
+  .tw-item--danger .tw-icon{ background:var(--vinya); color:var(--pergami); }
+  .tw-item--warn{ border-left-color:var(--samfaina); }
+  .tw-item--warn .tw-icon{ background:var(--samfaina); color:var(--llicorella); }
+  .tw-item--info{ border-left-color:var(--herba); }
+  .tw-item--info .tw-icon{ background:var(--herba); color:var(--pergami); }
+  @media (max-width:600px){
+    .tw-list{ grid-template-columns:1fr; }
+    .tw-list li{ font-size:14px; }
+  }
+
+  /* ---------- "per a qui NO és" ---------- */
+  .not-for{ padding:40px 0; border-bottom:1px solid var(--line); background:var(--llicorella-2); }
+  .not-for h2{ font-size:22px; margin-bottom:6px; }
+  .not-for .lead-note{ font-size:14px; color:var(--pergami-dim); margin:0 0 20px; max-width:64ch; }
+  .not-for-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:14px; }
+  .not-for-card{ border:1px solid var(--line); border-top:3px solid var(--vinya); padding:16px 18px; background:var(--llicorella); }
+  .not-for-card h4{ font-family:'Fraunces', serif; font-size:15.5px; margin:0 0 6px; color:var(--pergami); }
+  .not-for-card p{ font-size:13.5px; color:var(--pergami-dim); margin:0; line-height:1.5; }
+
+  /* ---------- leyenda oficial / propuesta / GPX ---------- */
+  .source-legend{ display:flex; flex-wrap:wrap; gap:8px 16px; margin:14px 0 0; }
+  .source-legend li{ display:flex; align-items:center; gap:7px; font-size:12px; color:var(--pergami-dim); list-style:none; }
+  .source-legend .dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; display:inline-block; }
+  .source-legend .dot.oficial{ background:var(--vinya); }
+  .source-legend .dot.pr{ background:var(--samfaina); }
+  .source-legend .dot.verified{ background:var(--herba); }
+
+  /* ---------- fecha de última revisión ---------- */
+  .last-updated{
+    display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono', monospace;
+    font-size:11px; letter-spacing:0.02em; color:var(--herba); border:1px solid var(--herba);
+    background:rgba(110,120,88,0.1); padding:4px 9px; margin-top:10px; white-space:nowrap;
+  }
+  .last-updated::before{ content:"✓"; font-weight:700; }
+
+  /* ---------- tabla-resumen de las 8 etapas ---------- */
+  .stage-summary-table{ margin:26px 0 34px; border:1px solid var(--line); overflow-x:auto; }
+  .sst-row{
+    display:grid; grid-template-columns:52px 2fr 0.85fr 0.85fr 0.85fr 1fr; gap:0;
+    border-top:1px solid var(--line); min-width:620px;
+  }
+  .sst-row:first-child{ border-top:none; }
+  .sst-row > div{ padding:10px 12px; font-size:13px; display:flex; align-items:center; }
+  .sst-head{ font-family:'JetBrains Mono', monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:0.04em; color:var(--samfaina); background:var(--llicorella-2); }
+  .sst-num{ font-family:'JetBrains Mono', monospace; color:var(--samfaina); font-weight:700; justify-content:center; }
+  .sst-route{ color:var(--pergami-dim); }
+  .sst-diff{ font-weight:600; }
+  .sst-diff.moderada{ color:var(--samfaina); }
+  .sst-diff.exigente{ color:var(--vinya); }
+  .sst-row a.sst-jump{ color:inherit; text-decoration:none; display:contents; cursor:pointer; }
+  .sst-row a.sst-jump:hover > div{ background:rgba(198,146,20,0.06); }
+  @media (max-width:640px){ .sst-row > div{ font-size:12px; padding:8px 8px; } }
 
   /* ---------- falset callout ---------- */
   .falset-callout{ padding:44px 0; border-bottom:1px solid var(--line); }
@@ -764,9 +843,6 @@
   .ad-slot--soci{ width:100%; max-width:1200px; height:220px; }
   .ad-banner{ display:block; width:100%; max-width:1200px; margin:22px auto; line-height:0; }
   .ad-banner img{ display:block; width:100%; height:auto; border:1px solid var(--line); }
-  .ad-banner--essencial{ max-width:1100px; }
-  .ad-banner--etapa{ max-width:760px; }
-  .ad-banner--banner{ max-width:970px; }
   @media (max-width:640px){
     .ad-slot--essencial{ min-height:220px; }
     .ad-slot--etapa{ min-height:200px; }
@@ -823,7 +899,9 @@
     <div>
       <div class="eyebrow" data-i18n="hero.eyebrow">Gran travesía circular · 100% senderista</div>
       <h1 data-i18n-html="hero.h1">19 pueblos del Priorat, <em>unidos a pie</em>.</h1>
+      <span class="hero-version-label" id="hero-label-emotional"></span>
       <p class="lead" data-i18n-html="hero.lead">El Priorat es una tierra dura y solitaria, de laderas imposibles y suelos de llicorella donde la vida siempre ha sido una batalla cuerpo a cuerpo con la roca. <span class="accent">Seguir la ruta de sus 19 pueblos es una experiencia épica</span>: un viaje interior entre viñas de viticultura heroica, ermitas y barrancos silenciosos, donde cada curva del camino te invita a sentir más intensamente el paisaje y a descubrir una espiritualidad hecha de esfuerzo, contemplación y belleza extrema.</p>
+      <span class="hero-version-label" id="hero-label-functional"></span>
       <p class="hero-sub" data-i18n="hero.sub">Circuito propuesto de 8 etapas que aprovecha tramos del GR‑174 y otros senderos señalizados, enlazados mediante caminos rurales y pistas forestales entre los 19 pueblos del Priorat, con Falset como puerta de entrada y salida. No es un itinerario propio homologado ni señalizado de forma continua.</p>
       <div class="hero-quick" aria-label="Resumen rápido">
         <span class="tag" data-i18n="hero.quick1">19 pueblos</span>
@@ -864,18 +942,26 @@
         <span class="eyebrow" data-i18n="terrain.eyebrow">Antes de venir</span>
         <h3 data-i18n="terrain.h">¿Es para ti? Lo esencial en 10 segundos</h3>
         <ul class="tw-list">
-          <li data-i18n-html="terrain.i1"><strong>166,4 km en 8 etapas</strong> (o 53,6 km en 3 etapas) — ruta exigente, llicorella y desniveles fuertes</li>
-          <li data-i18n-html="terrain.iSeason"><strong>Mejor época: abril–junio y septiembre–noviembre.</strong> Evita julio y agosto (35–38&nbsp;°C)</li>
-          <li data-i18n-html="terrain.iAgua"><strong>Agua: 2,5–3&nbsp;L por etapa; 4–5&nbsp;L en las etapas 2 y 5</strong></li>
-          <li data-i18n-html="terrain.i3">Muy poca infraestructura turística <strong>fuera de fin de semana</strong></li>
-          <li data-i18n-html="terrain.iSenal"><strong>Señalización discontinua</strong>: no es un itinerario propio homologado</li>
-          <li data-i18n-html="terrain.iGpx"><strong>Imprescindible</strong> llevar track GPX offline</li>
-          <li><a href="#guia" data-i18n="terrain.link">Ver la guía práctica completa →</a></li>
+          <li class="tw-item tw-item--warn"><span class="tw-icon">!</span><span data-i18n-html="terrain.i1"><strong>166,4 km en 8 etapas</strong> (o 53,6 km en 3 etapas) — ruta exigente, llicorella y desniveles fuertes</span></li>
+          <li class="tw-item tw-item--info"><span class="tw-icon">i</span><span data-i18n-html="terrain.iSeason"><strong>Mejor época: abril–junio y septiembre–noviembre.</strong> Evita julio y agosto (35–38&nbsp;°C)</span></li>
+          <li class="tw-item tw-item--warn"><span class="tw-icon">!</span><span data-i18n-html="terrain.iAgua"><strong>Agua: 2,5–3&nbsp;L por etapa; 4–5&nbsp;L en las etapas 2 y 5</strong></span></li>
+          <li class="tw-item tw-item--warn"><span class="tw-icon">!</span><span data-i18n-html="terrain.i3">Muy poca infraestructura turística <strong>fuera de fin de semana</strong></span></li>
+          <li class="tw-item tw-item--danger"><span class="tw-icon">✕</span><span data-i18n-html="terrain.iSenal"><strong>Señalización discontinua</strong>: no es un itinerario propio homologado</span></li>
+          <li class="tw-item tw-item--danger"><span class="tw-icon">✕</span><span data-i18n-html="terrain.iGpx"><strong>Imprescindible</strong> llevar track GPX offline</span></li>
+          <li class="tw-link"><a href="#guia" data-i18n="terrain.link">Ver la guía práctica completa →</a></li>
         </ul>
       </div>
     </div>
   </div>
 </div>
+
+<section class="not-for" id="para-quien-no-es" aria-labelledby="not-for-title">
+  <div class="wrap">
+    <h2 id="not-for-title"></h2>
+    <p class="lead-note" id="not-for-lead"></p>
+    <div class="not-for-grid" id="not-for-grid"></div>
+  </div>
+</section>
 
 <section class="route-options" id="dos-formas" aria-labelledby="route-options-title">
   <div class="wrap">
@@ -884,11 +970,13 @@
       <article class="option-card">
         <h3 data-i18n="routeopt.fullH">Travessa completa</h3>
         <p data-i18n="routeopt.fullP">166,4&nbsp;km · 8 etapas · circuito cerrado</p>
+        <ul class="option-compare" id="option-compare-full"></ul>
         <a href="#etapas" class="btn btn-primary" data-i18n="routeopt.fullBtn">Ver las 8 etapas</a>
       </article>
       <article class="option-card option-card--accent">
         <h3 data-i18n="routeopt.shortH">Ruta corta</h3>
         <p data-i18n="routeopt.shortP">53,6&nbsp;km · 3 etapas · primera toma de contacto</p>
+        <ul class="option-compare" id="option-compare-short"></ul>
         <a href="#ruta-corta" class="btn btn-secondary" data-i18n="routeopt.shortBtn">Ver ruta corta</a>
       </article>
     </div>
@@ -975,6 +1063,7 @@
       </div>
       <p data-i18n="mapa.p">Ubicación real de los 19 municipios y trazado real de las 8 etapas, verificado con GPX.</p>
     </div>
+    <div class="last-updated" id="last-updated-mapa"></div>
     <div class="map-status">
       <span class="tag verified" data-i18n="mapa.statusVerified">Las 8 etapas verificadas con GPX real</span>
       <span class="tag verified" data-i18n="mapa.statusShortRoute">Ruta corta (3 días): las 3 etapas verificadas con GPX real</span>
@@ -996,7 +1085,10 @@
       </div>
       <p data-i18n="etapas.p">Distancia, desnivel y tiempo reales de las 8 etapas, verificados con GPX.</p>
     </div>
+    <div class="last-updated" id="last-updated-etapas"></div>
+    <ul class="source-legend" id="source-legend"></ul>
     <div class="loop-summary" id="loop-summary"></div>
+    <div class="stage-summary-table" id="stage-summary-table"></div>
     <div class="stage-list" id="stage-list"></div>
     <div class="stage-source" id="stage-source"></div>
   </div>
@@ -1029,6 +1121,7 @@
       </div>
       <p data-i18n="guia.p">Terreno agreste, poca sombra, calor fuerte y muy poca infraestructura turística fuera de fin de semana. Prepárate en consecuencia.</p>
     </div>
+    <div class="last-updated" id="last-updated-guia"></div>
 
     <nav class="guide-subnav">
       <a href="#guia-cuando" data-i18n="guia.nav1">Cuándo ir</a>
@@ -2090,19 +2183,21 @@
 
   // --- Espais publicitaris (mostra per a anunciants) ---
   const AD_SLOTS = {
-    essencial: { type:"image", cls:"ad-banner--essencial", desktop:"fitxa_essencial__760_1_100.jpg", mobile:"fitxa_essencial_320_430_px.jpg", alt:"Cabacés (Priorat) · Catalunya — destí turístic imprescindible" },
-    etapa:     { type:"image", cls:"ad-banner--etapa", desktop:"Targeta_d_etapa_500_x60_.jpg", mobile:"Targeta_d_etapa_320x430.jpg", alt:"Masia El Priorat — allotjament, esmorzars i servei al caminant (Etapa 1)" },
-    banner:    { type:"image", cls:"ad-banner--banner", desktop:"Banner_editorial_970x250.jpg", mobile:"Banner_editorial_320x120.jpg", alt:"Hostal Priorat — el teu lloc per carregar piles i preparar la jornada de demà" },
-    soci1:     { type:"image", desktop:"banner_1200x200.jpg", mobile:"Banner_360x180.jpg", alt:"Oficina de Turisme de Falset" },
-    soci2:     { type:"image", desktop:"banner_1200x200.jpg", mobile:"Banner_360x180.jpg", alt:"Oficina de Turisme de Falset" },
+    essencial: { type:"placeholder", cls:"ad-slot--essencial", label:"Fitxa Essencial", dim:"100% ample ≈ 760–1.100 px · mòbil 100% ample ≈ 320–430 px" },
+    etapa:     { type:"placeholder", cls:"ad-slot--etapa", label:"Targeta d'Etapa", dim:"100% ample columna ≈ 500–760 px · mòbil 100% ample ≈ 320–430 px" },
+    banner:    { type:"placeholder", cls:"ad-slot--banner", label:"Banner editorial", dim:"728 × 180 px (màx. 970 × 250) · mòbil 320 × 120 px (màx. 360 × 140)" },
+    soci1:     { type:"image", desktop:"banner_1200x200.jpg", mobile:"Banner_360x180.jpg", alt:"Oficina de Turisme de Falset", href:"https://www.turismefalset.cat" },
   };
   function adSlotHtml(key){
     const s = AD_SLOTS[key];
     if (s.type === "image"){
-      return `<picture class="ad-banner ${s.cls || ""}" data-ad-slot="${key}">
+      const pic = `<picture class="ad-banner" data-ad-slot="${key}">
         <source media="(max-width:640px)" srcset="${s.mobile}">
         <img src="${s.desktop}" alt="${s.alt}" loading="lazy">
       </picture>`;
+      return s.href
+        ? `<a href="${s.href}" target="_blank" rel="noopener sponsored">${pic}</a>`
+        : pic;
     }
     return `<div class="ad-slot ${s.cls}" data-ad-slot="${key}">
       <div>
@@ -2116,15 +2211,154 @@
     const list = document.getElementById("stage-list");
     if (!list) return;
     const cards = Array.from(list.querySelectorAll(".stage-card"));
-    [[1,"essencial"],[2,"etapa"],[3,"banner"],[5,"soci1"],[6,"soci2"]].forEach(([n,key]) => {
+    [[1,"essencial"],[2,"etapa"],[3,"banner"],[8,"soci1"]].forEach(([n,key]) => {
       const card = cards[n-1];
       if (card) card.insertAdjacentHTML("afterend", adSlotHtml(key));
+    });
+  }
+
+  // --- Contenido autocontenido de las mejoras de la sección (checklist, tabla-resumen,
+  // comparativa de rutas, "para quién no es", leyenda de fuentes y fecha de revisión).
+  // No depende de i18n.js: mismo patrón trilingüe usado en el resto de este archivo
+  // (stageInfo, GPX_TRACKS, etc.), para no romper nada si el diccionario externo no
+  // conoce estas claves nuevas.
+  const LAST_REVIEW = { es:"13 de septiembre de 2026", ca:"13 de setembre de 2026", en:"13 September 2026" };
+  const LAST_REVIEW_LABEL = { es:"Última revisión", ca:"Darrera revisió", en:"Last reviewed" };
+
+  const HERO_LABELS = {
+    emotional:  { es:"En pocas palabras", ca:"En poques paraules", en:"In a few words" },
+    functional: { es:"Lo esencial en datos", ca:"L'essencial en dades", en:"The essentials, in numbers" }
+  };
+
+  const SST_LABELS = {
+    es:{ stage:"Etapa", route:"Recorrido", dist:"Distancia", gain:"Desnivel +", time:"Tiempo", diff:"Dificultad" },
+    ca:{ stage:"Etapa", route:"Recorregut", dist:"Distància", gain:"Desnivell +", time:"Temps", diff:"Dificultat" },
+    en:{ stage:"Stage", route:"Route", dist:"Distance", gain:"Ascent", time:"Time", diff:"Difficulty" }
+  };
+
+  const SOURCE_LEGEND = {
+    es:[["oficial","Tramo oficial (GR‑174 / PR)"],["pr","Enlace propuesto (no homologado)"],["verified","Verificado con GPX real"]],
+    ca:[["oficial","Tram oficial (GR‑174 / PR)"],["pr","Enllaç proposat (no homologat)"],["verified","Verificat amb GPX real"]],
+    en:[["oficial","Official section (GR‑174 / PR)"],["pr","Proposed link (not officially waymarked)"],["verified","Verified with real GPX"]]
+  };
+
+  const OPTION_COMPARE = {
+    full:{
+      es:[["Distancia","166,4 km"],["Etapas","8"],["Días recomendados","7–9"],["Ideal para","Ya tienes experiencia en travesías largas"]],
+      ca:[["Distància","166,4 km"],["Etapes","8"],["Dies recomanats","7–9"],["Ideal per a","Ja tens experiència en travesses llargues"]],
+      en:[["Distance","166.4 km"],["Stages","8"],["Recommended days","7–9"],["Ideal for","Hikers with long-trek experience"]]
+    },
+    short:{
+      es:[["Distancia","53,6 km"],["Etapas","3"],["Días recomendados","3"],["Ideal para","Primera toma de contacto con el Priorat"]],
+      ca:[["Distància","53,6 km"],["Etapes","3"],["Dies recomanats","3"],["Ideal per a","Primer contacte amb el Priorat"]],
+      en:[["Distance","53.6 km"],["Stages","3"],["Recommended days","3"],["Ideal for","A first taste of the Priorat"]]
+    }
+  };
+
+  const NOT_FOR = {
+    es:{ h2:"Para quién NO es esta ruta", lead:"Con la misma honestidad que el resto de la web: esta travesía no es para todo el mundo, y es mejor saberlo antes de salir de casa.",
+      cards:[
+        ["Si es tu primera travesía larga","166 km, 8 etapas exigentes y desniveles de hasta 1.600 m no son un buen debut. Prueba antes la ruta corta (53,6 km, 3 etapas) o unas pocas etapas sueltas."],
+        ["Si buscas hacerla en pleno verano","En julio y agosto el Priorat alcanza 35–38 °C, con muy poca sombra en muchos tramos. El riesgo de golpe de calor es real; mejor abril–junio o septiembre–noviembre."],
+        ["Si no puedes o no quieres navegar offline","La señalización es discontinua y varios tramos no son un itinerario homologado. Sin un track GPX cargado en el móvil (y batería para todo el día) es fácil perderse."],
+        ["Si necesitas servicios cada pocos kilómetros","Fuera de fin de semana hay muy poca infraestructura turística abierta en los pueblos pequeños. Sin reserva y planificación previa de agua y comida, algunas etapas se complican."]
+      ]},
+    ca:{ h2:"Per a qui NO és aquesta ruta", lead:"Amb la mateixa honestedat que la resta de la web: aquesta travessa no és per a tothom, i és millor saber-ho abans de sortir de casa.",
+      cards:[
+        ["Si és la teva primera travessa llarga","166 km, 8 etapes exigents i desnivells de fins a 1.600 m no són un bon debut. Prova abans la ruta curta (53,6 km, 3 etapes) o unes poques etapes soltes."],
+        ["Si vols fer-la a ple estiu","Al juliol i l'agost el Priorat arriba als 35–38 °C, amb molt poca ombra en molts trams. El risc de cop de calor és real; millor abril–juny o setembre–novembre."],
+        ["Si no pots o no vols navegar offline","La senyalització és discontínua i diversos trams no són un itinerari homologat. Sense un track GPX carregat al mòbil (i bateria per a tot el dia) és fàcil perdre's."],
+        ["Si necessites serveis cada pocs quilòmetres","Fora de cap de setmana hi ha molt poca infraestructura turística oberta als pobles petits. Sense reserva i planificació prèvia d'aigua i menjar, algunes etapes es compliquen."]
+      ]},
+    en:{ h2:"Who this route is NOT for", lead:"With the same honesty as the rest of this site: this trek isn't for everyone, and it's better to know that before leaving home.",
+      cards:[
+        ["If this would be your first long trek","166 km, 8 demanding stages and climbs of up to 1,600 m are not a good starting point. Try the short route (53.6 km, 3 stages) or a few standalone stages first."],
+        ["If you plan to hike it in peak summer","In July and August, Priorat reaches 35–38 °C, with very little shade on many stretches. Heatstroke risk is real; April–June or September–November are far safer."],
+        ["If you can't or won't navigate offline","Waymarking is patchy and several stretches aren't an officially waymarked route. Without a GPX track loaded on your phone (and battery for the whole day), it's easy to get lost."],
+        ["If you need services every few kilometres","Outside weekends, very little tourist infrastructure is open in the small villages. Without advance booking and water/food planning, some stages become difficult."]
+      ]}
+  };
+
+  function renderLastUpdated(lang){
+    ["last-updated-mapa","last-updated-etapas","last-updated-guia"].forEach(id=>{
+      const el = document.getElementById(id);
+      if (el) el.textContent = `${LAST_REVIEW_LABEL[lang]}: ${LAST_REVIEW[lang]}`;
+    });
+  }
+
+  function renderHeroLabels(lang){
+    const em = document.getElementById("hero-label-emotional");
+    const fn = document.getElementById("hero-label-functional");
+    if (em) em.textContent = HERO_LABELS.emotional[lang];
+    if (fn) fn.textContent = HERO_LABELS.functional[lang];
+  }
+
+  function renderSourceLegend(lang){
+    const el = document.getElementById("source-legend");
+    if (!el) return;
+    el.innerHTML = SOURCE_LEGEND[lang].map(([cls,label]) =>
+      `<li><span class="dot ${cls}"></span>${label}</li>`
+    ).join("");
+  }
+
+  function renderOptionCompare(lang){
+    const fullEl = document.getElementById("option-compare-full");
+    const shortEl = document.getElementById("option-compare-short");
+    if (fullEl) fullEl.innerHTML = OPTION_COMPARE.full[lang].map(([k,v]) => `<li>${k}<b>${v}</b></li>`).join("");
+    if (shortEl) shortEl.innerHTML = OPTION_COMPARE.short[lang].map(([k,v]) => `<li>${k}<b>${v}</b></li>`).join("");
+  }
+
+  function renderNotFor(lang){
+    const data = NOT_FOR[lang];
+    const h2 = document.getElementById("not-for-title");
+    const lead = document.getElementById("not-for-lead");
+    const grid = document.getElementById("not-for-grid");
+    if (h2) h2.textContent = data.h2;
+    if (lead) lead.textContent = data.lead;
+    if (grid) grid.innerHTML = data.cards.map(([h,p]) =>
+      `<div class="not-for-card"><h4>${h}</h4><p>${p}</p></div>`
+    ).join("");
+  }
+
+  function renderStageSummaryTable(lang){
+    const el = document.getElementById("stage-summary-table");
+    if (!el) return;
+    const l = SST_LABELS[lang];
+    const t = T[lang].etapas;
+    let html = `<div class="sst-row sst-head">
+        <div>${l.stage}</div><div>${l.route}</div><div>${l.dist}</div><div>${l.gain}</div><div>${l.time}</div><div>${l.diff}</div>
+      </div>`;
+    stages.forEach((s, i) => {
+      const info = stageInfo[i];
+      const diffLabel = t[DIFF_LABEL_KEY[info.diff]];
+      html += `<a class="sst-jump" data-jump-stage="${i}">
+        <div class="sst-num">${String(i+1).padStart(2,"0")}</div>
+        <div class="sst-route">${s[0]} → ${s[s.length-1]}</div>
+        <div>${info.distKm.toFixed(1)} km</div>
+        <div>+${info.gainM} m</div>
+        <div>${info.time}</div>
+        <div class="sst-diff ${info.diff}">${diffLabel}</div>
+      </a>`;
+    });
+    el.innerHTML = html;
+    el.querySelectorAll("[data-jump-stage]").forEach(a=>{
+      a.addEventListener("click", () => {
+        const i = Number(a.getAttribute("data-jump-stage"));
+        const card = document.querySelectorAll("#stage-list .stage-card")[i];
+        if (card){ card.open = true; card.scrollIntoView({ behavior:"smooth", block:"start" }); }
+      });
     });
   }
 
   function renderAll(lang){
     currentLang = lang;
     applyStaticText(lang);
+    renderHeroLabels(lang);
+    renderLastUpdated(lang);
+    renderSourceLegend(lang);
+    renderOptionCompare(lang);
+    renderNotFor(lang);
+    renderStageSummaryTable(lang);
     renderStages(lang);
     renderRutaCorta(lang);
     renderMapPopups(lang);
