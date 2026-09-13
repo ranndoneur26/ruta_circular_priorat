@@ -21,8 +21,8 @@
       },
       "hero": {
         "eyebrow": "Gran travesía circular · 100% senderista",
-        "h1": "19 pueblos del Priorat, <em>unidos a pie</em>.",
-        "lead": "El Priorat es una tierra dura y solitaria, de laderas imposibles y suelos de llicorella donde la vida siempre ha sido una batalla cuerpo a cuerpo con la roca. <span class=\"accent\">Seguir el camino de sus 19 pueblos es una experiencia épica</span>: un viaje interior entre viñas de viticultura heroica, ermitas y barrancos silenciosos, donde cada curva del camino te invita a sentir más intensamente el paisaje y a descubrir una espiritualidad hecha de esfuerzo, contemplación y belleza extrema.",
+        "h1": "<span class=\"h1-brand\">El Camí del Prior</span>, 19 pueblos del Priorat, <em>unidos a pie</em>.",
+        "lead": "El Priorat es una tierra dura y solitaria, de laderas imposibles y suelos de llicorella donde la vida siempre ha sido una batalla cuerpo a cuerpo con la roca. <span class=\"accent\">Seguir la ruta de sus 19 pueblos es una experiencia épica</span>: un viaje interior entre viñas de viticultura heroica, ermitas y barrancos silenciosos, donde cada curva del camino te invita a sentir más intensamente el paisaje y a descubrir una espiritualidad hecha de esfuerzo, contemplación y belleza extrema.",
         "sub": "<ul class=\"hero-checkpoints\"><li><span class=\"hero-checkpoint-icon\" aria-hidden=\"true\">i</span>Circuito propuesto de <strong>8 etapas</strong> que aprovecha tramos del GR‑174 y otros senderos señalizados.</li><li><span class=\"hero-checkpoint-icon\" aria-hidden=\"true\">i</span>Enlazados mediante caminos rurales y pistas forestales entre los <strong>19 pueblos</strong> del Priorat, con <strong>Falset</strong> como puerta de entrada y salida.</li><li><span class=\"hero-checkpoint-icon\" aria-hidden=\"true\">i</span>No es un itinerario propio homologado ni señalizado de forma continua.</li></ul>",
         "quick1": "19 pueblos",
         "quick2": "Eje GR‑174",
@@ -61,7 +61,7 @@
         "note": "Las 8 etapas verificadas con GPX real (línea sólida).",
         "popupConn": "Conexión",
         "statusVerified": "Las 8 etapas verificadas con GPX real",
-        "statusShortRoute": "Camino corto (3 días): las 3 etapas verificadas con GPX real",
+        "statusShortRoute": "Ruta corta (3 días): las 3 etapas verificadas con GPX real",
         "legendCorta": "Ruta corta (3 días)",
         "shortRouteLabel": "Ruta corta (3 días) — tramo Bellmunt–Falset, verificado con GPX real"
       },
@@ -142,7 +142,7 @@
       "terrain": {
         "eyebrow": "Antes de venir",
         "h": "¿Es para ti? Lo esencial en 10 segundos",
-        "i1": "<strong>166,4 km en 8 etapas</strong> (o 53,6 km en 3 etapas) — camino exigente, llicorella y desniveles fuertes",
+        "i1": "<strong>166,4 km en 8 etapas</strong> (o 53,6 km en 3 etapas) — ruta exigente, llicorella y desniveles fuertes",
         "iSeason": "<strong>Mejor época: abril–junio y septiembre–noviembre.</strong> Evita julio y agosto (35–38&nbsp;°C)",
         "iAgua": "<strong>Agua: 2,5–3&nbsp;L por etapa; 4–5&nbsp;L en las etapas 2 y 5</strong>",
         "i2": "Poca sombra, calor intenso en época estival",
@@ -186,14 +186,14 @@
       },
       "meta": {
         "title": "Travessa del Priorat · Gran travesía circular a pie",
-        "description": "El camí del Prior a pie, también llamada la ruta de los eremitas o la ruta del silencio: una travesía circular de 166 km y 8 etapas por los 19 pueblos del Priorat, verificada con GPX real."
+        "description": "La Ruta del Priorat a pie, también llamada la ruta de los eremitas o la ruta del silencio: una travesía circular de 166 km y 8 etapas por los 19 pueblos del Priorat, verificada con GPX real."
       },
       "also": {
         "eyebrow": "También conocida como",
         "h2": "El camino del Prior: el camino de los eremitas",
         "p": "Adentrarse en estos 166 kilómetros y 8 etapas es aceptar la invitación a un viaje hacia atrás en el tiempo. Una travesía circular e íntima que traza la misma soledad que antiguamente buscaban los eremitas: un diálogo silencioso entre la piedra caliza, la llicorella cruda y el caminante que busca redescubrir el Priorat más puro, paso a paso y sin huella.",
         "n1": {
-          "h": "El camino del Prior a pie",
+          "h": "La Ruta del Prior a pie",
           "p": "19 pueblos de la Denominació d'Origen Qualificada, unidos a pie por primera vez en un único circuito cerrado."
         },
         "n2": {
@@ -340,7 +340,7 @@
         "h1": "Deja tu huella en la llicorella",
         "p": "19 pueblos. 8 etapas. Una tierra que no perdona la improvisación.",
         "kicker": "Apúntate con tu alias y quedará escrito junto al de quienes también <span class=\"accent\">se han atrevido</span>.",
-        "h2": "El camino del Prior · la ruta de los eremitas"
+        "h2": "La Ruta del Prior · la ruta de los eremitas"
       },
       "notice": {
         "text": "Esto es una inscripción informal, tipo libro de firmas: <strong>no hay verificación de identidad ni de que hayas completado realmente la ruta</strong>. Tu correo se guarda solo por si queremos avisarte de novedades — nunca se muestra en la lista pública."
@@ -391,21 +391,21 @@
         },
         "short": {
           "h": "La escapada esencial: 3 días",
-          "p": "El camino corto de 53,6 km entre Falset y Bellmunt del Priorat, ideal si dispones de menos tiempo pero quieres sentir el silencio de la llicorella."
+          "p": "La ruta corta de 53,6 km entre Falset y Bellmunt del Priorat, ideal si dispones de menos tiempo pero quieres sentir el silencio de la llicorella."
         },
         "signature": "El Silencio en ruta. Priorat."
       },
       "success": {
         "h": "¡Listo!",
-        "p": "Tu alias ya está en la lista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Ver la lista de caminantes →</a><br>Cuando termines el camino, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifícala con 4 fotos →</a>"
+        "p": "Tu alias ya está en la lista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Ver la lista de caminantes →</a><br>Cuando termines la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifícala con 4 fotos →</a>"
       },
       "footer": {
         "left": "El Camí del Prior — Proyecto independiente en fase de contraste territorial y colaboración local.",
         "right": "v1.0 · circuito cerrado, 19 pueblos, 8/8 etapas verificadas"
       },
       "meta": {
-        "title": "Inscripción · El camí del Prior",
-        "description": "Apúntate a la Travessa del Priorat: lEl camino del Prior a pie, la ruta de los eremitas, la ruta del silencio. 166 km, 8 etapas, 19 pueblos."
+        "title": "Inscripción · Travessa del Priorat",
+        "description": "Apúntate a la Travessa del Priorat: la Ruta del Priorat a pie, la ruta de los eremitas, la ruta del silencio. 166 km, 8 etapas, 19 pueblos."
       }
     },
     "certificar": {
@@ -524,7 +524,7 @@
       "meta": {
         "title": "Admin · Travessa del Priorat"
       },
-      "h1": "Camino del Prior — admin",
+      "h1": "Ruta del Prior — admin",
       "sub": "Panel para marcar como verificadas las inscripciones cuyas 4 fotos ya has revisado en tu correo.",
       "hdrList": "Ver caminantes",
       "hdrBack": "← Volver al circuito",
@@ -582,7 +582,7 @@
       },
       "variant": {
         "completo": "Circuito completo",
-        "corta": "Camino corto (3 días)"
+        "corta": "Ruta corta (3 días)"
       }
     }
   },
@@ -600,8 +600,8 @@
       },
       "hero": {
         "eyebrow": "Gran travessa circular · 100% senderista",
-        "h1": "19 pobles del Priorat, <em>units a peu</em>.",
-        "lead": "El Priorat és una terra dura i solitària, de vessants impossibles i sòls de llicorella on la vida sempre ha estat una batalla cos a cos amb la roca. <span class=\"accent\">Seguir El camí dels 19 pobles és una experiència èpica</span>: un viatge interior entre vinyes de viticultura heroica, ermites i barrancs silenciosos, on cada revolt del camí et convida a sentir més intensament el paisatge i a descobrir una espiritualitat feta d'esforç, contemplació i bellesa extrema.",
+        "h1": "<span class=\"h1-brand\">El Camí del Prior</span>, 19 pobles del Priorat, <em>units a peu</em>.",
+        "lead": "El Priorat és una terra dura i solitària, de vessants impossibles i sòls de llicorella on la vida sempre ha estat una batalla cos a cos amb la roca. <span class=\"accent\">Seguir la ruta dels 19 pobles és una experiència èpica</span>: un viatge interior entre vinyes de viticultura heroica, ermites i barrancs silenciosos, on cada revolt del camí et convida a sentir més intensament el paisatge i a descobrir una espiritualitat feta d'esforç, contemplació i bellesa extrema.",
         "sub": "<ul class=\"hero-checkpoints\"><li><span class=\"hero-checkpoint-icon\" aria-hidden=\"true\">i</span>Circuit proposat de <strong>8 etapes</strong> que aprofita trams del GR‑174 i altres senders senyalitzats.</li><li><span class=\"hero-checkpoint-icon\" aria-hidden=\"true\">i</span>Enllaçats mitjançant camins rurals i pistes forestals entre els <strong>19 pobles</strong> del Priorat, amb <strong>Falset</strong> com a porta d'entrada i sortida.</li><li><span class=\"hero-checkpoint-icon\" aria-hidden=\"true\">i</span>No és un itinerari propi homologat ni senyalitzat de manera contínua.</li></ul>",
         "quick1": "19 pobles",
         "quick2": "Eix GR‑174",
@@ -640,9 +640,9 @@
         "note": "Les 8 etapes verificades amb GPX real (línia sòlida).",
         "popupConn": "Connexió",
         "statusVerified": "Les 8 etapes verificades amb GPX real",
-        "statusShortRoute": "Camí curt (3 dies): les 3 etapes verificades amb GPX real",
-        "legendCorta": "Camí curt(3 dies)",
-        "shortRouteLabel": "Camí curt (3 dies) — tram Bellmunt–Falset, verificat amb GPX real"
+        "statusShortRoute": "Ruta curta (3 dies): les 3 etapes verificades amb GPX real",
+        "legendCorta": "Ruta curta (3 dies)",
+        "shortRouteLabel": "Ruta curta (3 dies) — tram Bellmunt–Falset, verificat amb GPX real"
       },
       "etapas": {
         "eyebrow": "Traçat proposat",
@@ -721,7 +721,7 @@
       "terrain": {
         "eyebrow": "Abans de venir",
         "h": "És per a tu? L'essencial en 10 segons",
-        "i1": "<strong>166,4 km en 8 etapes</strong> (o 53,6 km en 3 etapes) — camí exigent, llicorella i desnivells forts",
+        "i1": "<strong>166,4 km en 8 etapes</strong> (o 53,6 km en 3 etapes) — ruta exigent, llicorella i desnivells forts",
         "iSeason": "<strong>Millor època: abril–juny i setembre–novembre.</strong> Evita juliol i agost (35–38&nbsp;°C)",
         "iAgua": "<strong>Aigua: 2,5–3&nbsp;L per etapa; 4–5&nbsp;L a les etapes 2 i 5</strong>",
         "i2": "Poca ombra, calor intensa en època estival",
@@ -735,9 +735,9 @@
         "fullH": "Travessa completa",
         "fullP": "166,4 km · 8 etapes · circuit tancat",
         "fullBtn": "Veure les 8 etapes",
-        "shortH": "Camí curt",
+        "shortH": "Ruta curta",
         "shortP": "53,6 km · 3 etapes · primer contacte",
-        "shortBtn": "Veure camí curt"
+        "shortBtn": "Veure ruta curta"
       },
       "falset": {
         "eyebrow": "Punt d'entrada i sortida",
@@ -760,19 +760,19 @@
         "cta": "Inscriure'm →"
       },
       "footer": {
-        "left": "El camí del Prior — Projecte independent en fase de contrast territorial i col·laboració local.",
+        "left": "Travessa del Priorat — Projecte independent en fase de contrast territorial i col·laboració local.",
         "right": "v1.0 · circuit tancat, 19 pobles, 8/8 etapes verificades"
       },
       "meta": {
         "title": "Travessa del Priorat · Gran travessa circular a peu",
-        "description": "El camí del Prior a peu, també anomenada la ruta dels eremites o la ruta del silenci: una travessa circular de 166 km i 8 etapes pels 19 pobles del Priorat, verificada amb GPX real."
+        "description": "La Ruta del Priorat a peu, també anomenada la ruta dels eremites o la ruta del silenci: una travessa circular de 166 km i 8 etapes pels 19 pobles del Priorat, verificada amb GPX real."
       },
       "also": {
         "eyebrow": "També coneguda com",
         "h2": "El camí del Prior: el camí dels eremites",
         "p": "Endinsar-se en aquests 166 quilòmetres i 8 etapes és acceptar la invitació a un viatge cap a darrere el temps. Una travessa circular i íntima que traça la mateixa solitud que antigament buscaven els eremites: un diàleg silenciós entre la pedra calcària, la llicorella crua i el caminant que busca redescobrir el Priorat més pur, pas a pas i sense petjada.",
         "n1": {
-          "h": "El camí del Prior a peu",
+          "h": "La Ruta del Prior a peu",
           "p": "19 pobles de la Denominació d'Origen Qualificada, units a peu per primera vegada en un únic circuit tancat."
         },
         "n2": {
@@ -783,10 +783,10 @@
       "backToTop": "Tornar amunt",
       "rutacorta": {
         "eyebrow": "Alternativa de 3 dies",
-        "h2": "El Camí curt, 3 etapes",
+        "h2": "Ruta Curta, 3 etapes",
         "p": "Mateix inici que el circuit complet — etapes 1 i 2 — però en arribar a Bellmunt del Priorat, un tercer dia tanca el cercle directament fins a Falset, ja verificat amb GPX real.",
         "day": "Dia",
-        "total": "Total del Camí curt: <strong>{km} km</strong> · +{gain} m / −{loss} m de desnivell acumulat, verificat amb GPX real a les 3 etapes."
+        "total": "Total de la ruta curta: <strong>{km} km</strong> · +{gain} m / −{loss} m de desnivell acumulat, verificat amb GPX real a les 3 etapes."
       }
     },
     "info": {
@@ -863,7 +863,7 @@
           "p": "Els 19 municipis, cadascun una vegada. La travessa completa tal com està descrita a les 8 fitxes d'etapa, verificades amb GPX real."
         },
         "v2": {
-          "label": "Camí curt",
+          "label": "Ruta curta",
           "h": "3 dies",
           "body": "<p>Etapes 1 i 2: Falset → Marçà → Capçanes → els Guiamets → el Masroig → el Molar → Bellmunt del Priorat. El tercer dia tanca el cercle per un tram directe Bellmunt–Falset, ja verificat amb GPX real (14,3 km, dificultat moderada) — <a href=\"index.html#ruta-corta\">veure la fitxa completa de les 3 etapes</a>.</p>\n     <p>Les tres etapes comencen i acaben a Falset, així que no cal transport de tornada.</p>"
         },
@@ -919,7 +919,7 @@
         "h1": "Deixa la teva empremta a la llicorella",
         "p": "19 pobles. 8 etapes. Una terra que no perdona la improvisació.",
         "kicker": "Inscriu-te amb el teu àlies i quedarà escrit junt amb el de qui també <span class=\"accent\">s'hi ha atrevit</span>.",
-        "h2": "El camí del Prior · la ruta dels eremites"
+        "h2": "La Ruta del Prior · la ruta dels eremites"
       },
       "notice": {
         "text": "Això és una inscripció informal, tipus llibre de signatures: <strong>no hi ha verificació d'identitat ni que hagis completat realment la ruta</strong>. El teu correu es guarda només per si volem avisar-te de novetats — mai es mostra a la llista pública."
@@ -970,13 +970,13 @@
         },
         "short": {
           "h": "L'escapada essencial: 3 dies",
-          "p": "El Camí curt de 53,6 km entre Falset i Bellmunt del Priorat, ideal si disposes de menys temps però vols sentir el silenci de la llicorella."
+          "p": "La ruta curta de 53,6 km entre Falset i Bellmunt del Priorat, ideal si disposes de menys temps però vols sentir el silenci de la llicorella."
         },
         "signature": "El Silenci en ruta. Priorat."
       },
       "success": {
         "h": "Fet!",
-        "p": "El teu àlies ja és a la llista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Veure la llista de caminants →</a><br>Quan acabis el camí, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifica-la amb 4 fotos →</a>"
+        "p": "El teu àlies ja és a la llista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Veure la llista de caminants →</a><br>Quan acabis la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifica-la amb 4 fotos →</a>"
       },
       "footer": {
         "left": "El Camí del Prior — Projecte independent en fase de contrast territorial i col·laboració local.",
@@ -984,7 +984,7 @@
       },
       "meta": {
         "title": "Inscripció · Travessa del Priorat",
-        "description": "Inscriu-te a la Travessa del Priorat: la Ruta del Prior a peu, la ruta dels eremites, la ruta del silenci. 166 km, 8 etapes, 19 pobles."
+        "description": "Inscriu-te a la Travessa del Priorat: la Ruta del Priorat a peu, la ruta dels eremites, la ruta del silenci. 166 km, 8 etapes, 19 pobles."
       }
     },
     "certificar": {
@@ -1103,7 +1103,7 @@
       "meta": {
         "title": "Admin · Travessa del Priorat"
       },
-      "h1": "Camí del Prior — admin",
+      "h1": "Ruta del Prior — admin",
       "sub": "Panell per marcar com a verificades les inscripcions les 4 fotos de les quals ja has revisat al teu correu.",
       "hdrList": "Veure caminants",
       "hdrBack": "← Tornar al circuit",
@@ -1179,7 +1179,7 @@
       },
       "hero": {
         "eyebrow": "Great circular crossing · 100% on foot",
-        "h1": "19 villages of Priorat, <em>joined on foot</em>.",
+        "h1": "<span class=\"h1-brand\">El Camí del Prior</span>, 19 villages of Priorat, <em>joined on foot</em>.",
         "lead": "Priorat is a harsh, solitary land, of impossible slopes and llicorella soils where life has always been a hand-to-hand battle with rock. <span class=\"accent\">Walking the route of its 19 villages is an epic experience</span>: an inner journey among vineyards of heroic viticulture, hermitages and silent ravines, where every bend in the path invites you to feel the landscape more intensely and to discover a spirituality made of effort, contemplation and extreme beauty.",
         "sub": "<ul class=\"hero-checkpoints\"><li><span class=\"hero-checkpoint-icon\" aria-hidden=\"true\">i</span>A proposed <strong>8-stage circuit</strong> that uses stretches of the GR‑174 and other waymarked trails.</li><li><span class=\"hero-checkpoint-icon\" aria-hidden=\"true\">i</span>Linked by rural paths and forest tracks between Priorat's <strong>19 villages</strong>, with <strong>Falset</strong> as the entry and exit point.</li><li><span class=\"hero-checkpoint-icon\" aria-hidden=\"true\">i</span>It is not its own approved route, nor is it waymarked continuously.</li></ul>",
         "quick1": "19 villages",
@@ -1682,7 +1682,7 @@
       "meta": {
         "title": "Admin · Travessa del Priorat"
       },
-      "h1": "Camí del Prior — admin",
+      "h1": "Ruta del Prior — admin",
       "sub": "Panel to mark as verified the sign-ups whose 4 photos you've already reviewed by email.",
       "hdrList": "See walkers",
       "hdrBack": "← Back to the circuit",
