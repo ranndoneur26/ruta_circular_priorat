@@ -216,8 +216,24 @@
   }
   .hero .lead + .hero-version-label{ margin-top:14px; }
   .hero-sub{
-    margin-top:16px; max-width:52ch; font-family:'JetBrains Mono', monospace;
-    font-size:12.5px; line-height:1.6; letter-spacing:0.01em; color:var(--pergami-dim);
+    margin-top:16px; max-width:52ch;
+  }
+  .hero-checkpoints{
+    list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;
+  }
+  .hero-checkpoints li{
+    display:flex; align-items:flex-start; gap:12px;
+    background:rgba(110,120,88,0.12); border:1px solid rgba(110,120,88,0.4);
+    border-radius:4px; padding:10px 14px;
+    font-family:'JetBrains Mono', monospace; font-size:12.5px; line-height:1.55;
+    letter-spacing:0.01em; color:var(--pergami-dim);
+  }
+  .hero-checkpoints li strong{ color:var(--pergami); font-weight:600; }
+  .hero-checkpoint-icon{
+    flex-shrink:0; width:20px; height:20px; margin-top:1px; border-radius:50%;
+    background:var(--herba); color:var(--pergami);
+    font-family:'Fraunces', serif; font-style:italic; font-weight:700; font-size:12px;
+    display:flex; align-items:center; justify-content:center;
   }
   .hero-quick{ display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
   .stat-row{ display:flex; gap:0; margin-top:36px; border-top:1px solid var(--line); }
@@ -894,7 +910,11 @@
       <span class="hero-version-label" id="hero-label-emotional"></span>
       <p class="lead" data-i18n-html="hero.lead">El Priorat es una tierra dura y solitaria, de laderas imposibles y suelos de llicorella donde la vida siempre ha sido una batalla cuerpo a cuerpo con la roca. <span class="accent">Seguir la ruta de sus 19 pueblos es una experiencia épica</span>: un viaje interior entre viñas de viticultura heroica, ermitas y barrancos silenciosos, donde cada curva del camino te invita a sentir más intensamente el paisaje y a descubrir una espiritualidad hecha de esfuerzo, contemplación y belleza extrema.</p>
       <span class="hero-version-label" id="hero-label-functional"></span>
-      <p class="hero-sub" data-i18n="hero.sub">Circuito propuesto de 8 etapas que aprovecha tramos del GR‑174 y otros senderos señalizados, enlazados mediante caminos rurales y pistas forestales entre los 19 pueblos del Priorat, con Falset como puerta de entrada y salida. No es un itinerario propio homologado ni señalizado de forma continua.</p>
+      <div class="hero-sub" data-i18n-html="hero.sub"><ul class="hero-checkpoints">
+        <li><span class="hero-checkpoint-icon" aria-hidden="true">i</span>Circuito propuesto de <strong>8 etapas</strong> que aprovecha tramos del GR‑174 y otros senderos señalizados.</li>
+        <li><span class="hero-checkpoint-icon" aria-hidden="true">i</span>Enlazados mediante caminos rurales y pistas forestales entre los <strong>19 pueblos</strong> del Priorat, con <strong>Falset</strong> como puerta de entrada y salida.</li>
+        <li><span class="hero-checkpoint-icon" aria-hidden="true">i</span>No es un itinerario propio homologado ni señalizado de forma continua.</li>
+      </ul></div>
       <div class="hero-quick" aria-label="Resumen rápido">
         <span class="tag" data-i18n="hero.quick1">19 pueblos</span>
         <span class="tag" data-i18n="hero.quick2">Eje GR‑174</span>
