@@ -760,7 +760,7 @@
         "cta": "Inscriure'm →"
       },
       "footer": {
-        "left": "Camí del Prior — Projecte independent en fase de contrast territorial i col·laboració local.",
+        "left": "El Camí del Prior — Projecte independent en fase de contrast territorial i col·laboració local.",
         "right": "v1.0 · circuit tancat, 19 pobles, 8/8 etapes verificades"
       },
       "meta": {
