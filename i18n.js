@@ -181,7 +181,7 @@
         "cta": "Inscribirme →"
       },
       "footer": {
-        "left": "Travessa del Priorat — las 8 etapas verificadas sobre el terreno con GPX real.",
+        "left": "Travessa del Priorat — Proyecto independiente en fase de contraste territorial y colaboración local.",
         "right": "v1.0 · circuito cerrado, 19 pueblos, 8/8 etapas verificadas"
       },
       "meta": {
@@ -400,7 +400,7 @@
         "p": "Tu alias ya está en la lista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Ver la lista de caminantes →</a><br>Cuando termines la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifícala con 4 fotos →</a>"
       },
       "footer": {
-        "left": "El Camí del Prior — las 8 etapas verificadas sobre el terreno con GPX real.",
+        "left": "El Camí del Prior — Proyecto independiente en fase de contraste territorial y colaboración local.",
         "right": "v1.0 · circuito cerrado, 19 pueblos, 8/8 etapas verificadas"
       },
       "meta": {
@@ -760,7 +760,7 @@
         "cta": "Inscriure'm →"
       },
       "footer": {
-        "left": "Travessa del Priorat — les 8 etapes verificades sobre el terreny amb GPX real.",
+        "left": "Travessa del Priorat — Projecte independent en fase de contrast territorial i col·laboració local.",
         "right": "v1.0 · circuit tancat, 19 pobles, 8/8 etapes verificades"
       },
       "meta": {
@@ -979,7 +979,7 @@
         "p": "El teu àlies ja és a la llista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Veure la llista de caminants →</a><br>Quan acabis la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifica-la amb 4 fotos →</a>"
       },
       "footer": {
-        "left": "El Camí del Prior — les 8 etapes verificades sobre el terreny amb GPX real.",
+        "left": "El Camí del Prior — Projecte independent en fase de contrast territorial i col·laboració local.",
         "right": "v1.0 · circuit tancat, 19 pobles, 8/8 etapes verificades"
       },
       "meta": {
@@ -1339,7 +1339,7 @@
         "cta": "Sign me up →"
       },
       "footer": {
-        "left": "Travessa del Priorat — all 8 stages verified on the ground with real GPX.",
+        "left": "Travessa del Priorat — Independent project in a phase of on-the-ground verification and local collaboration.",
         "right": "v1.0 · closed loop, 19 villages, 8/8 stages verified"
       },
       "meta": {
@@ -1558,7 +1558,7 @@
         "p": "Your alias is now on the list. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">See the list of walkers →</a><br>Once you finish the route, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certify it with 4 photos →</a>"
       },
       "footer": {
-        "left": "El Camí del Prior — all 8 stages verified on the ground with real GPX.",
+        "left": "El Camí del Prior — Independent project in a phase of on-the-ground verification and local collaboration.",
         "right": "v1.0 · closed loop, 19 villages, 8/8 stages verified"
       },
       "meta": {
