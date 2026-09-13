@@ -764,6 +764,9 @@
   .ad-slot--soci{ width:100%; max-width:1200px; height:220px; }
   .ad-banner{ display:block; width:100%; max-width:1200px; margin:22px auto; line-height:0; }
   .ad-banner img{ display:block; width:100%; height:auto; border:1px solid var(--line); }
+  .ad-banner--essencial{ max-width:1100px; }
+  .ad-banner--etapa{ max-width:760px; }
+  .ad-banner--banner{ max-width:970px; }
   @media (max-width:640px){
     .ad-slot--essencial{ min-height:220px; }
     .ad-slot--etapa{ min-height:200px; }
@@ -2087,21 +2090,19 @@
 
   // --- Espais publicitaris (mostra per a anunciants) ---
   const AD_SLOTS = {
-    essencial: { type:"placeholder", cls:"ad-slot--essencial", label:"Fitxa Essencial", dim:"100% ample ≈ 760–1.100 px · mòbil 100% ample ≈ 320–430 px" },
-    etapa:     { type:"placeholder", cls:"ad-slot--etapa", label:"Targeta d'Etapa", dim:"100% ample columna ≈ 500–760 px · mòbil 100% ample ≈ 320–430 px" },
-    banner:    { type:"placeholder", cls:"ad-slot--banner", label:"Banner editorial", dim:"728 × 180 px (màx. 970 × 250) · mòbil 320 × 120 px (màx. 360 × 140)" },
-    soci1:     { type:"image", desktop:"banner_1200x200.jpg", mobile:"Banner_360x180.jpg", alt:"Oficina de Turisme de Falset", href:"https://www.turismefalset.cat" },
+    essencial: { type:"image", cls:"ad-banner--essencial", desktop:"fitxa_essencial__760_1_100.jpg", mobile:"fitxa_essencial_320_430_px.jpg", alt:"Cabacés (Priorat) · Catalunya — destí turístic imprescindible" },
+    etapa:     { type:"image", cls:"ad-banner--etapa", desktop:"Targeta_d_etapa_500_x60_.jpg", mobile:"Targeta_d_etapa_320x430.jpg", alt:"Masia El Priorat — allotjament, esmorzars i servei al caminant (Etapa 1)" },
+    banner:    { type:"image", cls:"ad-banner--banner", desktop:"Banner_editorial_970x250.jpg", mobile:"Banner_editorial_320x120.jpg", alt:"Hostal Priorat — el teu lloc per carregar piles i preparar la jornada de demà" },
+    soci1:     { type:"image", desktop:"banner_1200x200.jpg", mobile:"Banner_360x180.jpg", alt:"Oficina de Turisme de Falset" },
+    soci2:     { type:"image", desktop:"banner_1200x200.jpg", mobile:"Banner_360x180.jpg", alt:"Oficina de Turisme de Falset" },
   };
   function adSlotHtml(key){
     const s = AD_SLOTS[key];
     if (s.type === "image"){
-      const pic = `<picture class="ad-banner" data-ad-slot="${key}">
+      return `<picture class="ad-banner ${s.cls || ""}" data-ad-slot="${key}">
         <source media="(max-width:640px)" srcset="${s.mobile}">
         <img src="${s.desktop}" alt="${s.alt}" loading="lazy">
       </picture>`;
-      return s.href
-        ? `<a href="${s.href}" target="_blank" rel="noopener sponsored">${pic}</a>`
-        : pic;
     }
     return `<div class="ad-slot ${s.cls}" data-ad-slot="${key}">
       <div>
@@ -2115,7 +2116,7 @@
     const list = document.getElementById("stage-list");
     if (!list) return;
     const cards = Array.from(list.querySelectorAll(".stage-card"));
-    [[1,"essencial"],[2,"etapa"],[3,"banner"],[8,"soci1"]].forEach(([n,key]) => {
+    [[1,"essencial"],[2,"etapa"],[3,"banner"],[5,"soci1"],[6,"soci2"]].forEach(([n,key]) => {
       const card = cards[n-1];
       if (card) card.insertAdjacentHTML("afterend", adSlotHtml(key));
     });
