@@ -97,7 +97,7 @@
       },
       "guia": {
         "eyebrow": "Preparación",
-        "h2": "Guía práctica del peregrino",
+        "h2": "Guía práctica del caminante",
         "p": "Terreno agreste, poca sombra, calor fuerte y muy poca infraestructura turística fuera de fin de semana. Prepárate en consecuencia.",
         "nav1": "Cuándo ir",
         "nav2": "Cómo llegar",
@@ -276,7 +276,7 @@
       },
       "servicios": {
         "eyebrow": "Planea tu paso",
-        "h2": "Servicios para el peregrino",
+        "h2": "Servicios para el caminante",
         "p": "No todo el mundo tiene 8 días. Estas son las formas realistas de recorrer el circuito, según el tiempo que tengas.",
         "v1": {
           "label": "Circuito completo",
@@ -379,7 +379,7 @@
         "mensajePlaceholder": "Una frase corta — se mostrará junto a tu alias"
       },
       "manifest": {
-        "eyebrow": "El código del peregrino",
+        "eyebrow": "El código del caminante",
         "intro": "Esta aventura no es ninguna carrera contra el cronómetro, sino un viaje para el alma.",
         "prep": {
           "h": "Preparación y libertad de ruta",
@@ -676,7 +676,7 @@
       },
       "guia": {
         "eyebrow": "Preparació",
-        "h2": "Guia pràctica del pelegrí",
+        "h2": "Guia pràctica del caminant",
         "p": "Terreny agrest, poca ombra, calor forta i molt poca infraestructura turística fora de cap de setmana. Prepara't en conseqüència.",
         "nav1": "Quan anar-hi",
         "nav2": "Com arribar-hi",
@@ -855,7 +855,7 @@
       },
       "servicios": {
         "eyebrow": "Planifica el teu pas",
-        "h2": "Serveis per al pelegrí",
+        "h2": "Serveis per al caminant",
         "p": "No tothom té 8 dies. Aquestes són les formes realistes de recórrer el circuit, segons el temps que tinguis.",
         "v1": {
           "label": "Circuit complet",
@@ -958,7 +958,7 @@
         "mensajePlaceholder": "Una frase curta — es mostrarà al costat del teu àlies"
       },
       "manifest": {
-        "eyebrow": "El codi del pelegrí",
+        "eyebrow": "El codi del caminant",
         "intro": "Aquesta aventura no és cap carrera contra el cronòmetre, sinó un viatge per a l'ànima.",
         "prep": {
           "h": "Preparació i llibertat de ruta",
@@ -1255,7 +1255,7 @@
       },
       "guia": {
         "eyebrow": "Preparation",
-        "h2": "Practical guide for the pilgrim",
+        "h2": "Practical guide for the walker",
         "p": "Rugged terrain, little shade, strong heat and very little tourist infrastructure outside weekends. Prepare accordingly.",
         "nav1": "When to go",
         "nav2": "How to get there",
@@ -1434,7 +1434,7 @@
       },
       "servicios": {
         "eyebrow": "Plan your trip",
-        "h2": "Services for the pilgrim",
+        "h2": "Services for the walker",
         "p": "Not everyone has 8 days. These are the realistic ways to cover the circuit, depending on how much time you have.",
         "v1": {
           "label": "Full circuit",
@@ -1537,7 +1537,7 @@
         "mensajePlaceholder": "A short line — shown next to your alias"
       },
       "manifest": {
-        "eyebrow": "The pilgrim's code",
+        "eyebrow": "The walker's code",
         "intro": "This adventure is no race against the clock, but a journey for the soul.",
         "prep": {
           "h": "Preparation and route freedom",
