@@ -816,8 +816,29 @@
   .guide-block ul li::before{ content:"·"; position:absolute; left:0; color:var(--samfaina); font-weight:700; }
   .guide-block .g-warn{ border-left:2px solid var(--vinya); padding:4px 0 4px 16px; margin:16px 0; }
   .guide-block .g-warn p{ margin:0; color:var(--pergami); font-size:14px; }
-  .transport-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:18px; }
-  @media (max-width:700px){ .transport-grid{ grid-template-columns:1fr; } }
+  .transport-accordion{ margin-top:18px; border-top:1px solid var(--line); }
+  .transport-acc-group{ border-bottom:1px solid var(--line); }
+  .transport-acc-summary{
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:18px 4px; margin:0 -4px; cursor:pointer; list-style:none;
+    border-left:3px solid transparent; transition:background-color 0.18s ease, border-color 0.18s ease;
+  }
+  .transport-acc-summary::-webkit-details-marker{ display:none; }
+  .transport-acc-summary:hover, .transport-acc-summary:focus-visible{
+    background:rgba(226,169,74,0.08); border-left-color:var(--samfaina-soft);
+  }
+  .transport-acc-summary h4{ margin:0; font-size:17px; font-family:'Fraunces', serif; font-weight:600; }
+  .transport-acc-body{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:1px;
+    background:var(--line); border-top:1px solid var(--line);
+  }
+  @media (max-width:700px){ .transport-acc-body{ grid-template-columns:1fr; } }
+  .transport-acc-group[open] .stage-toggle-icon{ transform:rotate(45deg); animation-play-state:paused; color:var(--samfaina); }
+  .transport-acc-group[open] .transport-acc-summary:hover .stage-toggle-icon,
+  .transport-acc-group[open] .transport-acc-summary:focus-visible .stage-toggle-icon{ transform:rotate(45deg) scale(1.2); }
+  .transport-acc-summary:hover .stage-toggle-icon, .transport-acc-summary:focus-visible .stage-toggle-icon{
+    transform:scale(1.2); animation-play-state:paused; color:var(--samfaina-soft);
+  }
   .transport-item{ background:var(--llicorella-2); padding:20px 22px; }
   .transport-item h4{ margin:0 0 6px; font-size:14.5px; font-family:'Public Sans'; font-weight:600; }
   .transport-item .tsub{ font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--samfaina); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px; display:block; }
@@ -1155,7 +1176,7 @@
     <div class="guide-block" id="guia-llegar">
       <h3><span class="gnum">02</span> <span data-i18n="guia.llegar.h">Cómo llegar</span></h3>
       <p data-i18n="guia.llegar.intro">Falset es el nudo del circuito y el mejor punto de entrada y salida. Así se llega:</p>
-      <div class="transport-grid" id="transport-grid"></div>
+      <div class="transport-accordion" id="transport-grid"></div>
     </div>
 
     <div class="guide-block" id="guia-agua">
@@ -1581,23 +1602,35 @@
     en: { tren:"Train", bus:"Bus", coche:"Car", avion:"Plane", taxi:"Taxi" },
   };
 
+  const TRANSPORT_CAT_ORDER = ["coche", "bus", "avion", "tren", "taxi"];
+
   function renderTransport(lang){
     const grid = document.getElementById("transport-grid");
     if (!grid) return;
-    grid.innerHTML = TRANSPORT_ITEMS.map(it => {
-      const note = lang === "ca" ? it.noteCa : lang === "en" ? it.noteEn : it.noteEs;
-      const title = lang === "ca" ? (it.titleCa || it.title) : lang === "en" ? (it.titleEn || it.title) : it.title;
-      const webLabel = lang === "ca" ? (it.webLabelCa || it.webLabel) : lang === "en" ? (it.webLabelEn || it.webLabel) : it.webLabel;
-      const catLabel = (TRANSPORT_CAT_LABELS[lang] || TRANSPORT_CAT_LABELS.es)[it.cat] || it.cat;
-      const phoneHtml = it.phone ? `<p><a href="tel:+34${it.phone.replace(/\s/g,'')}">${it.phone}</a></p>` : "";
-      const webHtml = it.web ? `<p><a href="${it.web}" target="_blank" rel="noopener">${webLabel || it.web.replace(/^https?:\/\//,'')}</a></p>` : "";
-      return `<div class="transport-item">
-        <span class="tsub">${catLabel}</span>
-        <h4>${title}</h4>
-        <p>${note}</p>
-        ${phoneHtml}${webHtml}
-      </div>`;
-    }).join("");
+    const catLabels = TRANSPORT_CAT_LABELS[lang] || TRANSPORT_CAT_LABELS.es;
+    grid.innerHTML = TRANSPORT_CAT_ORDER
+      .filter(cat => TRANSPORT_ITEMS.some(it => it.cat === cat))
+      .map(cat => {
+        const itemsHtml = TRANSPORT_ITEMS.filter(it => it.cat === cat).map(it => {
+          const note = lang === "ca" ? it.noteCa : lang === "en" ? it.noteEn : it.noteEs;
+          const title = lang === "ca" ? (it.titleCa || it.title) : lang === "en" ? (it.titleEn || it.title) : it.title;
+          const webLabel = lang === "ca" ? (it.webLabelCa || it.webLabel) : lang === "en" ? (it.webLabelEn || it.webLabel) : it.webLabel;
+          const phoneHtml = it.phone ? `<p><a href="tel:+34${it.phone.replace(/\s/g,'')}">${it.phone}</a></p>` : "";
+          const webHtml = it.web ? `<p><a href="${it.web}" target="_blank" rel="noopener">${webLabel || it.web.replace(/^https?:\/\//,'')}</a></p>` : "";
+          return `<div class="transport-item">
+            <h4>${title}</h4>
+            <p>${note}</p>
+            ${phoneHtml}${webHtml}
+          </div>`;
+        }).join("");
+        return `<details class="transport-acc-group">
+          <summary class="transport-acc-summary">
+            <h4>${catLabels[cat] || cat}</h4>
+            <span class="stage-toggle-icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="transport-acc-body">${itemsHtml}</div>
+        </details>`;
+      }).join("");
   }
 
   function renderKit(lang){
