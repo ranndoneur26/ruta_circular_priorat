@@ -783,7 +783,7 @@
       "backToTop": "Tornar amunt",
       "rutacorta": {
         "eyebrow": "Alternativa de 3 dies",
-        "h2": "Ruta Curta, 3 etapes",
+        "h2": "Camí curt, 3 etapes",
         "p": "Mateix inici que el circuit complet — etapes 1 i 2 — però en arribar a Bellmunt del Priorat, un tercer dia tanca el cercle directament fins a Falset, ja verificat amb GPX real.",
         "day": "Dia",
         "total": "Total de la ruta curta: <strong>{km} km</strong> · +{gain} m / −{loss} m de desnivell acumulat, verificat amb GPX real a les 3 etapes."
