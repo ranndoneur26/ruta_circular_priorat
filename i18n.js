@@ -181,7 +181,7 @@
         "cta": "Inscribirme →"
       },
       "footer": {
-        "left": "Travessa del Priorat — Proyecto independiente en fase de contraste territorial y colaboración local.",
+        "left": "Camí del Prior — Proyecto independiente en fase de contraste territorial y colaboración local.",
         "right": "v1.0 · circuito cerrado, 19 pueblos, 8/8 etapas verificadas"
       },
       "meta": {
@@ -760,7 +760,7 @@
         "cta": "Inscriure'm →"
       },
       "footer": {
-        "left": "Travessa del Priorat — Projecte independent en fase de contrast territorial i col·laboració local.",
+        "left": "Camí del Prior — Projecte independent en fase de contrast territorial i col·laboració local.",
         "right": "v1.0 · circuit tancat, 19 pobles, 8/8 etapes verificades"
       },
       "meta": {
@@ -1339,7 +1339,7 @@
         "cta": "Sign me up →"
       },
       "footer": {
-        "left": "Travessa del Priorat — Independent project in a phase of on-the-ground verification and local collaboration.",
+        "left": "Camí del Prior — Independent project in a phase of on-the-ground verification and local collaboration.",
         "right": "v1.0 · closed loop, 19 villages, 8/8 stages verified"
       },
       "meta": {
