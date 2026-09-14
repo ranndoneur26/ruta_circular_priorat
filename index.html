@@ -219,6 +219,8 @@
   .hero-sub{
     margin-top:16px; max-width:52ch;
   }
+  .hero-map-inline{ margin:28px 0; max-width:640px; }
+  .hero-map-inline .section-head{ margin-bottom:20px; }
   .hero-checkpoints{
     list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;
   }
@@ -230,6 +232,7 @@
     letter-spacing:0.01em; color:var(--pergami-dim);
   }
   .hero-checkpoints li strong{ color:var(--pergami); font-weight:600; }
+  .hero-checkpoints li .ck-text{ flex:1 1 auto; min-width:0; }
   .hero-checkpoint-icon{
     flex-shrink:0; width:20px; height:20px; margin-top:1px; border-radius:50%;
     background:var(--herba); color:var(--pergami);
@@ -948,11 +951,29 @@
       <h1 data-i18n-html="hero.h1"><span class="h1-brand">El Camí del Prior</span>, 19 pueblos del Priorat, <em>unidos a pie</em>.</h1>
       <span class="hero-version-label" id="hero-label-emotional"></span>
       <p class="lead" data-i18n-html="hero.lead">El Priorat es una tierra dura y solitaria, de laderas imposibles y suelos de llicorella donde la vida siempre ha sido una batalla cuerpo a cuerpo con la roca. <span class="accent">Seguir la ruta de sus 19 pueblos es una experiencia épica</span>: un viaje interior entre viñas de viticultura heroica, ermitas y barrancos silenciosos, donde cada curva del camino te invita a sentir más intensamente el paisaje y a descubrir una espiritualidad hecha de esfuerzo, contemplación y belleza extrema.</p>
+      <div class="hero-map-inline" id="mapa">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="mapa.h2">El mapa</h2>
+          </div>
+          <p data-i18n="mapa.p">Ubicación real de los 19 municipios y trazado real de las 8 etapas, verificado con GPX.</p>
+        </div>
+        <div class="last-updated" id="last-updated-mapa"></div>
+        <div class="map-status">
+          <span class="tag verified" data-i18n="mapa.statusVerified">Las 8 etapas verificadas con GPX real</span>
+          <span class="tag verified" data-i18n="mapa.statusShortRoute">Ruta corta (3 días): las 3 etapas verificadas con GPX real</span>
+        </div>
+        <div id="map"></div>
+        <div class="map-caption">
+          <span><span class="dot" style="background:var(--vinya)"></span><span data-i18n="mapa.legendGr">Nudo GR-174</span> &nbsp; <span class="dot" style="background:var(--samfaina)"></span><span data-i18n="mapa.legendPr">Municipio</span> &nbsp; <span class="dot" style="background:#ffffff;border:1px solid var(--line);"></span><span data-i18n="mapa.legendCorta">Ruta corta (3 días)</span></span>
+          <span data-i18n="mapa.note">Las 8 etapas verificadas con GPX real (línea sólida).</span>
+        </div>
+      </div>
       <span class="hero-version-label" id="hero-label-functional"></span>
       <div class="hero-sub" data-i18n-html="hero.sub"><ul class="hero-checkpoints">
-        <li><span class="hero-checkpoint-icon" aria-hidden="true">i</span>Circuito propuesto de <strong>8 etapas</strong> que aprovecha tramos del GR‑174 y otros senderos señalizados.</li>
-        <li><span class="hero-checkpoint-icon" aria-hidden="true">i</span>Enlazados mediante caminos rurales y pistas forestales entre los <strong>19 pueblos</strong> del Priorat, con <strong>Falset</strong> como puerta de entrada y salida.</li>
-        <li><span class="hero-checkpoint-icon" aria-hidden="true">i</span>No es un itinerario propio homologado ni señalizado de forma continua.</li>
+        <li><span class="hero-checkpoint-icon" aria-hidden="true">i</span><span class="ck-text">Circuito propuesto de <strong>8 etapas</strong> que aprovecha tramos del GR‑174 y otros senderos señalizados.</span></li>
+        <li><span class="hero-checkpoint-icon" aria-hidden="true">i</span><span class="ck-text">Enlazados mediante caminos rurales y pistas forestales entre los <strong>19 pueblos</strong> del Priorat, con <strong>Falset</strong> como puerta de entrada y salida.</span></li>
+        <li><span class="hero-checkpoint-icon" aria-hidden="true">i</span><span class="ck-text">No es un itinerario propio homologado ni señalizado de forma continua.</span></li>
       </ul></div>
       <div class="hero-quick" aria-label="Resumen rápido">
         <span class="tag" data-i18n="hero.quick1">19 pueblos</span>
@@ -1105,28 +1126,6 @@
   </div>
 </div>
 
-<section id="mapa" class="reveal">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <div class="eyebrow" data-i18n="mapa.eyebrow">Primera fase interactiva</div>
-        <h2 data-i18n="mapa.h2">El mapa</h2>
-      </div>
-      <p data-i18n="mapa.p">Ubicación real de los 19 municipios y trazado real de las 8 etapas, verificado con GPX.</p>
-    </div>
-    <div class="last-updated" id="last-updated-mapa"></div>
-    <div class="map-status">
-      <span class="tag verified" data-i18n="mapa.statusVerified">Las 8 etapas verificadas con GPX real</span>
-      <span class="tag verified" data-i18n="mapa.statusShortRoute">Ruta corta (3 días): las 3 etapas verificadas con GPX real</span>
-    </div>
-    <div id="map"></div>
-    <div class="map-caption">
-      <span><span class="dot" style="background:var(--vinya)"></span><span data-i18n="mapa.legendGr">Nudo GR-174</span> &nbsp; <span class="dot" style="background:var(--samfaina)"></span><span data-i18n="mapa.legendPr">Municipio</span> &nbsp; <span class="dot" style="background:#ffffff;border:1px solid var(--line);"></span><span data-i18n="mapa.legendCorta">Ruta corta (3 días)</span></span>
-      <span data-i18n="mapa.note">Las 8 etapas verificadas con GPX real (línea sólida).</span>
-    </div>
-  </div>
-</section>
-
 <section id="etapas" class="dark-alt reveal">
   <div class="wrap">
     <div class="section-head">
@@ -1172,18 +1171,6 @@
       </div>
       <p data-i18n="guia.p">Terreno agreste, poca sombra, calor fuerte y muy poca infraestructura turística fuera de fin de semana. Prepárate en consecuencia.</p>
     </div>
-    <div class="last-updated" id="last-updated-guia"></div>
-
-    <nav class="guide-subnav">
-      <a href="#guia-cuando" data-i18n="guia.nav1">Cuándo ir</a>
-      <a href="#guia-llegar" data-i18n="guia.nav2">Cómo llegar</a>
-      <a href="#guia-agua" data-i18n="guia.nav3">Agua</a>
-      <a href="#guia-comida" data-i18n="guia.nav4">Comida</a>
-      <a href="#guia-calor" data-i18n="guia.nav5">Calor</a>
-      <a href="#guia-terreno" data-i18n="guia.nav6">Terreno y calzado</a>
-      <a href="#guia-equipo" data-i18n="guia.nav7">Equipo</a>
-      <a href="#guia-gpx" data-i18n="guia.nav8">Usar los tracks GPX</a>
-    </nav>
 
     <details class="guide-block" id="guia-cuando">
       <summary class="guide-summary">
@@ -2380,7 +2367,7 @@
   };
 
   function renderLastUpdated(lang){
-    ["last-updated-mapa","last-updated-etapas","last-updated-guia"].forEach(id=>{
+    ["last-updated-mapa","last-updated-etapas"].forEach(id=>{
       const el = document.getElementById(id);
       if (el) el.textContent = `${LAST_REVIEW_LABEL[lang]}: ${LAST_REVIEW[lang]}`;
     });
