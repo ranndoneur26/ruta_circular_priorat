@@ -508,6 +508,10 @@
         "p": "Sé la primera persona en dejar su alias escrito en esta lista.",
         "cta": "Inscribirme →"
       },
+      "emptyFiltered": {
+        "h": "Ningún caminante coincide",
+        "p": "O bien no hay resultados para tu búsqueda, o bien todavía no se ha verificado a nadie con estos criterios."
+      },
       "pagination": {
         "prev": "← Anterior",
         "next": "Siguiente →",
@@ -1087,6 +1091,10 @@
         "p": "Sigues la primera persona a deixar el teu àlies escrit en aquesta llista.",
         "cta": "Inscriure'm →"
       },
+      "emptyFiltered": {
+        "h": "Cap caminant coincideix",
+        "p": "O bé no hi ha resultats per a la teva cerca, o bé encara no s'ha verificat ningú amb aquests criteris."
+      },
       "pagination": {
         "prev": "← Anterior",
         "next": "Següent →",
@@ -1665,6 +1673,10 @@
         "h": "No one has signed up yet",
         "p": "Be the first to leave your alias written on this list.",
         "cta": "Sign up →"
+      },
+      "emptyFiltered": {
+        "h": "No walkers match",
+        "p": "Either there are no results for your search, or no one has been verified yet under these criteria."
       },
       "pagination": {
         "prev": "← Previous",

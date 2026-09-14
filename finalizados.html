@@ -448,11 +448,12 @@
     }
 
     let visible = allEntries.filter(w => {
+      const isVerified = !!w.verified;
       const matchesSearch = !searchTerm ||
         (w.alias||"").toLowerCase().includes(searchTerm) ||
         (w.origen||"").toLowerCase().includes(searchTerm);
       const matchesFilter = variantFilter === "all" || w.variante === variantFilter;
-      return matchesSearch && matchesFilter;
+      return isVerified && matchesSearch && matchesFilter;
     });
 
     visible.sort((a,b) => {
@@ -464,8 +465,8 @@
       grid.style.display = "none";
       document.getElementById("pagination").style.display = "none";
       empty.style.display = "block";
-      empty.querySelector("h3").textContent = t.empty.h;
-      empty.querySelector("p").textContent = t.empty.p;
+      empty.querySelector("h3").textContent = t.emptyFiltered.h;
+      empty.querySelector("p").textContent = t.emptyFiltered.p;
       return;
     }
 
@@ -527,7 +528,7 @@
   }
 
   (async function init(){
-    allEntries = (await loadEntries()).filter(w => !!w.verified);
+    allEntries = await loadEntries();
     document.getElementById("loading").style.display = "none";
     applyStaticText(I18N.setLanguage(I18N.resolveInitialLanguage()));
   })();
