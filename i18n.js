@@ -478,7 +478,7 @@
       "hero": {
         "eyebrow": "Quién ya se ha atrevido",
         "h1": "Caminantes de la travessa",
-        "p": "Lista informal, tipo libro de firmas: nadie ha verificado que estos alias hayan completado realmente la ruta. El «Verificado» solo indica que alguien del proyecto ha revisado fotos enviadas por correo."
+        "p": "Lista de personas cuya finalización ha sido verificada: alguien del proyecto ha revisado las 4 fotos de control que enviaron por correo. No es una verificación oficial de identidad, solo una revisión manual de las fotos."
       },
       "stats": {
         "total": "Inscritos",
@@ -1057,7 +1057,7 @@
       "hero": {
         "eyebrow": "Qui ja s'hi ha atrevit",
         "h1": "Caminants de la travessa",
-        "p": "Llista informal, tipus llibre de signatures: ningú ha verificat que aquests àlies hagin completat realment la ruta. El «Verificat» només indica que algú del projecte ha revisat fotos enviades per correu."
+        "p": "Llista de persones la finalització de les quals ha estat verificada: algú del projecte ha revisat les 4 fotos de control que van enviar per correu. No és una verificació oficial d'identitat, només una revisió manual de les fotos."
       },
       "stats": {
         "total": "Inscrits",
@@ -1636,7 +1636,7 @@
       "hero": {
         "eyebrow": "Who's already dared",
         "h1": "Walkers of the crossing",
-        "p": "An informal list, like a guestbook: no one has verified that these aliases actually completed the route. «Verified» only means someone from the project has reviewed photos sent by email."
+        "p": "A list of people whose completion has been verified: someone from the project has reviewed the 4 checkpoint photos they sent by email. This isn't an official identity check, just a manual photo review."
       },
       "stats": {
         "total": "Signed up",

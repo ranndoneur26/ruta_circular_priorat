@@ -256,7 +256,7 @@
   <div class="wrap">
     <div class="eyebrow" data-i18n="hero.eyebrow">Quién ya se ha atrevido</div>
     <h1 data-i18n="hero.h1">Caminantes de la travessa</h1>
-    <p data-i18n="hero.p">Lista informal, tipo libro de firmas: nadie ha verificado que estos alias hayan completado realmente la ruta. El «Verificado» solo indica que alguien del proyecto ha revisado fotos enviadas por correo.</p>
+    <p data-i18n="hero.p">Lista de personas cuya finalización ha sido verificada: alguien del proyecto ha revisado las 4 fotos de control que enviaron por correo. No es una verificación oficial de identidad, solo una revisión manual de las fotos.</p>
     <div class="stat-row">
       <div class="stat-cell"><span class="n" id="stat-total">0</span><span class="l" data-i18n="stats.total">Inscritos</span></div>
       <div class="stat-cell"><span class="n" id="stat-verified">0</span><span class="l" data-i18n="stats.verified">Verificados</span></div>
@@ -527,7 +527,7 @@
   }
 
   (async function init(){
-    allEntries = await loadEntries();
+    allEntries = (await loadEntries()).filter(w => !!w.verified);
     document.getElementById("loading").style.display = "none";
     applyStaticText(I18N.setLanguage(I18N.resolveInitialLanguage()));
   })();
