@@ -517,7 +517,10 @@
         "vCompleto": "Circuito completo",
         "sortRecent": "Más recientes",
         "sortAlias": "Por alias",
-        "loading": "Cargando caminantes…",
+        "loading": "Paciencia, estamos cargando los datos…",
+        "loadingSlow": "Puede tardar unos segundos más de lo habitual.",
+        "loadError": "No se han podido cargar los datos. Comprueba tu conexión e inténtalo de nuevo.",
+        "retry": "↻ Reintentar",
         "vCorta": "Ruta corta (3 días)"
       },
       "variant": {
@@ -1125,7 +1128,10 @@
         "vCompleto": "Circuit complet",
         "sortRecent": "Més recents",
         "sortAlias": "Per àlies",
-        "loading": "Carregant caminants…",
+        "loading": "Paciència, estem carregant les dades…",
+        "loadingSlow": "Pot trigar uns segons més del que és habitual.",
+        "loadError": "No s'han pogut carregar les dades. Comprova la connexió i torna-ho a provar.",
+        "retry": "↻ Tornar a provar",
         "vCorta": "Ruta curta (3 dies)"
       },
       "variant": {
@@ -1733,7 +1739,10 @@
         "vCompleto": "Full circuit",
         "sortRecent": "Most recent",
         "sortAlias": "By alias",
-        "loading": "Loading walkers…",
+        "loading": "Hang tight, we're loading the data…",
+        "loadingSlow": "This can take a few seconds longer than usual.",
+        "loadError": "The data couldn't be loaded. Check your connection and try again.",
+        "retry": "↻ Retry",
         "vCorta": "Short route (3 days)"
       },
       "variant": {

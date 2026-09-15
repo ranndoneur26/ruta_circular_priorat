@@ -201,6 +201,15 @@
   .empty .btn:hover{ opacity:0.88; }
 
   .loading{ padding:60px 0; text-align:center; color:var(--pergami-dim); font-family:'JetBrains Mono', monospace; font-size:12.5px; }
+  .spinner{
+    width:28px; height:28px; margin:0 auto 16px;
+    border:3px solid rgba(237,230,214,0.15); border-top-color:var(--samfaina);
+    border-radius:50%; animation:fp-spin 0.8s linear infinite;
+  }
+  @keyframes fp-spin{ to{ transform:rotate(360deg); } }
+  .loading-slow{ margin-top:10px; opacity:0.75; font-size:11px; }
+  .load-error{ padding:50px 0; text-align:center; }
+  .load-error p{ color:var(--pergami-dim); font-size:13.5px; margin:0 0 16px; max-width:44ch; margin-left:auto; margin-right:auto; }
 
   footer{ padding:30px 0 50px; border-top:1px solid var(--line); font-size:12px; color:var(--pergami-dim); }
 
@@ -403,7 +412,15 @@
     </select>
   </div>
 
-  <div class="loading" id="loading" data-i18n="toolbar.loading">Cargando caminantes…</div>
+  <div class="loading" id="loading">
+    <div class="spinner" aria-hidden="true"></div>
+    <p data-i18n="toolbar.loading">Cargando caminantes…</p>
+    <p class="loading-slow" id="loading-slow" data-i18n="toolbar.loadingSlow" style="display:none;">Puede tardar unos segundos más de lo habitual.</p>
+  </div>
+  <div class="load-error" id="load-error" style="display:none;">
+    <p data-i18n="toolbar.loadError">No se han podido cargar los datos. Comprueba tu conexión e inténtalo de nuevo.</p>
+    <button type="button" class="btn" id="retry-load-btn" data-i18n="toolbar.retry">↻ Reintentar</button>
+  </div>
   <div class="grid" id="grid" style="display:none;"></div>
   <div class="pagination" id="pagination" style="display:none;"></div>
   <div class="empty" id="empty" style="display:none;">
@@ -459,11 +476,14 @@
   let currentLang = I18N.FALLBACK;
   const get = I18N.get;
 
+  let dataLoadFailed = false;
   function applyStaticText(lang){
     currentLang = lang;
     I18N.applyDom(T, lang);
-    render();
-    renderStatsPremium(lang);
+    if (!dataLoadFailed){
+      render();
+      renderStatsPremium(lang);
+    }
   }
   document.querySelectorAll(".lang-switch button").forEach(btn=>{
     btn.addEventListener("click", ()=> applyStaticText(I18N.setLanguage(btn.getAttribute("data-lang"))));
@@ -503,37 +523,63 @@
   }
 
   // --- Load entries: Google Sheets backend (real, cross-device) as primary source,
-  // plus shared window.storage and localStorage as fallback for continuity. ---
+  // plus shared window.storage and localStorage as fallback for continuity.
+  // Sources are fetched in PARALLEL (instead of one after another) and the
+  // individual shared-storage keys are also fetched in parallel, to cut load
+  // time significantly. The Sheets call gets one automatic retry, since Google
+  // Apps Script sometimes fails or times out on a cold start. ---
   const LOCAL_KEY = "travessa_priorat_walkers";
   const SHEETS_API_URL = window.APP_CONFIG.SHEETS_API_URL;
   const SHEETS_CONFIGURED = /^https:\/\/script\.google(usercontent)?\.com\//.test(SHEETS_API_URL);
 
+  async function fetchSheetsOnce(){
+    const res = await fetch(SHEETS_API_URL + "?action=list");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    if (Array.isArray(data)) return data;
+    if (data && Array.isArray(data.rows)) return data.rows;
+    return [];
+  }
+
   async function sheetsList(){
-    if (!SHEETS_CONFIGURED) return [];
+    if (!SHEETS_CONFIGURED) return { ok: true, entries: [] };
     try {
-      const res = await fetch(SHEETS_API_URL + "?action=list");
-      const data = await res.json();
-      if (Array.isArray(data)) return data;
-      if (data && Array.isArray(data.rows)) return data.rows;
-      return [];
-    } catch(e){ return []; }
+      return { ok: true, entries: await fetchSheetsOnce() };
+    } catch(e){
+      try {
+        await new Promise(r => setTimeout(r, 1200));
+        return { ok: true, entries: await fetchSheetsOnce() };
+      } catch(e2){
+        return { ok: false, entries: [] };
+      }
+    }
+  }
+
+  async function sharedStorageEntries(){
+    const out = [];
+    if (!(window.storage && typeof window.storage.list === "function")) return out;
+    try {
+      const listResult = await window.storage.list("walker:", true);
+      if (listResult && listResult.keys && listResult.keys.length){
+        const results = await Promise.all(
+          listResult.keys.map(key => window.storage.get(key, true).catch(() => null))
+        );
+        results.forEach(r => {
+          if (r && r.value){
+            try { out.push(JSON.parse(r.value)); } catch(e){}
+          }
+        });
+      }
+    } catch(e){}
+    return out;
   }
 
   async function loadEntries(){
-    let entries = await sheetsList();
-    if (window.storage && typeof window.storage.list === "function"){
-      try {
-        const listResult = await window.storage.list("walker:", true);
-        if (listResult && listResult.keys && listResult.keys.length){
-          for (const key of listResult.keys){
-            try {
-              const r = await window.storage.get(key, true);
-              if (r && r.value) entries.push(JSON.parse(r.value));
-            } catch(e){}
-          }
-        }
-      } catch(e){}
-    }
+    const [sheetsResult, storageEntries] = await Promise.all([
+      sheetsList(),
+      sharedStorageEntries()
+    ]);
+    let entries = sheetsResult.entries.concat(storageEntries);
     try {
       const raw = localStorage.getItem(LOCAL_KEY);
       if (raw){
@@ -541,7 +587,7 @@
         if (Array.isArray(local)) entries = entries.concat(local);
       }
     } catch(e){}
-    return entries;
+    return { entries, sheetsFailed: !sheetsResult.ok };
   }
 
   function escapeHtml(s){
@@ -844,10 +890,34 @@
     if (grid) grid.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  (async function init(){
-    allEntries = await loadEntries();
-    document.getElementById("loading").style.display = "none";
+  async function loadAndRender(){
+    const loadingEl = document.getElementById("loading");
+    const errorEl = document.getElementById("load-error");
+    const slowEl = document.getElementById("loading-slow");
+    loadingEl.style.display = "block";
+    errorEl.style.display = "none";
+    slowEl.style.display = "none";
+    document.getElementById("grid").style.display = "none";
+    document.getElementById("empty").style.display = "none";
+    const slowTimer = setTimeout(() => { slowEl.style.display = "block"; }, 4000);
+
+    const { entries, sheetsFailed } = await loadEntries();
+    clearTimeout(slowTimer);
+    loadingEl.style.display = "none";
+
+    allEntries = entries;
+    dataLoadFailed = sheetsFailed && entries.length === 0;
+
+    if (dataLoadFailed){
+      errorEl.style.display = "block";
+    }
     applyStaticText(I18N.setLanguage(I18N.resolveInitialLanguage()));
+  }
+
+  document.getElementById("retry-load-btn").addEventListener("click", loadAndRender);
+
+  (async function init(){
+    await loadAndRender();
   })();
 </script>
 
