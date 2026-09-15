@@ -271,6 +271,18 @@
   .legal-modal-card p{ font-size:13px; color:var(--pergami-dim); margin:0 0 12px; line-height:1.55; }
   .legal-modal-card p:last-child{ margin-bottom:0; }
   .legal-modal-card strong{ color:var(--pergami); }
+  .origins-modal-list{ list-style:none; margin:0; padding:0; columns:2; column-gap:24px; }
+  .origins-modal-list li{
+    display:flex; justify-content:space-between; gap:10px; font-size:13px;
+    color:var(--pergami-dim); padding:6px 0; border-bottom:1px solid var(--line);
+    break-inside:avoid;
+  }
+  .origins-modal-list li b{ color:var(--pergami); font-weight:400; }
+  .origins-modal-list li span:last-child{ font-family:'JetBrains Mono', monospace; color:var(--samfaina); flex-shrink:0; }
+  @media (max-width:480px){ .origins-modal-list{ columns:1; } }
+  .origin-row-others{ cursor:pointer; }
+  .origin-row-others .origin-name{ color:var(--samfaina); text-decoration:underline; text-decoration-style:dotted; text-underline-offset:2px; }
+  .origin-row-others:hover .origin-bar-fill{ filter:brightness(1.2); }
 </style>
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -415,6 +427,14 @@
   </div>
 </div>
 
+<div class="legal-modal" id="origins-modal">
+  <div class="legal-modal-card">
+    <button type="button" class="legal-modal-close" id="origins-modal-close" aria-label="Cerrar">&times;</button>
+    <h3 id="origins-modal-title"></h3>
+    <div id="origins-modal-body"></div>
+  </div>
+</div>
+
 <div class="legal-modal" id="legal-modal">
   <div class="legal-modal-card">
     <button type="button" class="legal-modal-close" id="legal-modal-close" aria-label="Cerrar">&times;</button>
@@ -438,6 +458,24 @@
   }
   document.querySelectorAll(".lang-switch button").forEach(btn=>{
     btn.addEventListener("click", ()=> applyStaticText(I18N.setLanguage(btn.getAttribute("data-lang"))));
+  });
+
+  // ---------- Popup "Otros orígenes": lista completa, alfabética, de las
+  // procedencias que no caben en el top 8 del gráfico. ----------
+  const originsModal = document.getElementById("origins-modal");
+  function openOriginsModal(){
+    const tp = T[currentLang].statsPremium;
+    document.getElementById("origins-modal-title").textContent = tp.originsOthers;
+    const sorted = originsRestList.slice().sort((a, b) => a.label.localeCompare(b.label, currentLang));
+    document.getElementById("origins-modal-body").innerHTML =
+      `<ul class="origins-modal-list">${sorted.map(o => `<li><span>${escapeHtml(o.label)}</span><span>${o.count}</span></li>`).join("")}</ul>`;
+    originsModal.classList.add("show");
+  }
+  function closeOriginsModal(){ originsModal.classList.remove("show"); }
+  document.getElementById("origins-modal-close").addEventListener("click", closeOriginsModal);
+  originsModal.addEventListener("click", (e) => { if (e.target.id === "origins-modal") closeOriginsModal(); });
+  document.getElementById("origins-chart").addEventListener("click", (e) => {
+    if (e.target.closest("#origins-others-row")) openOriginsModal();
   });
 
   const navToggle = document.getElementById("nav-toggle");
@@ -510,6 +548,7 @@
   }
 
   let allEntries = [];
+  let originsRestList = [];
   let searchTerm = "";
   let variantFilter = "all";
   let sortMode = "recent";
@@ -603,12 +642,16 @@
       } else {
         const TOP_N = 8;
         const top = originList.slice(0, TOP_N).map(o => ({ label: o.label, count: o.count }));
-        const restCount = originList.slice(TOP_N).reduce((s, o) => s + o.count, 0);
-        if (restCount > 0) top.push({ label: tp.originsOthers, count: restCount });
+        const rest = originList.slice(TOP_N);
+        const restCount = rest.reduce((s, o) => s + o.count, 0);
+        originsRestList = rest;
+        if (restCount > 0) top.push({ label: tp.originsOthers, count: restCount, isOthers: true });
         const maxCount = Math.max(...top.map(r => r.count));
         originsChart.innerHTML = top.map(r => {
           const pct = maxCount ? Math.round((r.count / maxCount) * 100) : 0;
-          return `<div class="origin-row">
+          const rowClass = r.isOthers ? "origin-row origin-row-others" : "origin-row";
+          const rowId = r.isOthers ? ` id="origins-others-row"` : "";
+          return `<div class="${rowClass}"${rowId}>
             <div class="origin-name" title="${escapeHtml(r.label)}">${escapeHtml(r.label)}</div>
             <div class="origin-bar-track"><div class="origin-bar-fill" style="width:${pct}%"></div></div>
             <div class="origin-count">${r.count}</div>
