@@ -504,7 +504,12 @@
         "originsOthers": "Otros",
         "originsEmpty": "Todavía no hay orígenes registrados.",
         "trendH": "Inscripciones por mes",
-        "trendEmpty": "Todavía no hay suficiente histórico para mostrar una tendencia."
+        "trendEmpty": "Todavía no hay suficiente histórico para mostrar una tendencia.",
+        "seasonH": "¿En qué mes empieza la gente?",
+        "seasonSub": "Mes de inicio elegido por los inscritos, en porcentaje sobre el total con fecha indicada.",
+        "seasonEmpty": "Todavía no hay suficientes fechas de inicio para mostrar esta gráfica.",
+        "insight4": "El mes más elegido para empezar es {month}, con el {pct}% de los inscritos.",
+        "months": ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
       },
       "toolbar": {
         "search": "Buscar por alias u origen…",
@@ -1107,7 +1112,12 @@
         "originsOthers": "Altres",
         "originsEmpty": "Encara no hi ha orígens registrats.",
         "trendH": "Inscripcions per mes",
-        "trendEmpty": "Encara no hi ha prou historial per mostrar una tendència."
+        "trendEmpty": "Encara no hi ha prou historial per mostrar una tendència.",
+        "seasonH": "En quin mes comença la gent?",
+        "seasonSub": "Mes d'inici triat pels inscrits, en percentatge sobre el total amb data indicada.",
+        "seasonEmpty": "Encara no hi ha prou dates d'inici per mostrar aquest gràfic.",
+        "insight4": "El mes més triat per començar és {month}, amb el {pct}% dels inscrits.",
+        "months": ["Gener","Febrer","Març","Abril","Maig","Juny","Juliol","Agost","Setembre","Octubre","Novembre","Desembre"]
       },
       "toolbar": {
         "search": "Cerca per àlies o origen…",
@@ -1710,7 +1720,12 @@
         "originsOthers": "Other",
         "originsEmpty": "No origins recorded yet.",
         "trendH": "Sign-ups per month",
-        "trendEmpty": "Not enough history yet to show a trend."
+        "trendEmpty": "Not enough history yet to show a trend.",
+        "seasonH": "Which month do people start in?",
+        "seasonSub": "Start month chosen by registrants, as a percentage of those with a date on record.",
+        "seasonEmpty": "Not enough start dates yet to show this chart.",
+        "insight4": "The most popular starting month is {month}, chosen by {pct}% of registrants.",
+        "months": ["January","February","March","April","May","June","July","August","September","October","November","December"]
       },
       "toolbar": {
         "search": "Search by alias or origin…",

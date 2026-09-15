@@ -137,6 +137,8 @@
   .trend-bar{ width:100%; max-width:28px; background:var(--samfaina); transition:height 0.8s ease; }
   .trend-labels{ display:flex; gap:6px; margin-top:6px; }
   .trend-label{ flex:1; text-align:center; font-size:9.5px; color:var(--pergami-dim); font-family:'JetBrains Mono', monospace; }
+  .season-sub{ font-size:12.5px; color:var(--pergami-dim); margin:-10px 0 18px; }
+  .trend-bar.is-top{ background:var(--vinya); }
 
   @media (max-width:480px){
     .stats-premium{ padding:40px 0; }
@@ -376,6 +378,13 @@
       <h3 data-i18n="statsPremium.trendH">Inscripciones por mes</h3>
       <div id="trend-chart-bars" class="trend-chart"></div>
       <div id="trend-chart-labels" class="trend-labels"></div>
+    </div>
+
+    <div class="trend-block" id="season-block" style="display:none;">
+      <h3 data-i18n="statsPremium.seasonH">¿En qué mes empieza la gente?</h3>
+      <p class="season-sub" data-i18n="statsPremium.seasonSub">Mes de inicio elegido por los inscritos, en porcentaje sobre el total con fecha indicada.</p>
+      <div id="season-chart-bars" class="trend-chart"></div>
+      <div id="season-chart-labels" class="trend-labels"></div>
     </div>
   </div>
 </section>
@@ -630,9 +639,26 @@
       : tp.insight2NoData;
     const insight3 = tp.insight3.replace("{n}", distinctOrigins);
 
+    const seasonCounts = new Array(12).fill(0);
+    let seasonTotal = 0;
+    allEntries.forEach(w => {
+      if (!w.startDate) return;
+      const d = new Date(w.startDate + "T00:00:00");
+      if (isNaN(d.getTime())) return;
+      seasonCounts[d.getMonth()]++;
+      seasonTotal++;
+    });
+    const maxSeason = Math.max(...seasonCounts);
+    const topMonthIdx = seasonCounts.indexOf(maxSeason);
+    const insight4 = (seasonTotal > 0 && maxSeason > 0)
+      ? tp.insight4.replace("{month}", tp.months[topMonthIdx]).replace("{pct}", Math.round((maxSeason / seasonTotal) * 100))
+      : null;
+
     const insightRow = document.getElementById("insight-row");
     if (insightRow){
-      insightRow.innerHTML = [insight1, insight2, insight3].map(txt => `<div class="insight-card">${escapeHtml(txt)}</div>`).join("");
+      const insights = [insight1, insight2, insight3];
+      if (insight4) insights.push(insight4);
+      insightRow.innerHTML = insights.map(txt => `<div class="insight-card">${escapeHtml(txt)}</div>`).join("");
     }
 
     const originsChart = document.getElementById("origins-chart");
@@ -692,6 +718,30 @@
         }).join("");
       } else {
         trendBlock.style.display = "none";
+      }
+    }
+
+    const seasonBlock = document.getElementById("season-block");
+    if (seasonBlock){
+      if (seasonTotal > 0){
+        seasonBlock.style.display = "block";
+        const monthShort = {
+          es: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+          ca: ["Gen","Feb","Mar","Abr","Mai","Jun","Jul","Ago","Set","Oct","Nov","Des"],
+          en: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        };
+        const shortNames = monthShort[lang] || monthShort.es;
+        const seasonBars = document.getElementById("season-chart-bars");
+        const seasonLabels = document.getElementById("season-chart-labels");
+        if (seasonBars) seasonBars.innerHTML = seasonCounts.map((c, i) => {
+          const h = maxSeason ? Math.round((c / maxSeason) * 100) : 0;
+          const realPct = seasonTotal ? Math.round((c / seasonTotal) * 100) : 0;
+          const isTop = i === topMonthIdx && c > 0;
+          return `<div class="trend-bar-wrap"><div class="trend-bar${isTop ? " is-top" : ""}" style="height:${h}%" title="${realPct}%"></div></div>`;
+        }).join("");
+        if (seasonLabels) seasonLabels.innerHTML = shortNames.map(n => `<div class="trend-label">${n}</div>`).join("");
+      } else {
+        seasonBlock.style.display = "none";
       }
     }
   }
