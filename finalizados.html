@@ -94,6 +94,56 @@
   .stat-cell .n{ font-family:'JetBrains Mono', monospace; font-size:24px; font-weight:600; color:var(--samfaina); display:block; }
   .stat-cell .l{ font-size:11.5px; color:var(--pergami-dim); margin-top:4px; display:block; }
 
+  /* ---------- Estadísticas premium (gráficas reales) ---------- */
+  .stats-premium{ padding:56px 0; border-bottom:1px solid var(--line); background:var(--llicorella-2); }
+  .stats-premium .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:36px; }
+  .stats-premium .section-head h2{ font-size:clamp(24px,3vw,32px); margin-top:8px; }
+  .stats-premium .section-head p{ max-width:44ch; color:var(--pergami-dim); font-size:14px; margin:0; }
+
+  .stats-grid{ display:grid; grid-template-columns:220px 1fr; gap:44px; align-items:center; }
+  @media (max-width:760px){ .stats-grid{ grid-template-columns:1fr; gap:32px; } }
+
+  .donut-wrap{ position:relative; width:180px; height:180px; margin:0 auto; }
+  .donut-svg{ width:100%; height:100%; transform:rotate(-90deg); }
+  .donut-track{ fill:none; stroke:rgba(237,230,214,0.12); stroke-width:10; }
+  .donut-value{ fill:none; stroke:var(--samfaina); stroke-width:10; stroke-linecap:round; transition:stroke-dashoffset 1s ease; }
+  .donut-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+  .donut-n{ font-family:'JetBrains Mono', monospace; font-size:34px; font-weight:700; color:var(--samfaina); line-height:1; }
+  .donut-sub{ font-size:10.5px; color:var(--pergami-dim); margin-top:4px; }
+  .stat-card-label{ text-align:center; font-size:13px; color:var(--pergami-dim); margin-top:14px; max-width:26ch; margin-left:auto; margin-right:auto; }
+
+  .split-bar{ display:flex; height:30px; border:1px solid var(--line); overflow:hidden; }
+  .split-bar-seg{ height:100%; transition:width 0.8s ease; }
+  .split-legend{ display:flex; gap:24px; margin-top:14px; flex-wrap:wrap; font-size:13px; color:var(--pergami-dim); }
+  .split-legend-item{ display:flex; align-items:center; gap:8px; }
+  .split-legend .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; flex-shrink:0; }
+  .split-legend b{ color:var(--pergami); }
+
+  .insight-row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:40px; }
+  .insight-card{ background:var(--llicorella); border-left:3px solid var(--samfaina); padding:16px 18px; font-size:13.5px; line-height:1.5; color:var(--pergami-dim); }
+
+  .origins-block{ margin-top:44px; }
+  .origins-block h3{ font-size:16px; margin-bottom:20px; }
+  .origin-row{ display:grid; grid-template-columns:130px 1fr 56px; align-items:center; gap:14px; margin-bottom:10px; font-size:13px; }
+  .origin-name{ color:var(--pergami-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .origin-bar-track{ background:rgba(237,230,214,0.08); height:12px; }
+  .origin-bar-fill{ height:100%; background:var(--samfaina); transition:width 0.8s ease; }
+  .origin-count{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--pergami-dim); text-align:right; }
+
+  .trend-block{ margin-top:44px; }
+  .trend-block h3{ font-size:16px; margin-bottom:20px; }
+  .trend-chart{ display:flex; align-items:flex-end; gap:6px; height:100px; border-bottom:1px solid var(--line); padding-bottom:2px; }
+  .trend-bar-wrap{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
+  .trend-bar{ width:100%; max-width:28px; background:var(--samfaina); transition:height 0.8s ease; }
+  .trend-labels{ display:flex; gap:6px; margin-top:6px; }
+  .trend-label{ flex:1; text-align:center; font-size:9.5px; color:var(--pergami-dim); font-family:'JetBrains Mono', monospace; }
+
+  @media (max-width:480px){
+    .stats-premium{ padding:40px 0; }
+    .insight-row{ grid-template-columns:1fr; }
+    .origin-row{ grid-template-columns:90px 1fr 44px; gap:8px; }
+  }
+
   main{ padding:36px 0 70px; }
 
   .toolbar{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:28px; }
@@ -266,6 +316,58 @@
   </div>
 </div>
 
+<section class="stats-premium" id="stats-premium">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="statsPremium.eyebrow">Datos del proyecto</div>
+        <h2 data-i18n="statsPremium.h2">El Camí del Prior en cifras</h2>
+      </div>
+      <p data-i18n="statsPremium.p">Un vistazo real a quién completa la ruta, de dónde viene y qué variante elige — calculado a partir de las inscripciones verificadas y no verificadas.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div>
+        <div class="donut-wrap">
+          <svg class="donut-svg" viewBox="0 0 120 120">
+            <circle class="donut-track" cx="60" cy="60" r="50"></circle>
+            <circle class="donut-value" id="donut-completion" cx="60" cy="60" r="50"></circle>
+          </svg>
+          <div class="donut-center">
+            <span class="donut-n" id="completion-pct">0%</span>
+            <span class="donut-sub" id="completion-sub"></span>
+          </div>
+        </div>
+        <div class="stat-card-label" data-i18n="statsPremium.completionLabel">de los inscritos han completado y verificado su paso</div>
+      </div>
+
+      <div class="split-card">
+        <div class="split-bar" id="split-bar">
+          <div class="split-bar-seg" id="split-seg-long" style="background:var(--samfaina);"></div>
+          <div class="split-bar-seg" id="split-seg-short" style="background:var(--herba);"></div>
+        </div>
+        <div class="split-legend">
+          <div class="split-legend-item"><span class="dot" style="background:var(--samfaina)"></span><span data-i18n="statsPremium.variantLong">Circuito completo (8 etapas)</span> <b id="pct-long">0%</b></div>
+          <div class="split-legend-item"><span class="dot" style="background:var(--herba)"></span><span data-i18n="statsPremium.variantShort">Ruta corta (3 días)</span> <b id="pct-short">0%</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-row" id="insight-row"></div>
+
+    <div class="origins-block">
+      <h3 data-i18n="statsPremium.originsH">¿De dónde vienen?</h3>
+      <div id="origins-chart"></div>
+    </div>
+
+    <div class="trend-block" id="trend-block" style="display:none;">
+      <h3 data-i18n="statsPremium.trendH">Inscripciones por mes</h3>
+      <div id="trend-chart-bars" class="trend-chart"></div>
+      <div id="trend-chart-labels" class="trend-labels"></div>
+    </div>
+  </div>
+</section>
+
 <main class="wrap">
   <div class="toolbar">
     <input type="text" class="search-box" id="search-box" data-i18n-placeholder="toolbar.search" placeholder="Buscar por alias u origen…">
@@ -332,6 +434,7 @@
     currentLang = lang;
     I18N.applyDom(T, lang);
     render();
+    renderStatsPremium(lang);
   }
   document.querySelectorAll(".lang-switch button").forEach(btn=>{
     btn.addEventListener("click", ()=> applyStaticText(I18N.setLanguage(btn.getAttribute("data-lang"))));
@@ -428,6 +531,127 @@
     currentPage = 1;
     render();
   });
+
+  // ---------- Estadísticas premium: % de finalización, reparto de variante,
+  // orígenes más frecuentes e inscripciones por mes, calculado siempre sobre
+  // TODAS las inscripciones reales (no solo las verificadas). ----------
+  function renderStatsPremium(lang){
+    const tp = T[lang].statsPremium;
+    if (!tp) return;
+    const total = allEntries.length;
+    const verifiedCount = allEntries.filter(w => w.verified).length;
+    const pctCompletion = total ? Math.round((verifiedCount / total) * 100) : 0;
+
+    const circumference = 2 * Math.PI * 50;
+    const donut = document.getElementById("donut-completion");
+    if (donut){
+      donut.style.strokeDasharray = circumference.toFixed(2);
+      donut.style.strokeDashoffset = (circumference * (1 - pctCompletion / 100)).toFixed(2);
+    }
+    const pctEl = document.getElementById("completion-pct");
+    const subEl = document.getElementById("completion-sub");
+    if (pctEl) pctEl.textContent = pctCompletion + "%";
+    if (subEl) subEl.textContent = tp.completionSub.replace("{verified}", verifiedCount).replace("{total}", total);
+
+    const longCount = allEntries.filter(w => w.variante === "completo").length;
+    const shortCount = allEntries.filter(w => w.variante === "corta").length;
+    const variantTotal = longCount + shortCount;
+    const pctLong = variantTotal ? Math.round((longCount / variantTotal) * 100) : 0;
+    const pctShort = variantTotal ? 100 - pctLong : 0;
+    const segLong = document.getElementById("split-seg-long");
+    const segShort = document.getElementById("split-seg-short");
+    if (segLong) segLong.style.width = pctLong + "%";
+    if (segShort) segShort.style.width = pctShort + "%";
+    const pctLongEl = document.getElementById("pct-long");
+    const pctShortEl = document.getElementById("pct-short");
+    if (pctLongEl) pctLongEl.textContent = pctLong + "%";
+    if (pctShortEl) pctShortEl.textContent = pctShort + "%";
+
+    const longVerified = allEntries.filter(w => w.variante === "completo" && w.verified).length;
+    const shortVerified = allEntries.filter(w => w.variante === "corta" && w.verified).length;
+    const pctLongCompletion = longCount ? Math.round((longVerified / longCount) * 100) : null;
+    const pctShortCompletion = shortCount ? Math.round((shortVerified / shortCount) * 100) : null;
+    const insight1 = (pctLongCompletion !== null && pctShortCompletion !== null)
+      ? tp.insight1.replace("{pctShort}", pctShortCompletion).replace("{pctLong}", pctLongCompletion)
+      : tp.insight1NoData;
+
+    const originCounts = {};
+    allEntries.forEach(w => {
+      const raw = (w.origen || "").trim().replace(/\s+/g, " ");
+      if (!raw) return;
+      const norm = raw.toLowerCase();
+      if (!originCounts[norm]) originCounts[norm] = { label: raw, count: 0 };
+      originCounts[norm].count++;
+    });
+    const originList = Object.values(originCounts).sort((a, b) => b.count - a.count);
+    const distinctOrigins = originList.length;
+
+    const insight2 = originList.length
+      ? tp.insight2.replace("{origin}", originList[0].label).replace("{count}", originList[0].count).replace("{pct}", total ? Math.round((originList[0].count / total) * 100) : 0)
+      : tp.insight2NoData;
+    const insight3 = tp.insight3.replace("{n}", distinctOrigins);
+
+    const insightRow = document.getElementById("insight-row");
+    if (insightRow){
+      insightRow.innerHTML = [insight1, insight2, insight3].map(txt => `<div class="insight-card">${escapeHtml(txt)}</div>`).join("");
+    }
+
+    const originsChart = document.getElementById("origins-chart");
+    if (originsChart){
+      if (!originList.length){
+        originsChart.innerHTML = `<p style="color:var(--pergami-dim); font-size:13px; margin:0;">${escapeHtml(tp.originsEmpty)}</p>`;
+      } else {
+        const TOP_N = 8;
+        const top = originList.slice(0, TOP_N).map(o => ({ label: o.label, count: o.count }));
+        const restCount = originList.slice(TOP_N).reduce((s, o) => s + o.count, 0);
+        if (restCount > 0) top.push({ label: tp.originsOthers, count: restCount });
+        const maxCount = Math.max(...top.map(r => r.count));
+        originsChart.innerHTML = top.map(r => {
+          const pct = maxCount ? Math.round((r.count / maxCount) * 100) : 0;
+          return `<div class="origin-row">
+            <div class="origin-name" title="${escapeHtml(r.label)}">${escapeHtml(r.label)}</div>
+            <div class="origin-bar-track"><div class="origin-bar-fill" style="width:${pct}%"></div></div>
+            <div class="origin-count">${r.count}</div>
+          </div>`;
+        }).join("");
+      }
+    }
+
+    const monthCounts = {};
+    allEntries.forEach(w => {
+      if (!w.submittedAt) return;
+      const d = new Date(w.submittedAt);
+      if (isNaN(d.getTime())) return;
+      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      monthCounts[key] = (monthCounts[key] || 0) + 1;
+    });
+    const monthKeys = Object.keys(monthCounts).sort();
+    const trendBlock = document.getElementById("trend-block");
+    if (trendBlock){
+      if (monthKeys.length >= 2){
+        trendBlock.style.display = "block";
+        const maxM = Math.max(...monthKeys.map(k => monthCounts[k]));
+        const monthNames = {
+          es: ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],
+          ca: ["gen","feb","mar","abr","mai","jun","jul","ago","set","oct","nov","des"],
+          en: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        };
+        const names = monthNames[lang] || monthNames.es;
+        const bars = document.getElementById("trend-chart-bars");
+        const labels = document.getElementById("trend-chart-labels");
+        if (bars) bars.innerHTML = monthKeys.map(k => {
+          const h = maxM ? Math.round((monthCounts[k] / maxM) * 100) : 0;
+          return `<div class="trend-bar-wrap"><div class="trend-bar" style="height:${h}%" title="${monthCounts[k]}"></div></div>`;
+        }).join("");
+        if (labels) labels.innerHTML = monthKeys.map(k => {
+          const [y, m] = k.split("-");
+          return `<div class="trend-label">${names[parseInt(m, 10) - 1]} ${y.slice(2)}</div>`;
+        }).join("");
+      } else {
+        trendBlock.style.display = "none";
+      }
+    }
+  }
 
   function render(){
     const grid = document.getElementById("grid");
