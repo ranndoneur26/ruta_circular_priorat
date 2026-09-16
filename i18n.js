@@ -433,7 +433,7 @@
       "welcome": "Hola, {alias} — sube tus 4 fotos cuando quieras.",
       "alreadyCert": {
         "title": "Ya recibimos tu certificación",
-        "body": "Este alias y correo ya enviaron sus 4 fotos desde este mismo dispositivo el {date}. Si crees que es un error o necesitas reenviarlas, escríbenos a ruta.silenci@gmail.com."
+        "body": "Este alias y correo ya enviaron sus 4 fotos desde este mismo dispositivo el {date}. Si crees que es un error o necesitas reenviarlas, escríbenos a info.camidelprior@gmail.com."
       },
       "cp": {
         "label1": "Punto 1 · fin etapa 2",
@@ -1048,7 +1048,7 @@
       "welcome": "Hola, {alias} — puja les teves 4 fotos quan vulguis.",
       "alreadyCert": {
         "title": "Ja hem rebut la teva certificació",
-        "body": "Aquest alies i correu ja van enviar les 4 fotos des d'aquest mateix dispositiu el {date}. Si creus que és un error o necessites tornar-les a enviar, escriu-nos a ruta.silenci@gmail.com."
+        "body": "Aquest alies i correu ja van enviar les 4 fotos des d'aquest mateix dispositiu el {date}. Si creus que és un error o necessites tornar-les a enviar, escriu-nos a info.camidelprior@gmail.com."
       },
       "cp": {
         "label1": "Punt 1 · final etapa 2",
@@ -1663,7 +1663,7 @@
       "welcome": "Hi, {alias} — upload your 4 photos whenever you're ready.",
       "alreadyCert": {
         "title": "We already received your certification",
-        "body": "This alias and email already sent the 4 photos from this same device on {date}. If you think this is a mistake or need to resend them, email us at ruta.silenci@gmail.com."
+        "body": "This alias and email already sent the 4 photos from this same device on {date}. If you think this is a mistake or need to resend them, email us at info.camidelprior@gmail.com."
       },
       "cp": {
         "label1": "Point 1 · end of stage 2",
