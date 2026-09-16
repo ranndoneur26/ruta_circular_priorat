@@ -421,6 +421,21 @@
     }
   }
 
+  async function checkWalkerExists_(alias, email){
+    try {
+      const res = await fetch(SHEETS_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify({ action: 'checkwalker', alias, email })
+      });
+      const data = await res.json();
+      return !!(data && data.ok && data.found);
+    } catch(e) {
+      console.error('checkWalkerExists_ error:', e);
+      return false;
+    }
+  }
+
   const form = document.getElementById('signup-form');
   const successBox = document.getElementById('success-box');
   const submitBtn = document.getElementById('submit-btn');
@@ -514,7 +529,19 @@
       submittedAt: new Date().toISOString()
     };
 
-    const result = await sheetsAdd(entry);
+    let result = await sheetsAdd(entry);
+
+    /*
+     * A veces la petición "add" falla en el navegador (red, timeout, redirect
+     * de Apps Script) aunque el servidor haya completado el registro y ya
+     * haya enviado el correo. Antes de mostrar un error, comprobamos si la
+     * inscripción se guardó igualmente buscando este alias + correo.
+     */
+    if (!result.ok && SHEETS_CONFIGURED) {
+      const exists = await checkWalkerExists_(entry.alias, entry.email);
+      if (exists) result = { ok: true, recovered: true };
+    }
+
     submitBtn.disabled = false;
     submitBtn.textContent = originalLabel;
 
