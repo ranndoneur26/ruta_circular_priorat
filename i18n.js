@@ -606,6 +606,10 @@
         "pageOf": "Página {page} de {total}"
       },
       "empty": "No hay inscripciones que coincidan.",
+      "loading": "Paciencia, estamos cargando los datos…",
+      "loadingSlow": "Puede tardar unos segundos más de lo habitual.",
+      "loadError": "No se han podido cargar los datos. Comprueba tu conexión e inténtalo de nuevo.",
+      "retry": "↻ Reintentar",
       "confirm": {
         "h": "¿Quitar la verificación?",
         "text": "\"{alias}\" dejará de aparecer como verificado en la lista pública de caminantes.",
@@ -1217,6 +1221,10 @@
         "pageOf": "Pàgina {page} de {total}"
       },
       "empty": "No hi ha inscripcions que coincideixin.",
+      "loading": "Paciència, estem carregant les dades…",
+      "loadingSlow": "Pot trigar uns segons més del que és habitual.",
+      "loadError": "No s'han pogut carregar les dades. Comprova la connexió i torna-ho a provar.",
+      "retry": "↻ Tornar a provar",
       "confirm": {
         "h": "Vols treure la verificació?",
         "text": "\"{alias}\" deixarà d'aparèixer com a verificat a la llista pública de caminants.",
@@ -1828,6 +1836,10 @@
         "pageOf": "Page {page} of {total}"
       },
       "empty": "No sign-ups match.",
+      "loading": "Hang tight, we're loading the data…",
+      "loadingSlow": "This can take a few seconds longer than usual.",
+      "loadError": "The data couldn't be loaded. Check your connection and try again.",
+      "retry": "↻ Retry",
       "confirm": {
         "h": "Remove verification?",
         "text": "\"{alias}\" will stop appearing as verified on the public list of walkers.",

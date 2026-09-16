@@ -93,6 +93,16 @@
   .mini-btn.unverify{ border-color:var(--vinya-light); color:var(--vinya-light); }
   .mini-btn:disabled{ opacity:0.4; cursor:not-allowed; }
   .empty{ padding:40px; text-align:center; color:var(--pergami-dim); border:1px dashed var(--line); }
+  .admin-loading{ padding:50px; text-align:center; color:var(--pergami-dim); font-family:'JetBrains Mono', monospace; font-size:12.5px; }
+  .admin-spinner{
+    width:26px; height:26px; margin:0 auto 14px;
+    border:3px solid rgba(237,230,214,0.15); border-top-color:var(--samfaina);
+    border-radius:50%; animation:admin-spin 0.8s linear infinite;
+  }
+  @keyframes admin-spin{ to{ transform:rotate(360deg); } }
+  .admin-loading-slow{ margin-top:10px; opacity:0.75; font-size:11px; }
+  .admin-load-error{ padding:40px; text-align:center; border:1px dashed var(--vinya); }
+  .admin-load-error p{ color:var(--pergami-dim); font-size:13.5px; margin:0 0 16px; max-width:48ch; margin-left:auto; margin-right:auto; }
   .pagination{
     display:flex; align-items:center; justify-content:center; gap:18px;
     margin-top:20px; font-family:'JetBrains Mono', monospace; font-size:12.5px;
@@ -163,7 +173,16 @@
         <button class="btn secondary" id="logout-btn" data-i18n="toolbar.logout">Salir</button>
       </div>
     </div>
-    <table>
+    <div class="admin-loading" id="admin-loading">
+      <div class="admin-spinner" aria-hidden="true"></div>
+      <p data-i18n="loading">Paciencia, estamos cargando los datos…</p>
+      <p class="admin-loading-slow" id="admin-loading-slow" data-i18n="loadingSlow" style="display:none;">Puede tardar unos segundos más de lo habitual.</p>
+    </div>
+    <div class="admin-load-error" id="admin-load-error" style="display:none;">
+      <p data-i18n="loadError">No se han podido cargar los datos. Comprueba tu conexión e inténtalo de nuevo.</p>
+      <button type="button" class="btn secondary" id="retry-load-btn" data-i18n="retry">↻ Reintentar</button>
+    </div>
+    <table id="admin-table" style="display:none;">
       <thead>
         <tr>
           <th data-sort="alias"><span data-i18n="table.alias">Alias</span> <span class="arrow" data-arrow="alias"></span></th>
@@ -204,7 +223,7 @@
   function applyStaticText(lang){
     currentLang = lang;
     I18N.applyDom(T, lang);
-    render();
+    if (!dataLoadFailed) render();
   }
   document.querySelectorAll(".lang-switch button").forEach(btn=>{
     btn.addEventListener("click", ()=> applyStaticText(I18N.setLanguage(btn.getAttribute("data-lang"))));
@@ -234,19 +253,31 @@
     } catch(e){ return { ok:false, error:String(e) }; }
   }
 
+  async function fetchAdminListOnce(){
+    const res = await fetch(SHEETS_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action:"adminlist", token: adminPass })
+    });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    if (Array.isArray(data)) return data;
+    if (data && Array.isArray(data.rows)) return data.rows;
+    return [];
+  }
+
   async function sheetsList(){
-    if (!SHEETS_CONFIGURED) return [];
+    if (!SHEETS_CONFIGURED) return { ok:true, rows: [] };
     try {
-      const res = await fetch(SHEETS_API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ action:"adminlist", token: adminPass })
-      });
-      const data = await res.json();
-      if (Array.isArray(data)) return data;
-      if (data && Array.isArray(data.rows)) return data.rows;
-      return [];
-    } catch(e){ return []; }
+      return { ok:true, rows: await fetchAdminListOnce() };
+    } catch(e){
+      try {
+        await new Promise(r => setTimeout(r, 1200));
+        return { ok:true, rows: await fetchAdminListOnce() };
+      } catch(e2){
+        return { ok:false, rows: [] };
+      }
+    }
   }
 
   async function sheetsVerify(id, verified){
@@ -321,23 +352,32 @@
   });
   document.getElementById("reload-btn").addEventListener("click", loadAndRender);
 
-  async function loadEntries(){
-    let entries = [];
-    const sheetRows = await sheetsList();
-    sheetRows.forEach(row => entries.push({ key: row.id, source:"sheets", data: row }));
-    if (window.storage && typeof window.storage.list === "function"){
-      try {
-        const listResult = await window.storage.list("walker:", true);
-        if (listResult && listResult.keys && listResult.keys.length){
-          for (const key of listResult.keys){
-            try {
-              const r = await window.storage.get(key, true);
-              if (r && r.value) entries.push({ key, source:"shared", data: JSON.parse(r.value) });
-            } catch(e){}
+  async function sharedStorageAdminEntries(){
+    const out = [];
+    if (!(window.storage && typeof window.storage.list === "function")) return out;
+    try {
+      const listResult = await window.storage.list("walker:", true);
+      if (listResult && listResult.keys && listResult.keys.length){
+        const results = await Promise.all(
+          listResult.keys.map(key => window.storage.get(key, true).catch(() => null))
+        );
+        results.forEach((r, i) => {
+          if (r && r.value){
+            try { out.push({ key: listResult.keys[i], source:"shared", data: JSON.parse(r.value) }); } catch(e){}
           }
-        }
-      } catch(e){}
-    }
+        });
+      }
+    } catch(e){}
+    return out;
+  }
+
+  async function loadEntries(){
+    const [sheetsResult, sharedEntries] = await Promise.all([
+      sheetsList(),
+      sharedStorageAdminEntries()
+    ]);
+    let entries = sheetsResult.rows.map(row => ({ key: row.id, source:"sheets", data: row }));
+    entries = entries.concat(sharedEntries);
     try {
       const raw = localStorage.getItem(LOCAL_KEY);
       if (raw){
@@ -347,7 +387,7 @@
         }
       }
     } catch(e){}
-    return entries;
+    return { entries, sheetsFailed: !sheetsResult.ok };
   }
 
   async function saveEntry(entry){
@@ -399,10 +439,36 @@
   let currentPage = 1;
   const PAGE_SIZE = 20;
 
+  let dataLoadFailed = false;
+
   async function loadAndRender(){
-    currentEntries = await loadEntries();
+    const loadingEl = document.getElementById("admin-loading");
+    const errorEl = document.getElementById("admin-load-error");
+    const slowEl = document.getElementById("admin-loading-slow");
+    const tableEl = document.getElementById("admin-table");
+    loadingEl.style.display = "block";
+    errorEl.style.display = "none";
+    slowEl.style.display = "none";
+    tableEl.style.display = "none";
+    document.getElementById("empty-state").style.display = "none";
+    document.getElementById("pagination").style.display = "none";
+    const slowTimer = setTimeout(() => { slowEl.style.display = "block"; }, 4000);
+
+    const { entries, sheetsFailed } = await loadEntries();
+    clearTimeout(slowTimer);
+    loadingEl.style.display = "none";
+
+    currentEntries = entries;
+    dataLoadFailed = sheetsFailed && entries.length === 0;
+
+    if (dataLoadFailed){
+      errorEl.style.display = "block";
+      return;
+    }
+    tableEl.style.display = "";
     render();
   }
+  document.getElementById("retry-load-btn").addEventListener("click", loadAndRender);
 
   document.getElementById("search-box").addEventListener("input", (e) => {
     searchTerm = e.target.value.trim().toLowerCase();
