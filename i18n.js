@@ -477,8 +477,8 @@
       },
       "hero": {
         "eyebrow": "Quién ya se ha atrevido",
-        "h1": "Caminantes de la travessa",
-        "p": "Lista de personas cuya finalización ha sido verificada: alguien del proyecto ha revisado las 4 fotos de control que enviaron por correo. No es una verificación oficial de identidad, solo una revisión manual de las fotos."
+        "h1": "Comunidad de Caminantes del Camí del Prior",
+        "p": "Completar el Camí del Prior es una vivencia que deja huella. Este espacio reúne a quienes ya han recorrido y validado su travesía siguiendo el trazado oficial. ¡Inscríbete y forma parte de la historia del camino!"
       },
       "stats": {
         "total": "Inscritos",
@@ -1092,8 +1092,8 @@
       },
       "hero": {
         "eyebrow": "Qui ja s'hi ha atrevit",
-        "h1": "Caminants de la travessa",
-        "p": "Llista de persones la finalització de les quals ha estat verificada: algú del projecte ha revisat les 4 fotos de control que van enviar per correu. No és una verificació oficial d'identitat, només una revisió manual de les fotos."
+        "h1": "Comunitat de Caminants del Camí del Prior",
+        "p": "Completar el Camí del Prior és una vivència que deixa petjada. Aquest espai reuneix qui ja ha recorregut i validat la seva travessa seguint el traçat oficial. Inscriu-te i forma part de la història del camí!"
       },
       "stats": {
         "total": "Inscrits",
@@ -1707,8 +1707,8 @@
       },
       "hero": {
         "eyebrow": "Who's already dared",
-        "h1": "Walkers of the crossing",
-        "p": "A list of people whose completion has been verified: someone from the project has reviewed the 4 checkpoint photos they sent by email. This isn't an official identity check, just a manual photo review."
+        "h1": "Community of Walkers of El Camí del Prior",
+        "p": "Completing El Camí del Prior is an experience that leaves a mark. This space brings together those who have already walked and validated their crossing along the official route. Sign up and become part of the trail's history!"
       },
       "stats": {
         "total": "Signed up",
