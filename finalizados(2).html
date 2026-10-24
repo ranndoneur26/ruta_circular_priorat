@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a1715">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<title>Caminantes · El Camí del Prior</title>
+<meta name="description" content="Lista de personas que han caminado El Camí del Prior (Travessa del Priorat): alias, variante y fecha de inicio de cada caminante inscrito.">
+<link rel="canonical" href="https://ruta-circular-priorat.vercel.app/finalizados.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Caminantes · El Camí del Prior">
+<meta property="og:description" content="Descubre quién ya se ha atrevido con El Camí del Prior.">
+<meta property="og:locale" content="ca_ES">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --llicorella: #1a1715; --llicorella-2: #241f1c;
+    --pergami: #ede6d6; --pergami-dim: #cfc6b2;
+    --samfaina: #c69214; --vinya: #7a1f2b; --herba: #6e7858;
+    --line: rgba(237,230,214,0.14); --maxw: 1040px;
+  }
+  *{box-sizing:border-box;}
+  body{ margin:0; background:var(--llicorella); color:var(--pergami); font-family:'Public Sans', sans-serif; font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; margin:0; letter-spacing:-0.01em; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+  .eyebrow{ font-family:'JetBrains Mono', monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--samfaina); display:flex; align-items:center; gap:10px; }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--samfaina); display:inline-block; }
+
+  header.top{ position:sticky; top:0; z-index:30; background:rgba(26,23,21,0.9); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+  header.top .wrap{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:20px; }
+  .brand{ display:block; flex-shrink:0; line-height:0; }
+  .brand-logo{ display:block; height:76px; width:auto; }
+  nav.top-nav{ display:flex; gap:22px; font-size:13px; align-items:center; }
+  nav.top-nav a{ text-decoration:none; color:var(--pergami-dim); }
+  nav.top-nav a:hover{ color:var(--pergami); }
+  .nav-cta{ border:1px solid var(--samfaina); color:var(--samfaina) !important; padding:5px 12px; font-family:'JetBrains Mono', monospace; font-size:11.5px !important; letter-spacing:0.03em; }
+  .nav-cta:hover{ background:var(--samfaina); color:var(--llicorella) !important; }
+  .nav-toggle{
+    display:none; flex-direction:column; justify-content:center; align-items:center; gap:5px;
+    background:transparent; border:1px solid var(--line); width:40px; height:36px;
+    padding:0; cursor:pointer; flex-shrink:0;
+  }
+  .nav-toggle .bar{
+    display:block; width:18px; height:1.5px; background:var(--pergami);
+    transition:transform .25s ease, opacity .2s ease;
+  }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(2){ opacity:0; }
+  .nav-toggle[aria-expanded="true"] .bar:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+  #mobile-nav{
+    display:none; flex-direction:column; max-height:0; overflow:hidden;
+    transition:max-height .3s ease; background:var(--llicorella-2); border-bottom:1px solid var(--line);
+  }
+  #mobile-nav.open{ max-height:420px; }
+  #mobile-nav a{ display:block; padding:14px 24px; text-decoration:none; color:var(--pergami-dim); border-top:1px solid var(--line); font-size:14px; }
+  #mobile-nav a:first-child{ border-top:none; }
+  #mobile-nav .mnav-cta{ color:var(--samfaina); font-weight:600; }
+  @media (max-width:860px){
+    nav.top-nav{ display:none; }
+    .nav-toggle{ display:flex; order:3; }
+    #mobile-nav{ display:flex; }
+    .brand-logo{ height:66px; }
+  }
+  @media (max-width:480px){
+    .brand-logo{ height:72px; }
+  }
+  .lang-switch{ display:flex; border:1px solid var(--line); flex-shrink:0; }
+  .lang-switch button{ font-family:'JetBrains Mono', monospace; font-size:10px; letter-spacing:0.05em; background:transparent; color:var(--pergami-dim); border:none; padding:5px 9px; cursor:pointer; }
+  .lang-switch button + button{ border-left:1px solid var(--line); }
+  .lang-switch button[aria-pressed="true"]{ background:var(--samfaina); color:var(--llicorella); font-weight:600; }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible{ outline:2px solid var(--samfaina); outline-offset:3px; }
+  .skip-link{
+    position:absolute; left:12px; top:-60px; z-index:100;
+    background:var(--samfaina); color:var(--llicorella); font-weight:600;
+    padding:10px 18px; text-decoration:none; font-family:'JetBrains Mono', monospace;
+    font-size:13px; transition:top .2s ease;
+  }
+  .skip-link:focus{ top:12px; }
+
+  .phero{ padding:56px 0 30px; border-bottom:1px solid var(--line); position:relative; overflow:hidden; }
+  .phero::before{ content:""; position:absolute; top:-40%; right:-10%; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle, rgba(198,146,20,0.10) 0%, transparent 70%); pointer-events:none; }
+  .phero h1{ font-size:clamp(30px,4.6vw,44px); line-height:1.06; margin-top:14px; max-width:20ch; }
+  .phero p{ font-size:15.5px; color:var(--pergami-dim); margin-top:14px; max-width:58ch; }
+
+  .stat-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:26px; }
+  @media (max-width:680px){ .stat-row{ grid-template-columns:1fr 1fr; } }
+  .stat-cell{ background:var(--llicorella-2); padding:16px 18px; }
+  .stat-cell .n{ font-family:'JetBrains Mono', monospace; font-size:24px; font-weight:600; color:var(--samfaina); display:block; }
+  .stat-cell .l{ font-size:11.5px; color:var(--pergami-dim); margin-top:4px; display:block; }
+
+  /* ---------- Estadísticas premium (gráficas reales) ---------- */
+  .stats-premium{ padding:56px 0; border-bottom:1px solid var(--line); background:var(--llicorella-2); }
+  .stats-premium .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:36px; }
+  .stats-premium .section-head h2{ font-size:clamp(24px,3vw,32px); margin-top:8px; }
+  .stats-premium .section-head p{ max-width:44ch; color:var(--pergami-dim); font-size:14px; margin:0; }
+
+  .stats-grid{ display:grid; grid-template-columns:220px 1fr; gap:44px; align-items:center; }
+  @media (max-width:760px){ .stats-grid{ grid-template-columns:1fr; gap:32px; } }
+
+  .donut-wrap{ position:relative; width:180px; height:180px; margin:0 auto; }
+  .donut-svg{ width:100%; height:100%; transform:rotate(-90deg); }
+  .donut-track{ fill:none; stroke:rgba(237,230,214,0.12); stroke-width:10; }
+  .donut-value{ fill:none; stroke:var(--samfaina); stroke-width:10; stroke-linecap:round; transition:stroke-dashoffset 1s ease; }
+  .donut-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
+  .donut-n{ font-family:'JetBrains Mono', monospace; font-size:34px; font-weight:700; color:var(--samfaina); line-height:1; }
+  .donut-sub{ font-size:10.5px; color:var(--pergami-dim); margin-top:4px; }
+  .stat-card-label{ text-align:center; font-size:13px; color:var(--pergami-dim); margin-top:14px; max-width:26ch; margin-left:auto; margin-right:auto; }
+
+  .split-bar{ display:flex; height:30px; border:1px solid var(--line); overflow:hidden; }
+  .split-bar-seg{ height:100%; transition:width 0.8s ease; }
+  .split-legend{ display:flex; gap:24px; margin-top:14px; flex-wrap:wrap; font-size:13px; color:var(--pergami-dim); }
+  .split-legend-item{ display:flex; align-items:center; gap:8px; }
+  .split-legend .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; flex-shrink:0; }
+  .split-legend b{ color:var(--pergami); }
+
+  .insight-row{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:40px; }
+  .insight-card{ background:var(--llicorella); border-left:3px solid var(--samfaina); padding:16px 18px; font-size:13.5px; line-height:1.5; color:var(--pergami-dim); }
+
+  .origins-block{ margin-top:44px; }
+  .origins-block h3{ font-size:16px; margin-bottom:20px; }
+  .origin-row{ display:grid; grid-template-columns:130px 1fr 56px; align-items:center; gap:14px; margin-bottom:10px; font-size:13px; }
+  .origin-name{ color:var(--pergami-dim); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .origin-bar-track{ background:rgba(237,230,214,0.08); height:12px; }
+  .origin-bar-fill{ height:100%; background:var(--samfaina); transition:width 0.8s ease; }
+  .origin-count{ font-family:'JetBrains Mono', monospace; font-size:12px; color:var(--pergami-dim); text-align:right; }
+
+  .trend-block{ margin-top:44px; }
+  .trend-block h3{ font-size:16px; margin-bottom:20px; }
+  .trend-chart{ display:flex; align-items:flex-end; gap:6px; height:100px; border-bottom:1px solid var(--line); padding-bottom:2px; }
+  .trend-bar-wrap{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
+  .trend-bar{ width:100%; max-width:28px; background:var(--samfaina); transition:height 0.8s ease; }
+  .trend-labels{ display:flex; gap:6px; margin-top:6px; }
+  .trend-label{ flex:1; text-align:center; font-size:9.5px; color:var(--pergami-dim); font-family:'JetBrains Mono', monospace; }
+  .season-sub{ font-size:12.5px; color:var(--pergami-dim); margin:-10px 0 18px; }
+  .trend-bar.is-top{ background:var(--vinya); }
+
+  @media (max-width:480px){
+    .stats-premium{ padding:40px 0; }
+    .insight-row{ grid-template-columns:1fr; }
+    .origin-row{ grid-template-columns:90px 1fr 44px; gap:8px; }
+  }
+
+  main{ padding:36px 0 70px; }
+
+  .toolbar{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-bottom:28px; }
+  .search-box{ background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami); padding:10px 14px; font-family:'Public Sans', sans-serif; font-size:14px; flex:1 1 220px; min-width:180px; -webkit-appearance:none; appearance:none; border-radius:0; }
+  .search-box:focus{ outline:none; border-color:var(--samfaina); }
+  .filter-select, .sort-select{
+    background:var(--llicorella-2); border:1px solid var(--line); color:var(--pergami-dim);
+    padding:10px 30px 10px 12px; font-family:'JetBrains Mono', monospace; font-size:11.5px;
+    -webkit-appearance:none; appearance:none; border-radius:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c69214' stroke-width='1.6' fill='none'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 10px center;
+  }
+  .search-box:-webkit-autofill{ -webkit-text-fill-color:var(--pergami); -webkit-box-shadow:0 0 0px 1000px var(--llicorella-2) inset; transition:background-color 5000s ease-in-out 0s; }
+  .filter-select:focus, .sort-select:focus{ outline:none; border-color:var(--samfaina); }
+
+  .grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  @media (max-width:900px){ .grid{ grid-template-columns:1fr 1fr; } }
+  @media (max-width:620px){ .grid{ grid-template-columns:1fr; } }
+
+  .pagination{
+    display:flex; align-items:center; justify-content:center; gap:18px;
+    margin-top:28px; font-family:'JetBrains Mono', monospace; font-size:12.5px;
+  }
+  .pagination button{
+    font-family:inherit; font-size:12.5px; letter-spacing:0.03em;
+    background:transparent; border:1px solid var(--line); color:var(--pergami);
+    padding:9px 16px; cursor:pointer; transition:border-color 0.15s ease, color 0.15s ease;
+  }
+  .pagination button:hover:not(:disabled){ border-color:var(--samfaina); color:var(--samfaina); }
+  .pagination button:disabled{ opacity:0.35; cursor:default; }
+  .pagination .page-of{ color:var(--pergami-dim); white-space:nowrap; }
+  @media (max-width:480px){
+    .pagination{ gap:10px; }
+    .pagination button{ padding:8px 12px; }
+  }
+
+  .walker-card{ background:var(--llicorella-2); padding:22px 22px; display:flex; flex-direction:column; min-height:180px; }
+  .walker-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:8px; }
+  .walker-alias{ font-family:'Fraunces', serif; font-size:19px; font-weight:600; line-height:1.2; }
+  .badge{ flex-shrink:0; font-family:'JetBrains Mono', monospace; font-size:9.5px; letter-spacing:0.04em; padding:2px 7px; border:1px solid var(--line); color:var(--pergami-dim); white-space:nowrap; margin-top:2px; }
+  .badge.verified{ border-color:var(--herba); color:var(--herba); }
+  .walker-meta{ font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.03em; color:var(--samfaina); text-transform:uppercase; margin-bottom:4px; }
+  .walker-origen{ font-size:12.5px; color:var(--pergami-dim); margin-bottom:10px; }
+  .walker-msg{ font-family:'Fraunces', serif; font-style:italic; font-size:14px; color:var(--pergami); line-height:1.5; flex:1; margin-bottom:10px; }
+  .walker-msg::before{ content:"\201C"; color:var(--samfaina); }
+  .walker-msg::after{ content:"\201D"; color:var(--samfaina); }
+  .walker-date{ font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--pergami-dim); opacity:0.7; margin-top:auto; }
+
+  .empty{ padding:60px 30px; text-align:center; border:1px dashed var(--line); color:var(--pergami-dim); }
+  .empty h3{ font-size:18px; color:var(--pergami); margin-bottom:8px; }
+  .empty p{ font-size:14px; margin:0 0 20px; }
+  .empty .btn{ display:inline-flex; padding:12px 24px; font-family:'JetBrains Mono', monospace; font-size:13px; letter-spacing:0.03em; text-decoration:none; border:1px solid var(--samfaina); background:var(--samfaina); color:var(--llicorella); font-weight:600; }
+  .empty .btn:hover{ opacity:0.88; }
+
+  .loading{ padding:60px 0; text-align:center; color:var(--pergami-dim); font-family:'JetBrains Mono', monospace; font-size:12.5px; }
+  .spinner{
+    width:28px; height:28px; margin:0 auto 16px;
+    border:3px solid rgba(237,230,214,0.15); border-top-color:var(--samfaina);
+    border-radius:50%; animation:fp-spin 0.8s linear infinite;
+  }
+  @keyframes fp-spin{ to{ transform:rotate(360deg); } }
+  .loading-slow{ margin-top:10px; opacity:0.75; font-size:11px; }
+  .load-error{ padding:50px 0; text-align:center; }
+  .load-error p{ color:var(--pergami-dim); font-size:13.5px; margin:0 0 16px; max-width:44ch; margin-left:auto; margin-right:auto; }
+
+  footer{ padding:30px 0 50px; border-top:1px solid var(--line); font-size:12px; color:var(--pergami-dim); }
+
+  /* ---------- footer legal row (discreet, compact on mobile) ---------- */
+  .footer-legal{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+    gap:8px 16px; width:100%; margin-top:14px; padding-top:14px;
+    border-top:1px solid var(--line); font-size:11px; color:var(--pergami-dim); opacity:0.8;
+  }
+  .footer-legal-links{ display:flex; gap:14px; flex-wrap:wrap; }
+  .footer-legal-link{
+    background:none; border:none; padding:0; margin:0; color:var(--pergami-dim);
+    font-family:'JetBrains Mono', monospace; font-size:11px; text-decoration:underline;
+    text-underline-offset:2px; cursor:pointer;
+  }
+  .footer-legal-link:hover{ color:var(--samfaina); }
+  a.footer-legal-link{ display:inline-block; }
+  @media (max-width:480px){
+    .footer-legal{ font-size:10px; gap:6px 12px; margin-top:10px; padding-top:10px; }
+  }
+
+  /* ---------- cookie banner (slim, fixed bottom, minimal on mobile) ---------- */
+  .cookie-banner{
+    position:fixed; left:0; right:0; bottom:0; z-index:60;
+    background:var(--llicorella-2); border-top:1px solid var(--line);
+    padding:10px 16px; padding-bottom:calc(10px + env(safe-area-inset-bottom, 0px));
+    transform:translateY(110%); transition:transform 0.3s ease;
+  }
+  .cookie-banner.show{ transform:translateY(0); }
+  .cookie-banner-inner{
+    max-width:var(--maxw); margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
+  }
+  .cookie-banner p{ margin:0; font-size:12px; color:var(--pergami-dim); flex:1 1 220px; line-height:1.45; }
+  .cookie-actions{ display:flex; align-items:center; gap:12px; flex-shrink:0; }
+  .cookie-link{
+    background:none; border:none; padding:4px 0; color:var(--samfaina);
+    font-family:'JetBrains Mono', monospace; font-size:11px; text-decoration:underline;
+    text-underline-offset:2px; cursor:pointer; white-space:nowrap;
+  }
+  .cookie-accept{
+    background:var(--samfaina); color:var(--llicorella); border:none; font-weight:600;
+    font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.03em;
+    padding:8px 16px; cursor:pointer; white-space:nowrap;
+  }
+  .cookie-accept:hover{ opacity:0.88; }
+  @media (max-width:480px){
+    .cookie-banner{ padding:8px 12px; padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px)); }
+    .cookie-banner p{ font-size:11px; flex-basis:100%; }
+    .cookie-actions{ width:100%; justify-content:flex-end; }
+    .cookie-accept{ padding:7px 13px; font-size:10.5px; }
+  }
+
+  /* ---------- legal info modal (aviso legal / privacidad / cookies) ---------- */
+  .legal-modal{
+    display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:70;
+    align-items:center; justify-content:center; padding:20px;
+  }
+  .legal-modal.show{ display:flex; }
+  .legal-modal-card{
+    background:var(--llicorella-2); border:1px solid var(--line); max-width:560px; width:100%;
+    max-height:80vh; overflow-y:auto; padding:28px 26px; position:relative;
+  }
+  .legal-modal-close{
+    position:absolute; top:12px; right:12px; background:none; border:none;
+    color:var(--pergami-dim); font-size:22px; line-height:1; cursor:pointer; padding:6px;
+  }
+  .legal-modal-close:hover{ color:var(--pergami); }
+  .legal-modal-card h3{ font-size:16px; margin:0 0 14px; padding-right:22px; }
+  .legal-modal-card p{ font-size:13px; color:var(--pergami-dim); margin:0 0 12px; line-height:1.55; }
+  .legal-modal-card p:last-child{ margin-bottom:0; }
+  .legal-modal-card strong{ color:var(--pergami); }
+  .origins-modal-list{ list-style:none; margin:0; padding:0; columns:2; column-gap:24px; }
+  .origins-modal-list li{
+    display:flex; justify-content:space-between; gap:10px; font-size:13px;
+    color:var(--pergami-dim); padding:6px 0; border-bottom:1px solid var(--line);
+    break-inside:avoid;
+  }
+  .origins-modal-list li b{ color:var(--pergami); font-weight:400; }
+  .origins-modal-list li span:last-child{ font-family:'JetBrains Mono', monospace; color:var(--samfaina); flex-shrink:0; }
+  @media (max-width:480px){ .origins-modal-list{ columns:1; } }
+  .origin-row-others{ cursor:pointer; }
+  .origin-row-others .origin-name{ color:var(--samfaina); text-decoration:underline; text-decoration-style:dotted; text-underline-offset:2px; }
+  .origin-row-others:hover .origin-bar-fill{ filter:brightness(1.2); }
+</style>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Saltar al contenido</a>
+<header class="top">
+  <div class="wrap">
+    <a href="index.html" class="brand"><img src="logo_cami_prior.svg" alt="El Camí del Prior" class="brand-logo"></a>
+    <nav class="top-nav">
+      <a href="index.html" data-i18n="nav.back">← Volver al circuito</a>
+      <a href="inscripcion.html" class="nav-cta" data-i18n="nav.signup">Inscribirme</a>
+    </nav>
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Abrir menú">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+    <div class="lang-switch" role="group" aria-label="Idioma / Llengua / Language">
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+      <button type="button" data-lang="ca" aria-pressed="true">CA</button>
+      <button type="button" data-lang="en" aria-pressed="false">ENG</button>
+    </div>
+  </div>
+  <div id="mobile-nav">
+    <a href="index.html" data-i18n="nav.back">← Volver al circuito</a>
+    <a href="inscripcion.html" class="mnav-cta" data-i18n="nav.signup">Inscribirme</a>
+  </div>
+</header>
+
+<div class="phero" id="main-content">
+  <div class="wrap">
+    <div class="eyebrow" data-i18n="hero.eyebrow">Quién ya se ha atrevido</div>
+    <h1 data-i18n="hero.h1">Comunidad de Caminantes del Camí del Prior</h1>
+    <p data-i18n="hero.p">Completar el Camí del Prior es una vivencia que deja huella. Este espacio reúne a quienes ya han recorrido y validado su travesía siguiendo el trazado oficial. ¡Inscríbete y forma parte de la historia del camino!</p>
+    <div class="stat-row">
+      <div class="stat-cell"><span class="n" id="stat-total">0</span><span class="l" data-i18n="stats.total">Inscritos</span></div>
+      <div class="stat-cell"><span class="n" id="stat-verified">0</span><span class="l" data-i18n="stats.verified">Verificados</span></div>
+      <div class="stat-cell"><span class="n" id="stat-completo">0</span><span class="l" data-i18n="stats.completo">Circuito completo</span></div>
+      <div class="stat-cell"><span class="n" id="stat-origenes">0</span><span class="l" data-i18n="stats.origenes">Orígenes distintos</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="stats-premium" id="stats-premium">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow" data-i18n="statsPremium.eyebrow">Datos del proyecto</div>
+        <h2 data-i18n="statsPremium.h2">El Camí del Prior en cifras</h2>
+      </div>
+      <p data-i18n="statsPremium.p">Un vistazo real a quién completa la ruta, de dónde viene y qué variante elige — calculado a partir de las inscripciones verificadas y no verificadas.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div>
+        <div class="donut-wrap">
+          <svg class="donut-svg" viewBox="0 0 120 120">
+            <circle class="donut-track" cx="60" cy="60" r="50"></circle>
+            <circle class="donut-value" id="donut-completion" cx="60" cy="60" r="50"></circle>
+          </svg>
+          <div class="donut-center">
+            <span class="donut-n" id="completion-pct">0%</span>
+            <span class="donut-sub" id="completion-sub"></span>
+          </div>
+        </div>
+        <div class="stat-card-label" data-i18n="statsPremium.completionLabel">de los inscritos han completado y verificado su paso</div>
+      </div>
+
+      <div class="split-card">
+        <div class="split-bar" id="split-bar">
+          <div class="split-bar-seg" id="split-seg-long" style="background:var(--samfaina);"></div>
+          <div class="split-bar-seg" id="split-seg-short" style="background:var(--herba);"></div>
+        </div>
+        <div class="split-legend">
+          <div class="split-legend-item"><span class="dot" style="background:var(--samfaina)"></span><span data-i18n="statsPremium.variantLong">Circuito completo (8 etapas)</span> <b id="pct-long">0%</b></div>
+          <div class="split-legend-item"><span class="dot" style="background:var(--herba)"></span><span data-i18n="statsPremium.variantShort">Ruta corta (3 días)</span> <b id="pct-short">0%</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-row" id="insight-row"></div>
+
+    <div class="origins-block">
+      <h3 data-i18n="statsPremium.originsH">¿De dónde vienen?</h3>
+      <div id="origins-chart"></div>
+    </div>
+
+    <div class="trend-block" id="trend-block" style="display:none;">
+      <h3 data-i18n="statsPremium.trendH">Inscripciones por mes</h3>
+      <div id="trend-chart-bars" class="trend-chart"></div>
+      <div id="trend-chart-labels" class="trend-labels"></div>
+    </div>
+
+    <div class="trend-block" id="season-block" style="display:none;">
+      <h3 data-i18n="statsPremium.seasonH">¿En qué mes empieza la gente?</h3>
+      <p class="season-sub" data-i18n="statsPremium.seasonSub">Mes de inicio elegido por los inscritos, en porcentaje sobre el total con fecha indicada.</p>
+      <div id="season-chart-bars" class="trend-chart"></div>
+      <div id="season-chart-labels" class="trend-labels"></div>
+    </div>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="toolbar">
+    <input type="text" class="search-box" id="search-box" data-i18n-placeholder="toolbar.search" placeholder="Buscar por alias u origen…">
+    <select class="filter-select" id="filter-select">
+      <option value="all" data-i18n="toolbar.allVariants">Todas las variantes</option>
+      <option value="completo" data-i18n="toolbar.vCompleto">Circuito completo</option>
+      <option value="corta" data-i18n="toolbar.vCorta">Ruta corta (3 días)</option>
+    </select>
+    <select class="sort-select" id="sort-select">
+      <option value="recent" data-i18n="toolbar.sortRecent">Más recientes</option>
+      <option value="alias" data-i18n="toolbar.sortAlias">Por alias</option>
+    </select>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="spinner" aria-hidden="true"></div>
+    <p data-i18n="toolbar.loading">Cargando caminantes…</p>
+    <p class="loading-slow" id="loading-slow" data-i18n="toolbar.loadingSlow" style="display:none;">Puede tardar unos segundos más de lo habitual.</p>
+  </div>
+  <div class="load-error" id="load-error" style="display:none;">
+    <p data-i18n="toolbar.loadError">No se han podido cargar los datos. Comprueba tu conexión e inténtalo de nuevo.</p>
+    <button type="button" class="btn" id="retry-load-btn" data-i18n="toolbar.retry">↻ Reintentar</button>
+  </div>
+  <div class="grid" id="grid" style="display:none;"></div>
+  <div class="pagination" id="pagination" style="display:none;"></div>
+  <div class="empty" id="empty" style="display:none;">
+    <h3 data-i18n="empty.h">Todavía nadie se ha apuntado</h3>
+    <p data-i18n="empty.p">Sé la primera persona en dejar su alias escrito en esta lista.</p>
+    <a href="inscripcion.html" class="btn" data-i18n="empty.cta">Inscribirme →</a>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap" data-i18n="footer.text">Camí del Prior — estadísticas de personas inscritas</div>
+  <div class="wrap footer-legal">
+    <span class="mono" id="footer-copy"></span>
+    <nav class="footer-legal-links">
+      <button type="button" class="footer-legal-link" id="footer-link-aviso"></button>
+      <button type="button" class="footer-legal-link" id="footer-link-privacidad"></button>
+      <button type="button" class="footer-legal-link" id="footer-link-cookies"></button>
+      <a class="footer-legal-link" href="mailto:info.camidelprior@gmail.com" id="footer-link-contacto"></a>
+    </nav>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner" role="region" aria-label="Cookies">
+  <div class="cookie-banner-inner">
+    <p id="cookie-text"></p>
+    <div class="cookie-actions">
+      <button type="button" class="cookie-link" id="cookie-info-btn"></button>
+      <button type="button" class="cookie-accept" id="cookie-accept-btn"></button>
+    </div>
+  </div>
+</div>
+
+<div class="legal-modal" id="origins-modal">
+  <div class="legal-modal-card">
+    <button type="button" class="legal-modal-close" id="origins-modal-close" aria-label="Cerrar">&times;</button>
+    <h3 id="origins-modal-title"></h3>
+    <div id="origins-modal-body"></div>
+  </div>
+</div>
+
+<div class="legal-modal" id="legal-modal">
+  <div class="legal-modal-card">
+    <button type="button" class="legal-modal-close" id="legal-modal-close" aria-label="Cerrar">&times;</button>
+    <div id="legal-modal-body"></div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="i18n.js"></script>
+<script>
+  const T = { es: I18N.dict.es.finalizados, ca: I18N.dict.ca.finalizados, en: I18N.dict.en.finalizados };
+
+  let currentLang = I18N.FALLBACK;
+  const get = I18N.get;
+
+  let dataLoadFailed = false;
+  function applyStaticText(lang){
+    currentLang = lang;
+    I18N.applyDom(T, lang);
+    if (!dataLoadFailed){
+      render();
+      renderStatsPremium(lang);
+    }
+  }
+  document.querySelectorAll(".lang-switch button").forEach(btn=>{
+    btn.addEventListener("click", ()=> applyStaticText(I18N.setLanguage(btn.getAttribute("data-lang"))));
+  });
+
+  // ---------- Popup "Otros orígenes": lista completa, alfabética, de las
+  // procedencias que no caben en el top 8 del gráfico. ----------
+  const originsModal = document.getElementById("origins-modal");
+  function openOriginsModal(){
+    const tp = T[currentLang].statsPremium;
+    document.getElementById("origins-modal-title").textContent = tp.originsOthers;
+    const sorted = originsRestList.slice().sort((a, b) => a.label.localeCompare(b.label, currentLang));
+    document.getElementById("origins-modal-body").innerHTML =
+      `<ul class="origins-modal-list">${sorted.map(o => `<li><span>${escapeHtml(o.label)}</span><span>${o.count}</span></li>`).join("")}</ul>`;
+    originsModal.classList.add("show");
+  }
+  function closeOriginsModal(){ originsModal.classList.remove("show"); }
+  document.getElementById("origins-modal-close").addEventListener("click", closeOriginsModal);
+  originsModal.addEventListener("click", (e) => { if (e.target.id === "origins-modal") closeOriginsModal(); });
+  document.getElementById("origins-chart").addEventListener("click", (e) => {
+    if (e.target.closest("#origins-others-row")) openOriginsModal();
+  });
+
+  const navToggle = document.getElementById("nav-toggle");
+  const mobileNav = document.getElementById("mobile-nav");
+  if (navToggle && mobileNav){
+    navToggle.addEventListener("click", () => {
+      const open = mobileNav.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+    mobileNav.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", () => {
+        mobileNav.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  }
+
+  // --- Load entries: Google Sheets backend (real, cross-device) as primary source,
+  // plus shared window.storage and localStorage as fallback for continuity.
+  // Sources are fetched in PARALLEL (instead of one after another) and the
+  // individual shared-storage keys are also fetched in parallel, to cut load
+  // time significantly. The Sheets call gets one automatic retry, since Google
+  // Apps Script sometimes fails or times out on a cold start. ---
+  const LOCAL_KEY = "travessa_priorat_walkers";
+  const SHEETS_API_URL = window.APP_CONFIG.SHEETS_API_URL;
+  const SHEETS_CONFIGURED = /^https:\/\/script\.google(usercontent)?\.com\//.test(SHEETS_API_URL);
+
+  async function fetchSheetsOnce(){
+    const res = await fetch(SHEETS_API_URL + "?action=list");
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    if (Array.isArray(data)) return data;
+    if (data && Array.isArray(data.rows)) return data.rows;
+    return [];
+  }
+
+  async function sheetsList(){
+    if (!SHEETS_CONFIGURED) return { ok: true, entries: [] };
+    try {
+      return { ok: true, entries: await fetchSheetsOnce() };
+    } catch(e){
+      try {
+        await new Promise(r => setTimeout(r, 1200));
+        return { ok: true, entries: await fetchSheetsOnce() };
+      } catch(e2){
+        return { ok: false, entries: [] };
+      }
+    }
+  }
+
+  async function sharedStorageEntries(){
+    const out = [];
+    if (!(window.storage && typeof window.storage.list === "function")) return out;
+    try {
+      const listResult = await window.storage.list("walker:", true);
+      if (listResult && listResult.keys && listResult.keys.length){
+        const results = await Promise.all(
+          listResult.keys.map(key => window.storage.get(key, true).catch(() => null))
+        );
+        results.forEach(r => {
+          if (r && r.value){
+            try { out.push(JSON.parse(r.value)); } catch(e){}
+          }
+        });
+      }
+    } catch(e){}
+    return out;
+  }
+
+  async function loadEntries(){
+    const [sheetsResult, storageEntries] = await Promise.all([
+      sheetsList(),
+      sharedStorageEntries()
+    ]);
+    let entries = sheetsResult.entries.concat(storageEntries);
+    try {
+      const raw = localStorage.getItem(LOCAL_KEY);
+      if (raw){
+        const local = JSON.parse(raw);
+        if (Array.isArray(local)) entries = entries.concat(local);
+      }
+    } catch(e){}
+    return { entries, sheetsFailed: !sheetsResult.ok };
+  }
+
+  function escapeHtml(s){
+    const div = document.createElement("div");
+    div.textContent = s || "";
+    return div.innerHTML;
+  }
+  function formatDate(iso){
+    if (!iso) return "";
+    const d = new Date(iso + "T00:00:00");
+    if (isNaN(d.getTime())) return iso;
+    return d.toLocaleDateString(currentLang === "ca" ? "ca-ES" : currentLang === "en" ? "en-GB" : "es-ES", { day:"numeric", month:"short", year:"numeric" });
+  }
+
+  let allEntries = [];
+  let originsRestList = [];
+  let searchTerm = "";
+  let variantFilter = "all";
+  let sortMode = "recent";
+  let currentPage = 1;
+  const PAGE_SIZE = 15;
+
+  document.getElementById("search-box").addEventListener("input", (e) => {
+    searchTerm = e.target.value.trim().toLowerCase();
+    currentPage = 1;
+    render();
+  });
+  document.getElementById("filter-select").addEventListener("change", (e) => {
+    variantFilter = e.target.value;
+    currentPage = 1;
+    render();
+  });
+  document.getElementById("sort-select").addEventListener("change", (e) => {
+    sortMode = e.target.value;
+    currentPage = 1;
+    render();
+  });
+
+  // ---------- Estadísticas premium: % de finalización, reparto de variante,
+  // orígenes más frecuentes e inscripciones por mes, calculado siempre sobre
+  // TODAS las inscripciones reales (no solo las verificadas). ----------
+  function renderStatsPremium(lang){
+    const tp = T[lang].statsPremium;
+    if (!tp) return;
+    const total = allEntries.length;
+    const verifiedCount = allEntries.filter(w => w.verified).length;
+    const pctCompletion = total ? Math.round((verifiedCount / total) * 100) : 0;
+
+    const circumference = 2 * Math.PI * 50;
+    const donut = document.getElementById("donut-completion");
+    if (donut){
+      donut.style.strokeDasharray = circumference.toFixed(2);
+      donut.style.strokeDashoffset = (circumference * (1 - pctCompletion / 100)).toFixed(2);
+    }
+    const pctEl = document.getElementById("completion-pct");
+    const subEl = document.getElementById("completion-sub");
+    if (pctEl) pctEl.textContent = pctCompletion + "%";
+    if (subEl) subEl.textContent = tp.completionSub.replace("{verified}", verifiedCount).replace("{total}", total);
+
+    const longCount = allEntries.filter(w => w.variante === "completo").length;
+    const shortCount = allEntries.filter(w => w.variante === "corta").length;
+    const variantTotal = longCount + shortCount;
+    const pctLong = variantTotal ? Math.round((longCount / variantTotal) * 100) : 0;
+    const pctShort = variantTotal ? 100 - pctLong : 0;
+    const segLong = document.getElementById("split-seg-long");
+    const segShort = document.getElementById("split-seg-short");
+    if (segLong) segLong.style.width = pctLong + "%";
+    if (segShort) segShort.style.width = pctShort + "%";
+    const pctLongEl = document.getElementById("pct-long");
+    const pctShortEl = document.getElementById("pct-short");
+    if (pctLongEl) pctLongEl.textContent = pctLong + "%";
+    if (pctShortEl) pctShortEl.textContent = pctShort + "%";
+
+    const longVerified = allEntries.filter(w => w.variante === "completo" && w.verified).length;
+    const shortVerified = allEntries.filter(w => w.variante === "corta" && w.verified).length;
+    const pctLongCompletion = longCount ? Math.round((longVerified / longCount) * 100) : null;
+    const pctShortCompletion = shortCount ? Math.round((shortVerified / shortCount) * 100) : null;
+    const insight1 = (pctLongCompletion !== null && pctShortCompletion !== null)
+      ? tp.insight1.replace("{pctShort}", pctShortCompletion).replace("{pctLong}", pctLongCompletion)
+      : tp.insight1NoData;
+
+    const originCounts = {};
+    allEntries.forEach(w => {
+      const raw = (w.origen || "").trim().replace(/\s+/g, " ");
+      if (!raw) return;
+      const norm = raw.toLowerCase();
+      if (!originCounts[norm]) originCounts[norm] = { label: raw, count: 0 };
+      originCounts[norm].count++;
+    });
+    const originList = Object.values(originCounts).sort((a, b) => b.count - a.count);
+    const distinctOrigins = originList.length;
+
+    const insight2 = originList.length
+      ? tp.insight2.replace("{origin}", originList[0].label).replace("{count}", originList[0].count).replace("{pct}", total ? Math.round((originList[0].count / total) * 100) : 0)
+      : tp.insight2NoData;
+    const insight3 = tp.insight3.replace("{n}", distinctOrigins);
+
+    const seasonCounts = new Array(12).fill(0);
+    let seasonTotal = 0;
+    allEntries.forEach(w => {
+      if (!w.startDate) return;
+      const d = new Date(w.startDate + "T00:00:00");
+      if (isNaN(d.getTime())) return;
+      seasonCounts[d.getMonth()]++;
+      seasonTotal++;
+    });
+    const maxSeason = Math.max(...seasonCounts);
+    const topMonthIdx = seasonCounts.indexOf(maxSeason);
+    const insight4 = (seasonTotal > 0 && maxSeason > 0)
+      ? tp.insight4.replace("{month}", tp.months[topMonthIdx]).replace("{pct}", Math.round((maxSeason / seasonTotal) * 100))
+      : null;
+
+    const insightRow = document.getElementById("insight-row");
+    if (insightRow){
+      const insights = [insight1, insight2, insight3];
+      if (insight4) insights.push(insight4);
+      insightRow.innerHTML = insights.map(txt => `<div class="insight-card">${escapeHtml(txt)}</div>`).join("");
+    }
+
+    const originsChart = document.getElementById("origins-chart");
+    if (originsChart){
+      if (!originList.length){
+        originsChart.innerHTML = `<p style="color:var(--pergami-dim); font-size:13px; margin:0;">${escapeHtml(tp.originsEmpty)}</p>`;
+      } else {
+        const TOP_N = 8;
+        const top = originList.slice(0, TOP_N).map(o => ({ label: o.label, count: o.count }));
+        const rest = originList.slice(TOP_N);
+        const restCount = rest.reduce((s, o) => s + o.count, 0);
+        originsRestList = rest;
+        if (restCount > 0) top.push({ label: tp.originsOthers, count: restCount, isOthers: true });
+        const maxCount = Math.max(...top.map(r => r.count));
+        originsChart.innerHTML = top.map(r => {
+          const pct = maxCount ? Math.round((r.count / maxCount) * 100) : 0;
+          const rowClass = r.isOthers ? "origin-row origin-row-others" : "origin-row";
+          const rowId = r.isOthers ? ` id="origins-others-row"` : "";
+          return `<div class="${rowClass}"${rowId}>
+            <div class="origin-name" title="${escapeHtml(r.label)}">${escapeHtml(r.label)}</div>
+            <div class="origin-bar-track"><div class="origin-bar-fill" style="width:${pct}%"></div></div>
+            <div class="origin-count">${r.count}</div>
+          </div>`;
+        }).join("");
+      }
+    }
+
+    const monthCounts = {};
+    allEntries.forEach(w => {
+      if (!w.submittedAt) return;
+      const d = new Date(w.submittedAt);
+      if (isNaN(d.getTime())) return;
+      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      monthCounts[key] = (monthCounts[key] || 0) + 1;
+    });
+    const monthKeys = Object.keys(monthCounts).sort();
+    const trendBlock = document.getElementById("trend-block");
+    if (trendBlock){
+      if (monthKeys.length >= 2){
+        trendBlock.style.display = "block";
+        const maxM = Math.max(...monthKeys.map(k => monthCounts[k]));
+        const monthNames = {
+          es: ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"],
+          ca: ["gen","feb","mar","abr","mai","jun","jul","ago","set","oct","nov","des"],
+          en: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        };
+        const names = monthNames[lang] || monthNames.es;
+        const bars = document.getElementById("trend-chart-bars");
+        const labels = document.getElementById("trend-chart-labels");
+        if (bars) bars.innerHTML = monthKeys.map(k => {
+          const h = maxM ? Math.round((monthCounts[k] / maxM) * 100) : 0;
+          return `<div class="trend-bar-wrap"><div class="trend-bar" style="height:${h}%" title="${monthCounts[k]}"></div></div>`;
+        }).join("");
+        if (labels) labels.innerHTML = monthKeys.map(k => {
+          const [y, m] = k.split("-");
+          return `<div class="trend-label">${names[parseInt(m, 10) - 1]} ${y.slice(2)}</div>`;
+        }).join("");
+      } else {
+        trendBlock.style.display = "none";
+      }
+    }
+
+    const seasonBlock = document.getElementById("season-block");
+    if (seasonBlock){
+      if (seasonTotal > 0){
+        seasonBlock.style.display = "block";
+        const monthShort = {
+          es: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],
+          ca: ["Gen","Feb","Mar","Abr","Mai","Jun","Jul","Ago","Set","Oct","Nov","Des"],
+          en: ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+        };
+        const shortNames = monthShort[lang] || monthShort.es;
+        const seasonBars = document.getElementById("season-chart-bars");
+        const seasonLabels = document.getElementById("season-chart-labels");
+        if (seasonBars) seasonBars.innerHTML = seasonCounts.map((c, i) => {
+          const h = maxSeason ? Math.round((c / maxSeason) * 100) : 0;
+          const realPct = seasonTotal ? Math.round((c / seasonTotal) * 100) : 0;
+          const isTop = i === topMonthIdx && c > 0;
+          return `<div class="trend-bar-wrap"><div class="trend-bar${isTop ? " is-top" : ""}" style="height:${h}%" title="${realPct}%"></div></div>`;
+        }).join("");
+        if (seasonLabels) seasonLabels.innerHTML = shortNames.map(n => `<div class="trend-label">${n}</div>`).join("");
+      } else {
+        seasonBlock.style.display = "none";
+      }
+    }
+  }
+
+  function render(){
+    const grid = document.getElementById("grid");
+    const empty = document.getElementById("empty");
+    const t = T[currentLang];
+
+    document.getElementById("stat-total").textContent = allEntries.length;
+    document.getElementById("stat-verified").textContent = allEntries.filter(w => w.verified).length;
+    document.getElementById("stat-completo").textContent = allEntries.filter(w => w.variante === "completo").length;
+    const origSet = new Set(allEntries.map(w => (w.origen||"").trim().toLowerCase()).filter(Boolean));
+    document.getElementById("stat-origenes").textContent = origSet.size;
+
+    if (allEntries.length === 0){
+      grid.style.display = "none";
+      document.getElementById("pagination").style.display = "none";
+      empty.style.display = "block";
+      return;
+    }
+
+    let visible = allEntries.filter(w => {
+      const isVerified = !!w.verified;
+      const matchesSearch = !searchTerm ||
+        (w.alias||"").toLowerCase().includes(searchTerm) ||
+        (w.origen||"").toLowerCase().includes(searchTerm);
+      const matchesFilter = variantFilter === "all" || w.variante === variantFilter;
+      return isVerified && matchesSearch && matchesFilter;
+    });
+
+    visible.sort((a,b) => {
+      if (sortMode === "alias") return (a.alias||"").localeCompare(b.alias||"");
+      return (b.submittedAt||"").localeCompare(a.submittedAt||"");
+    });
+
+    if (visible.length === 0){
+      grid.style.display = "none";
+      document.getElementById("pagination").style.display = "none";
+      empty.style.display = "block";
+      empty.querySelector("h3").textContent = t.emptyFiltered.h;
+      empty.querySelector("p").textContent = t.emptyFiltered.p;
+      return;
+    }
+
+    const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = totalPages;
+    const pageItems = visible.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+    empty.style.display = "none";
+    grid.style.display = "grid";
+    grid.innerHTML = pageItems.map(w => {
+      const variantLabel = t.variant[w.variante] || escapeHtml(w.variante || "");
+      const verifiedBadge = w.verified ? `<span class="badge verified">${t.card.verified}</span>` : "";
+      const origen = w.origen ? `<div class="walker-origen">${escapeHtml(w.origen)}</div>` : "";
+      const msg = w.mensaje ? `<div class="walker-msg">${escapeHtml(w.mensaje)}</div>` : `<div class="walker-msg" style="opacity:0.35;">—</div>`;
+      const date = w.startDate ? `${t.card.start}: ${formatDate(w.startDate)}` : "";
+      return `<div class="walker-card">
+        <div class="walker-top">
+          <div class="walker-alias">${escapeHtml(w.alias)}</div>
+          ${verifiedBadge}
+        </div>
+        <div class="walker-meta">${variantLabel}</div>
+        ${origen}
+        ${msg}
+        <div class="walker-date">${date}</div>
+      </div>`;
+    }).join("");
+
+    renderPagination(totalPages);
+  }
+
+  // Paginación: 15 alias por página. Los botones Anterior/Siguiente se deshabilitan en
+  // los extremos, y al cambiar de página se hace scroll suave hasta arriba del listado.
+  function renderPagination(totalPages){
+    const pag = document.getElementById("pagination");
+    const tp = T[currentLang].pagination;
+    if (totalPages <= 1){
+      pag.style.display = "none";
+      pag.innerHTML = "";
+      return;
+    }
+    pag.style.display = "flex";
+    const pageLabel = (tp.pageOf || "Página {page} de {total}")
+      .replace("{page}", currentPage).replace("{total}", totalPages);
+    pag.innerHTML = `
+      <button type="button" id="pag-prev" ${currentPage === 1 ? "disabled" : ""}>${tp.prev || "← Anterior"}</button>
+      <span class="page-of">${pageLabel}</span>
+      <button type="button" id="pag-next" ${currentPage === totalPages ? "disabled" : ""}>${tp.next || "Siguiente →"}</button>
+    `;
+    document.getElementById("pag-prev").addEventListener("click", () => {
+      if (currentPage > 1){ currentPage--; render(); scrollToGridTop(); }
+    });
+    document.getElementById("pag-next").addEventListener("click", () => {
+      if (currentPage < totalPages){ currentPage++; render(); scrollToGridTop(); }
+    });
+  }
+  function scrollToGridTop(){
+    const grid = document.getElementById("grid");
+    if (grid) grid.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  async function loadAndRender(){
+    const loadingEl = document.getElementById("loading");
+    const errorEl = document.getElementById("load-error");
+    const slowEl = document.getElementById("loading-slow");
+    loadingEl.style.display = "block";
+    errorEl.style.display = "none";
+    slowEl.style.display = "none";
+    document.getElementById("grid").style.display = "none";
+    document.getElementById("empty").style.display = "none";
+    const slowTimer = setTimeout(() => { slowEl.style.display = "block"; }, 4000);
+
+    const { entries, sheetsFailed } = await loadEntries();
+    clearTimeout(slowTimer);
+    loadingEl.style.display = "none";
+
+    allEntries = entries;
+    dataLoadFailed = sheetsFailed && entries.length === 0;
+
+    if (dataLoadFailed){
+      errorEl.style.display = "block";
+    }
+    applyStaticText(I18N.setLanguage(I18N.resolveInitialLanguage()));
+  }
+
+  document.getElementById("retry-load-btn").addEventListener("click", loadAndRender);
+
+  (async function init(){
+    await loadAndRender();
+  })();
+</script>
+
+<script>
+  // ---------- Cookies, © footer legal y modal de aviso legal / privacidad / cookies ----------
+  // Contenido trilingüe autocontenido: no depende de i18n.js para no arriesgar el
+  // sistema de traducción existente. Se sincroniza con los mismos botones de idioma.
+  (function(){
+    const COOKIE_KEY = "travessa_cookie_consent";
+    const CONTACT_EMAIL = "info.camidelprior@gmail.com";
+    const SITE_NAME = "El Camí del Prior";
+    const OWNER_NAME = "Marc Xicola, creador de la pàgina El Camí del Prior";
+
+    const YEAR = new Date().getFullYear();
+
+    const L = {
+      es: {
+        footerCopy: `© ${YEAR} El Camí del Prior, la travessa del Priorat`,
+        aviso: "Aviso legal", privacidad: "Privacidad", cookies: "Cookies", contacto: "Contacto",
+        cookieText: "Usamos solo cookies técnicas necesarias (idioma, preferencias). Sin seguimiento ni publicidad.",
+        cookieInfo: "Más info", cookieAccept: "Vale",
+        legal: {
+          aviso: {
+            title: "Aviso legal",
+            body: [
+              `<strong>Titular del sitio:</strong> ${OWNER_NAME}. Contacto: <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `${SITE_NAME} es un proyecto informativo sobre una ruta de senderismo circular por el Priorat (Catalunya). El contenido (etapas, distancias, tracks GPX) se ofrece con fines orientativos; recorrer la ruta es responsabilidad exclusiva de quien la realiza.`,
+              `No se garantiza la disponibilidad continua ni la ausencia de errores en la web. El titular no se responsabiliza de daños derivados del uso de la información aquí publicada.`
+            ]
+          },
+          privacidad: {
+            title: "Política de privacidad",
+            body: [
+              `<strong>Responsable:</strong> ${OWNER_NAME} — <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `<strong>Datos que recogemos:</strong> si te inscribes, guardamos tu alias, correo electrónico, población de origen, variante elegida, fecha de inicio y, si lo escribes, un mensaje. Si además envías tu certificación, guardamos también las 4 fotos de los puntos de control que adjuntas. Los datos de texto se almacenan en una hoja de cálculo de Google (Google Sheets); las fotos se envían y quedan guardadas como adjunto en la bandeja de Gmail del proyecto. Todo ello gestionado mediante Google Apps Script.`,
+              `<strong>Finalidad:</strong> gestionar tu inscripción, mostrar tu alias en la lista de caminantes y, si completas la ruta, verificar tu certificación y contactarte al respecto.`,
+              `<strong>Destinatarios:</strong> Google, como proveedor técnico del almacenamiento (Google Sheets) y del envío de correos. No se cede tu información a terceros con fines comerciales.`,
+              `<strong>Conservación:</strong> mientras el proyecto esté activo, o hasta que solicites su eliminación.`,
+              `<strong>Tus derechos:</strong> puedes pedir acceder, corregir o eliminar tus datos escribiendo a <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`
+            ]
+          },
+          cookies: {
+            title: "Política de cookies",
+            body: [
+              `Esta web no utiliza cookies de seguimiento ni publicitarias.`,
+              `<strong>Almacenamiento técnico usado:</strong> guardamos en tu navegador (localStorage) tu idioma preferido y si ya has aceptado este aviso, para no repetírtelo. En el panel de administración, se guarda una sesión temporal (sessionStorage) mientras dura la visita.`,
+              `<strong>Terceros:</strong> las fuentes tipográficas (Google Fonts) y el mapa interactivo (Leaflet, vía cdnjs) se cargan desde redes de distribución externas, que pueden establecer cookies técnicas propias necesarias para servir esos archivos.`,
+              `Puedes borrar estos datos en cualquier momento desde la configuración de tu navegador.`
+            ]
+          }
+        }
+      },
+      ca: {
+        footerCopy: `© ${YEAR} El Camí del Prior, la travessa del Priorat`,
+        aviso: "Avís legal", privacidad: "Privacitat", cookies: "Cookies", contacto: "Contacte",
+        cookieText: "Fem servir només cookies tècniques necessàries (idioma, preferències). Sense seguiment ni publicitat.",
+        cookieInfo: "Més info", cookieAccept: "D'acord",
+        legal: {
+          aviso: {
+            title: "Avís legal",
+            body: [
+              `<strong>Titular del lloc:</strong> ${OWNER_NAME}. Contacte: <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `${SITE_NAME} és un projecte informatiu sobre una ruta de senderisme circular pel Priorat (Catalunya). El contingut (etapes, distàncies, tracks GPX) s'ofereix amb finalitat orientativa; recórrer la ruta és responsabilitat exclusiva de qui la realitza.`,
+              `No es garanteix la disponibilitat contínua ni l'absència d'errors al lloc web. El titular no es fa responsable dels danys derivats de l'ús de la informació aquí publicada.`
+            ]
+          },
+          privacidad: {
+            title: "Política de privacitat",
+            body: [
+              `<strong>Responsable:</strong> ${OWNER_NAME} — <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `<strong>Dades que recollim:</strong> si t'inscrius, guardem el teu alies, correu electrònic, població d'origen, variant escollida, data d'inici i, si l'escrius, un missatge. Si a més envies la teva certificació, guardem també les 4 fotos dels punts de control que adjuntes. Les dades de text es guarden en un full de càlcul de Google (Google Sheets); les fotos s'envien i queden desades com a adjunt a la bústia de Gmail del projecte. Tot això gestionat mitjançant Google Apps Script.`,
+              `<strong>Finalitat:</strong> gestionar la teva inscripció, mostrar el teu alies a la llista de caminants i, si completes la ruta, verificar la teva certificació i contactar-te al respecte.`,
+              `<strong>Destinataris:</strong> Google, com a proveïdor tècnic de l'emmagatzematge (Google Sheets) i de l'enviament de correus. No es cedeix la teva informació a tercers amb finalitats comercials.`,
+              `<strong>Conservació:</strong> mentre el projecte estigui actiu, o fins que en sol·licitis l'eliminació.`,
+              `<strong>Els teus drets:</strong> pots demanar accedir, corregir o eliminar les teves dades escrivint a <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`
+            ]
+          },
+          cookies: {
+            title: "Política de cookies",
+            body: [
+              `Aquest lloc web no fa servir cookies de seguiment ni publicitàries.`,
+              `<strong>Emmagatzematge tècnic utilitzat:</strong> guardem al teu navegador (localStorage) el teu idioma preferit i si ja has acceptat aquest avís, per no repetir-t'ho. Al panell d'administració, es guarda una sessió temporal (sessionStorage) mentre dura la visita.`,
+              `<strong>Tercers:</strong> les fonts tipogràfiques (Google Fonts) i el mapa interactiu (Leaflet, via cdnjs) es carreguen des de xarxes de distribució externes, que poden establir cookies tècniques pròpies necessàries per servir aquests fitxers.`,
+              `Pots esborrar aquestes dades en qualsevol moment des de la configuració del teu navegador.`
+            ]
+          }
+        }
+      },
+      en: {
+        footerCopy: `© ${YEAR} El Camí del Prior, la travessa del Priorat`,
+        aviso: "Legal notice", privacidad: "Privacy", cookies: "Cookies", contacto: "Contact",
+        cookieText: "We only use necessary technical cookies (language, preferences). No tracking or advertising.",
+        cookieInfo: "More info", cookieAccept: "Got it",
+        legal: {
+          aviso: {
+            title: "Legal notice",
+            body: [
+              `<strong>Site owner:</strong> ${OWNER_NAME}. Contact: <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `${SITE_NAME} is an informational project about a circular hiking route through Priorat (Catalonia). Content (stages, distances, GPX tracks) is provided for guidance only; walking the route is the sole responsibility of the person doing so.`,
+              `Continuous availability and absence of errors on the site are not guaranteed. The owner is not liable for damages arising from the use of the information published here.`
+            ]
+          },
+          privacidad: {
+            title: "Privacy policy",
+            body: [
+              `<strong>Data controller:</strong> ${OWNER_NAME} — <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`,
+              `<strong>Data we collect:</strong> if you register, we store your alias, email, home town, chosen route variant, start date and, if you write one, a message. If you also submit your certification, we also store the 4 checkpoint photos you attach. Text data is stored in a Google Sheet; photos are sent and kept as an attachment in the project's Gmail inbox. All of this is managed via Google Apps Script.`,
+              `<strong>Purpose:</strong> to manage your registration, show your alias on the walkers list and, if you complete the route, verify your certification and contact you about it.`,
+              `<strong>Recipients:</strong> Google, as the technical provider of storage (Google Sheets) and email delivery. Your data is not shared with third parties for commercial purposes.`,
+              `<strong>Retention:</strong> for as long as the project is active, or until you request deletion.`,
+              `<strong>Your rights:</strong> you can request access, correction or deletion of your data by writing to <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.`
+            ]
+          },
+          cookies: {
+            title: "Cookies policy",
+            body: [
+              `This site does not use tracking or advertising cookies.`,
+              `<strong>Technical storage used:</strong> we save your preferred language and whether you've already accepted this notice in your browser (localStorage), so we don't ask again. The admin panel keeps a temporary session (sessionStorage) for the duration of your visit.`,
+              `<strong>Third parties:</strong> web fonts (Google Fonts) and the interactive map (Leaflet, via cdnjs) are loaded from external content delivery networks, which may set their own technical cookies needed to serve those files.`,
+              `You can clear this data at any time from your browser settings.`
+            ]
+          }
+        }
+      }
+    };
+
+    function currentLegalLang(){
+      try {
+        const active = document.querySelector('.lang-switch button[aria-pressed="true"]');
+        if (active) return active.getAttribute("data-lang");
+      } catch(e){}
+      return (window.I18N && I18N.FALLBACK) ? I18N.FALLBACK : "ca";
+    }
+
+    function renderLegalTexts(){
+      const lang = currentLegalLang();
+      const t = L[lang] || L.ca;
+
+      document.getElementById("footer-copy").textContent = t.footerCopy;
+      document.getElementById("footer-link-aviso").textContent = t.aviso;
+      document.getElementById("footer-link-privacidad").textContent = t.privacidad;
+      document.getElementById("footer-link-cookies").textContent = t.cookies;
+      document.getElementById("footer-link-contacto").textContent = t.contacto;
+
+      document.getElementById("cookie-text").textContent = t.cookieText;
+      document.getElementById("cookie-info-btn").textContent = t.cookieInfo;
+      document.getElementById("cookie-accept-btn").textContent = t.cookieAccept;
+    }
+
+    function openLegal(key){
+      const lang = currentLegalLang();
+      const t = (L[lang] || L.ca).legal[key];
+      if (!t) return;
+      document.getElementById("legal-modal-body").innerHTML =
+        `<h3>${t.title}</h3>` + t.body.map(p => `<p>${p}</p>`).join("");
+      document.getElementById("legal-modal").classList.add("show");
+    }
+    function closeLegal(){
+      document.getElementById("legal-modal").classList.remove("show");
+    }
+
+    document.getElementById("footer-link-aviso").addEventListener("click", () => openLegal("aviso"));
+    document.getElementById("footer-link-privacidad").addEventListener("click", () => openLegal("privacidad"));
+    document.getElementById("footer-link-cookies").addEventListener("click", () => openLegal("cookies"));
+    document.getElementById("cookie-info-btn").addEventListener("click", () => openLegal("cookies"));
+    document.getElementById("legal-modal-close").addEventListener("click", closeLegal);
+    document.getElementById("legal-modal").addEventListener("click", (e) => {
+      if (e.target.id === "legal-modal") closeLegal();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeLegal();
+    });
+
+    const banner = document.getElementById("cookie-banner");
+    document.getElementById("cookie-accept-btn").addEventListener("click", () => {
+      try { localStorage.setItem(COOKIE_KEY, "accepted"); } catch(e){}
+      banner.classList.remove("show");
+    });
+
+    // Se sincroniza con los botones de idioma ya existentes en la página.
+    document.querySelectorAll(".lang-switch button").forEach(btn => {
+      btn.addEventListener("click", renderLegalTexts);
+    });
+
+    renderLegalTexts();
+
+    let alreadyAccepted = false;
+    try { alreadyAccepted = localStorage.getItem(COOKIE_KEY) === "accepted"; } catch(e){}
+    if (!alreadyAccepted){
+      setTimeout(() => banner.classList.add("show"), 600);
+    }
+  })();
+</script>
+
+</body>
+</html>
