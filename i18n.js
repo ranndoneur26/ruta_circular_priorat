@@ -397,7 +397,10 @@
       },
       "success": {
         "h": "¡Listo!",
-        "p": "Tu alias ya está en la lista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Ver la lista de caminantes →</a><br>Cuando termines la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifícala con 4 fotos →</a>"
+        "p": "Tu alias ya está en la lista y aparecerá cuando completes el Camí. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Ver la lista de caminantes que ya lo han completado →</a><br>Cuando termines la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifícala con las 4 fotos que te especificaremos en el correo que acabas de recibir →</a>"
+      },
+      "pdf": {
+        "p": "<strong>¿Quieres tener la información de la web en PDF?</strong> <a href=\"camidelprior-cast-cat.pdf\" download style=\"color:var(--samfaina)\">Descárgalo aquí →</a>"
       },
       "footer": {
         "left": "El Camí del Prior — Proyecto independiente en fase de contraste territorial y colaboración local.",
@@ -546,7 +549,7 @@
         "pageOf": "Página {page} de {total}"
       },
       "footer": {
-        "text": "Travessa del Priorat — lista pública informal, sin verificación de identidad. Los correos nunca se muestran."
+        "text": "Camí del Prior — estadísticas de personas inscritas"
       },
       "meta": {
         "title": "Caminantes · Travessa del Priorat"
@@ -1012,7 +1015,10 @@
       },
       "success": {
         "h": "Fet!",
-        "p": "El teu àlies ja és a la llista. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Veure la llista de caminants →</a><br>Quan acabis la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifica-la amb 4 fotos →</a>"
+        "p": "El teu àlies ja és a la llista i apareixerà quan completis el Camí. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">Veure la llista de caminants que ja l'han completat →</a><br>Quan acabis la ruta, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certifica-la amb 4 fotos que t'especificarem en el correu que acabes de rebre →</a>"
+      },
+      "pdf": {
+        "p": "<strong>Vols tenir la informació de la web en PDF?</strong> <a href=\"camidelprior-cast-cat.pdf\" download style=\"color:var(--samfaina)\">Descarrega'l aquí →</a>"
       },
       "footer": {
         "left": "El Camí del Prior — Projecte independent en fase de contrast territorial i col·laboració local.",
@@ -1161,7 +1167,7 @@
         "pageOf": "Pàgina {page} de {total}"
       },
       "footer": {
-        "text": "Travessa del Priorat — llista pública informal, sense verificació d'identitat. Els correus mai es mostren."
+        "text": "Camí del Prior — estadístiques de persones inscrites"
       },
       "meta": {
         "title": "Caminants · Travessa del Priorat"
@@ -1627,7 +1633,10 @@
       },
       "success": {
         "h": "Done!",
-        "p": "Your alias is now on the list. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">See the list of walkers →</a><br>Once you finish the route, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certify it with 4 photos →</a>"
+        "p": "Your alias is now on the list and will appear once you complete the Camí. <a href=\"finalizados.html\" style=\"color:var(--samfaina)\">See the walkers who have already completed it →</a><br>Once you finish the route, <a href=\"certificar.html\" style=\"color:var(--samfaina)\">certify it with the 4 photos we'll specify in the email you've just received →</a>"
+      },
+      "pdf": {
+        "p": "<strong>Want to have the website's information as a PDF?</strong> <a href=\"camidelprior_english.pdf\" download style=\"color:var(--samfaina)\">Download it here →</a>"
       },
       "footer": {
         "left": "El Camí del Prior — Independent project in a phase of on-the-ground verification and local collaboration.",
@@ -1776,7 +1785,7 @@
         "pageOf": "Page {page} of {total}"
       },
       "footer": {
-        "text": "Travessa del Priorat — informal public list, no identity verification. Emails are never shown."
+        "text": "Camí del Prior — statistics of registered walkers"
       },
       "meta": {
         "title": "Walkers · Travessa del Priorat"

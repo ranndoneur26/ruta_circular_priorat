@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<title>Inscripció · El Camí del Prior</title>
+<title>Inscríbete · El Camí del Prior</title>
 <meta name="description" id="meta-description" content="Apúntate a El Camí del Prior (Travessa del Priorat): la ruta de los eremitas. 166 km, 8 etapas, 19 pueblos. Deja tu alias escrito junto al de quienes ya se han atrevido.">
 <meta name="keywords" content="inscripción El Camí del Prior, inscripción Travessa del Priorat, apuntarse ruta del Priorat, ruta de los eremitas, ruta del silencio, senderismo Priorat inscripción">
 <link rel="canonical" href="https://ruta-circular-priorat.vercel.app/inscripcion.html">
@@ -137,6 +137,9 @@
   .btn:hover{ opacity:0.88; }
   .btn:disabled{ opacity:0.5; cursor:not-allowed; }
   .notice{ border:1px solid var(--line); background:var(--llicorella-2); padding:16px 18px; font-size:13px; color:var(--pergami-dim); margin-bottom:34px; }
+  .pdf-download{ margin-top:24px; border:1px solid var(--line); border-left:3px solid var(--samfaina); padding:16px 20px; }
+  .pdf-download p{ margin:0; font-size:13.5px; color:var(--pergami-dim); }
+  .pdf-download strong{ color:var(--pergami); font-weight:600; }
   .success{ display:none; border:1px solid var(--herba); background:rgba(110,120,88,0.1); padding:22px 24px; margin-top:24px; }
   .success.show{ display:block; }
   .success h3{ font-size:16px; color:var(--herba); margin-bottom:6px; }
@@ -295,7 +298,7 @@
       <div class="charcount"><span id="mensaje-count">0</span>/140</div>
     </div>
     <div class="manifest">
-      <div class="eyebrow" data-i18n="manifest.eyebrow">El código del peregrino</div>
+      <div class="eyebrow" data-i18n="manifest.eyebrow">El código del caminante</div>
       <p class="manifest-intro" data-i18n="manifest.intro">Esta aventura no es ninguna carrera contra el cronómetro, sino un viaje para el alma.</p>
       <div class="manifest-block">
         <h4 data-i18n="manifest.prep.h">Preparación y libertad de ruta</h4>
@@ -329,10 +332,13 @@
     <h3 data-i18n="success.h">¡Listo!</h3>
     <p data-i18n-html="success.p"></p>
   </div>
+  <div class="pdf-download">
+    <p data-i18n-html="pdf.p"><strong>¿Quieres tener la información de la web en PDF?</strong> <a href="camidelprior-cast-cat.pdf" download style="color:var(--samfaina)">Descárgalo aquí →</a></p>
+  </div>
 </main>
 <footer>
   <div class="wrap" style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; width:100%;">
-    <span data-i18n="footer.left">El Camí del Prior — las 8 etapas verificadas sobre el terreno con GPX real.</span>
+    <span data-i18n="footer.left">El Camí del Prior — Proyecto independiente en fase de contraste territorial y colaboración local.</span>
     <span class="mono" data-i18n="footer.right">v1.0 · circuito cerrado, 19 pueblos, 8/8 etapas verificadas</span>
   </div>
   <div class="wrap footer-legal">
@@ -550,7 +556,7 @@
       successBox.classList.add('show');
     } else {
       console.error('Fallo inscripción:', result.error);
-      errBox.textContent = 'No hemos podido completar la inscripción. Revisa la URL del Apps Script y vuelve a intentarlo.';
+      errBox.textContent = (T[currentLang] && T[currentLang].form && T[currentLang].form.submitErr) || 'No hemos podido guardar tu inscripción. Comprueba tu conexión e inténtalo de nuevo.';
       errBox.classList.add('show');
     }
   });
