@@ -110,11 +110,11 @@
         <div class="last-updated" id="last-updated-mapa"></div>
         <div class="map-status">
           <span class="tag verified" data-i18n="mapa.statusVerified">Las 8 etapas verificadas con GPX real</span>
-          <span class="tag verified" data-i18n="mapa.statusShortRoute">Ruta corta (3 días): las 3 etapas verificadas con GPX real</span>
+          <span class="tag verified" data-i18n="mapa.statusShortRoute">Camí curt (3 días): las 3 etapas verificadas con GPX real</span>
         </div>
         <div id="map"></div>
         <div class="map-caption">
-          <span><span class="dot" style="background:var(--vinya)"></span><span data-i18n="mapa.legendGr">Nudo GR-174</span> &nbsp; <span class="dot" style="background:var(--samfaina)"></span><span data-i18n="mapa.legendPr">Municipio</span> &nbsp; <span class="dot" style="background:#ffffff;border:1px solid var(--line);"></span><span data-i18n="mapa.legendCorta">Ruta corta (3 días)</span></span>
+          <span><span class="dot" style="background:var(--vinya)"></span><span data-i18n="mapa.legendGr">Nudo GR-174</span> &nbsp; <span class="dot" style="background:var(--samfaina)"></span><span data-i18n="mapa.legendPr">Municipio</span> &nbsp; <span class="dot" style="background:#ffffff;border:1px solid var(--line);"></span><span data-i18n="mapa.legendCorta">Camí curt (3 días)</span></span>
           <span data-i18n="mapa.note">Las 8 etapas verificadas con GPX real (línea sólida).</span>
         </div>
       </div>
@@ -189,10 +189,10 @@
         <a href="#etapas" class="btn btn-primary" data-i18n="routeopt.fullBtn">Ver las 8 etapas</a>
       </article>
       <article class="option-card option-card--accent">
-        <h3 data-i18n="routeopt.shortH">Ruta corta</h3>
+        <h3 data-i18n="routeopt.shortH">Camí curt</h3>
         <p data-i18n="routeopt.shortP">53,6&nbsp;km · 3 etapas · primera toma de contacto</p>
         <ul class="option-compare" id="option-compare-short"></ul>
-        <a href="#ruta-corta" class="btn btn-secondary" data-i18n="routeopt.shortBtn">Ver ruta corta</a>
+        <a href="#ruta-corta" class="btn btn-secondary" data-i18n="routeopt.shortBtn">Ver el Camí curt</a>
       </article>
     </div>
   </div>
@@ -279,6 +279,10 @@
       <p data-i18n="etapas.p">Distancia, desnivel y tiempo reales de las 8 etapas, verificados con GPX.</p>
     </div>
     <div class="last-updated" id="last-updated-etapas"></div>
+    <div class="gpx-all">
+      <a class="gpx-download gpx-download-all" href="camidelprior-circuit-complet.gpx" download data-i18n="etapas.gpxAll">↓ Descargar el circuito completo (.gpx)</a>
+      <p class="gpx-all-note" data-i18n="etapas.gpxAllNote">Las 8 etapas en un único track continuo, para seguirlas sin cambiar de archivo.</p>
+    </div>
     <ul class="source-legend" id="source-legend"></ul>
     <div class="loop-summary" id="loop-summary"></div>
     <div class="stage-summary-table" id="stage-summary-table"></div>
@@ -537,7 +541,7 @@
     }
   };
 
-  // Etapa d'enllaç (día 3 de la Ruta corta): Bellmunt del Priorat -> Falset.
+  // Etapa d'enllaç (día 3 de la Camí curt): Bellmunt del Priorat -> Falset.
   // Track GPX real, subido y verificado — cierra el círculo de la variante de 3 días.
   const ENLLAC_TRACK = {
     file: "etapa-enllac-bellmunt-falset.gpx",
@@ -548,9 +552,9 @@
 
   const ENLLAC_INFO = {
     distKm: 14.31, gainM: 415, lossM: 314, diff: "moderada", time: "4,5–5,5 h", gpx: true,
-    hEs: "El tramo que cierra la ruta corta: de Bellmunt del Priorat a Falset por caminos agrícolas entre viñas y olivos. Es la etapa más corta y suave de las tres — y al llegar, ya estás en Falset para comer y dormir, sin logística extra.",
-    hCa: "El tram que tanca la ruta curta: de Bellmunt del Priorat a Falset per camins agrícoles entre vinyes i oliveres. És l'etapa més curta i suau de les tres — i en arribar, ja ets a Falset per menjar i dormir, sense logística extra.",
-    hEn: "The stretch that closes the short route: from Bellmunt del Priorat to Falset along farm tracks through vineyards and olive groves. It's the shortest and gentlest of the three stages — and once you arrive, you're already in Falset to eat and sleep, no extra logistics needed.",
+    hEs: "El tramo que cierra el Camí curt: de Bellmunt del Priorat a Falset por caminos agrícolas entre viñas y olivos. Es la etapa más corta y suave de las tres — y al llegar, ya estás en Falset para comer y dormir, sin logística extra.",
+    hCa: "El tram que tanca el Camí curt: de Bellmunt del Priorat a Falset per camins agrícoles entre vinyes i oliveres. És l'etapa més curta i suau de les tres — i en arribar, ja ets a Falset per menjar i dormir, sense logística extra.",
+    hEn: "The stretch that closes the Camí curt: from Bellmunt del Priorat to Falset along farm tracks through vineyards and olive groves. It's the shortest and gentlest of the three stages — and once you arrive, you're already in Falset to eat and sleep, no extra logistics needed.",
     poiEs: ["Paisaje agrícola de la DO Q Priorat, entre viñas y olivos", "Vistas de la silueta de Falset al acercarse, con el Castell-Capella al fondo"],
     poiCa: ["Paisatge agrícola de la DOQ Priorat, entre vinyes i oliveres", "Vistes de la silueta de Falset en apropar-se, amb el Castell-Capella al fons"],
     poiEn: ["Farmland of the Priorat DOQ, among vineyards and olive groves", "Views of Falset's silhouette as you approach, with the Castell-Capella hilltop behind it"],
@@ -1129,7 +1133,7 @@
   }
 
   // Mismo patrón que initSingleStageMiniMap(), pero para cualquiera de los 3 días de
-  // "Ruta Curta". Los días 1 y 2 usan GPX_TRACKS[0]/[1] (mismo track que las etapas 1 y 2
+  // "Camí curt". Los días 1 y 2 usan GPX_TRACKS[0]/[1] (mismo track que las etapas 1 y 2
   // de la sección "Etapas"); el día 3 usa ENLLAC_TRACK (tramo de enlace Bellmunt–Falset,
   // que no forma parte del array GPX_TRACKS de las 8 etapas oficiales). Perezoso: se llama
   // desde el listener "toggle" de cada <details>, solo la primera vez que se abre.
@@ -1202,7 +1206,7 @@
     document.getElementById("map-modal").classList.remove("show");
     if (stageModalMap){ stageModalMap.remove(); stageModalMap = null; }
     // Restauramos la visibilidad de todos los mini-mapas de origen que se hubieran ocultado
-    // (tanto los de "Etapas" como el de "Ruta Curta").
+    // (tanto los de "Etapas" como el de "Camí curt").
     document.querySelectorAll('[id^="stage-minimap-"], [id^="rc-minimap-"]').forEach(el => { el.style.visibility = ""; });
   }
   document.getElementById("map-modal-close").addEventListener("click", closeStageMapModal);
@@ -1389,7 +1393,7 @@
       }
     });
 
-    // Ruta corta (3 días): tramo de cierre Bellmunt–Falset (etapa de enlace),
+    // Camí curt (3 días): tramo de cierre Bellmunt–Falset (etapa de enlace),
     // ahora con track GPX real. En blanco para diferenciarla de las 8 etapas oficiales.
     shortRouteLine = L.polyline(ENLLAC_TRACK.coords, { color:'#ffffff', weight:2.5, opacity:0.85, dashArray:'6 6' }).addTo(lineLayer);
     shortRouteLine.bindTooltip(T[currentLang].mapa.shortRouteLabel, { sticky:true });
@@ -1488,21 +1492,21 @@
   const NOT_FOR = {
     es:{ h2:"Para quién NO es esta ruta", lead:"Con la misma honestidad que el resto de la web: esta travesía no es para todo el mundo, y es mejor saberlo antes de salir de casa.",
       cards:[
-        ["Si es tu primera travesía larga","166 km, 8 etapas exigentes y desniveles de hasta 1.600 m no son un buen debut. Prueba antes la ruta corta (53,6 km, 3 etapas) o unas pocas etapas sueltas."],
+        ["Si es tu primera travesía larga","166 km, 8 etapas exigentes y desniveles de hasta 1.600 m no son un buen debut. Prueba antes el Camí curt (53,6 km, 3 etapas) o unas pocas etapas sueltas."],
         ["Si buscas hacerla en pleno verano","En julio y agosto el Priorat alcanza 35–38 °C, con muy poca sombra en muchos tramos. El riesgo de golpe de calor es real; mejor abril–junio o septiembre–noviembre."],
         ["Si no puedes o no quieres navegar offline","La señalización es discontinua y varios tramos no son un itinerario homologado. Sin un track GPX cargado en el móvil (y batería para todo el día) es fácil perderse."],
         ["Si necesitas servicios cada pocos kilómetros","Fuera de fin de semana hay muy poca infraestructura turística abierta en los pueblos pequeños. Sin reserva y planificación previa de agua y comida, algunas etapas se complican."]
       ]},
     ca:{ h2:"Per a qui NO és aquesta ruta", lead:"Amb la mateixa honestedat que la resta de la web: aquesta travessa no és per a tothom, i és millor saber-ho abans de sortir de casa.",
       cards:[
-        ["Si és la teva primera travessa llarga","166 km, 8 etapes exigents i desnivells de fins a 1.600 m no són un bon debut. Prova abans la ruta curta (53,6 km, 3 etapes) o unes poques etapes soltes."],
+        ["Si és la teva primera travessa llarga","166 km, 8 etapes exigents i desnivells de fins a 1.600 m no són un bon debut. Prova abans el Camí curt (53,6 km, 3 etapes) o unes poques etapes soltes."],
         ["Si vols fer-la a ple estiu","Al juliol i l'agost el Priorat arriba als 35–38 °C, amb molt poca ombra en molts trams. El risc de cop de calor és real; millor abril–juny o setembre–novembre."],
         ["Si no pots o no vols navegar offline","La senyalització és discontínua i diversos trams no són un itinerari homologat. Sense un track GPX carregat al mòbil (i bateria per a tot el dia) és fàcil perdre's."],
         ["Si necessites serveis cada pocs quilòmetres","Fora de cap de setmana hi ha molt poca infraestructura turística oberta als pobles petits. Sense reserva i planificació prèvia d'aigua i menjar, algunes etapes es compliquen."]
       ]},
     en:{ h2:"Who this route is NOT for", lead:"With the same honesty as the rest of this site: this trek isn't for everyone, and it's better to know that before leaving home.",
       cards:[
-        ["If this would be your first long trek","166 km, 8 demanding stages and climbs of up to 1,600 m are not a good starting point. Try the short route (53.6 km, 3 stages) or a few standalone stages first."],
+        ["If this would be your first long trek","166 km, 8 demanding stages and climbs of up to 1,600 m are not a good starting point. Try the Camí curt (53.6 km, 3 stages) or a few standalone stages first."],
         ["If you plan to hike it in peak summer","In July and August, Priorat reaches 35–38 °C, with very little shade on many stretches. Heatstroke risk is real; April–June or September–November are far safer."],
         ["If you can't or won't navigate offline","Waymarking is patchy and several stretches aren't an officially waymarked route. Without a GPX track loaded on your phone (and battery for the whole day), it's easy to get lost."],
         ["If you need services every few kilometres","Outside weekends, very little tourist infrastructure is open in the small villages. Without advance booking and water/food planning, some stages become difficult."]

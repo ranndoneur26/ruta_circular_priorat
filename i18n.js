@@ -61,14 +61,16 @@
         "note": "Las 8 etapas verificadas con GPX real (línea sólida).",
         "popupConn": "Conexión",
         "statusVerified": "Las 8 etapas verificadas con GPX real",
-        "statusShortRoute": "Ruta corta (3 días): las 3 etapas verificadas con GPX real",
-        "legendCorta": "Ruta corta (3 días)",
-        "shortRouteLabel": "Ruta corta (3 días) — tramo Bellmunt–Falset, verificado con GPX real"
+        "statusShortRoute": "Camí curt (3 días): las 3 etapas verificadas con GPX real",
+        "legendCorta": "Camí curt (3 días)",
+        "shortRouteLabel": "Camí curt (3 días) — tramo Bellmunt–Falset, verificado con GPX real"
       },
       "etapas": {
         "eyebrow": "Trazado propuesto",
         "h2": "Ocho etapas, un círculo cerrado",
         "p": "Cada uno de los 19 municipios se visita una sola vez. Falset abre y cierra el circuito.",
+        "gpxAll": "↓ Descargar el circuito completo (.gpx)",
+        "gpxAllNote": "Las 8 etapas en un único track continuo, para seguirlas sin cambiar de archivo.",
         "etapaLabel": "Etapa",
         "dist": "Distancia (línea recta)",
         "diff": "Dificultad",
@@ -136,7 +138,7 @@
         "nav8": "Usar los tracks GPX",
         "gpx": {
           "h": "Cómo usar los tracks GPX",
-          "body": "<div class=\"g-warn\"><p><strong>Aviso importante:</strong> estos tracks GPX son una ayuda de orientación verificada sobre el terreno, pero no sustituyen la señalización oficial ni tu criterio. La Travessa no está señalizada como itinerario propio ni cuenta con asistencia durante el recorrido: caminarla es responsabilidad exclusiva de quien la realiza. Comprueba siempre las condiciones del día (tiempo, riesgo de incendio, tu propio estado físico) antes de salir.</p></div>\n           <p>Cada ficha de etapa tiene un botón para descargar su track en formato <strong>.gpx</strong>. Un GPX no es un mapa: es solo una lista de coordenadas. Para verlo y seguirlo necesitas una aplicación que lo importe — Google Maps normal no sirve para esto.</p>\n           <p><strong>No hace falta un GPS dedicado.</strong> Cualquier smartphone actual lleva chip GPS de serie, el mismo que usas para la ubicación normal. Un Garmin u otro GPS de montaña es una opción más, no un requisito.</p>\n           <div class=\"gpx-highlight\">\n             <p><strong>Aplicaciones gratuitas que sí leen GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot o Gaia GPS. Todas permiten importar el archivo y seguirlo en directo con tu posición en pantalla.</p>\n             <p><strong>Pasos:</strong> descarga el .gpx de la etapa → ábrelo con la app (opción \"Importar track\" o \"Abrir con\") → antes de salir, descarga también el mapa de esa zona en modo <em>offline</em> desde la propia app.</p>\n             <p>Esto último es imprescindible: como ya se advierte en este mismo circuito, hay tramos largos sin cobertura móvil. Un track offline es la diferencia entre orientarte y no.</p>\n           </div>"
+          "body": "<div class=\"g-warn\"><p><strong>Aviso importante:</strong> estos tracks GPX son una ayuda de orientación verificada sobre el terreno, pero no sustituyen la señalización oficial ni tu criterio. La Travessa no está señalizada como itinerario propio ni cuenta con asistencia durante el recorrido: caminarla es responsabilidad exclusiva de quien la realiza. Comprueba siempre las condiciones del día (tiempo, riesgo de incendio, tu propio estado físico) antes de salir.</p></div>\n           <p>Cada ficha de etapa tiene un botón para descargar su track en formato <strong>.gpx</strong>. Un GPX no es un mapa: es solo una lista de coordenadas. Para verlo y seguirlo necesitas una aplicación que lo importe — Google Maps normal no sirve para esto.</p>\n           <p><strong>¿Prefieres un solo archivo?</strong> Descarga el circuito completo: <a class=\"gpx-download gpx-download-all\" href=\"camidelprior-circuit-complet.gpx\" download>↓ Circuito completo (.gpx)</a> Las 8 etapas enlazadas en un único track continuo, con un marcador al inicio de cada etapa. Entre una etapa y la siguiente hay un pequeño tramo recto de enlace (de entre 35 y 200 m, dentro de los pueblos), así que la suma sale en torno a 167 km.</p>\n           <p><strong>No hace falta un GPS dedicado.</strong> Cualquier smartphone actual lleva chip GPS de serie, el mismo que usas para la ubicación normal. Un Garmin u otro GPS de montaña es una opción más, no un requisito.</p>\n           <div class=\"gpx-highlight\">\n             <p><strong>Aplicaciones gratuitas que sí leen GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot o Gaia GPS. Todas permiten importar el archivo y seguirlo en directo con tu posición en pantalla.</p>\n             <p><strong>Pasos:</strong> descarga el .gpx de la etapa → ábrelo con la app (opción \"Importar track\" o \"Abrir con\") → antes de salir, descarga también el mapa de esa zona en modo <em>offline</em> desde la propia app.</p>\n             <p>Esto último es imprescindible: como ya se advierte en este mismo circuito, hay tramos largos sin cobertura móvil. Un track offline es la diferencia entre orientarte y no.</p>\n           </div>"
         }
       },
       "terrain": {
@@ -156,9 +158,9 @@
         "fullH": "Travessa completa",
         "fullP": "166,4 km · 8 etapas · circuito cerrado",
         "fullBtn": "Ver las 8 etapas",
-        "shortH": "Ruta corta",
+        "shortH": "Camí curt",
         "shortP": "53,6 km · 3 etapas · primera toma de contacto",
-        "shortBtn": "Ver ruta corta"
+        "shortBtn": "Ver el Camí curt"
       },
       "falset": {
         "eyebrow": "Punto de entrada y salida",
@@ -204,10 +206,10 @@
       "backToTop": "Volver arriba",
       "rutacorta": {
         "eyebrow": "Alternativa de 3 días",
-        "h2": "Ruta Corta, 3 etapas",
+        "h2": "Camí curt, 3 etapas",
         "p": "Mismo inicio que el circuito completo — etapas 1 y 2 — pero al llegar a Bellmunt del Priorat, un tercer día cierra el círculo directamente hasta Falset, ya verificado con GPX real.",
         "day": "Día",
-        "total": "Total de la ruta corta: <strong>{km} km</strong> · +{gain} m / −{loss} m de desnivel acumulado, verificado con GPX real en las 3 etapas."
+        "total": "Total del Camí curt: <strong>{km} km</strong> · +{gain} m / −{loss} m de desnivel acumulado, verificado con GPX real en las 3 etapas."
       }
     },
     "info": {
@@ -284,7 +286,7 @@
           "p": "Los 19 municipios, cada uno una vez. La travessa completa tal como está descrita en las 8 fichas de etapa, verificadas con GPX real."
         },
         "v2": {
-          "label": "Ruta corta",
+          "label": "Camí curt",
           "h": "3 días",
           "body": "<p>Etapas 1 y 2: Falset → Marçà → Capçanes → Els Guiamets → El Masroig → El Molar → Bellmunt del Priorat. El tercer día cierra el círculo por un tramo directo Bellmunt–Falset, ya verificado con GPX real (14,3 km, dificultad moderada) — <a href=\"index.html#ruta-corta\">ver la ficha completa de las 3 etapas</a>.</p>\n     <p>Las tres etapas empiezan y terminan en Falset, así que no hace falta transporte de vuelta.</p>"
         },
@@ -362,7 +364,7 @@
         "varianteErr": "Elige la variante que vas a hacer.",
         "variantePlaceholder": "Elige una variante…",
         "variante1": "Circuito completo · 8 días · ~166,4 km",
-        "variante2": "Ruta corta · 3 días · Falset–Bellmunt–Falset (~53,6 km, verificado con GPX real)",
+        "variante2": "Camí curt · 3 días · Falset–Bellmunt–Falset (~53,6 km, verificado con GPX real)",
         "date": "Día de inicio de la ruta",
         "dateErr": "Elige una fecha.",
         "mensaje": "¿Por qué te atreves con el Priorat?",
@@ -391,7 +393,7 @@
         },
         "short": {
           "h": "La escapada esencial: 3 días",
-          "p": "La ruta corta de 53,6 km entre Falset y Bellmunt del Priorat, ideal si dispones de menos tiempo pero quieres sentir el silencio de la llicorella."
+          "p": "El Camí curt de 53,6 km entre Falset y Bellmunt del Priorat, ideal si dispones de menos tiempo pero quieres sentir el silencio de la llicorella."
         },
         "signature": "El Silencio en ruta. Priorat."
       },
@@ -495,10 +497,10 @@
         "p": "Un vistazo real a quién completa la ruta, de dónde viene y qué variante elige — calculado a partir de las inscripciones verificadas y no verificadas.",
         "completionLabel": "de los inscritos han completado y verificado su paso",
         "completionSub": "{verified} de {total} inscritos",
-        "splitH": "Circuito completo vs. ruta corta",
+        "splitH": "Circuito completo vs. Camí curt",
         "variantLong": "Circuito completo (8 etapas)",
-        "variantShort": "Ruta corta (3 días)",
-        "insight1": "La ruta corta tiene una tasa de finalización del {pctShort}%, frente al {pctLong}% del circuito completo.",
+        "variantShort": "Camí curt (3 días)",
+        "insight1": "El Camí curt tiene una tasa de finalización del {pctShort}%, frente al {pctLong}% del circuito completo.",
         "insight1NoData": "Todavía no hay suficientes datos para comparar la tasa de finalización entre variantes.",
         "insight2": "El origen más frecuente es {origin}, con {count} caminantes ({pct}%).",
         "insight2NoData": "Todavía no se ha registrado ningún origen.",
@@ -524,11 +526,11 @@
         "loadingSlow": "Puede tardar unos segundos más de lo habitual.",
         "loadError": "No se han podido cargar los datos. Comprueba tu conexión e inténtalo de nuevo.",
         "retry": "↻ Reintentar",
-        "vCorta": "Ruta corta (3 días)"
+        "vCorta": "Camí curt (3 días)"
       },
       "variant": {
         "completo": "Circuito completo",
-        "corta": "Ruta corta (3 días)"
+        "corta": "Camí curt (3 días)"
       },
       "card": {
         "verified": "✓ Verificado",
@@ -549,7 +551,7 @@
         "pageOf": "Página {page} de {total}"
       },
       "footer": {
-        "text": "Camí del Prior — estadísticas de personas inscritas"
+        "text": "Camí del Prior — comunidad de caminantes y estadísticas de inscripción"
       },
       "meta": {
         "title": "Caminantes · Travessa del Priorat"
@@ -621,7 +623,7 @@
       },
       "variant": {
         "completo": "Circuito completo",
-        "corta": "Ruta corta (3 días)"
+        "corta": "Camí curt (3 días)"
       }
     }
   },
@@ -679,14 +681,16 @@
         "note": "Les 8 etapes verificades amb GPX real (línia sòlida).",
         "popupConn": "Connexió",
         "statusVerified": "Les 8 etapes verificades amb GPX real",
-        "statusShortRoute": "Ruta curta (3 dies): les 3 etapes verificades amb GPX real",
-        "legendCorta": "Ruta curta (3 dies)",
-        "shortRouteLabel": "Ruta curta (3 dies) — tram Bellmunt–Falset, verificat amb GPX real"
+        "statusShortRoute": "Camí curt (3 dies): les 3 etapes verificades amb GPX real",
+        "legendCorta": "Camí curt (3 dies)",
+        "shortRouteLabel": "Camí curt (3 dies) — tram Bellmunt–Falset, verificat amb GPX real"
       },
       "etapas": {
         "eyebrow": "Traçat proposat",
         "h2": "Vuit etapes, un cercle tancat",
         "p": "Cada un dels 19 municipis es visita una sola vegada. Falset obre i tanca el circuit.",
+        "gpxAll": "↓ Descarregar el circuit complet (.gpx)",
+        "gpxAllNote": "Les 8 etapes en un únic track continu, per seguir-les sense canviar de fitxer.",
         "etapaLabel": "Etapa",
         "dist": "Distància (línia recta)",
         "diff": "Dificultat",
@@ -754,7 +758,7 @@
         "nav8": "Fer servir els tracks GPX",
         "gpx": {
           "h": "Com fer servir els tracks GPX",
-          "body": "<div class=\"g-warn\"><p><strong>Avís important:</strong> aquests tracks GPX són una ajuda d'orientació verificada sobre el terreny, però no substitueixen la senyalització oficial ni el teu criteri. La Travessa no està senyalitzada com a itinerari propi ni compta amb assistència durant el recorregut: caminar-la és responsabilitat exclusiva de qui la realitza. Comprova sempre les condicions del dia (temps, risc d'incendi, el teu propi estat físic) abans de sortir.</p></div>\n           <p>Cada fitxa d'etapa té un botó per descarregar el seu track en format <strong>.gpx</strong>. Un GPX no és un mapa: només és una llista de coordenades. Per veure'l i seguir-lo necessites una aplicació que l'importi — el Google Maps normal no serveix per a això.</p>\n           <p><strong>No cal un GPS dedicat.</strong> Qualsevol smartphone actual porta xip GPS de sèrie, el mateix que fas servir per a la ubicació normal. Un Garmin o un altre GPS de muntanya és una opció més, no un requisit.</p>\n           <div class=\"gpx-highlight\">\n             <p><strong>Aplicacions gratuïtes que sí que llegeixen GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot o Gaia GPS. Totes permeten importar l'arxiu i seguir-lo en directe amb la teva posició a la pantalla.</p>\n             <p><strong>Passos:</strong> descarrega el .gpx de l'etapa → obre'l amb l'app (opció \"Importar track\" o \"Obrir amb\") → abans de sortir, descarrega també el mapa d'aquella zona en mode <em>offline</em> des de la mateixa app.</p>\n             <p>Això últim és imprescindible: tal com ja s'avisa en aquest mateix circuit, hi ha trams llargs sense cobertura mòbil. Un track offline és la diferència entre orientar-te i no fer-ho.</p>\n           </div>"
+          "body": "<div class=\"g-warn\"><p><strong>Avís important:</strong> aquests tracks GPX són una ajuda d'orientació verificada sobre el terreny, però no substitueixen la senyalització oficial ni el teu criteri. La Travessa no està senyalitzada com a itinerari propi ni compta amb assistència durant el recorregut: caminar-la és responsabilitat exclusiva de qui la realitza. Comprova sempre les condicions del dia (temps, risc d'incendi, el teu propi estat físic) abans de sortir.</p></div>\n           <p>Cada fitxa d'etapa té un botó per descarregar el seu track en format <strong>.gpx</strong>. Un GPX no és un mapa: només és una llista de coordenades. Per veure'l i seguir-lo necessites una aplicació que l'importi — el Google Maps normal no serveix per a això.</p>\n           <p><strong>Prefereixes un sol fitxer?</strong> Descarrega el circuit complet: <a class=\"gpx-download gpx-download-all\" href=\"camidelprior-circuit-complet.gpx\" download>↓ Circuit complet (.gpx)</a> Les 8 etapes enllaçades en un únic track continu, amb un marcador a l'inici de cada etapa. Entre una etapa i la següent hi ha un petit tram recte d'enllaç (d'entre 35 i 200 m, dins dels pobles), de manera que la suma surt al voltant de 167 km.</p>\n           <p><strong>No cal un GPS dedicat.</strong> Qualsevol smartphone actual porta xip GPS de sèrie, el mateix que fas servir per a la ubicació normal. Un Garmin o un altre GPS de muntanya és una opció més, no un requisit.</p>\n           <div class=\"gpx-highlight\">\n             <p><strong>Aplicacions gratuïtes que sí que llegeixen GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot o Gaia GPS. Totes permeten importar l'arxiu i seguir-lo en directe amb la teva posició a la pantalla.</p>\n             <p><strong>Passos:</strong> descarrega el .gpx de l'etapa → obre'l amb l'app (opció \"Importar track\" o \"Obrir amb\") → abans de sortir, descarrega també el mapa d'aquella zona en mode <em>offline</em> des de la mateixa app.</p>\n             <p>Això últim és imprescindible: tal com ja s'avisa en aquest mateix circuit, hi ha trams llargs sense cobertura mòbil. Un track offline és la diferència entre orientar-te i no fer-ho.</p>\n           </div>"
         }
       },
       "terrain": {
@@ -774,9 +778,9 @@
         "fullH": "Travessa completa",
         "fullP": "166,4 km · 8 etapes · circuit tancat",
         "fullBtn": "Veure les 8 etapes",
-        "shortH": "Ruta curta",
+        "shortH": "Camí curt",
         "shortP": "53,6 km · 3 etapes · primer contacte",
-        "shortBtn": "Veure ruta curta"
+        "shortBtn": "Veure el Camí curt"
       },
       "falset": {
         "eyebrow": "Punt d'entrada i sortida",
@@ -825,7 +829,7 @@
         "h2": "Camí curt, 3 etapes",
         "p": "Mateix inici que el circuit complet — etapes 1 i 2 — però en arribar a Bellmunt del Priorat, un tercer dia tanca el cercle directament fins a Falset, ja verificat amb GPX real.",
         "day": "Dia",
-        "total": "Total de la ruta curta: <strong>{km} km</strong> · +{gain} m / −{loss} m de desnivell acumulat, verificat amb GPX real a les 3 etapes."
+        "total": "Total del Camí curt: <strong>{km} km</strong> · +{gain} m / −{loss} m de desnivell acumulat, verificat amb GPX real a les 3 etapes."
       }
     },
     "info": {
@@ -902,7 +906,7 @@
           "p": "Els 19 municipis, cadascun una vegada. La travessa completa tal com està descrita a les 8 fitxes d'etapa, verificades amb GPX real."
         },
         "v2": {
-          "label": "Ruta curta",
+          "label": "Camí curt",
           "h": "3 dies",
           "body": "<p>Etapes 1 i 2: Falset → Marçà → Capçanes → els Guiamets → el Masroig → el Molar → Bellmunt del Priorat. El tercer dia tanca el cercle per un tram directe Bellmunt–Falset, ja verificat amb GPX real (14,3 km, dificultat moderada) — <a href=\"index.html#ruta-corta\">veure la fitxa completa de les 3 etapes</a>.</p>\n     <p>Les tres etapes comencen i acaben a Falset, així que no cal transport de tornada.</p>"
         },
@@ -980,7 +984,7 @@
         "varianteErr": "Tria la variant que faràs.",
         "variantePlaceholder": "Tria una variant…",
         "variante1": "Circuit complet · 8 dies · ~166,4 km",
-        "variante2": "Ruta curta · 3 dies · Falset–Bellmunt–Falset (~53,6 km, verificat amb GPX real)",
+        "variante2": "Camí curt · 3 dies · Falset–Bellmunt–Falset (~53,6 km, verificat amb GPX real)",
         "date": "Dia d'inici de la ruta",
         "dateErr": "Tria una data.",
         "mensaje": "Per què t'atreveixes amb el Priorat?",
@@ -1009,7 +1013,7 @@
         },
         "short": {
           "h": "L'escapada essencial: 3 dies",
-          "p": "La ruta curta de 53,6 km entre Falset i Bellmunt del Priorat, ideal si disposes de menys temps però vols sentir el silenci de la llicorella."
+          "p": "El Camí curt de 53,6 km entre Falset i Bellmunt del Priorat, ideal si disposes de menys temps però vols sentir el silenci de la llicorella."
         },
         "signature": "El Silenci en ruta. Priorat."
       },
@@ -1113,10 +1117,10 @@
         "p": "Una mirada real a qui completa la ruta, d'on ve i quina variant tria — calculat a partir de les inscripcions verificades i no verificades.",
         "completionLabel": "dels inscrits han completat i verificat el seu pas",
         "completionSub": "{verified} de {total} inscrits",
-        "splitH": "Circuit complet vs. ruta curta",
+        "splitH": "Circuit complet vs. Camí curt",
         "variantLong": "Circuit complet (8 etapes)",
-        "variantShort": "Ruta curta (3 dies)",
-        "insight1": "La ruta curta té una taxa de finalització del {pctShort}%, davant del {pctLong}% del circuit complet.",
+        "variantShort": "Camí curt (3 dies)",
+        "insight1": "El Camí curt té una taxa de finalització del {pctShort}%, davant del {pctLong}% del circuit complet.",
         "insight1NoData": "Encara no hi ha prou dades per comparar la taxa de finalització entre variants.",
         "insight2": "L'origen més freqüent és {origin}, amb {count} caminants ({pct}%).",
         "insight2NoData": "Encara no s'ha registrat cap origen.",
@@ -1142,11 +1146,11 @@
         "loadingSlow": "Pot trigar uns segons més del que és habitual.",
         "loadError": "No s'han pogut carregar les dades. Comprova la connexió i torna-ho a provar.",
         "retry": "↻ Tornar a provar",
-        "vCorta": "Ruta curta (3 dies)"
+        "vCorta": "Camí curt (3 dies)"
       },
       "variant": {
         "completo": "Circuit complet",
-        "corta": "Ruta curta (3 dies)"
+        "corta": "Camí curt (3 dies)"
       },
       "card": {
         "verified": "✓ Verificat",
@@ -1167,7 +1171,7 @@
         "pageOf": "Pàgina {page} de {total}"
       },
       "footer": {
-        "text": "Camí del Prior — estadístiques de persones inscrites"
+        "text": "Camí del Prior — comunitat de caminants i estadístiques d'inscripció"
       },
       "meta": {
         "title": "Caminants · Travessa del Priorat"
@@ -1239,7 +1243,7 @@
       },
       "variant": {
         "completo": "Circuit complet",
-        "corta": "Ruta curta (3 dies)"
+        "corta": "Camí curt (3 dies)"
       }
     }
   },
@@ -1297,14 +1301,16 @@
         "note": "All 8 stages verified with a real GPX track (solid line).",
         "popupConn": "Connection",
         "statusVerified": "All 8 stages verified with real GPX",
-        "statusShortRoute": "Short route (3 days): all 3 stages verified with real GPX",
-        "legendCorta": "Short route (3 days)",
-        "shortRouteLabel": "Short route (3 days) — Bellmunt–Falset stretch, verified with real GPX"
+        "statusShortRoute": "Camí curt (3 days): all 3 stages verified with real GPX",
+        "legendCorta": "Camí curt (3 days)",
+        "shortRouteLabel": "Camí curt (3 days) — Bellmunt–Falset stretch, verified with real GPX"
       },
       "etapas": {
         "eyebrow": "Proposed route",
         "h2": "Eight stages, one closed loop",
         "p": "Each of the 19 municipalities is visited exactly once. Falset opens and closes the circuit.",
+        "gpxAll": "↓ Download the full circuit (.gpx)",
+        "gpxAllNote": "All 8 stages in a single continuous track, so you can follow them without switching files.",
         "etapaLabel": "Stage",
         "dist": "Distance (straight line)",
         "diff": "Difficulty",
@@ -1372,7 +1378,7 @@
         "nav8": "Using the GPX tracks",
         "gpx": {
           "h": "How to use the GPX tracks",
-          "body": "<div class=\"g-warn\"><p><strong>Important notice:</strong> these GPX tracks are a navigation aid verified on the ground, but they don't replace official waymarking or your own judgement. The Travessa isn't waymarked as its own trail and has no support along the way: walking it is entirely the responsibility of the person doing so. Always check the day's conditions (weather, fire risk, your own physical state) before setting out.</p></div>\n           <p>Each stage card has a button to download its track as a <strong>.gpx</strong> file. A GPX isn't a map — it's just a list of coordinates. To see it and follow it you need an app that can import it; regular Google Maps won't do this.</p>\n           <p><strong>You don't need a dedicated GPS device.</strong> Any current smartphone already has a GPS chip built in, the same one used for regular location services. A Garmin or other hiking GPS is one more option, not a requirement.</p>\n           <div class=\"gpx-highlight\">\n             <p><strong>Free apps that read GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot, or Gaia GPS. All of them let you import the file and follow it live with your position on screen.</p>\n             <p><strong>Steps:</strong> download the stage's .gpx file → open it with the app (\"Import track\" or \"Open with\") → before setting out, also download the map for that area in <em>offline</em> mode from within the app.</p>\n             <p>That last step matters: as this same circuit's guide already warns, there are long stretches with no mobile signal. An offline track is the difference between staying oriented and getting lost.</p>\n           </div>"
+          "body": "<div class=\"g-warn\"><p><strong>Important notice:</strong> these GPX tracks are a navigation aid verified on the ground, but they don't replace official waymarking or your own judgement. The Travessa isn't waymarked as its own trail and has no support along the way: walking it is entirely the responsibility of the person doing so. Always check the day's conditions (weather, fire risk, your own physical state) before setting out.</p></div>\n           <p>Each stage card has a button to download its track as a <strong>.gpx</strong> file. A GPX isn't a map — it's just a list of coordinates. To see it and follow it you need an app that can import it; regular Google Maps won't do this.</p>\n           <p><strong>Prefer a single file?</strong> Download the full circuit: <a class=\"gpx-download gpx-download-all\" href=\"camidelprior-circuit-complet.gpx\" download>↓ Full circuit (.gpx)</a> All 8 stages linked in one continuous track, with a marker at the start of each stage. Between one stage and the next there is a short straight connecting stretch (between 35 and 200 m, inside the villages), so the total comes out at around 167 km.</p>\n           <p><strong>You don't need a dedicated GPS device.</strong> Any current smartphone already has a GPS chip built in, the same one used for regular location services. A Garmin or other hiking GPS is one more option, not a requirement.</p>\n           <div class=\"gpx-highlight\">\n             <p><strong>Free apps that read GPX:</strong> OsmAnd, Organic Maps, Wikiloc, Komoot, or Gaia GPS. All of them let you import the file and follow it live with your position on screen.</p>\n             <p><strong>Steps:</strong> download the stage's .gpx file → open it with the app (\"Import track\" or \"Open with\") → before setting out, also download the map for that area in <em>offline</em> mode from within the app.</p>\n             <p>That last step matters: as this same circuit's guide already warns, there are long stretches with no mobile signal. An offline track is the difference between staying oriented and getting lost.</p>\n           </div>"
         }
       },
       "terrain": {
@@ -1392,9 +1398,9 @@
         "fullH": "Full crossing",
         "fullP": "166.4 km · 8 stages · closed loop",
         "fullBtn": "See the 8 stages",
-        "shortH": "Short route",
+        "shortH": "Camí curt",
         "shortP": "53.6 km · 3 stages · first taste of the trail",
-        "shortBtn": "See short route"
+        "shortBtn": "See the Camí curt"
       },
       "falset": {
         "eyebrow": "Entry and exit point",
@@ -1440,10 +1446,10 @@
       "backToTop": "Back to top",
       "rutacorta": {
         "eyebrow": "3-day alternative",
-        "h2": "Short Route, 3 Stages",
+        "h2": "Camí curt, 3 Stages",
         "p": "Same start as the full circuit — stages 1 and 2 — but on reaching Bellmunt del Priorat, a third day closes the loop directly back to Falset, now verified with real GPX.",
         "day": "Day",
-        "total": "Total for the short route: <strong>{km} km</strong> · +{gain} m / −{loss} m of accumulated elevation, verified with real GPX across all 3 stages."
+        "total": "Total for the Camí curt: <strong>{km} km</strong> · +{gain} m / −{loss} m of accumulated elevation, verified with real GPX across all 3 stages."
       }
     },
     "info": {
@@ -1520,7 +1526,7 @@
           "p": "All 19 municipalities, each visited once. The complete crossing as described in the 8 stage cards, verified with real GPX."
         },
         "v2": {
-          "label": "Short route",
+          "label": "Camí curt",
           "h": "3 days",
           "body": "<p>Stages 1 and 2: Falset → Marçà → Capçanes → Els Guiamets → El Masroig → El Molar → Bellmunt del Priorat. The third day closes the loop via a direct Bellmunt–Falset stretch, now verified with real GPX (14.3 km, moderate difficulty) — <a href=\"index.html#ruta-corta\">see the full 3-stage breakdown</a>.</p>\n     <p>All three stages start and end in Falset, so no return transport is needed.</p>"
         },
@@ -1598,7 +1604,7 @@
         "varianteErr": "Choose the variant you'll do.",
         "variantePlaceholder": "Choose a variant…",
         "variante1": "Full circuit · 8 days · ~166.4 km",
-        "variante2": "Short route · 3 days · Falset–Bellmunt–Falset (~53.6 km, verified with real GPX)",
+        "variante2": "Camí curt · 3 days · Falset–Bellmunt–Falset (~53.6 km, verified with real GPX)",
         "date": "Route start date",
         "dateErr": "Choose a date.",
         "mensaje": "Why are you daring to do the Priorat?",
@@ -1627,7 +1633,7 @@
         },
         "short": {
           "h": "The essential getaway: 3 days",
-          "p": "The 53.6 km short route between Falset and Bellmunt del Priorat, ideal if you have less time but still want to feel the silence of the llicorella."
+          "p": "The 53.6 km Camí curt between Falset and Bellmunt del Priorat, ideal if you have less time but still want to feel the silence of the llicorella."
         },
         "signature": "The Silence on the trail. Priorat."
       },
@@ -1731,10 +1737,10 @@
         "p": "A real look at who completes the route, where they come from, and which variant they choose — calculated from verified and unverified sign-ups.",
         "completionLabel": "of sign-ups have completed and verified their crossing",
         "completionSub": "{verified} of {total} sign-ups",
-        "splitH": "Full circuit vs. short route",
+        "splitH": "Full circuit vs. Camí curt",
         "variantLong": "Full circuit (8 stages)",
-        "variantShort": "Short route (3 days)",
-        "insight1": "The short route has a {pctShort}% completion rate, versus {pctLong}% for the full circuit.",
+        "variantShort": "Camí curt (3 days)",
+        "insight1": "The Camí curt has a {pctShort}% completion rate, versus {pctLong}% for the full circuit.",
         "insight1NoData": "Not enough data yet to compare completion rates between variants.",
         "insight2": "The most common origin is {origin}, with {count} walkers ({pct}%).",
         "insight2NoData": "No origin has been recorded yet.",
@@ -1760,11 +1766,11 @@
         "loadingSlow": "This can take a few seconds longer than usual.",
         "loadError": "The data couldn't be loaded. Check your connection and try again.",
         "retry": "↻ Retry",
-        "vCorta": "Short route (3 days)"
+        "vCorta": "Camí curt (3 days)"
       },
       "variant": {
         "completo": "Full circuit",
-        "corta": "Short route (3 days)"
+        "corta": "Camí curt (3 days)"
       },
       "card": {
         "verified": "✓ Verified",
@@ -1857,7 +1863,7 @@
       },
       "variant": {
         "completo": "Full circuit",
-        "corta": "Short route (3 days)"
+        "corta": "Camí curt (3 days)"
       }
     }
   }
