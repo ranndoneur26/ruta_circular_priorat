@@ -144,7 +144,7 @@
       "terrain": {
         "eyebrow": "Antes de venir",
         "h": "¿Es para ti? Lo esencial en 10 segundos",
-        "i1": "<strong>166,4 km en 8 etapas</strong> (o 53,6 km en 3 etapas) — ruta exigente, llicorella y desniveles fuertes",
+        "i1": "<strong>165,7 km en 8 etapas</strong> (o 53,6 km en 3 etapas) — ruta exigente, llicorella y desniveles fuertes",
         "iSeason": "<strong>Mejor época: abril–junio y septiembre–noviembre.</strong> Evita julio y agosto (35–38&nbsp;°C)",
         "iAgua": "<strong>Agua: 2,5–3&nbsp;L por etapa; 4–5&nbsp;L en las etapas 2 y 5</strong>",
         "i2": "Poca sombra, calor intenso en época estival",
@@ -156,7 +156,7 @@
       "routeopt": {
         "h2": "Dos maneras de recorrerla",
         "fullH": "Travessa completa",
-        "fullP": "166,4 km · 8 etapas · circuito cerrado",
+        "fullP": "165,7 km · 8 etapas · circuito cerrado",
         "fullBtn": "Ver las 8 etapas",
         "shortH": "Camí curt",
         "shortP": "53,6 km · 3 etapas · primera toma de contacto",
@@ -363,7 +363,7 @@
         "variante": "Variante que vas a caminar",
         "varianteErr": "Elige la variante que vas a hacer.",
         "variantePlaceholder": "Elige una variante…",
-        "variante1": "Circuito completo · 8 días · ~166,4 km",
+        "variante1": "Circuito completo · 8 días · ~165,7 km",
         "variante2": "Camí curt · 3 días · Falset–Bellmunt–Falset (~53,6 km, verificado con GPX real)",
         "date": "Día de inicio de la ruta",
         "dateErr": "Elige una fecha.",
@@ -389,7 +389,7 @@
         },
         "full": {
           "h": "La experiencia completa: 8 días",
-          "p": "El circuito íntegro de 166,4 km por las 19 villas, viviendo el Priorat a fondo, etapa a etapa, de refugio en refugio."
+          "p": "El circuito íntegro de 165,7 km por las 19 villas, viviendo el Priorat a fondo, etapa a etapa, de refugio en refugio."
         },
         "short": {
           "h": "La escapada esencial: 3 días",
@@ -764,7 +764,7 @@
       "terrain": {
         "eyebrow": "Abans de venir",
         "h": "És per a tu? L'essencial en 10 segons",
-        "i1": "<strong>166,4 km en 8 etapes</strong> (o 53,6 km en 3 etapes) — ruta exigent, llicorella i desnivells forts",
+        "i1": "<strong>165,7 km en 8 etapes</strong> (o 53,6 km en 3 etapes) — ruta exigent, llicorella i desnivells forts",
         "iSeason": "<strong>Millor època: abril–juny i setembre–novembre.</strong> Evita juliol i agost (35–38&nbsp;°C)",
         "iAgua": "<strong>Aigua: 2,5–3&nbsp;L per etapa; 4–5&nbsp;L a les etapes 2 i 5</strong>",
         "i2": "Poca ombra, calor intensa en època estival",
@@ -776,7 +776,7 @@
       "routeopt": {
         "h2": "Dues maneres de recórrer-la",
         "fullH": "Travessa completa",
-        "fullP": "166,4 km · 8 etapes · circuit tancat",
+        "fullP": "165,7 km · 8 etapes · circuit tancat",
         "fullBtn": "Veure les 8 etapes",
         "shortH": "Camí curt",
         "shortP": "53,6 km · 3 etapes · primer contacte",
@@ -983,7 +983,7 @@
         "variante": "Variant que caminaràs",
         "varianteErr": "Tria la variant que faràs.",
         "variantePlaceholder": "Tria una variant…",
-        "variante1": "Circuit complet · 8 dies · ~166,4 km",
+        "variante1": "Circuit complet · 8 dies · ~165,7 km",
         "variante2": "Camí curt · 3 dies · Falset–Bellmunt–Falset (~53,6 km, verificat amb GPX real)",
         "date": "Dia d'inici de la ruta",
         "dateErr": "Tria una data.",
@@ -1009,7 +1009,7 @@
         },
         "full": {
           "h": "L'experiència completa: 8 dies",
-          "p": "El circuit íntegre de 166,4 km per les 19 viles, vivint el Priorat a fons, etapa a etapa, de refugi en refugi."
+          "p": "El circuit íntegre de 165,7 km per les 19 viles, vivint el Priorat a fons, etapa a etapa, de refugi en refugi."
         },
         "short": {
           "h": "L'escapada essencial: 3 dies",
@@ -1384,7 +1384,7 @@
       "terrain": {
         "eyebrow": "Before you come",
         "h": "Is this for you? The essentials in 10 seconds",
-        "i1": "<strong>166.4 km over 8 stages</strong> (or 53.6 km over 3 stages) — a demanding route with llicorella slate and steep gradients",
+        "i1": "<strong>165.7 km over 8 stages</strong> (or 53.6 km over 3 stages) — a demanding route with llicorella slate and steep gradients",
         "iSeason": "<strong>Best season: April–June and September–November.</strong> Avoid July and August (35–38&nbsp;°C)",
         "iAgua": "<strong>Water: 2.5–3&nbsp;L per stage; 4–5&nbsp;L on stages 2 and 5</strong>",
         "i2": "Little shade, intense heat in summer",
@@ -1396,7 +1396,7 @@
       "routeopt": {
         "h2": "Two ways to walk it",
         "fullH": "Full crossing",
-        "fullP": "166.4 km · 8 stages · closed loop",
+        "fullP": "165.7 km · 8 stages · closed loop",
         "fullBtn": "See the 8 stages",
         "shortH": "Camí curt",
         "shortP": "53.6 km · 3 stages · first taste of the trail",
@@ -1603,7 +1603,7 @@
         "variante": "Variant you'll be walking",
         "varianteErr": "Choose the variant you'll do.",
         "variantePlaceholder": "Choose a variant…",
-        "variante1": "Full circuit · 8 days · ~166.4 km",
+        "variante1": "Full circuit · 8 days · ~165.7 km",
         "variante2": "Camí curt · 3 days · Falset–Bellmunt–Falset (~53.6 km, verified with real GPX)",
         "date": "Route start date",
         "dateErr": "Choose a date.",
@@ -1629,7 +1629,7 @@
         },
         "full": {
           "h": "The full experience: 8 days",
-          "p": "The complete 166.4 km circuit through the 19 villages, living the Priorat in depth, stage by stage, shelter by shelter."
+          "p": "The complete 165.7 km circuit through the 19 villages, living the Priorat in depth, stage by stage, shelter by shelter."
         },
         "short": {
           "h": "The essential getaway: 3 days",
