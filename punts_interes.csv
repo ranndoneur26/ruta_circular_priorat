@@ -1,0 +1,42 @@
+﻿etapa;ordre;nom;tipus;simbol_garmin;latitud;longitud;distancia_tracat_m;desviament;precisio;descripcio
+Etapa 1;1;Castell de Falset;Monument;Building;41.144700;0.818000;251;Sí;aproximada;"Monument. Castell medieval (s. XII) sobre el turó de Falset, símbol del Priorat; vistes de la vila i dels pobles veïns. DESVIAMENT: ~251 m del traçat."
+Etapa 1;2;Celler Cooperatiu de Falset;Enologia;Winery;41.145900;0.822500;570;Sí;aproximada;Enologia. Celler modernista de Cèsar Martinell (1919), de la cooperativa Falset-Marçà. Visites i degustació. DESVIAMENT: ~570 m del traçat.
+Etapa 1;3;Marçà (nucli);Nucli;Building;41.139700;0.840800;1923;Sí;aproximada;Nucli. Nucli de Marçà: cases tradicionals, celler cooperatiu i restes del castell. El traçat passa a ponent del poble. DESVIAMENT: ~1923 m del traçat.
+Etapa 1;4;Capçanes (nucli);Nucli;Building;41.099300;0.780500;34;No;track;"Nucli. Nucli de Capçanes a la vall de la riera, entre vinyes; celler de Capçanes (vins kosher). A peu del traçat."
+Etapa 1;5;Mirador del Pantà;Mirador;Scenic Area;41.100120;0.756220;275;Sí;verificada;Mirador. Mirador sobre el pantà de les Guiamets (riera de Capçanes, construït entre 1951 i 1971). DESVIAMENT: ~275 m del traçat.
+Etapa 1;6;Els Guiamets (nucli);Nucli;Building;41.101840;0.751120;0;No;track;Nucli. Fi d'etapa. Nucli rural dels Guiamets, vora el pantà i envoltat de vinyes. A peu del traçat.
+Etapa 2;1;Els Guiamets (nucli);Nucli;Building;41.102250;0.752470;4;No;track;Nucli. Inici d'etapa al nucli dels Guiamets. A peu del traçat.
+Etapa 2;2;Mirador del Pantà;Mirador;Scenic Area;41.100120;0.756220;384;Sí;verificada;Mirador. Mirador sobre el pantà de les Guiamets, a tocar del poble. DESVIAMENT: ~384 m del traçat.
+Etapa 2;3;El Masroig (nucli);Nucli;Building;41.121700;0.777800;2672;Sí;aproximada;Nucli. Nucli del Masroig: celler cooperatiu modernista (Cèsar Martinell) i barraques de pedra seca al Camí Ral. El traçat d'aquesta etapa passa a ponent del poble. DESVIAMENT: ~2672 m del traçat.
+Etapa 2;4;El Molar (nucli);Nucli;Building;41.140300;0.761400;1956;Sí;aproximada;Nucli. Nucli tradicional d'El Molar, poble vinculat al passat miner i al vi. DESVIAMENT: ~1956 m del traçat.
+Etapa 2;5;Bellmunt del Priorat (nucli);Nucli;Building;41.163510;0.765830;0;No;track;Nucli. Fi d'etapa. Poble miner del Priorat, als peus de la Serra de Llaberia. A peu del traçat.
+Etapa 2;6;Museu de les Mines;Museu;Museum;41.161800;0.764800;140;No;aproximada;Museu. Museu de les Mines de Bellmunt: visita guiada a la mina Eugènia (plom i argent, explotada fins al 1990). A peu del traçat.
+Etapa 3;1;Museu de les Mines;Museu;Museum;41.161800;0.764800;140;No;aproximada;Museu. Inici d'etapa vora el patrimoni miner de Bellmunt (Museu de les Mines, mina Eugènia). A peu del traçat.
+Etapa 3;2;La Figuera (miradors 575 m);Mirador;Scenic Area;41.213100;0.735200;49;No;track;"Mirador. El poble més alt del Priorat (575 m): miradors panoràmics sobre la comarca; entorn del Coll d'en Solans. A peu del traçat."
+Etapa 3;3;Santa Maria de Cabacés;Religiós;Church;41.246500;0.733500;57;No;track;Religiós. Església de Santa Maria amb retaule gòtic del s. XVI. Fi d'etapa al nucli de Cabacés. A peu del traçat.
+Etapa 4;1;Cabacés (nucli);Nucli;Building;41.247790;0.733940;0;No;track;Nucli. Inici d'etapa. Nucli de carrers empedrats amb ponts i patrimoni rural. A peu del traçat.
+Etapa 4;2;La Bisbal (nucli antic);Nucli;Building;41.270300;0.729400;371;Sí;aproximada;Nucli. Nucli antic de la Bisbal de Montsant, amb coves i abrics a la vora del poble. DESVIAMENT: ~371 m del traçat.
+Etapa 4;3;Pantà de Margalef;Aigua;Water;41.290500;0.748000;455;Sí;aproximada;Aigua. Petit embassament vora Margalef, al riu de Montsant. Ubicació aproximada (±500 m). DESVIAMENT: ~455 m del traçat.
+Etapa 4;4;Margalef (nucli);Nucli;Building;41.284420;0.754000;0;No;track;Nucli. Fi d'etapa. Margalef, poble d'escalada entre parets de conglomerat del Montsant. A peu del traçat.
+Etapa 5;1;Margalef (nucli);Nucli;Building;41.285390;0.753910;0;No;track;Nucli. Inici d'etapa a Margalef. A peu del traçat.
+Etapa 5;2;Ermita de Sant Salvador;Religiós;Church;41.285200;0.748800;427;Sí;aproximada;Religiós. Ermita penjada sobre el poble, amb una font de molta aigua, vora el Tossal Pelat. Ubicació aproximada (±300 m). DESVIAMENT: ~427 m del traçat.
+Etapa 5;3;Ulldemolins (nucli);Nucli;Building;41.305300;0.818300;58;No;aproximada;Nucli. Nucli d'Ulldemolins, als peus de la serra del Montsant. A peu del traçat.
+Etapa 5;4;Ermita de Sant Antoni;Religiós;Church;41.305500;0.826000;245;Sí;aproximada;Religiós. Ermita de Sant Antoni de Pàdua, punt destacat de l'etapa vora Ulldemolins. Ubicació aproximada. DESVIAMENT: ~245 m del traçat.
+Etapa 5;5;Cornudella de Montsant (nucli);Nucli;Building;41.265500;0.905360;0;No;track;Nucli. Fi d'etapa. Porta del Montsant, vora el pantà de Siurana. A peu del traçat.
+Etapa 6;1;Cornudella de Montsant (nucli);Nucli;Building;41.265360;0.907760;0;No;track;Nucli. Inici d'etapa a Cornudella de Montsant. A peu del traçat.
+Etapa 6;2;Santa Maria de Siurana;Religiós;Church;41.259600;0.930500;6;No;aproximada;Religiós. Església romànica del s. XII amb retaule, dalt del poble de Siurana. A peu del traçat.
+Etapa 6;3;Castell de Siurana (restes);Monument;Building;41.259000;0.929000;39;No;aproximada;Monument. Restes del castell musulmà del s. XII, damunt dels riscos de Siurana. A peu del traçat.
+Etapa 6;4;Mirador dels riscos de Siurana;Mirador;Scenic Area;41.260000;0.931500;84;No;aproximada;Mirador. Miradors sobre els riscos i el pantà de Siurana (12 hm³, inaugurat el 1973). A peu del traçat.
+Etapa 6;5;Poboleda (nucli);Nucli;Building;41.234750;0.845290;0;No;track;Nucli. Fi d'etapa. Nucli tradicional de Poboleda amb cases senyorials del s. XVIII. A peu del traçat.
+Etapa 7;1;Poboleda (nucli);Nucli;Building;41.234680;0.844800;0;No;track;Nucli. Inici d'etapa a Poboleda. A peu del traçat.
+Etapa 7;2;Cartoixa d'Escaladei;Monument;Church;41.256940;0.810280;1040;Sí;verificada;Monument. Cartoixa de Santa Maria d'Escaladei (1194), primera cartoixa de la Península Ibèrica. Visitable. DESVIAMENT: ~1040 m del traçat.
+Etapa 7;3;La Vilella Alta (nucli);Nucli;Building;41.246000;0.811500;31;No;track;Nucli. Nucli petit entre vinyes i boscos, sota la serra del Montsant. A peu del traçat.
+Etapa 7;4;Torroja del Priorat (nucli);Nucli;Building;41.213280;0.810820;0;No;track;Nucli. Fi d'etapa. Nucli tradicional de Torroja, entre vinyes. A peu del traçat.
+Etapa 8;1;Torroja del Priorat (nucli);Nucli;Building;41.212870;0.809880;0;No;track;Nucli. Inici d'etapa a Torroja, poble d'arquitectura tradicional. A peu del traçat.
+Etapa 8;2;Porrera (rellotges de sol);Patrimoni;Flag, Blue;41.190800;0.856200;28;No;track;Patrimoni. Porrera: ruta dels rellotges de sol, més de trenta pintats als murs del nucli. A peu del traçat.
+Etapa 8;3;Castell de Falset;Monument;Building;41.144700;0.818000;126;No;aproximada;Monument. Final del circuit circular a Falset, als peus del castell medieval. A peu del traçat.
+Etapa 8;4;Museu Comarcal del Priorat;Museu;Museum;41.145300;0.819600;17;No;aproximada;Museu. Museu comarcal al centre de Falset (carrer Major): patrimoni natural i humà del Priorat. A peu del traçat.
+Etapa 8;5;Celler Cooperatiu de Falset;Enologia;Winery;41.145900;0.822500;167;No;aproximada;Enologia. Celler modernista Falset-Marçà (Cèsar Martinell, 1919). Visites i degustació. A peu del traçat.
+Enllaç;1;Museu de les Mines;Museu;Museum;41.161800;0.764800;345;Sí;aproximada;Museu. Inici de l'enllaç vora el patrimoni miner de Bellmunt (Museu de les Mines). DESVIAMENT: ~345 m del traçat.
+Enllaç;2;El Molar (nucli);Nucli;Building;41.140300;0.761400;67;No;aproximada;Nucli. Nucli d'El Molar, vora el traçat de l'enllaç. Ubicació aproximada. A peu del traçat.
+Enllaç;3;Castell de Falset;Monument;Building;41.144700;0.818000;140;No;aproximada;Monument. Final de l'enllaç a Falset, vora el castell medieval. A peu del traçat.
