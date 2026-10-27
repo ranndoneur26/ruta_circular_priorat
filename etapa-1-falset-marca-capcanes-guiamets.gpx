@@ -7,7 +7,49 @@
       <link href="https://gpx.studio"/>
     </author>
   </metadata>
-  <trk>
+  <wpt lat="41.144700" lon="0.818000">
+  <ele>354</ele>
+  <name>Etapa 1: Falset – Marçà – Capçanes – Els Guiamets</name>
+  <desc>Monument. Castell medieval (s. XII) sobre el turó de Falset, símbol del Priorat; vistes de la vila i dels pobles veïns. DESVIAMENT: ~251 m del traçat.</desc>
+  <sym>Building</sym>
+  <type>Monument</type>
+</wpt>
+<wpt lat="41.145900" lon="0.822500">
+  <ele>354</ele>
+  <name>Celler Cooperatiu de Falset</name>
+  <desc>Enologia. Celler modernista de Cèsar Martinell (1919), de la cooperativa Falset-Marçà. Visites i degustació. DESVIAMENT: ~570 m del traçat.</desc>
+  <sym>Winery</sym>
+  <type>Enologia</type>
+</wpt>
+<wpt lat="41.139700" lon="0.840800">
+  <ele>359</ele>
+  <name>Marçà (nucli)</name>
+  <desc>Nucli. Nucli de Marçà: cases tradicionals, celler cooperatiu i restes del castell. El traçat passa a ponent del poble. DESVIAMENT: ~1923 m del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.099300" lon="0.780500">
+  <ele>213</ele>
+  <name>Capçanes (nucli)</name>
+  <desc>Nucli. Nucli de Capçanes a la vall de la riera, entre vinyes; celler de Capçanes (vins kosher). A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.100120" lon="0.756220">
+  <ele>200</ele>
+  <name>Mirador del Pantà</name>
+  <desc>Mirador. Mirador sobre el pantà de les Guiamets (riera de Capçanes, construït entre 1951 i 1971). DESVIAMENT: ~275 m del traçat.</desc>
+  <sym>Scenic Area</sym>
+  <type>Mirador</type>
+</wpt>
+<wpt lat="41.101840" lon="0.751120">
+  <ele>218</ele>
+  <name>Els Guiamets (nucli)</name>
+  <desc>Nucli. Fi d'etapa. Nucli rural dels Guiamets, vora el pantà i envoltat de vinyes. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<trk>
     <name>Nuevo archivo 1</name>
     <trkseg>
       <trkpt lat="41.142485" lon="0.817417">
