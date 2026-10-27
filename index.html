@@ -550,6 +550,129 @@
     profile: [{d:0.0,e:249.4},{d:0.239,e:233.6},{d:0.477,e:241.1},{d:0.716,e:257.7},{d:0.954,e:279.4},{d:1.193,e:290.5},{d:1.431,e:313.4},{d:1.67,e:320.5},{d:1.908,e:311.7},{d:2.147,e:299.9},{d:2.385,e:287.0},{d:2.624,e:265.6},{d:2.862,e:260.8},{d:3.101,e:278.2},{d:3.339,e:277.0},{d:3.578,e:273.1},{d:3.816,e:273.0},{d:4.055,e:265.9},{d:4.293,e:256.5},{d:4.532,e:251.8},{d:4.77,e:219.8},{d:5.009,e:222.5},{d:5.247,e:232.0},{d:5.486,e:246.3},{d:5.724,e:254.9},{d:5.963,e:268.9},{d:6.201,e:265.8},{d:6.44,e:272.1},{d:6.678,e:281.3},{d:6.917,e:284.5},{d:7.155,e:280.0},{d:7.394,e:285.6},{d:7.632,e:290.1},{d:7.871,e:287.7},{d:8.109,e:290.8},{d:8.348,e:304.8},{d:8.586,e:306.2},{d:8.825,e:314.5},{d:9.063,e:312.2},{d:9.302,e:314.7},{d:9.54,e:306.4},{d:9.779,e:302.4},{d:10.017,e:293.9},{d:10.256,e:297.2},{d:10.494,e:307.7},{d:10.733,e:309.6},{d:10.971,e:318.4},{d:11.21,e:321.9},{d:11.448,e:331.7},{d:11.687,e:334.2},{d:11.925,e:325.5},{d:12.164,e:316.5},{d:12.402,e:306.3},{d:12.641,e:318.0},{d:12.879,e:335.9},{d:13.118,e:360.7},{d:13.356,e:352.9},{d:13.595,e:362.1},{d:13.833,e:365.3},{d:14.072,e:359.6},{d:14.31,e:350.0},{d:14.31,e:350.0}]
   };
 
+  // Textos descriptivos de cada etapa (se muestran antes del mapa). Índice 0-7 = etapas 1-8; 8 = tramo de enlace.
+  const STAGE_DESC = {
+ "ca": [
+  [
+   "Etapa 1 · Falset – Marçà – Capçanes – Els Guiamets",
+   "L'etapa surt de Falset, la capital del Priorat, i cap al sud per camins de vinyes i oliveres fins als Guiamets, vora el pantà de la riera de Capçanes. El traçat original ressegueix les valls de ponent, passa pel nucli de Capçanes i entra al nucli de Marçà, combinant el patrimoni urbà de Falset (castell, museu comarcal i celler modernista de Cèsar Martinell) amb l'embassament i els miradors del sector dels Guiamets."
+  ],
+  [
+   "Etapa 2 · Els Guiamets – El Masroig – El Molar – Bellmunt",
+   "Aquesta és l'etapa més llarga juntament amb la 5 i travessa el Priorat vitícola del sud. Segueix una variant panoràmica per les valls de ponent: passa pel Masroig i El Molar, de manera que ambdós nuclis queden marcats com a visita. Els punts d'interès destaquen el mirador del pantà dels Guiamets a la sortida, els cellers cooperatius modernistes i el patrimoni miner de Bellmunt del Priorat, on acaba l'etapa vora el Museu de les Mines."
+  ],
+  [
+   "Etapa 3 · Bellmunt – La Figuera – Cabacés",
+   "L'etapa comença al cor del patrimoni miner de Bellmunt i remunta cap al planell de La Figuera, el poble més alt del Priorat (575 m), on el traçat corona entre miradors panoràmics sobre tota la comarca, a l'entorn del Coll d'en Solans. Després davalla per feixes i barrancs fins a Cabacés, amb l'església de Santa Maria i el seu retaule gòtic com a cloenda, un dels recorreguts més panoràmics de tot el circuit."
+  ],
+  [
+   "Etapa 4 · Cabacés – La Bisbal de Montsant – Margalef",
+   "Etapa curta i molt vertical que connecta el nucli de Cabacés amb Margalef passant per la Bisbal de Montsant. El traçat passa pel nucli antic de la Bisbal i vora el petit pantà de Margalef, sobre el riu de Montsant. Els punts d'interès recullen el patrimoni rural de Cabacés, el nucli de la Bisbal amb les seves coves i abrics, i l'entorn de parets de conglomerat de Margalef, famós mundialment per l'escalada esportiva."
+  ],
+  [
+   "Etapa 5 · Margalef – Ulldemolins – Cornudella de Montsant",
+   "L'etapa reina del circuit, amb gairebé 33 km i prop de 1.900 m de desnivell acumulat. Des de Margalef, l'ermita de Sant Salvador penjada sobre el poble ofereix una de les millors panoràmiques del tram inicial. Després el traçat entra al terme d'Ulldemolins, passa vora el nucli i l'ermita de Sant Antoni de Pàdua, i travessa la vall fins a Cornudella de Montsant, porta del massís."
+  ],
+  [
+   "Etapa 6 · Cornudella – Siurana – Poboleda",
+   "L'etapa més espectacular pel paisatge: des de Cornudella remunta fins a Siurana, darrer reducte musulmà damunt dels riscos, amb el pantà de Siurana (12 hm³, inaugurat el 1973) als peus. El traçat passa pel mateix nucli de Siurana, on hi ha l'església de Santa Maria, les restes del castell i el mirador dels riscos. La davallada final per vinyes de la DOQ Priorat porta fins a Poboleda."
+  ],
+  [
+   "Etapa 7 · Poboleda – Escaladei – La Vilella Alta – Torroja",
+   "Etapa d'essència prioratina: vinyes de llicorella, boscos i tres nuclis petits. El punt culminant patrimonial és la Cartoixa d'Escaladei, primera cartoixa de la Península Ibèrica (1194) i visitable; el traçat, però, passa a uns 1.040 m del monument, que queda marcat com a desviament de visita obligada. Després el recorregut entra al nucli de la Vilella Alta i davalla fins a Torroja del Priorat, entre vinyes i costers."
+  ],
+  [
+   "Etapa 8 · Torroja – Porrera – Falset",
+   "L'etapa final tanca el cercle: de Torroja puja fins a la carena i baixa al nucli de Porrera, conegut per la ruta dels rellotges de sol, amb més de trenta peces pintades als murs de les cases. El traçat passa pel mateix poble. Després remunta un darrer turó i davalla cap a Falset, on el circuit acaba als peus del castell medieval, vora el Museu Comarcal del Priorat i el celler cooperatiu modernista."
+  ],
+  [
+   "Enllaç · Bellmunt del Priorat – Falset",
+   "Track d'enllaç opcional per tornar de Bellmunt a Falset sense completar tot el circuit, o per escurçar el camí entre etapes. Passa pel nucli d'El Molar (confirmat: el traçat hi entra) i acaba a Falset, a tocar del castell. S'hi han afegit tres waypoints: el Museu de les Mines a l'inici, el nucli d'El Molar i el castell de Falset com a final."
+  ]
+ ],
+ "es": [
+  [
+   "Etapa 1 · Falset – Marçà – Capçanes – Els Guiamets",
+   "La etapa sale de Falset, la capital del Priorat, y se dirige hacia el sur por caminos de viñas y olivos hasta Els Guiamets, junto al pantano de la riera de Capçanes. El trazado original recorre los valles de poniente, pasa por el núcleo de Capçanes y entra en el núcleo de Marçà, combinando el patrimonio urbano de Falset (castillo, museo comarcal y bodega modernista de Cèsar Martinell) con el embalse y los miradores del sector de Els Guiamets."
+  ],
+  [
+   "Etapa 2 · Els Guiamets – El Masroig – El Molar – Bellmunt",
+   "Esta es la etapa más larga junto con la 5 y atraviesa el Priorat vitícola del sur. Sigue una variante panorámica por los valles de poniente: pasa por El Masroig y El Molar, de modo que ambos núcleos quedan marcados como visita. Los puntos de interés destacan el mirador del pantano de Els Guiamets a la salida, las bodegas cooperativas modernistas y el patrimonio minero de Bellmunt del Priorat, donde termina la etapa junto al Museu de les Mines."
+  ],
+  [
+   "Etapa 3 · Bellmunt – La Figuera – Cabacés",
+   "La etapa arranca en el corazón del patrimonio minero de Bellmunt y remonta hacia el llano de La Figuera, el pueblo más alto del Priorat (575 m), donde el trazado corona entre miradores panorámicos sobre toda la comarca, en torno al Coll d'en Solans. Después desciende por bancales y barrancos hasta Cabacés, con la iglesia de Santa Maria y su retablo gótico como colofón, uno de los recorridos más panorámicos de todo el circuito."
+  ],
+  [
+   "Etapa 4 · Cabacés – La Bisbal de Montsant – Margalef",
+   "Etapa corta y muy vertical que conecta el núcleo de Cabacés con Margalef pasando por La Bisbal de Montsant. El trazado pasa por el casco antiguo de La Bisbal y junto al pequeño pantano de Margalef, sobre el río Montsant. Los puntos de interés recogen el patrimonio rural de Cabacés, el núcleo de La Bisbal con sus cuevas y abrigos, y el entorno de paredes de conglomerado de Margalef, famoso en todo el mundo por la escalada deportiva."
+  ],
+  [
+   "Etapa 5 · Margalef – Ulldemolins – Cornudella de Montsant",
+   "La etapa reina del circuito, con casi 33 km y cerca de 1.900 m de desnivel acumulado. Desde Margalef, la ermita de Sant Salvador, colgada sobre el pueblo, ofrece una de las mejores panorámicas del tramo inicial. Después el trazado entra en el término de Ulldemolins, pasa junto al núcleo y la ermita de Sant Antoni de Pàdua, y cruza el valle hasta Cornudella de Montsant, puerta del macizo."
+  ],
+  [
+   "Etapa 6 · Cornudella – Siurana – Poboleda",
+   "La etapa más espectacular por el paisaje: desde Cornudella remonta hasta Siurana, último reducto musulmán sobre los riscos, con el pantano de Siurana (12 hm³, inaugurado en 1973) a sus pies. El trazado pasa por el propio núcleo de Siurana, donde se encuentran la iglesia de Santa Maria, los restos del castillo y el mirador de los riscos. El descenso final entre viñas de la DOQ Priorat lleva hasta Poboleda."
+  ],
+  [
+   "Etapa 7 · Poboleda – Escaladei – La Vilella Alta – Torroja",
+   "Etapa de esencia prioratina: viñas de llicorella, bosques y tres núcleos pequeños. El punto culminante patrimonial es la Cartoixa d'Escaladei, primera cartuja de la Península Ibérica (1194) y visitable; el trazado, sin embargo, pasa a unos 1.040 m del monumento, que queda marcado como desvío de visita obligada. Después el recorrido entra en el núcleo de La Vilella Alta y desciende hasta Torroja del Priorat, entre viñas y laderas."
+  ],
+  [
+   "Etapa 8 · Torroja – Porrera – Falset",
+   "La etapa final cierra el círculo: desde Torroja sube hasta la cresta y baja al núcleo de Porrera, conocido por la ruta de los relojes de sol, con más de treinta piezas pintadas en los muros de las casas. El trazado pasa por el propio pueblo. Después remonta un último cerro y desciende hacia Falset, donde el circuito termina a los pies del castillo medieval, junto al Museu Comarcal del Priorat y la bodega cooperativa modernista."
+  ],
+  [
+   "Enlace · Bellmunt del Priorat – Falset",
+   "Track de enlace opcional para volver de Bellmunt a Falset sin completar todo el circuito, o para acortar el camino entre etapas. Pasa por el núcleo de El Molar (confirmado: el trazado entra en él) y termina en Falset, junto al castillo. Se han añadido tres waypoints: el Museu de les Mines al inicio, el núcleo de El Molar y el castillo de Falset como final."
+  ]
+ ],
+ "en": [
+  [
+   "Stage 1 · Falset – Marçà – Capçanes – Els Guiamets",
+   "The stage leaves Falset, the capital of the Priorat, and heads south along vineyard and olive-grove tracks to Els Guiamets, beside the reservoir on the Capçanes stream. The original route follows the western valleys, passes through the village of Capçanes and enters Marçà, combining Falset's urban heritage (castle, regional museum and Cèsar Martinell's modernist winery) with the reservoir and viewpoints of the Els Guiamets area."
+  ],
+  [
+   "Stage 2 · Els Guiamets – El Masroig – El Molar – Bellmunt",
+   "Together with stage 5, this is the longest stage, crossing the wine-growing southern Priorat. It follows a scenic variant through the western valleys: it passes through El Masroig and El Molar, so both villages are marked as places to visit. Highlights include the Els Guiamets reservoir viewpoint at the start, the modernist cooperative wineries and the mining heritage of Bellmunt del Priorat, where the stage ends next to the Museu de les Mines."
+  ],
+  [
+   "Stage 3 · Bellmunt – La Figuera – Cabacés",
+   "The stage begins in the heart of Bellmunt's mining heritage and climbs to the plateau of La Figuera, the highest village in the Priorat (575 m), where the route crests among panoramic viewpoints over the whole region, around the Coll d'en Solans. It then descends through terraces and ravines to Cabacés, closing with the church of Santa Maria and its Gothic altarpiece — one of the most panoramic stretches of the whole circuit."
+  ],
+  [
+   "Stage 4 · Cabacés – La Bisbal de Montsant – Margalef",
+   "A short, very steep stage linking Cabacés with Margalef via La Bisbal de Montsant. The route passes through La Bisbal's old quarter and beside the small Margalef reservoir, above the Montsant river. Points of interest include Cabacés's rural heritage, La Bisbal's village with its caves and rock shelters, and the conglomerate walls around Margalef, world-famous for sport climbing."
+  ],
+  [
+   "Stage 5 · Margalef – Ulldemolins – Cornudella de Montsant",
+   "The queen stage of the circuit, with almost 33 km and around 1,900 m of cumulative elevation gain. From Margalef, the hermitage of Sant Salvador, perched above the village, offers one of the best views of the opening stretch. The route then enters the municipality of Ulldemolins, passes close to the village and the hermitage of Sant Antoni de Pàdua, and crosses the valley to Cornudella de Montsant, gateway to the massif."
+  ],
+  [
+   "Stage 6 · Cornudella – Siurana – Poboleda",
+   "The most spectacular stage for its scenery: from Cornudella it climbs to Siurana, the last Muslim stronghold, perched above the cliffs, with the Siurana reservoir (12 hm³, opened in 1973) at its feet. The route goes through Siurana itself, where you'll find the church of Santa Maria, the castle remains and the cliff viewpoint. The final descent through the vineyards of the Priorat DOQ leads to Poboleda."
+  ],
+  [
+   "Stage 7 · Poboleda – Escaladei – La Vilella Alta – Torroja",
+   "A stage that captures the essence of the Priorat: llicorella-slate vineyards, forests and three small villages. The heritage highlight is the Cartoixa d'Escaladei, the first Carthusian monastery on the Iberian Peninsula (1194), open to visitors; the route, however, passes about 1,040 m from the monument, which is marked as a must-see detour. The route then enters La Vilella Alta and descends to Torroja del Priorat, among vineyards and hillsides."
+  ],
+  [
+   "Stage 8 · Torroja – Porrera – Falset",
+   "The final stage closes the circle: from Torroja it climbs to the ridge and drops to Porrera, known for its sundial route, with more than thirty pieces painted on house walls. The route goes through the village itself. It then climbs one last hill and descends to Falset, where the circuit ends at the foot of the medieval castle, next to the Museu Comarcal del Priorat and the modernist cooperative winery."
+  ],
+  [
+   "Link · Bellmunt del Priorat – Falset",
+   "An optional link track for returning from Bellmunt to Falset without completing the whole circuit, or for shortening the way between stages. It passes through El Molar (confirmed: the route enters the village) and ends in Falset, beside the castle. Three waypoints have been added: the Museu de les Mines at the start, the village of El Molar, and Falset castle at the end."
+  ]
+ ]
+};
+  function stageDescHtml(lang, idx){
+    const d = (STAGE_DESC[lang] || STAGE_DESC.es)[idx];
+    if (!d) return "";
+    return `<div class="stage-desc"><h5>${d[0]}</h5><p>${d[1]}</p></div>`;
+  }
+
   const ENLLAC_INFO = {
     distKm: 14.31, gainM: 415, lossM: 314, diff: "moderada", time: "4,5–5,5 h", gpx: true,
     hEs: "El tramo que cierra el Camí curt: de Bellmunt del Priorat a Falset por caminos agrícolas entre viñas y olivos. Es la etapa más corta y suave de las tres — y al llegar, ya estás en Falset para comer y dormir, sin logística extra.",
@@ -1038,6 +1161,7 @@
         </summary>
         <div class="stage-body">
           <div class="highlight">${highlight}</div>
+          ${stageDescHtml(lang, i)}
           ${minimapHtml}
           <div class="stage-extra">
             <div><h5>${t.poi}</h5><ul>${listOrEmpty(poi, "—")}</ul></div>
@@ -1330,6 +1454,7 @@
         </summary>
         <div class="stage-body">
           <div class="highlight">${highlight}</div>
+          ${stageDescHtml(lang, d.full ? 8 : d.num - 1)}
           ${minimapHtml}
           ${metaOrGain}
           ${extra}
