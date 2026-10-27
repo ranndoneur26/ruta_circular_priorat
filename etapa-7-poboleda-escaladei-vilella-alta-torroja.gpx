@@ -7,7 +7,35 @@
       <link href="https://gpx.studio"/>
     </author>
   </metadata>
-  <trk>
+  <wpt lat="41.234680" lon="0.844800">
+  <ele>358</ele>
+  <name>Etapa 7: Poboleda – Escaladei – La Vilella Alta – Torroja</name>
+  <desc>Nucli. Inici d'etapa a Poboleda. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.256940" lon="0.810280">
+  <ele>411</ele>
+  <name>Cartoixa d'Escaladei</name>
+  <desc>Monument. Cartoixa de Santa Maria d'Escaladei (1194), primera cartoixa de la Península Ibèrica. Visitable. DESVIAMENT: ~1040 m del traçat.</desc>
+  <sym>Church</sym>
+  <type>Monument</type>
+</wpt>
+<wpt lat="41.246000" lon="0.811500">
+  <ele>450</ele>
+  <name>La Vilella Alta (nucli)</name>
+  <desc>Nucli. Nucli petit entre vinyes i boscos, sota la serra del Montsant. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.213280" lon="0.810820">
+  <ele>334</ele>
+  <name>Torroja del Priorat (nucli)</name>
+  <desc>Nucli. Fi d'etapa. Nucli tradicional de Torroja, entre vinyes. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<trk>
     <name>Nuevo archivo 9</name>
     <trkseg>
       <trkpt lat="41.234684" lon="0.844799">

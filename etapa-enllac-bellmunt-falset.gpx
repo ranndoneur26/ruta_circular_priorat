@@ -7,7 +7,28 @@
       <link href="https://gpx.studio"/>
     </author>
   </metadata>
-  <trk>
+  <wpt lat="41.161800" lon="0.764800">
+  <ele>232</ele>
+  <name>Enllaç: Bellmunt del Priorat – Falset</name>
+  <desc>Museu. Inici de l'enllaç vora el patrimoni miner de Bellmunt (Museu de les Mines). DESVIAMENT: ~345 m del traçat.</desc>
+  <sym>Museum</sym>
+  <type>Museu</type>
+</wpt>
+<wpt lat="41.140300" lon="0.761400">
+  <ele>245</ele>
+  <name>El Molar (nucli)</name>
+  <desc>Nucli. Nucli d'El Molar, vora el traçat de l'enllaç. Ubicació aproximada. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.144700" lon="0.818000">
+  <ele>350</ele>
+  <name>Castell de Falset</name>
+  <desc>Monument. Final de l'enllaç a Falset, vora el castell medieval. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Monument</type>
+</wpt>
+<trk>
     <name>Nuevo archivo 11</name>
     <trkseg>
       <trkpt lat="41.166061" lon="0.767606">

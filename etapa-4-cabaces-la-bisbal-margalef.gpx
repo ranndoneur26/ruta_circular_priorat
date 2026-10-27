@@ -7,7 +7,35 @@
       <link href="https://gpx.studio"/>
     </author>
   </metadata>
-  <trk>
+  <wpt lat="41.247790" lon="0.733940">
+  <ele>357</ele>
+  <name>Etapa 4: Cabacés – La Bisbal de Montsant – Margalef</name>
+  <desc>Nucli. Inici d'etapa. Nucli de carrers empedrats amb ponts i patrimoni rural. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.270300" lon="0.729400">
+  <ele>428</ele>
+  <name>La Bisbal (nucli antic)</name>
+  <desc>Nucli. Nucli antic de la Bisbal de Montsant, amb coves i abrics a la vora del poble. DESVIAMENT: ~371 m del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.290500" lon="0.748000">
+  <ele>363</ele>
+  <name>Pantà de Margalef</name>
+  <desc>Aigua. Petit embassament vora Margalef, al riu de Montsant. Ubicació aproximada (±500 m). DESVIAMENT: ~455 m del traçat.</desc>
+  <sym>Water</sym>
+  <type>Aigua</type>
+</wpt>
+<wpt lat="41.284420" lon="0.754000">
+  <ele>378</ele>
+  <name>Margalef (nucli)</name>
+  <desc>Nucli. Fi d'etapa. Margalef, poble d'escalada entre parets de conglomerat del Montsant. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<trk>
     <name>Nuevo archivo 5</name>
     <trkseg>
       <trkpt lat="41.247794" lon="0.733941">

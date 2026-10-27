@@ -11,7 +11,49 @@
     </link>
     <time>2023-04-12T19:45:44.000Z</time>
   </metadata>
-  <trk>
+  <wpt lat="41.102250" lon="0.752470">
+  <ele>225</ele>
+  <name>Track auxiliar Wikiloc (2 punts)</name>
+  <desc>Nucli. Inici d'etapa al nucli dels Guiamets. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.100120" lon="0.756220">
+  <ele>225</ele>
+  <name>Mirador del Pantà</name>
+  <desc>Mirador. Mirador sobre el pantà de les Guiamets, a tocar del poble. DESVIAMENT: ~384 m del traçat.</desc>
+  <sym>Scenic Area</sym>
+  <type>Mirador</type>
+</wpt>
+<wpt lat="41.121700" lon="0.777800">
+  <ele>186</ele>
+  <name>Etapa 2: Els Guiamets – El Masroig – El Molar – Bellmunt</name>
+  <desc>Nucli. Nucli del Masroig: celler cooperatiu modernista (Cèsar Martinell) i barraques de pedra seca al Camí Ral. El traçat d'aquesta etapa passa a ponent del poble. DESVIAMENT: ~2672 m del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.140300" lon="0.761400">
+  <ele>220</ele>
+  <name>El Molar (nucli)</name>
+  <desc>Nucli. Nucli tradicional d'El Molar, poble vinculat al passat miner i al vi. DESVIAMENT: ~1956 m del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.163510" lon="0.765830">
+  <ele>265</ele>
+  <name>Bellmunt del Priorat (nucli)</name>
+  <desc>Nucli. Fi d'etapa. Poble miner del Priorat, als peus de la Serra de Llaberia. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.161800" lon="0.764800">
+  <ele>239</ele>
+  <name>Museu de les Mines</name>
+  <desc>Museu. Museu de les Mines de Bellmunt: visita guiada a la mina Eugènia (plom i argent, explotada fins al 1990). A peu del traçat.</desc>
+  <sym>Museum</sym>
+  <type>Museu</type>
+</wpt>
+<trk>
     <name>els Guiamets-Masroig-Bellmunt-Guiamets - Wikiloc</name>
     <trkseg>
       <trkpt lat="41.10225" lon="0.752467">

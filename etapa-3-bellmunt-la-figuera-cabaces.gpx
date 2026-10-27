@@ -7,7 +7,28 @@
       <link href="https://gpx.studio"/>
     </author>
   </metadata>
-  <trk>
+  <wpt lat="41.161800" lon="0.764800">
+  <ele>239</ele>
+  <name>Etapa 3: Bellmunt – La Figuera – Cabacés</name>
+  <desc>Museu. Inici d'etapa vora el patrimoni miner de Bellmunt (Museu de les Mines, mina Eugènia). A peu del traçat.</desc>
+  <sym>Museum</sym>
+  <type>Museu</type>
+</wpt>
+<wpt lat="41.213100" lon="0.735200">
+  <ele>581</ele>
+  <name>La Figuera (miradors 575 m)</name>
+  <desc>Mirador. El poble més alt del Priorat (575 m): miradors panoràmics sobre la comarca; entorn del Coll d'en Solans. A peu del traçat.</desc>
+  <sym>Scenic Area</sym>
+  <type>Mirador</type>
+</wpt>
+<wpt lat="41.246500" lon="0.733500">
+  <ele>349</ele>
+  <name>Santa Maria de Cabacés</name>
+  <desc>Religiós. Església de Santa Maria amb retaule gòtic del s. XVI. Fi d'etapa al nucli de Cabacés. A peu del traçat.</desc>
+  <sym>Church</sym>
+  <type>Religiós</type>
+</wpt>
+<trk>
     <name>Nuevo archivo 4</name>
     <trkseg>
       <trkpt lat="41.163807" lon="0.765686">

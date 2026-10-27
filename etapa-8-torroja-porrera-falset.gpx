@@ -7,7 +7,42 @@
       <link href="https://gpx.studio"/>
     </author>
   </metadata>
-  <trk>
+  <wpt lat="41.212870" lon="0.809880">
+  <ele>334</ele>
+  <name>Etapa 8: Torroja – Porrera – Falset</name>
+  <desc>Nucli. Inici d'etapa a Torroja, poble d'arquitectura tradicional. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.190800" lon="0.856200">
+  <ele>334</ele>
+  <name>Porrera (rellotges de sol)</name>
+  <desc>Patrimoni. Porrera: ruta dels rellotges de sol, més de trenta pintats als murs del nucli. A peu del traçat.</desc>
+  <sym>Flag, Blue</sym>
+  <type>Patrimoni</type>
+</wpt>
+<wpt lat="41.144700" lon="0.818000">
+  <ele>353</ele>
+  <name>Castell de Falset</name>
+  <desc>Monument. Final del circuit circular a Falset, als peus del castell medieval. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Monument</type>
+</wpt>
+<wpt lat="41.145300" lon="0.819600">
+  <ele>355</ele>
+  <name>Museu Comarcal del Priorat</name>
+  <desc>Museu. Museu comarcal al centre de Falset (carrer Major): patrimoni natural i humà del Priorat. A peu del traçat.</desc>
+  <sym>Museum</sym>
+  <type>Museu</type>
+</wpt>
+<wpt lat="41.145900" lon="0.822500">
+  <ele>357</ele>
+  <name>Celler Cooperatiu de Falset</name>
+  <desc>Enologia. Celler modernista Falset-Marçà (Cèsar Martinell, 1919). Visites i degustació. A peu del traçat.</desc>
+  <sym>Winery</sym>
+  <type>Enologia</type>
+</wpt>
+<trk>
     <name>Nuevo archivo 10</name>
     <trkseg>
       <trkpt lat="41.212867" lon="0.809883">

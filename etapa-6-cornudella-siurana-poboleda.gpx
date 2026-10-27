@@ -7,7 +7,42 @@
       <link href="https://gpx.studio"/>
     </author>
   </metadata>
-  <trk>
+  <wpt lat="41.265360" lon="0.907760">
+  <ele>527</ele>
+  <name>Etapa 6: Cornudella – Siurana – Poboleda</name>
+  <desc>Nucli. Inici d'etapa a Cornudella de Montsant. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<wpt lat="41.259600" lon="0.930500">
+  <ele>635</ele>
+  <name>Santa Maria de Siurana</name>
+  <desc>Religiós. Església romànica del s. XII amb retaule, dalt del poble de Siurana. A peu del traçat.</desc>
+  <sym>Church</sym>
+  <type>Religiós</type>
+</wpt>
+<wpt lat="41.259000" lon="0.929000">
+  <ele>656</ele>
+  <name>Castell de Siurana (restes)</name>
+  <desc>Monument. Restes del castell musulmà del s. XII, damunt dels riscos de Siurana. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Monument</type>
+</wpt>
+<wpt lat="41.260000" lon="0.931500">
+  <ele>638</ele>
+  <name>Mirador dels riscos de Siurana</name>
+  <desc>Mirador. Miradors sobre els riscos i el pantà de Siurana (12 hm³, inaugurat el 1973). A peu del traçat.</desc>
+  <sym>Scenic Area</sym>
+  <type>Mirador</type>
+</wpt>
+<wpt lat="41.234750" lon="0.845290">
+  <ele>358</ele>
+  <name>Poboleda (nucli)</name>
+  <desc>Nucli. Fi d'etapa. Nucli tradicional de Poboleda amb cases senyorials del s. XVIII. A peu del traçat.</desc>
+  <sym>Building</sym>
+  <type>Nucli</type>
+</wpt>
+<trk>
     <name>Nuevo archivo 8</name>
     <trkseg>
       <trkpt lat="41.265357" lon="0.90776">
